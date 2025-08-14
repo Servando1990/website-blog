@@ -1,0 +1,196 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllPosts, getAllCategories } from '../../utils/posts';
+import { formatDate } from '../../utils/dates';
+
+const posts = await getAllPosts();
+const categories = await getAllCategories();
+---
+
+<Layout
+  title="All Posts - Servando's Blog"
+  description="Browse all blog posts about AI, ML, and technology"
+>
+  <section>
+    <h1>All Posts</h1>
+
+    <div class="filters">
+      <input
+        type="text"
+        placeholder="Search posts..."
+        id="search-input"
+        class="search-input"
+      />
+
+      <select id="category-filter" class="category-filter">
+        <option value="">All Categories</option>
+        {
+          categories.map(category => (
+            <option value={category}>{category}</option>
+          ))
+        }
+      </select>
+    </div>
+
+    <div class="post-list" id="post-list">
+      {
+        posts.map(post => (
+          <article
+            class="post-card"
+            data-title={post.data.title.toLowerCase()}
+            data-description={post.data.description?.toLowerCase() || ''}
+            data-categories={post.data.categories.join(',')}
+          >
+            <div class="post-meta">{formatDate(post.data.date)}</div>
+            <h2 class="post-title">
+              <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+            </h2>
+            {post.data.description && (
+              <p class="post-excerpt">{post.data.description}</p>
+            )}
+            {post.data.categories.length > 0 && (
+              <div class="categories">
+                {post.data.categories.map(category => (
+                  <button class="category" data-category={category}>
+                    {category}
+                  </button>
+                ))}
+              </div>
+            )}
+          </article>
+        ))
+      }
+    </div>
+
+    <div id="no-posts" class="no-posts" style="display: none;">
+      <p>No posts found matching your criteria.</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .search-input,
+  .category-filter {
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 1rem;
+  }
+
+  .search-input {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .category-filter {
+    min-width: 200px;
+  }
+
+  .search-input:focus,
+  .category-filter:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .category {
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    background: var(--accent);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .category:hover {
+    background-color: #2563eb;
+    transform: translateY(-1px);
+  }
+
+  .no-posts {
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin: 3rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .filters {
+      flex-direction: column;
+    }
+
+    .search-input {
+      min-width: unset;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById(
+      'search-input'
+    ) as HTMLInputElement;
+    const categoryFilter = document.getElementById(
+      'category-filter'
+    ) as HTMLSelectElement;
+    const postList = document.getElementById('post-list')!;
+    const noPostsMessage = document.getElementById('no-posts')!;
+    const posts = postList.querySelectorAll('.post-card');
+
+    function filterPosts() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const selectedCategory = categoryFilter.value;
+      let visibleCount = 0;
+
+      posts.forEach(post => {
+        const title = post.getAttribute('data-title') || '';
+        const description = post.getAttribute('data-description') || '';
+        const categories = post.getAttribute('data-categories') || '';
+
+        const matchesSearch =
+          !searchTerm ||
+          title.includes(searchTerm) ||
+          description.includes(searchTerm);
+
+        const matchesCategory =
+          !selectedCategory || categories.split(',').includes(selectedCategory);
+
+        if (matchesSearch && matchesCategory) {
+          (post as HTMLElement).style.display = 'block';
+          visibleCount++;
+        } else {
+          (post as HTMLElement).style.display = 'none';
+        }
+      });
+
+      noPostsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    // Add event listeners
+    searchInput.addEventListener('input', filterPosts);
+    categoryFilter.addEventListener('change', filterPosts);
+
+    // Category button clicks
+    document.addEventListener('click', e => {
+      const target = e.target as HTMLElement;
+      if (target.classList.contains('category')) {
+        const category = target.getAttribute('data-category');
+        if (category) {
+          categoryFilter.value = category;
+          filterPosts();
+        }
+      }
+    });
+  });
+</script>

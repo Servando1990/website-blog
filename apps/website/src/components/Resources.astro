@@ -1,0 +1,76 @@
+---
+import { getAllBlogPosts, type ContentReference } from '@website-blog/ui';
+
+// Get featured blog posts
+const featuredPosts = getAllBlogPosts().filter(post => 
+  post.tags?.includes('AI') || post.tags?.includes('Tutorial')
+);
+---
+
+<section class="py-16 bg-background">
+  <div class="container mx-auto px-4 max-w-6xl">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-foreground mb-4">
+        Learning Resources
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        Practical guides and insights from our technical blog to help you implement AI solutions effectively.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {featuredPosts.map((post) => (
+        <article class="bg-card border border-border rounded-lg p-6 hover:border-accent transition-colors">
+          <div class="mb-4">
+            <h3 class="text-xl font-semibold text-foreground mb-2">
+              <a href={post.url} target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors">
+                {post.title}
+              </a>
+            </h3>
+            {post.description && (
+              <p class="text-muted-foreground text-sm leading-relaxed">
+                {post.description}
+              </p>
+            )}
+          </div>
+          
+          {post.tags && post.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mb-4">
+              {post.tags.slice(0, 3).map((tag) => (
+                <span class="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded-md font-medium">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+          
+          <a 
+            href={post.url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center text-sm font-medium text-accent hover:text-accent/80 transition-colors"
+          >
+            Read Article
+            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <div class="text-center mt-8">
+      <a 
+        href="https://servando.co/posts" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="inline-flex items-center px-6 py-3 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 transition-colors"
+      >
+        View All Articles
+        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,60 @@
+---
+// Company data with logos
+const companies = [
+  {
+    name: 'BBVA',
+    domain: 'bbva.com'
+  },
+  {
+    name: 'Orange',
+    domain: 'orange.com'
+  },
+  {
+    name: 'Fintonic', 
+    domain: 'fintonic.com'
+  },
+  {
+    name: 'PwC',
+    domain: 'pwc.com'
+  },
+  {
+    name: 'KPMG',
+    domain: 'kpmg.com'
+  },
+  {
+    name: 'Minsait',
+    domain: 'minsait.com'
+  },
+  {
+    name: 'Stealth',
+    domain: 'startup.com',
+    customLogo: 'data:image/jpeg;base64,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'
+  }
+];
+---
+
+<section class="pt-32 pb-16 px-6 bg-light-card dark:bg-dark-card">
+  <div class="container mx-auto max-w-6xl">
+    <div class="text-center">
+      <h2 class="text-4xl md:text-6xl lg:text-7xl font-medium mb-8 text-black dark:text-white">
+        Companies we have helped
+      </h2>
+      
+      <div class="flex flex-wrap justify-center items-center gap-12 md:gap-16 lg:gap-20">
+        {companies.map((company) => (
+          <div class="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-all duration-200 group">
+            <img 
+              src={company.customLogo || `https://www.google.com/s2/favicons?domain=${company.domain}&sz=128`}
+              alt={`${company.name} logo`}
+              class="w-8 h-8 md:w-10 md:h-10 filter grayscale group-hover:grayscale-0 transition-all duration-200"
+              loading="lazy"
+            />
+            <span class="text-xs text-[#878787] group-hover:text-black dark:group-hover:text-white transition-colors duration-200">
+              {company.name}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

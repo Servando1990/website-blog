@@ -1,0 +1,86 @@
+---
+import '../app.postcss';
+import ThemeToggle from '../components/ThemeToggle.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'AI, machine learning, and technology insights from Servando Torres',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    
+    <!-- Theme detection script (runs before page load) -->
+    <script is:inline>
+      // Prevent flash of incorrect theme
+      const getThemePreference = () => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      };
+      const isDark = getThemePreference() === 'dark';
+      document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+      
+      if (typeof localStorage !== 'undefined') {
+        // Watch for changes in localStorage
+        const observer = new MutationObserver(() => {
+          const isDarkMode = document.documentElement.classList.contains('dark');
+          localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        });
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+      }
+    </script>
+    
+    <!-- Geist Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font CSS Variables -->
+    <style>
+      :root {
+        --font-geist-sans: 'Geist', system-ui, sans-serif;
+        --font-geist-mono: 'Geist Mono', ui-monospace, monospace;
+        --font-serif: ui-serif, Georgia, serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mx-auto max-w-4xl px-4 min-h-screen flex flex-col">
+      <header class="py-8 mb-8">
+        <nav class="flex justify-between items-center">
+          <a href="/" class="text-xl font-bold">Servando's Blog</a>
+          <div class="flex gap-6 items-center">
+            <a href="/">Home</a>
+            <a href="/posts">Posts</a>
+            <a href="/about">About</a>
+            <ThemeToggle />
+          </div>
+        </nav>
+      </header>
+
+      <main class="flex-1">
+        <slot />
+      </main>
+
+      <footer class="py-8 mt-16 text-center opacity-60">
+        <p>&copy; 2024 Servando Torres</p>
+      </footer>
+    </div>
+  </body>
+</html>

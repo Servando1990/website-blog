@@ -1,0 +1,19 @@
+{
+  "name": "@website-blog/ui",
+  "version": "1.0.0",
+  "description": "Shared design system and UI components for website and blog",
+  "type": "module",
+  "main": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./styles": "./styles/index.css",
+    "./tailwind": "./tailwind.config.js"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.4.17",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

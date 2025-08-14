@@ -1,0 +1,91 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {
+  getAllPosts,
+  getAllCategories,
+  getCategoryPostCount,
+} from '../../utils/posts';
+
+const posts = await getAllPosts();
+const categories = await getAllCategories();
+
+const categoriesWithCounts = categories.map(category => ({
+  category,
+  count: getCategoryPostCount(posts, category),
+}));
+---
+
+<Layout
+  title="Categories - Servando's Blog"
+  description="Browse posts by category"
+>
+  <section>
+    <h1>Categories</h1>
+    <p class="subtitle">Explore posts organized by topic</p>
+
+    <div class="category-grid">
+      {
+        categoriesWithCounts.map(({ category, count }) => (
+          <a
+            href={`/categories/${category.toLowerCase()}`}
+            class="category-card"
+          >
+            <h3>{category}</h3>
+            <p>
+              {count} post{count !== 1 ? 's' : ''}
+            </p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    font-size: 1.125rem;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .category-card {
+    display: block;
+    padding: 2rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .category-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+  }
+
+  .category-card h3 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .category-card p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .category-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,273 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllPosts, getAllCategories } from '../../utils/posts';
+import { formatDate } from '../../utils/dates';
+
+const posts = await getAllPosts();
+const categories = await getAllCategories();
+const recentPosts = posts.slice(0, 8);
+---
+
+<Layout
+  title="Writing - Servando's Blog"
+  description="My thoughts on AI, machine learning, technology, and more"
+>
+  <section>
+    <h1>Writing</h1>
+    <p class="subtitle">
+      Welcome to my writing section where I share thoughts on AI, machine
+      learning, technology, and more.
+    </p>
+
+    <div class="writing-stats">
+      <div class="stat">
+        <span class="stat-number">{posts.length}</span>
+        <span class="stat-label">Posts</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">{categories.length}</span>
+        <span class="stat-label">Categories</span>
+      </div>
+    </div>
+
+    <div class="section-nav">
+      <a href="/posts" class="nav-button"> 📚 Browse All Posts </a>
+      <a href="/categories" class="nav-button"> 🏷️ View Categories </a>
+    </div>
+
+    <section class="recent-posts">
+      <h2>Recent Posts</h2>
+
+      {
+        recentPosts.length > 0 ? (
+          <div class="post-list">
+            {recentPosts.map(post => (
+              <article class="post-card">
+                <div class="post-meta">{formatDate(post.data.date)}</div>
+                <h3 class="post-title">
+                  <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+                </h3>
+                {post.data.description && (
+                  <p class="post-excerpt">{post.data.description}</p>
+                )}
+                {post.data.categories.length > 0 && (
+                  <div class="categories">
+                    {post.data.categories.map(category => (
+                      <a
+                        href={`/categories/${category.toLowerCase()}`}
+                        class="category"
+                      >
+                        {category}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p>No posts yet. Start writing!</p>
+        )
+      }
+
+      {
+        posts.length > recentPosts.length && (
+          <div class="view-all">
+            <a href="/posts" class="view-all-link">
+              View all {posts.length} posts →
+            </a>
+          </div>
+        )
+      }
+    </section>
+
+    <section class="categories-preview">
+      <h2>Browse by Category</h2>
+      <div class="category-list">
+        {
+          categories.slice(0, 6).map(category => (
+            <a
+              href={`/categories/${category.toLowerCase()}`}
+              class="category-link"
+            >
+              {category}
+            </a>
+          ))
+        }
+      </div>
+      {
+        categories.length > 6 && (
+          <a href="/categories" class="view-all-categories">
+            View all categories →
+          </a>
+        )
+      }
+    </section>
+  </section>
+</Layout>
+
+<style>
+  .subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    line-height: 1.6;
+  }
+
+  .writing-stats {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    justify-content: center;
+  }
+
+  .stat {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--bg-secondary);
+    border-radius: 1rem;
+    border: 1px solid var(--border);
+    min-width: 120px;
+  }
+
+  .stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .section-nav {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 4rem;
+  }
+
+  .nav-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    color: var(--text-primary) !important;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .nav-button:hover {
+    border-color: var(--accent);
+    background-color: var(--accent);
+    color: white !important;
+    transform: translateY(-2px);
+  }
+
+  .recent-posts {
+    margin-bottom: 4rem;
+  }
+
+  .recent-posts h2 {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+  }
+
+  .view-all {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .view-all-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background-color: var(--accent);
+    color: white !important;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .view-all-link:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
+  }
+
+  .categories-preview h2 {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+  }
+
+  .category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .category-link {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 2rem;
+    color: var(--text-primary) !important;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .category-link:hover {
+    border-color: var(--accent);
+    background-color: var(--accent);
+    color: white !important;
+    transform: translateY(-1px);
+  }
+
+  .view-all-categories {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .writing-stats {
+      gap: 1rem;
+    }
+
+    .stat {
+      min-width: 100px;
+      padding: 1rem;
+    }
+
+    .section-nav {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .nav-button {
+      width: 100%;
+      max-width: 300px;
+      justify-content: center;
+    }
+
+    .category-list {
+      justify-content: center;
+    }
+  }
+</style>

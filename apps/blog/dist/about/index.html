@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="description" content="Learn more about Servando Torres"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.16.18"><title>About - Servando Torres</title><!-- Theme detection script (runs before page load) --><script>
+      // Prevent flash of incorrect theme
+      const getThemePreference = () => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      };
+      const isDark = getThemePreference() === 'dark';
+      document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+      
+      if (typeof localStorage !== 'undefined') {
+        // Watch for changes in localStorage
+        const observer = new MutationObserver(() => {
+          const isDarkMode = document.documentElement.classList.contains('dark');
+          localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        });
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+      }
+    </script><!-- Geist Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"><!-- Font CSS Variables --><link rel="stylesheet" href="/_astro/about.DPrySVmf.css">
+<link rel="stylesheet" href="/_astro/_slug_.CFvaEzqC.css">
+<style>.about[data-astro-cid-kh7btl4r]{max-width:700px}.about-content[data-astro-cid-kh7btl4r] p[data-astro-cid-kh7btl4r]{font-size:1.125rem;line-height:1.7;margin-bottom:1.5rem}.about-content[data-astro-cid-kh7btl4r] h2[data-astro-cid-kh7btl4r]{margin-top:2.5rem;margin-bottom:1rem;color:var(--text-primary)}.about-content[data-astro-cid-kh7btl4r] ul[data-astro-cid-kh7btl4r]{margin:1rem 0 2rem 2rem}.about-content[data-astro-cid-kh7btl4r] li[data-astro-cid-kh7btl4r]{margin:.75rem 0;line-height:1.6}.contact-links[data-astro-cid-kh7btl4r]{display:flex;gap:1.5rem;margin-top:2.5rem;flex-wrap:wrap}.contact-links[data-astro-cid-kh7btl4r] a[data-astro-cid-kh7btl4r]{display:inline-flex;align-items:center;padding:.75rem 1.5rem;background-color:var(--bg-secondary);border:1px solid var(--border);border-radius:.75rem;color:var(--text-primary)!important;font-weight:500;transition:all .2s;text-decoration:none}.contact-links[data-astro-cid-kh7btl4r] a[data-astro-cid-kh7btl4r]:hover{border-color:var(--accent);background-color:var(--accent);color:#fff!important;transform:translateY(-2px);box-shadow:0 4px 12px #3b82f640}@media (max-width: 768px){.contact-links[data-astro-cid-kh7btl4r]{flex-direction:column;gap:1rem}.contact-links[data-astro-cid-kh7btl4r] a[data-astro-cid-kh7btl4r]{text-align:center}}
+</style><script type="module" src="/_astro/hoisted.2GcT8FGU.js"></script></head> <body data-astro-cid-sckkx6r4> <div class="container mx-auto max-w-4xl px-4 min-h-screen flex flex-col" data-astro-cid-sckkx6r4> <header class="py-8 mb-8" data-astro-cid-sckkx6r4> <nav class="flex justify-between items-center" data-astro-cid-sckkx6r4> <a href="/" class="text-xl font-bold" data-astro-cid-sckkx6r4>Servando's Blog</a> <div class="flex gap-6 items-center" data-astro-cid-sckkx6r4> <a href="/" data-astro-cid-sckkx6r4>Home</a> <a href="/posts" data-astro-cid-sckkx6r4>Posts</a> <a href="/about" data-astro-cid-sckkx6r4>About</a> <button id="theme-toggle" class="p-2 rounded hover:opacity-70 transition-opacity"> <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"> <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path> </svg> <svg id="theme-toggle-light-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"> <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path> </svg> </button>  </div> </nav> </header> <main class="flex-1" data-astro-cid-sckkx6r4>  <article class="about" data-astro-cid-kh7btl4r> <h1 data-astro-cid-kh7btl4r>About Me</h1> <div class="about-content" data-astro-cid-kh7btl4r> <p data-astro-cid-kh7btl4r>
+Hi, I'm Servando Torres, and I'm passionate about artificial
+        intelligence, machine learning, and technology. This blog is where I
+        share my insights, experiments, and learnings from working in the AI
+        space.
+</p> <p data-astro-cid-kh7btl4r>
+I believe in learning in public and sharing knowledge with the
+        community. Here you'll find posts about AI engineering, machine learning
+        experiments, technical tutorials, and thoughts on the future of
+        technology.
+</p> <h2 data-astro-cid-kh7btl4r>What You'll Find Here</h2> <ul data-astro-cid-kh7btl4r> <li data-astro-cid-kh7btl4r> <strong data-astro-cid-kh7btl4r>AI & ML Insights:</strong> Practical applications and learnings
+</li> <li data-astro-cid-kh7btl4r> <strong data-astro-cid-kh7btl4r>Technical Tutorials:</strong> Step-by-step guides and how-tos
+</li> <li data-astro-cid-kh7btl4r> <strong data-astro-cid-kh7btl4r>Experiments:</strong> Projects and prototypes I'm working on
+</li> <li data-astro-cid-kh7btl4r> <strong data-astro-cid-kh7btl4r>Industry Thoughts:</strong> Perspectives on technology trends
+</li> </ul> <h2 data-astro-cid-kh7btl4r>Connect With Me</h2> <p data-astro-cid-kh7btl4r>
+Feel free to reach out if you want to discuss AI, collaborate on
+        projects, or just say hello!
+</p> <div class="contact-links" data-astro-cid-kh7btl4r> <a href="https://github.com/vandotorres" target="_blank" rel="noopener" data-astro-cid-kh7btl4r>GitHub</a> <a href="https://x.com/vandotorres" target="_blank" rel="noopener" data-astro-cid-kh7btl4r>Twitter</a> <a href="mailto:servando@example.com" data-astro-cid-kh7btl4r>Email</a> </div> </div> </article>  </main> <footer class="py-8 mt-16 text-center opacity-60" data-astro-cid-sckkx6r4> <p data-astro-cid-sckkx6r4>&copy; 2024 Servando Torres</p> </footer> </div> </body></html> 

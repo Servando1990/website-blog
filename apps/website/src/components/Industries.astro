@@ -1,0 +1,111 @@
+---
+import { Activity, DollarSign, Settings, ShoppingCart, ExternalLink } from 'lucide-react';
+import IndustryModal from './IndustryModal';
+
+const industries = [
+  {
+    key: 'pharma',
+    name: 'Pharma',
+    IconComponent: Activity
+  },
+  {
+    key: 'finance', 
+    name: 'Finance',
+    IconComponent: DollarSign
+  },
+  {
+    key: 'manufacturing',
+    name: 'Manufacturing', 
+    IconComponent: Settings
+  },
+  {
+    key: 'retail',
+    name: 'Retail & E-commerce',
+    IconComponent: ShoppingCart
+  }
+];
+
+const expertiseData = {
+  pharma: {
+    title: "Pharma Expertise",
+    items: [
+      "Recsys-based tool between healthcare professionals and sales execs"
+    ]
+  },
+  finance: {
+    title: "Finance Expertise", 
+    items: [
+      "ML-based credit risk modelling",
+      "Predictive loan default",
+      "Finance anomaly detection"
+    ]
+  },
+  manufacturing: {
+    title: "Manufacturing Expertise",
+    items: [
+      "Demand forecasting",
+      "Multi-database matching records", 
+      "Supply chain planner, scheduler and optimizer"
+    ]
+  },
+  retail: {
+    title: "Retail & E-commerce Expertise",
+    items: [
+      "Demand forecasting and price optimization",
+      "Image & text based product mappings",
+      "Customer behavior analysis"
+    ]
+  }
+};
+---
+
+<section class="py-20 px-6">
+  <div class="container mx-auto max-w-6xl">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-6xl lg:text-7xl font-medium mb-6 text-black dark:text-white">
+        Deployed Implementations Across Industries
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+        Tailored AI implementations that understand <strong class="text-black dark:text-white">your specific business context</strong>
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      {industries.map((industry) => (
+        <div class="group p-6 rounded-xl bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 text-center">
+          <div class="flex justify-center mb-4">
+            <div class="p-3 rounded-lg bg-accent-gold/10 dark:bg-accent-amber/10">
+              <industry.IconComponent className="h-6 w-6 text-accent-gold dark:text-accent-amber" />
+            </div>
+          </div>
+          
+          <h3 class="font-medium mb-4 text-black dark:text-white">
+            {industry.name}
+          </h3>
+          
+          <button 
+            onclick={`openExpertiseModal('${industry.key}')`}
+            class="px-4 py-2 text-sm bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors text-gray-700 dark:text-gray-300 group-hover:bg-accent-gold/10 dark:group-hover:bg-accent-amber/10 group-hover:text-accent-gold dark:group-hover:text-accent-amber"
+          >
+            Case Studies
+          </button>
+        </div>
+      ))}
+    </div>
+    
+    <div class="text-center">
+      <a 
+        href="https://cal.com/servando-torres-garcia-qco7rh/30min" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-8 py-4 border-2 border-gray-300 dark:border-gray-700 text-black dark:text-white rounded-lg hover:border-gray-400 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200"
+      >
+        Discuss Your Industry
+        <ExternalLink className="h-4 w-4" />
+      </a>
+    </div>
+  </div>
+  
+  <!-- Industry Modal -->
+  <IndustryModal industryData={expertiseData} client:load />
+</section>

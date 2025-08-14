@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Midday's exact light theme colors */
+    --background: 0, 0%, 100%;
+    --foreground: 0, 0%, 7%;
+    --card: 45 18% 96%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 45 18% 96%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 40, 11%, 89%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 40, 11%, 89%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 40, 10%, 94%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 45, 5%, 85%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Midday's exact dark theme colors */
+    --background: 0, 0%, 7%;
+    --foreground: 0 0% 98%;
+    --card: 0, 0%, 7%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0, 0%, 7%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 0, 0%, 11%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0, 0%, 11%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 0, 0%, 11%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 359, 100%, 61%;
+    --destructive-foreground: 0, 0%, 100%;
+    --border: 0, 0%, 17%;
+    --input: 0, 0%, 11%;
+    --ring: 240 4.9% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Midday's signature visual effects */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Midday's dotted background pattern */
+.dotted-bg {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    hsl(var(--border)) 1px,
+    transparent 0
+  );
+  background-size: 8px 8px;
+}
+
+.dark .dotted-bg {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    #232323 1px,
+    transparent 0
+  );
+  background-size: 8px 8px;
+}
+
+.light .dotted-bg {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    #e7e7e7 1px,
+    transparent 0
+  );
+  background-size: 8px 8px;
+}
+
+/* Midday's text stroke effect */
+.text-stroke {
+  color: white;
+  text-shadow: -1px 1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black;
+}
+
+.dark .text-stroke {
+  color: black;
+  text-shadow: -1px 1px 0 white, 1px 1px 0 white, 1px -1px 0 white, -1px -1px 0 white;
+}
+
+/* Midday's text dotted effect */
+.text-dotted {
+  background-image: radial-gradient(
+    circle at 0.4px 0.2px,
+    #000 1px,
+    transparent 0
+  );
+  background-size: 5px 5px;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .text-dotted {
+  background-image: radial-gradient(
+    circle at 0.4px 0.2px,
+    #fff 1px,
+    transparent 0
+  );
+  background-size: 5px 5px;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Midday's selection styling */
+::selection {
+  background: #00cc9937;
+  color: #007763fd;
+}
+
+img::selection {
+  background: transparent;
+}
+
+/* Button component styles */
+@layer components {
+  /* Base button styles */
+  .btn-base {
+    @apply inline-flex items-center justify-center gap-2 font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  /* Primary CTA Button - "Start free trial" style */
+  .btn-primary {
+    @apply btn-base h-12 px-5 bg-black text-white dark:bg-white dark:text-black rounded-lg transition-all duration-200 !important;
+  }
+  
+  .btn-primary:hover {
+    @apply bg-black/80 dark:bg-white/80 !important;
+  }
+
+  /* Secondary/Outline Button - "Talk to founders" style */
+  .btn-secondary {
+    @apply btn-base h-12 px-6 border border-black dark:border-white text-black dark:text-white rounded-lg transition-all duration-200 !important;
+    background-color: transparent !important;
+  }
+  
+  .btn-secondary:hover {
+    @apply bg-black/5 dark:bg-white/5 !important;
+  }
+
+  /* Rounded/Pill Button */
+  .btn-pill {
+    @apply btn-base px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200;
+  }
+
+  /* Outline Button - generic */
+  .btn-outline {
+    @apply btn-base border border-gray-300 dark:border-gray-700 text-black dark:text-white rounded-lg hover:border-gray-400 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200;
+  }
+
+  /* Ghost Button */
+  .btn-ghost {
+    @apply btn-base hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300;
+  }
+
+  /* Link Button */
+  .btn-link {
+    @apply btn-base text-accent-gold dark:text-accent-amber hover:underline underline-offset-4;
+  }
+
+  /* Midday-style text effects */
+  .text-stroke {
+    -webkit-text-stroke: 1px currentColor;
+    -webkit-text-fill-color: transparent;
+    color: #000;
+  }
+
+  .dark .text-stroke {
+    color: #fff;
+  }
+
+  .text-dotted {
+    background: radial-gradient(circle, currentColor 1px, transparent 1px);
+    background-size: 6px 6px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #000;
+  }
+
+  .dark .text-dotted {
+    color: #fff;
+  }
+}

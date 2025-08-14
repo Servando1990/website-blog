@@ -1,0 +1,89 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Transform AI/ML confusion into competitive advantage. Strategic AI consulting and RAG implementation training that moves you from overwhelm to concrete action plans and measurable results." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    
+    <!-- Theme detection script (runs before page load) -->
+    <script is:inline>
+      // Prevent flash of incorrect theme
+      const getThemePreference = () => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      };
+      const isDark = getThemePreference() === 'dark';
+      document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+      
+      if (typeof localStorage !== 'undefined') {
+        // Watch for changes in localStorage
+        const observer = new MutationObserver(() => {
+          const isDarkMode = document.documentElement.classList.contains('dark');
+          localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        });
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+      }
+    </script>
+    
+    <!-- Geist Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font CSS Variables -->
+    <style>
+      :root {
+        --font-geist-sans: 'Geist', system-ui, sans-serif;
+        --font-geist-mono: 'Geist Mono', ui-monospace, monospace;
+        --font-serif: ui-serif, Georgia, serif;
+      }
+    </style>
+    
+    <!-- Global styles -->
+    <style>
+      @import '../styles/global.css';
+    </style>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization", 
+      "name": "controlthrive",
+      "founder": {
+        "@type": "Person",
+        "name": "Servando Torres"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "London",
+        "addressRegion": "UK"
+      },
+      "email": "servando@controlthrive.com",
+      "sameAs": [
+        "https://x.com/servandotorres",
+        "https://linkedin.com/in/servandotorres"
+      ],
+      "description": "AI Consulting Services"
+    }
+    </script>
+    
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

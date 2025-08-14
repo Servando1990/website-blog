@@ -1,0 +1,96 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllCategories, getPostsByCategory } from '../../utils/posts';
+import { formatDate } from '../../utils/dates';
+
+export async function getStaticPaths() {
+  const categories = await getAllCategories();
+
+  return categories.map(category => ({
+    params: { category: category.toLowerCase() },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+const posts = await getPostsByCategory(category);
+---
+
+<Layout
+  title={`${category} Posts - Servando's Blog`}
+  description={`Posts in the ${category} category`}
+>
+  <section>
+    <nav class="breadcrumb">
+      <a href="/categories">Categories</a>
+      <span>→</span>
+      <span>{category}</span>
+    </nav>
+
+    <h1>{category}</h1>
+    <p class="subtitle">
+      {posts.length} post{posts.length !== 1 ? 's' : ''} in this category
+    </p>
+
+    {
+      posts.length > 0 ? (
+        <div class="post-list">
+          {posts.map(post => (
+            <article class="post-card">
+              <div class="post-meta">{formatDate(post.data.date)}</div>
+              <h2 class="post-title">
+                <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+              </h2>
+              {post.data.description && (
+                <p class="post-excerpt">{post.data.description}</p>
+              )}
+              {post.data.categories.length > 1 && (
+                <div class="categories">
+                  {post.data.categories.map(cat => (
+                    <a
+                      href={`/categories/${cat.toLowerCase()}`}
+                      class="category"
+                    >
+                      {cat}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+      ) : (
+        <p class="no-posts">No posts found in this category.</p>
+      )
+    }
+  </section>
+</Layout>
+
+<style>
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+
+  .breadcrumb a {
+    color: var(--accent);
+  }
+
+  .subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 1.125rem;
+  }
+
+  .no-posts {
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin: 3rem 0;
+    font-size: 1.125rem;
+  }
+</style>

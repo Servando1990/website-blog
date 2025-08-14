@@ -1,0 +1,36 @@
+---
+import { Check, ExternalLink } from 'lucide-react';
+
+const solutions = [
+  "Seamless synergy between business goals and ML implementations",
+  "Rapid Time-to-Market with focus on business use cases", 
+  "Simplified technical demands and optimized resource usage",
+  "Strategic long-term partnership for ongoing success"
+];
+---
+
+<section class="py-20 px-6" id="solutions">
+  <div class="container mx-auto max-w-4xl">
+    <div class="text-center mb-16">
+      <!-- Option 3: Refined Medium Typography -->
+      <h2 class="text-4xl md:text-6xl lg:text-7xl font-medium mb-4 text-black dark:text-white">
+        We are grounded in these fundamentals
+      </h2>
+    </div>
+    
+    <div class="space-y-6 mb-12">
+      {solutions.map((solution) => (
+        <div class="flex items-start gap-4 p-6 rounded-xl bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200">
+          <div class="flex-shrink-0 mt-1">
+            <div class="flex items-center justify-center w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30">
+              <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
+            </div>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+            {solution}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section> 

@@ -1,0 +1,163 @@
+---
+// This component will be populated with heading data via props
+export interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+export interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+---
+
+<nav class="toc" aria-label="Table of Contents">
+  <ul class="toc-list">
+{headings
+      .filter(heading => heading.depth >= 2 && heading.depth <= 3)
+      .map(heading => (
+        <li
+          class="toc-item"
+          style={`margin-left: ${(heading.depth - 2) * 1}rem`}
+        >
+          <a href={`#${heading.slug}`} class="toc-link">
+            {heading.text}
+          </a>
+        </li>
+      ))}
+  </ul>
+</nav>
+
+<style>
+  .toc {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+    padding: 1.5rem;
+    margin-right: 2rem;
+    width: 280px;
+    flex-shrink: 0;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .toc-item {
+    margin: 0;
+  }
+
+  .toc-link {
+    display: block;
+    padding: 0.375rem 0;
+    color: #94a3b8; /* surface-400 equivalent */
+    text-decoration: none;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    transition: all 0.2s ease;
+    border-radius: 0.25rem;
+    white-space: normal;
+    word-break: break-words;
+  }
+
+  .toc-link:hover {
+    color: #3b82f6; /* primary-600 equivalent */
+    text-decoration: none;
+  }
+
+  /* Active state */
+  .toc-link.active {
+    color: #1e293b; /* primary-900 equivalent */
+    font-weight: 600;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 1200px) {
+    .toc {
+      display: none;
+    }
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .toc::-webkit-scrollbar {
+    display: none;
+  }
+
+  .toc {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Smooth scroll behavior */
+  :global(html) {
+    scroll-behavior: smooth;
+  }
+</style>
+
+<script>
+  // Smooth scrolling and active state management
+  document.addEventListener('DOMContentLoaded', function () {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('h2, h3');
+
+    // Add smooth scrolling
+    tocLinks.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+        }
+      });
+    });
+
+    // Update active state on scroll
+    function updateActiveLink() {
+      let current = '';
+
+      headings.forEach(heading => {
+        const rect = heading.getBoundingClientRect();
+        if (rect.top <= 100) {
+          current = heading.id;
+        }
+      });
+
+      tocLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // Throttled scroll listener
+    let ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(function () {
+          updateActiveLink();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Initial call
+    updateActiveLink();
+  });
+</script>
+

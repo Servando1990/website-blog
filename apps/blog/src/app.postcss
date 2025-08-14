@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Shared design system from website */
+@layer base {
+  :root {
+    --font-geist-sans: 'Geist', system-ui, sans-serif;
+    --font-geist-mono: 'Geist Mono', ui-monospace, monospace;
+    --font-serif: ui-serif, Georgia, serif;
+    
+    /* Light theme variables */
+    --background: 46 44 34; /* #eeece2 in HSL */
+    --foreground: 0 0 0;
+    --border: 44 42 35;
+    --muted: 50 48 42;
+    --accent: 45 76 41;
+    
+    --primary: 0 0 0;
+    --primary-foreground: 46 44 34;
+    --secondary: 44 42 35;
+    --secondary-foreground: 0 0 0;
+    --destructive: 0 84 60;
+    --destructive-foreground: 0 0 98;
+    --popover: 46 44 34;
+    --popover-foreground: 0 0 0;
+    --card: 46 44 34;
+    --card-foreground: 0 0 0;
+    --input: 44 42 35;
+    --ring: 45 76 41;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark theme variables */
+    --background: 0 0 0; /* Pure black */
+    --foreground: 0 0 100;
+    --border: 0 0 10;
+    --muted: 0 0 7;
+    --accent: 45 76 41;
+    
+    --primary: 0 0 100;
+    --primary-foreground: 0 0 0;
+    --secondary: 0 0 10;
+    --secondary-foreground: 0 0 100;
+    --destructive: 0 62 30;
+    --destructive-foreground: 0 0 98;
+    --popover: 0 0 0;
+    --popover-foreground: 0 0 100;
+    --card: 0 0 0;
+    --card-foreground: 0 0 100;
+    --input: 0 0 10;
+    --ring: 45 76 41;
+  }
+
+  html {
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  a:hover {
+    opacity: 0.7;
+  }
+
+  /* Code blocks with consistent theming */
+  pre {
+    background: hsl(var(--muted));
+    color: hsl(var(--foreground));
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+    border: 1px solid hsl(var(--border));
+  }
+
+  code {
+    background: hsl(var(--muted));
+    color: hsl(var(--foreground));
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+  }
+
+  pre code {
+    background: transparent;
+    padding: 0;
+  }
+}

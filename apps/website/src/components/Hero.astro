@@ -1,0 +1,65 @@
+---
+import { Button } from './Button';
+import { WordAnimation } from './WordAnimation';
+---
+
+<section class="mt-[60px] lg:mt-[180px] min-h-[530px] relative lg:h-[calc(100vh-300px)] px-4 md:px-6 lg:px-8" id="home">
+  <div class="flex flex-col max-w-7xl mx-auto">
+    <!-- Version badge like Midday -->
+    <a 
+      href="https://ai-framework-demo.vercel.app/" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      class="inline-flex items-center space-x-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-mono w-fit hover:bg-accent transition-colors mb-4"
+    >
+      <span>AI Assessment v2.0</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none">
+        <path fill="currentColor" d="M8.783 6.667H.667V5.333h8.116L5.05 1.6 6 .667 11.333 6 6 11.333l-.95-.933 3.733-3.733Z"/>
+      </svg>
+    </a>
+
+    <!-- Large Midday-style heading -->
+    <h2 class="mt-6 md:mt-10 max-w-[580px] text-[#878787] leading-tight text-[24px] md:text-[36px] font-medium mb-6 md:mb-8">
+      We help domain experts transform their business logic with agentic data science solutions
+    </h2>
+
+    <!-- Large display text with animations -->
+    <h1 class="mt-4 md:mt-6 text-[45px] sm:text-[55px] md:text-[75px] lg:text-[95px] font-medium leading-none mb-6 md:mb-8 flex flex-wrap items-baseline gap-2 md:gap-4">
+      <span>control</span>
+      <div class="inline-block min-w-[140px] sm:min-w-[160px] md:min-w-[220px] lg:min-w-[280px] text-center">
+        <WordAnimation 
+          words={["data", "models", "code", "agents"]} 
+          className="text-[#878787] text-[32px] sm:text-[38px] md:text-[52px] lg:text-[65px]"
+          client:load 
+        />
+      </div>
+      <span>thrive</span>
+      <span class="text-[#878787] text-[32px] sm:text-[38px] md:text-[52px] lg:text-[65px]">in business</span>
+    </h1>
+
+    <!-- CTA Buttons matching Midday's exact style -->
+    <div class="mt-6 md:mt-8 mb-8 md:mb-12">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <a
+          href="https://cal.com/servando-torres-garcia-qco7rh/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center h-11 px-6 border-transparent bg-[#F2F1EF] dark:bg-[#1D1D1D] text-sm font-medium transition-colors hover:bg-[#E8E7E5] dark:hover:bg-[#2A2A2A] focus-visible:outline-none w-full sm:w-auto"
+        >
+          Schedule Consultation
+        </a>
+
+        <a 
+          href="https://ai-framework-demo.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center h-11 px-5 bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-medium transition-colors focus-visible:outline-none w-full sm:w-auto"
+        >
+          Take AI Assessment
+        </a>
+      </div>
+    </div>
+
+    <!-- Metrics or additional content can go here -->
+  </div>
+</section>

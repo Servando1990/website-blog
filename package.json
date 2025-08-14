@@ -1,0 +1,34 @@
+{
+  "name": "website-blog-monorepo",
+  "version": "1.0.0",
+  "description": "ControlThrive website and blog monorepo with shared design system",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces",
+    "build": "npm run build --workspaces",
+    "website:dev": "npm run dev --workspace=apps/website",
+    "website:build": "npm run build --workspace=apps/website",
+    "blog:dev": "npm run dev --workspace=apps/blog",
+    "blog:build": "npm run build --workspace=apps/blog",
+    "ui:build": "npm run build --workspace=packages/ui",
+    "clean": "rm -rf apps/*/dist packages/*/dist apps/*/node_modules packages/*/node_modules node_modules",
+    "install-all": "npm install"
+  },
+  "keywords": [
+    "monorepo",
+    "astro",
+    "website",
+    "blog",
+    "controlthrive"
+  ],
+  "author": "Servando Torres",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.8.3"
+  }
+}
