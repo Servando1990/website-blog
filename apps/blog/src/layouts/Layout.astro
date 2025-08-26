@@ -1,5 +1,5 @@
 ---
-import '../app.postcss';
+import '@website-blog/ui/styles/index.css';
 import ThemeToggle from '../components/ThemeToggle.astro';
 
 export interface Props {
@@ -61,7 +61,7 @@ const {
     </style>
   </head>
   <body>
-    <div class="container mx-auto max-w-4xl px-4 min-h-screen flex flex-col">
+    <div class="container mx-auto max-w-6xl px-4 min-h-screen flex flex-col">
       <header class="py-8 mb-8">
         <nav class="flex justify-between items-center">
           <a href="/" class="text-xl font-bold">Servando's Blog</a>

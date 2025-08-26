@@ -22,14 +22,14 @@ const { title, date, description, categories, headings = [] } = Astro.props;
   <div class="flex gap-8 items-start flex-col xl:flex-row">
     {headings.length > 0 && <TableOfContents headings={headings} />}
 
-    <article class="flex-1 min-w-0">
-      <header class="mb-8 pb-6 border-b border-surface-700">
+    <article class="max-w-[700px] mx-auto">
+      <header class="mb-8 pb-6 border-b border-border">
         <h1
-          class="text-4xl md:text-5xl font-bold mb-4 leading-tight text-surface-50"
+          class="text-4xl md:text-5xl font-bold mb-4 leading-tight text-foreground"
         >
           {title}
         </h1>
-        <div class="text-surface-300 text-sm mb-4">
+        <div class="text-muted-foreground text-sm mb-4">
           <time datetime={date.toISOString()}>
             {formatDate(date)}
           </time>
@@ -40,7 +40,7 @@ const { title, date, description, categories, headings = [] } = Astro.props;
               {categories.map(category => (
                 <a
                   href={`/categories/${category.toLowerCase()}`}
-                  class="bg-surface-800 text-surface-50 px-3 py-1 rounded-full text-xs font-medium border border-surface-700 hover:bg-accent-500 hover:text-white transition-all duration-200"
+                  class="bg-secondary text-secondary-foreground px-3 py-1 rounded-full text-xs font-medium border border-border hover:bg-accent hover:text-accent-foreground transition-all duration-200"
                 >
                   {category}
                 </a>
@@ -50,14 +50,14 @@ const { title, date, description, categories, headings = [] } = Astro.props;
         }
       </header>
 
-      <div class="prose prose-lg max-w-none text-surface-50">
+      <div class="prose prose-lg dark:prose-invert prose-none-max-w">
         <slot />
       </div>
 
-      <nav class="mt-12 pt-8 border-t border-surface-700">
+      <nav class="mt-12 pt-8 border-t border-border">
         <a
           href="/posts"
-          class="inline-flex items-center gap-2 text-surface-50 hover:text-accent-400 font-medium transition-all duration-200 hover:transform hover:-translate-x-1"
+          class="inline-flex items-center gap-2 text-foreground hover:text-primary font-medium transition-all duration-200 hover:transform hover:-translate-x-1"
           >← Back to all posts</a
         >
       </nav>
@@ -75,7 +75,6 @@ const { title, date, description, categories, headings = [] } = Astro.props;
   .prose h6 {
     scroll-margin-top: 2rem;
     position: relative;
-    color: #fdfbd4; /* Cream color for all headings */
   }
 
   /* Add hover effect for heading anchors */
@@ -88,27 +87,12 @@ const { title, date, description, categories, headings = [] } = Astro.props;
     content: '#';
     position: absolute;
     left: -1.5rem;
-    color: #84b067; /* Sage green for anchor symbols */
-    font-weight: normal;
     opacity: 0.7;
+    font-weight: normal;
   }
 
-  /* Ensure all prose content is cream colored */
-  .prose p,
-  .prose li,
-  .prose blockquote,
-  .prose strong,
-  .prose em,
-  .prose code {
-    color: #fdfbd4 !important; /* Cream color for all text */
-  }
-
-  /* Links in prose should be slightly green but subtle */
-  .prose a {
-    color: #a7d193 !important; /* Light sage green for links */
-  }
-
-  .prose a:hover {
-    color: #84b067 !important; /* Darker sage green on hover */
+  /* Override prose default max-width */
+  .prose-none-max-w {
+    max-width: none !important;
   }
 </style>

@@ -6,7 +6,7 @@
   "main": "./index.ts",
   "exports": {
     ".": "./index.ts",
-    "./styles": "./styles/index.css",
+    "./styles/index.css": "./styles/index.css",
     "./tailwind": "./tailwind.config.js"
   },
   "peerDependencies": {

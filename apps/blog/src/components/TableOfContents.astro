@@ -59,7 +59,7 @@ const { headings } = Astro.props;
   .toc-link {
     display: block;
     padding: 0.375rem 0;
-    color: #94a3b8; /* surface-400 equivalent */
+    color: hsl(var(--muted-foreground));
     text-decoration: none;
     font-size: 0.875rem;
     line-height: 1.4;
@@ -70,13 +70,13 @@ const { headings } = Astro.props;
   }
 
   .toc-link:hover {
-    color: #3b82f6; /* primary-600 equivalent */
+    color: hsl(var(--primary));
     text-decoration: none;
   }
 
   /* Active state */
   .toc-link.active {
-    color: #1e293b; /* primary-900 equivalent */
+    color: hsl(var(--foreground));
     font-weight: 600;
   }
 

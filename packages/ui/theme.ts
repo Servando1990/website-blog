@@ -12,14 +12,14 @@ export const themeConfig = {
       foreground: '#000000',
       border: '#e2e0d6',
       muted: '#f5f4f0',
-      accent: '#d4af37' // Gold accent
+      accent: '#e4e4e7' // Light gray accent
     },
     dark: {
       background: '#000000', // Pure black
       foreground: '#ffffff',
       border: '#1a1a1a',
       muted: '#111111',
-      accent: '#d4af37' // Gold accent
+      accent: '#e4e4e7' // Light gray accent
     }
   }
 }
@@ -35,7 +35,7 @@ export const cssVariables = `
   --foreground: 0 0 0;
   --border: 44 42 35;
   --muted: 50 48 42;
-  --accent: 45 76 41;
+  --accent: 240 5.9% 90%;
   
   --primary: 0 0 0;
   --primary-foreground: 46 44 34;
@@ -48,7 +48,7 @@ export const cssVariables = `
   --card: 46 44 34;
   --card-foreground: 0 0 0;
   --input: 44 42 35;
-  --ring: 45 76 41;
+  --ring: 240 5.9% 90%;
   --radius: 0.5rem;
 }
 
@@ -58,7 +58,7 @@ export const cssVariables = `
   --foreground: 0 0 100;
   --border: 0 0 10;
   --muted: 0 0 7;
-  --accent: 45 76 41;
+  --accent: 240 5.9% 90%;
   
   --primary: 0 0 100;
   --primary-foreground: 0 0 0;
@@ -71,6 +71,6 @@ export const cssVariables = `
   --card: 0 0 0;
   --card-foreground: 0 0 100;
   --input: 0 0 10;
-  --ring: 45 76 41;
+  --ring: 240 5.9% 90%;
 }
 `;
