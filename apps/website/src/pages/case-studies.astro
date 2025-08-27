@@ -1,0 +1,120 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const caseStudies = [
+  {
+    id: 'price-optimization-saas',
+    title: 'Price Optimization for SaaS Product',
+    industry: 'SaaS',
+    summary: 'Implemented dynamic pricing algorithms that increased revenue by 35% while maintaining customer satisfaction. Our ML models analyzed usage patterns, competitor pricing, and customer value to optimize pricing in real-time.',
+    tags: ['Machine Learning', 'Pricing Strategy', 'Revenue Optimization']
+  },
+  {
+    id: 'ai-matching-engine-manufacturing',
+    title: 'AI Matching Engine for Manufacturing Company',
+    industry: 'Manufacturing',
+    summary: 'Built an intelligent matching system that reduced material waste by 40% and improved production efficiency by 28%. The engine optimizes supplier-demand matching using advanced algorithms and predictive analytics.',
+    tags: ['AI/ML', 'Supply Chain', 'Process Optimization']
+  },
+  {
+    id: 'earnings-dashboard-private-equity',
+    title: 'Earnings Call Dashboard for Private Equity Firm',
+    industry: 'Private Equity',
+    summary: 'Created an automated dashboard that processes earnings calls from 500+ portfolio companies, extracting key insights and generating actionable intelligence. Reduced analysis time from days to hours.',
+    tags: ['NLP', 'Dashboard', 'Financial Analytics']
+  }
+];
+---
+
+<Layout title="Case Studies - controlthrive">
+  <Header />
+  
+  <main class="min-h-screen bg-light-bg dark:bg-dark-bg">
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16">
+      <div class="container mx-auto px-6">
+        <div class="text-center max-w-4xl mx-auto">
+          <h1 class="text-4xl md:text-5xl font-bold text-black dark:text-white mb-6">
+            Case Studies
+          </h1>
+          <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            Explore how we've helped businesses transform their operations with AI and data-driven solutions. 
+            Each case study showcases real-world impact and measurable results.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Studies Grid -->
+    <section class="pb-24">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-1 lg:grid-cols-1 gap-8 max-w-4xl mx-auto">
+          {caseStudies.map((study) => (
+            <div class="bg-white dark:bg-gray-900 rounded-lg border border-light-border dark:border-dark-border p-8 hover:shadow-lg transition-all duration-300">
+              <!-- Industry Tag -->
+              <div class="inline-block bg-light-accent/10 dark:bg-dark-accent/10 text-light-accent dark:text-dark-accent px-3 py-1 rounded-full text-sm font-medium mb-4">
+                {study.industry}
+              </div>
+              
+              <!-- Title -->
+              <h2 class="text-2xl font-bold text-black dark:text-white mb-4">
+                {study.title}
+              </h2>
+              
+              <!-- Summary -->
+              <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+                {study.summary}
+              </p>
+              
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-2 mb-6">
+                {study.tags.map((tag) => (
+                  <span class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              
+              <!-- CTA Button -->
+              <button 
+                class="inline-flex items-center justify-center bg-light-accent dark:bg-dark-accent text-white hover:bg-light-accent/90 dark:hover:bg-dark-accent/90 transition-colors px-6 py-3 rounded-lg font-medium"
+                onclick={`window.location.href='/case-studies/${study.id}'`}
+              >
+                Read Full Case Study
+                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gray-50 dark:bg-gray-900/50">
+      <div class="container mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto">
+          <h2 class="text-3xl font-bold text-black dark:text-white mb-4">
+            Ready to Transform Your Business?
+          </h2>
+          <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+            Let's discuss how AI solutions can drive similar results for your organization.
+          </p>
+          <a 
+            href="https://cal.com/servando-torres/discovery-call" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center bg-light-accent dark:bg-dark-accent text-white hover:bg-light-accent/90 dark:hover:bg-dark-accent/90 transition-colors px-8 py-4 rounded-lg font-medium text-lg"
+          >
+            Schedule a Discovery Call
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
