@@ -19,7 +19,7 @@ This monorepo contains two Astro applications that deploy to separate domains vi
    - **Install Command**: `cd ../.. && npm install`
 3. Set custom domain to `controlthrive.com`
 
-### 2. Blog Deployment (servando.co)
+### 2. Blog Deployment (servando.co) (TODO: servando.co hasn't been setup yet)
 
 1. Create a new Vercel project from the same GitHub repo
 2. When prompted for project settings:
