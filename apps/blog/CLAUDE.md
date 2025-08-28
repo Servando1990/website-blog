@@ -12,19 +12,20 @@ This is Servando Torres's personal blog built with Astro. The site features AI/M
 # Install dependencies
 npm install
 
-# Development server with live reload
-npm run dev
+# Development server with live reload (run from monorepo root)
+npm run blog:dev
 
-# Build static site
-npm run build
+# Build static site (run from monorepo root)  
+npm run blog:build
 
-# Preview production build
+# Preview production build (run from app directory)
 npm run preview
 
-# Utility scripts
-python scripts/check_links.py          # Verify all links in markdown files
-python scripts/generate_sitemap.py     # Generate SEO sitemap with AI summaries
-python scripts/generate_desc.py        # Add AI-generated descriptions to posts
+# Utility scripts (run from monorepo root)
+cd tools && uv run python check_links.py ../apps/blog          # Verify all links in markdown files
+cd tools && uv run python generate_sitemap.py ../apps/blog     # Generate SEO sitemap with AI summaries
+cd tools && uv run python generate_desc.py ../apps/blog        # Add AI-generated descriptions to posts
+cd tools && uv run python shortlinks.py                        # URL shortening utility
 ```
 
 ## Architecture
@@ -53,23 +54,22 @@ When adding new blog posts:
 
 1. Create markdown file in `src/content/posts/`
 2. Include frontmatter with date, title, description, categories, and published status
-3. Run `python scripts/generate_desc.py` to generate AI descriptions if needed
-4. Links should be verified with `python scripts/check_links.py`
+3. Run `cd tools && uv run python generate_desc.py ../apps/blog` to generate AI descriptions if needed
+4. Links should be verified with `cd tools && uv run python check_links.py ../apps/blog`
 5. Categories automatically generate dynamic routes at `/categories/[category]`
 
 ## Important Notes
 
-- The site is live at https://servando.co/
-- Git repository: https://github.com/vandotorres/blog/
+- The site will be deployed at https://servando.co/
 - Modern dark theme with consistent branding
 - RSS feed generation via Astro RSS integration
 - Type-safe content validation ensures data integrity
 
 ## Shortlink CLI Rule
 
-- When adding new external links to any blog post, always use the `scripts/shortlinks.py` CLI to generate a shortlink.
+- When adding new external links to any blog post, always use the `tools/shortlinks.py` CLI to generate a shortlink.
 - Always use the `--blog-tag` option to tag the link with the blog's slug or filename.
 - Example usage:
   ```bash
-  uv run python scripts/shortlinks.py "https://example.com" --title "Descriptive Title" --desc "Short description" --tags "tag1,tag2" --external-id "unique-id-for-link" --blog-tag "blog-slug"
+  cd tools && uv run python shortlinks.py "https://example.com" --title "Descriptive Title" --desc "Short description" --tags "tag1,tag2" --external-id "unique-id-for-link" --blog-tag "blog-slug"
   ```
