@@ -28,10 +28,51 @@ const caseStudies = [
 ];
 ---
 
+<style>
+  /* Fix case study card backgrounds to avoid system color conversion */
+  .case-study-card {
+    background-color: #f0f0f0 !important; /* Light gray for light mode */
+  }
+  
+  /* Force dark mode cards to be black with stronger selectors */
+  .dark .case-study-card,
+  html.dark .case-study-card,
+  :root.dark .case-study-card {
+    background-color: #000000 !important; /* True black for dark mode */
+  }
+</style>
+
+<script>
+  // Force case study cards to be black in dark mode
+  function updateCardColors() {
+    const cards = document.querySelectorAll('.case-study-card');
+    const isDark = document.documentElement.classList.contains('dark');
+    
+    cards.forEach((card) => {
+      const htmlCard = card as HTMLElement;
+      if (isDark) {
+        htmlCard.style.backgroundColor = '#000000'; // Black in dark mode
+      } else {
+        htmlCard.style.backgroundColor = '#f0f0f0'; // Light gray in light mode
+      }
+    });
+  }
+  
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', updateCardColors);
+  
+  // Watch for theme changes
+  const observer = new MutationObserver(updateCardColors);
+  observer.observe(document.documentElement, { 
+    attributes: true, 
+    attributeFilter: ['class'] 
+  });
+</script>
+
 <Layout title="Case Studies - controlthrive">
   <Header />
   
-  <main class="min-h-screen bg-light-bg dark:bg-dark-bg">
+  <main class="min-h-screen bg-background dark:bg-background">
     <!-- Hero Section -->
     <section class="pt-24 pb-16">
       <div class="container mx-auto px-6">
@@ -52,9 +93,11 @@ const caseStudies = [
       <div class="container mx-auto px-6">
         <div class="grid md:grid-cols-1 lg:grid-cols-1 gap-8 max-w-4xl mx-auto">
           {caseStudies.map((study) => (
-            <div class="bg-white dark:bg-gray-900 rounded-lg border border-light-border dark:border-dark-border p-8 hover:shadow-lg transition-all duration-300">
+            <div 
+              class="case-study-card !bg-gray-50 dark:!bg-black rounded-lg border border-gray-200 dark:border-gray-800 p-8 hover:shadow-lg transition-all duration-300"
+            >
               <!-- Industry Tag -->
-              <div class="inline-block bg-light-accent/10 dark:bg-dark-accent/10 text-light-accent dark:text-dark-accent px-3 py-1 rounded-full text-sm font-medium mb-4">
+              <div class="inline-block !bg-black/5 dark:!bg-white/10 !text-black dark:!text-white px-3 py-1 rounded-full text-sm font-medium mb-4">
                 {study.industry}
               </div>
               
@@ -79,7 +122,7 @@ const caseStudies = [
               
               <!-- CTA Button -->
               <button 
-                class="inline-flex items-center justify-center bg-light-accent dark:bg-dark-accent text-white hover:bg-light-accent/90 dark:hover:bg-dark-accent/90 transition-colors px-6 py-3 rounded-lg font-medium"
+                class="inline-flex items-center justify-center !bg-black dark:!bg-white !text-white dark:!text-black hover:!bg-black/90 dark:hover:!bg-white/90 transition-colors px-6 py-3 rounded-lg font-medium"
                 onclick={`window.location.href='/case-studies/${study.id}'`}
               >
                 Read Full Case Study
@@ -107,7 +150,7 @@ const caseStudies = [
             href="https://cal.com/servando-torres/discovery-call" 
             target="_blank" 
             rel="noopener noreferrer"
-            class="inline-flex items-center justify-center bg-light-accent dark:bg-dark-accent text-white hover:bg-light-accent/90 dark:hover:bg-dark-accent/90 transition-colors px-8 py-4 rounded-lg font-medium text-lg"
+            class="inline-flex items-center justify-center !bg-black dark:!bg-white !text-white dark:!text-black hover:!bg-black/90 dark:hover:!bg-white/90 transition-colors px-8 py-4 rounded-lg font-medium text-lg"
           >
             Schedule a Discovery Call
           </a>

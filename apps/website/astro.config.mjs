@@ -8,5 +8,15 @@ export default defineConfig({
     react()
   ],
   output: 'static',
-  site: 'https://controlthrive.com'
+  site: 'https://controlthrive.com',
+  vite: {
+    server: {
+      // Prevent caching during development
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    }
+  }
 });
