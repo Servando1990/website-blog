@@ -4,6 +4,9 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      ringColor: {
+        DEFAULT: "hsl(var(--ring))"
+      },
       fontFamily: {
         sans: "var(--font-geist-sans), system-ui, sans-serif",
         mono: "var(--font-geist-mono), ui-monospace, monospace",

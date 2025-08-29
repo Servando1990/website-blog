@@ -67,6 +67,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* Force override the blue ring color */
+    --tw-ring-color: hsl(var(--ring));
   }
 
   html {
