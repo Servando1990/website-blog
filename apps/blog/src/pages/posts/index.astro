@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { getAllPosts, getAllCategories } from '../../utils/posts';
 import { formatDate } from '../../utils/dates';
+import Badge from '@website-blog/ui/components/Badge.astro';
 
 const posts = await getAllPosts();
 const categories = await getAllCategories();
@@ -22,14 +23,26 @@ const categories = await getAllCategories();
         class="search-input"
       />
 
-      <select id="category-filter" class="category-filter">
-        <option value="">All Categories</option>
+      <div class="category-badges">
+        <Badge 
+          variant="outline" 
+          class="category-badge active" 
+          data-category=""
+        >
+          All Categories
+        </Badge>
         {
           categories.map(category => (
-            <option value={category}>{category}</option>
+            <Badge 
+              variant="outline" 
+              class="category-badge" 
+              data-category={category}
+            >
+              {category}
+            </Badge>
           ))
         }
-      </select>
+      </div>
     </div>
 
     <div class="post-list" id="post-list">
@@ -76,29 +89,41 @@ const categories = await getAllCategories();
     flex-wrap: wrap;
   }
 
-  .search-input,
-  .category-filter {
+  .search-input {
     padding: 0.75rem;
     border: 1px solid var(--border);
     border-radius: 0.5rem;
     background-color: var(--bg-secondary);
     color: var(--text-primary);
     font-size: 1rem;
-  }
-
-  .search-input {
     flex: 1;
     min-width: 300px;
   }
 
-  .category-filter {
-    min-width: 200px;
-  }
-
-  .search-input:focus,
-  .category-filter:focus {
+  .search-input:focus {
     outline: none;
     border-color: var(--accent);
+  }
+
+  .category-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .category-badge {
+    transition: all 0.2s ease;
+  }
+
+  .category-badge:hover {
+    transform: translateY(-1px);
+  }
+
+  .category-badge.active {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    border-color: hsl(var(--primary));
   }
 
   .category {
@@ -133,6 +158,10 @@ const categories = await getAllCategories();
     .search-input {
       min-width: unset;
     }
+
+    .category-badges {
+      justify-content: flex-start;
+    }
   }
 </style>
 
@@ -141,16 +170,26 @@ const categories = await getAllCategories();
     const searchInput = document.getElementById(
       'search-input'
     ) as HTMLInputElement;
-    const categoryFilter = document.getElementById(
-      'category-filter'
-    ) as HTMLSelectElement;
     const postList = document.getElementById('post-list')!;
     const noPostsMessage = document.getElementById('no-posts')!;
     const posts = postList.querySelectorAll('.post-card');
+    const categoryBadges = document.querySelectorAll('.category-badge');
+    
+    let selectedCategory = '';
+
+    function updateBadgeStates() {
+      categoryBadges.forEach(badge => {
+        const badgeCategory = badge.getAttribute('data-category') || '';
+        if (badgeCategory === selectedCategory) {
+          badge.classList.add('active');
+        } else {
+          badge.classList.remove('active');
+        }
+      });
+    }
 
     function filterPosts() {
       const searchTerm = searchInput.value.toLowerCase();
-      const selectedCategory = categoryFilter.value;
       let visibleCount = 0;
 
       posts.forEach(post => {
@@ -175,22 +214,32 @@ const categories = await getAllCategories();
       });
 
       noPostsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
+      updateBadgeStates();
     }
 
     // Add event listeners
     searchInput.addEventListener('input', filterPosts);
-    categoryFilter.addEventListener('change', filterPosts);
 
-    // Category button clicks
+    // Category badge clicks
     document.addEventListener('click', e => {
       const target = e.target as HTMLElement;
+      if (target.classList.contains('category-badge')) {
+        const category = target.getAttribute('data-category') || '';
+        selectedCategory = category;
+        filterPosts();
+      }
+      
+      // Handle individual post category clicks
       if (target.classList.contains('category')) {
         const category = target.getAttribute('data-category');
         if (category) {
-          categoryFilter.value = category;
+          selectedCategory = category;
           filterPosts();
         }
       }
     });
+
+    // Initialize
+    filterPosts();
   });
 </script>

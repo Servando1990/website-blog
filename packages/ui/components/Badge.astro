@@ -1,0 +1,33 @@
+---
+import { cn } from '../utils';
+
+export interface Props {
+  variant?: 'default' | 'secondary' | 'destructive' | 'outline';
+  class?: string;
+  onClick?: string;
+  'data-category'?: string;
+}
+
+const { variant = 'default', class: className, onClick, 'data-category': dataCategory, ...props } = Astro.props;
+
+const badgeClasses = cn(
+  // Base styles
+  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors cursor-pointer select-none",
+  // Variant styles
+  {
+    'border-transparent bg-black dark:bg-white text-white dark:text-black hover:bg-black/80 dark:hover:bg-white/80': variant === 'default',
+    'border-transparent bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700': variant === 'secondary',
+    'border-transparent bg-red-500 text-white hover:bg-red-600': variant === 'destructive',
+    'border-gray-300 dark:border-gray-600 bg-transparent text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800': variant === 'outline',
+  }[variant],
+  className
+);
+---
+
+<button 
+  class={badgeClasses} 
+  data-category={dataCategory}
+  {...props}
+>
+  <slot />
+</button>
