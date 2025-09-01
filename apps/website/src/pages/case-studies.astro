@@ -8,21 +8,21 @@ const caseStudies = [
     id: 'price-optimization-saas',
     title: 'Price Optimization for SaaS Product',
     industry: 'SaaS',
-    summary: 'Implemented dynamic pricing algorithms that increased revenue by 35% while maintaining customer satisfaction. Our ML models analyzed usage patterns, competitor pricing, and customer value to optimize pricing in real-time.',
+    summary: 'Designed an end-to-end dynamic pricing optimization system, that allowed single and multi optimization goals, while respecting business rules and constraints for e-commerces',
     tags: ['Machine Learning', 'Pricing Strategy', 'Revenue Optimization']
   },
   {
     id: 'ai-matching-engine-manufacturing',
-    title: 'AI Matching Engine for Manufacturing Company',
+    title: 'AI Matching Engine.',
     industry: 'Manufacturing',
-    summary: 'Built an intelligent matching system that reduced material waste by 40% and improved production efficiency by 28%. The engine optimizes supplier-demand matching using advanced algorithms and predictive analytics.',
+    summary: 'Successfully integrated an AI matching engine that fetches data from various sources, addressing 200,000 incomplete entries',
     tags: ['AI/ML', 'Supply Chain', 'Process Optimization']
   },
   {
-    id: 'earnings-dashboard-private-equity',
-    title: 'Earnings Call Dashboard for Private Equity Firm',
+    id: 'earnings-dashboard-finance-research',
+    title: 'Earnings Call Dashboard for Financial Research',
     industry: 'Private Equity',
-    summary: 'Created an automated dashboard that processes earnings calls from 500+ portfolio companies, extracting key insights and generating actionable intelligence. Reduced analysis time from days to hours.',
+    summary: 'Created an automated dashboard that processes earnings calls from 500+ portfolio companies, extracting key insights and predicting sentiment with vocal tone AI models.',
     tags: ['NLP', 'Dashboard', 'Financial Analytics']
   }
 ];
@@ -37,11 +37,9 @@ const caseStudies = [
       <div class="container mx-auto px-6">
         <div class="text-center max-w-4xl mx-auto">
           <h1 class="text-4xl md:text-5xl font-bold text-black dark:text-white mb-6">
-            Case Studies
+            How we have helped
           </h1>
           <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-            Explore how we've helped businesses transform their operations with AI and data-driven solutions. 
-            Each case study showcases real-world impact and measurable results.
           </p>
         </div>
       </div>
@@ -78,15 +76,15 @@ const caseStudies = [
               </div>
               
               <!-- CTA Button -->
-              <button 
+              <a 
+                href={`/case-studies/${study.id}`}
                 class="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 transition-colors px-6 py-3 rounded-lg font-medium"
-                onclick={`window.location.href='/case-studies/${study.id}'`}
               >
                 Read Full Case Study
                 <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
-              </button>
+              </a>
             </div>
           ))}
         </div>

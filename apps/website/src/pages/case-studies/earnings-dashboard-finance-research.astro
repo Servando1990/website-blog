@@ -1,0 +1,117 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Earnings Call Dashboard for Financial Research - Case Study - controlthrive">
+  <Header />
+  
+  <main class="min-h-screen bg-background">
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="inline-block bg-accent/10 text-accent-foreground px-3 py-1 rounded-full text-sm font-medium mb-6">
+            Private Equity
+          </div>
+          <h1 class="text-4xl md:text-5xl font-bold text-black dark:text-white mb-6">
+            Earnings Call Dashboard for Financial Research
+          </h1>
+          <div class="flex flex-wrap gap-2 mb-8">
+            <span class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm">
+              NLP
+            </span>
+            <span class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm">
+              Dashboard
+            </span>
+            <span class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm">
+              Financial Analytics
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Sections -->
+    <section class="pb-24">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto space-y-16">
+          
+          <!-- Challenge -->
+          <div>
+            <h2 class="text-3xl font-bold text-black dark:text-white mb-6">
+              Challenge
+            </h2>
+            <div class="prose prose-lg dark:prose-invert">
+              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                Financial research firm needed a dashboard to process earnings calls from 500+ portfolio companies, extracting key insights and predicting sentiment with vocal tone AI models.
+              </p>
+            </div>
+          </div>
+
+          <!-- Design -->
+          <div>
+            <h2 class="text-3xl font-bold text-black dark:text-white mb-6">
+              Design
+            </h2>
+            <div class="prose prose-lg dark:prose-invert">
+              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                We built a backend in charge of extracting transcripts and audio data from recent earnings calls and then feeding this to LLMs and vocal tone models to trigger inference on sentiment and key insights.
+              </p>
+            </div>
+          </div>
+
+          <!-- Result -->
+          <div>
+            <h2 class="text-3xl font-bold text-black dark:text-white mb-6">
+              Result
+            </h2>
+            <div class="prose prose-lg dark:prose-invert">
+              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                The dashboard is now serving as key alert tooling for portfolio managers, enhancing their decision making on the fly.
+              </p>
+            </div>
+          </div>
+
+          <!-- Takeaway -->
+          <div>
+            <h2 class="text-3xl font-bold text-black dark:text-white mb-6">
+              Takeaway
+            </h2>
+            <div class="prose prose-lg dark:prose-invert">
+              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                Being able to visually display negative and positive alerts across multiple companies was a key differentiator for the firm.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gray-50 dark:bg-gray-900/50">
+      <div class="container mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto">
+          <h2 class="text-3xl font-bold text-black dark:text-white mb-4">
+            Ready to Transform Your Business?
+          </h2>
+          <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+            Let's discuss how AI solutions can drive similar results for your organization.
+          </p>
+          <a 
+            href="https://cal.com/servando-torres/discovery-call" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 transition-colors px-8 py-4 rounded-lg font-medium text-lg"
+          >
+            Schedule a Discovery Call
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
