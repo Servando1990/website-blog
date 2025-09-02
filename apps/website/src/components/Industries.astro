@@ -1,6 +1,5 @@
 ---
 import { Activity, DollarSign, Settings, ShoppingCart, ExternalLink } from 'lucide-react';
-import IndustryModal from './IndustryModal';
 
 const industries = [
   {
@@ -25,42 +24,13 @@ const industries = [
   }
 ];
 
-const expertiseData = {
-  pharma: {
-    title: "Pharma Expertise",
-    items: [
-      "Recsys-based tool between healthcare professionals and sales execs"
-    ]
-  },
-  finance: {
-    title: "Finance Expertise", 
-    items: [
-      "ML-based credit risk modelling",
-      "Predictive loan default",
-      "Finance anomaly detection"
-    ]
-  },
-  manufacturing: {
-    title: "Manufacturing Expertise",
-    items: [
-      "Demand forecasting",
-      "Multi-database matching records", 
-      "Supply chain planner, scheduler and optimizer"
-    ]
-  },
-  retail: {
-    title: "Retail & E-commerce Expertise",
-    items: [
-      "Demand forecasting and price optimization",
-      "Image & text based product mappings",
-      "Customer behavior analysis"
-    ]
-  }
-};
+// Duplicate industries multiple times for seamless full-width infinite scroll
+const duplicatedIndustries = [...industries, ...industries, ...industries, ...industries];
 ---
 
-<section class="py-20 px-6">
-  <div class="container mx-auto max-w-6xl">
+<section class="py-20">
+  <!-- Header section with container -->
+  <div class="container mx-auto max-w-6xl px-6">
     <div class="text-center mb-16">
       <h2 class="text-4xl md:text-6xl lg:text-7xl font-medium mb-6 text-black dark:text-white">
         Deployed Implementations Across Industries
@@ -69,30 +39,32 @@ const expertiseData = {
         Tailored AI implementations that understand <strong class="text-black dark:text-white">your specific business context</strong>
       </p>
     </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-      {industries.map((industry) => (
-        <div class="group p-6 rounded-xl bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 text-center">
+  </div>
+
+  <!-- Full-width Animated Marquee Container -->
+  <div class="relative overflow-hidden mb-16 w-full">
+    <div class="flex animate-marquee-left gap-6">
+      {duplicatedIndustries.map((industry) => (
+        <div class="group p-6 rounded-xl bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 text-center flex-shrink-0 w-80 hover:scale-105 hover:shadow-lg">
           <div class="flex justify-center mb-4">
-            <div class="p-3 rounded-lg bg-accent-gold/10 dark:bg-accent-amber/10">
-              <industry.IconComponent className="h-6 w-6 text-accent-gold dark:text-accent-amber" />
+            <div class="p-3 rounded-lg bg-accent-gold/10 dark:bg-accent-amber/10 transition-all duration-300 group-hover:bg-accent-gold/20 dark:group-hover:bg-accent-amber/20">
+              <industry.IconComponent className="h-8 w-8 text-accent-gold dark:text-accent-amber transition-transform duration-300 group-hover:scale-110" />
             </div>
           </div>
           
-          <h3 class="font-medium mb-4 text-black dark:text-white">
+          <h3 class="font-medium text-lg text-black dark:text-white transition-colors duration-300 group-hover:text-accent-gold dark:group-hover:text-accent-amber">
             {industry.name}
           </h3>
-          
-          <button 
-            onclick={`openExpertiseModal('${industry.key}')`}
-            class="px-4 py-2 text-sm bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors text-gray-700 dark:text-gray-300 group-hover:bg-accent-gold/10 dark:group-hover:bg-accent-amber/10 group-hover:text-accent-gold dark:group-hover:text-accent-amber"
-          >
-            Case Studies
-          </button>
+          <div class="mt-2 text-sm text-gray-600 dark:text-gray-400 transition-opacity duration-300 group-hover:opacity-80">
+            AI Solutions
+          </div>
         </div>
       ))}
     </div>
-    
+  </div>
+
+  <!-- Footer section with container -->
+  <div class="container mx-auto max-w-6xl px-6">
     <div class="text-center">
       <a 
         href="https://cal.com/servando-torres-garcia-qco7rh/30min" 
@@ -105,7 +77,85 @@ const expertiseData = {
       </a>
     </div>
   </div>
-  
-  <!-- Industry Modal -->
-  <IndustryModal industryData={expertiseData} client:load />
 </section>
+
+<style>
+  @keyframes marquee-left {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marquee-right {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .animate-marquee-left {
+    animation: marquee-left 10s linear infinite;
+  }
+
+  .animate-marquee-right {
+    animation: marquee-right 25s linear infinite;
+  }
+
+
+  /* Add smooth gradient overlay for fade effect on sides - full width */
+  .relative::before,
+  .relative::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .relative::before {
+    left: 0;
+    background: linear-gradient(to right, hsl(var(--background)) 0%, hsl(var(--background) / 0) 100%);
+  }
+
+  .relative::after {
+    right: 0;
+    background: linear-gradient(to left, hsl(var(--background)) 0%, hsl(var(--background) / 0) 100%);
+  }
+
+  /* Fallback for systems without CSS custom properties */
+  @supports not (color: hsl(var(--background))) {
+    .relative::before {
+      background: linear-gradient(to right, rgb(255 255 255) 0%, rgb(255 255 255 / 0) 100%);
+    }
+
+    .relative::after {
+      background: linear-gradient(to left, rgb(255 255 255) 0%, rgb(255 255 255 / 0) 100%);
+    }
+
+    /* Dark mode fallback */
+    @media (prefers-color-scheme: dark) {
+      .relative::before {
+        background: linear-gradient(to right, rgb(0 0 0) 0%, rgb(0 0 0 / 0) 100%);
+      }
+
+      .relative::after {
+        background: linear-gradient(to left, rgb(0 0 0) 0%, rgb(0 0 0 / 0) 100%);
+      }
+    }
+
+    .dark .relative::before {
+      background: linear-gradient(to right, rgb(0 0 0) 0%, rgb(0 0 0 / 0) 100%);
+    }
+
+    .dark .relative::after {
+      background: linear-gradient(to left, rgb(0 0 0) 0%, rgb(0 0 0 / 0) 100%);
+    }
+  }
+</style>
