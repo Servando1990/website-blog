@@ -16,6 +16,12 @@ const testimonials = [
     authorName: "Francisco Llaneza",
     position: "Principal Data Scientist",
     companyName: "Fintonic"
+  },
+  {
+    text: "Servando has a great knack for data science, and building ML systems that stand up in real-world environments. We worked on recommendation systems together.",
+    authorName: "Ed Mattia",
+    position: "AI Engineer",
+    companyName: "Outerbounds"
   }
 ];
 
@@ -25,7 +31,7 @@ export default function TestimonialSquares() {
       <div className="container mx-auto max-w-4xl">
         <div className="text-center mb-12">
           {/* Aligned with Midday's section title pattern */}
-      <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium mb-4 text-black dark:text-white">Testimonials</h2>
+      <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium mb-4 text-black dark:text-white">What People Are Saying</h2>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
