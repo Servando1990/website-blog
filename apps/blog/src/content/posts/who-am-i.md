@@ -3,12 +3,12 @@ title: 'Who am I?'
 date: '2025-09-05'
 description: 'Who am I and why I started this blog?'
 categories: ['Personal']
-published: false
+published: true
 ---
 #TODO: Find patterns to replace over usage of "I"
 #TODO: Add "10 minute read tag"
 
-# Life story
+## Life story
 
 I was born in Puebla, Mexico. For people always asking: where is it? I always say "it's close to Mexico City". My dad is a retired doctor and my mom was dentist. She died of cancer when I was in my early twenties (I have blurred memory of that period of my life). My dad always said that when I was a kid I was always on my own. I used get lost a big supermarkets, my mom would freak out but I'd would always be at the toy section, looking closely at the boxes of new toys as I would enjoy reading every detail about this new toy.
 
@@ -22,5 +22,15 @@ I had small taste of entreprenuership after collague, me and friend were working
 
 ## Summer of Machine Learning
 
-I was obssed with ML and its implications with in the real industries, after I graduated form that program I made an excel spreadsheet with a very comprehensive list of things I missed from my studies and decided to self-study everything I could within a timeline of 3 months - it was that summer. During my studies I went full-nerd and dedicate my entire time to extract all the knowledge I had not only from the classes but also from engagigng with my professors. Looking back, I think I was very annoying. Graduated with excelent notes but it was not enough to get a job in tech, not comming from STEAM field made things difficult.
+I was obssed with ML and its implications with in the real industries, after I graduated form that program I made an excel spreadsheet with a very comprehensive list of things I missed from my studies and decided to self-study everything I could within a timeline of 3 months - it was that summer. During my studies I went full-nerd and dedicate my entire time to extract all the knowledge I had not only from the classes but also from engagigng with my professors. Looking back, I think I was very annoying. Graduated with excelent notes but it was not enough to get a job in tech, not comming from STEAM field made things difficult but not impossible.
+
+## Fulfilling career in ML
+
+## Crisis
+
+## Betting on building something on my own
+
+## What's next?
+
+
 
