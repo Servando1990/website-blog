@@ -12,21 +12,15 @@ published: true
 
 ---
 
-#TODO: Find patterns to replace over usage of "I"
 
-#TODO: Add rule for paragraph length. In the blog post the lenght is smaller than the raw markdown file.
 
 ## Life Story
 
 I was born in Puebla, Mexico. For people always asking: where is it? "Close to Mexico City" is my gold standard answer. My dad is a retired doctor and my mom was a dentist. She died of cancer when I was in my early twenties (I have a blurred memory of that period of my life). My dad always said that when I was a kid, I was always on my own. 
 
-Getting lost in a big supermarket was common. My mom would freak out, but I’d always find my way to the toy section. I loved looking at the boxes of new toys and reading every detail about them.
+Getting lost in a big supermarket was common. My mom would freak out, but I’d always find my way to the toy section. I loved looking at the boxes of new toys and reading every detail about them. Growing up, business and art had always interested me. I used to sketch with charcoal, write poetry, and "kind of" write lyrics. I did fine in high school. Math was tough for me.
 
-Growing up, I always had an interest in business and art. I used to sketch with charcoal, write poetry, and "kind of" write lyrics. I did fine in high school. Math was tough for me, but I enjoyed statistics. 
-
-I was particularly good at a subject called "business English." We used to go through business case studies, talk about some problems, and come up with solutions.
-
-Finding out who I am was the ultimate quest during my teenage years and twenties. My friends were from different social groups. Looking back, the thought I had was "to see more." The idea of one path for everything felt impossible to me. 
+I was particularly good at a subject called "business English." We used to go through business case studies, talk about some problems, and come up with solutions. Finding out who I am was the ultimate quest during my teenage years and twenties. My friends were from different social groups. Looking back, the thought I had was "to see more." The idea of one path for everything felt impossible to me. 
 
 I went to Brazil right before starting university, and it changed everything for me. That year changed me forever. I realized, "Kids are doing completely different things than I am," was my takeaway.
 
@@ -42,11 +36,11 @@ I found myself at a university fair. One of those where they hand out these nice
 
 I obsessed over ML and its implications in the real industries. After I graduated, I created an Excel spreadsheet. It listed all the things I missed from my studies. I decided to self-study everything I could in 3 months that summer.
 
-During my studies, I went full-nerd and dedicated my entire time to extract all the value possible. Looking back, I was very annoying. I graduated with excellent grades, but it was not enough to get a job in tech; not coming from a STEAM made things difficult but not impossible.
+During my studies, I went full-nerd and dedicated my entire time to extract all the value possible. Looking back, I was very annoying. I graduated with excellent grades, but it was not enough to get a job in tech; not coming from a a tech background made things difficult but not impossible.
 
 ## Fulfilling Career in ML
 
-Not specialized and fairly wide can be an accurate description of my time working in tech and ML. I began writing SAS code in banking and telco. I learned to always ask why we do things and how they impact.
+I began writing SAS code for big bands and telecommunication companies, learned to always ask why we do things and how they impact.
 
 Then I started designing classification models for churn detection and risk. Technical consulting kept broadening my technical and industry toolkit. I deployed models for insurance companies. Then, I wrote Scala code for complex operations research problems. Everything while learning best practices for creating MLOps pipelines. This generalist approach made me a fast learner. It also helped me spot common patterns in solutions.
 
