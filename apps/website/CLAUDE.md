@@ -97,3 +97,7 @@ The site deploys to Vercel with:
 - Theme system persists user preference in localStorage
 - All external links and Cal.com integrations maintained
 
+## Important Notes
+
+- Google Analytics enabled (tag: G-LLMXBYB3P8)
+

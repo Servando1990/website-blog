@@ -23,6 +23,15 @@ const {
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B63GHWTW4B"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B63GHWTW4B');
+    </script>
+    
     <!-- Theme detection script (runs before page load) -->
     <script is:inline>
       // Prevent flash of incorrect theme

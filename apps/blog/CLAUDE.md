@@ -64,6 +64,7 @@ When adding new blog posts:
 - Modern dark theme with consistent branding
 - RSS feed generation via Astro RSS integration
 - Type-safe content validation ensures data integrity
+- Google Analytics enabled (tag: G-B63GHWTW4B)
 
 ## Shortlink CLI Rule
 
