@@ -7,24 +7,22 @@ import Layout from '../layouts/Layout.astro';
   description="Learn more about Servando Torres"
 >
   <article class="about">
-    <h1>About Me</h1>
-
-    <div class="about-content">
+    <div class="about-header">
+      <img src="/profile-pic.jpg" alt="Servando Torres" class="profile-pic" />
+      <div class="about-content">
       <p>
         Hi, I'm Servando Torres. I'm self-taught ML Engineer born in Mexico. I love good quality code, learning about different industries, building companies and AI.
       </p>
 
       <p>
-        Day by day I'm mastering the skill retrieving and mapping as much value as possible from talking to people. So I can quickly understand gaps and accurately provide solutions.
+        Every day, I’m getting better at talking to people. I’m learning how to find and map valuable insights from these conversations. So I can quickly understand gaps and accurately provide solutions.
       </p>
 
       <p>
-        My dream was always to be an entrepreneur. This blog is my way to share my journey building <a href="https://controlthrive.com" target="_blank" rel="noopener">controlthrive</a>, share technical content and every now and then personal learnings.
+        My dream was always to be an entrepreneur. This blog shares my journey of building <a href="https://controlthrive.com" target="_blank" rel="noopener">controlthrive</a>. Here, I'll post technical content and some personal insights too.
       </p>
 
-      <p>
-        Another dream of mine is to become a dad and a caring husband 😊
-      </p>
+
 
       <h2>Connect With Me</h2>
       <p>
@@ -44,13 +42,29 @@ import Layout from '../layouts/Layout.astro';
         >
         <a href="mailto:servando@controlthrive.com">Email</a>
       </div>
+      </div>
     </div>
   </article>
 </Layout>
 
 <style>
   .about {
-    max-width: 700px;
+    max-width: 900px;
+  }
+
+  .about-header {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+
+  .profile-pic {
+    width: 300px;
+    height: 300px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
   }
 
   .about-content p {
@@ -103,6 +117,17 @@ import Layout from '../layouts/Layout.astro';
   }
 
   @media (max-width: 768px) {
+    .about-header {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .profile-pic {
+      width: 200px;
+      height: 200px;
+    }
+
     .contact-links {
       flex-direction: column;
       gap: 1rem;
