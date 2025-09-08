@@ -8,6 +8,7 @@ export interface Props {
   date: Date;
   description: string;
   categories: string[];
+  readingTime?: string;
   headings?: Array<{
     depth: number;
     slug: string;
@@ -15,7 +16,7 @@ export interface Props {
   }>;
 }
 
-const { title, date, description, categories, headings = [] } = Astro.props;
+const { title, date, description, categories, readingTime, headings = [] } = Astro.props;
 ---
 
 <Layout title={title} description={description}>
@@ -29,10 +30,16 @@ const { title, date, description, categories, headings = [] } = Astro.props;
         >
           {title}
         </h1>
-        <div class="text-muted-foreground text-sm mb-4">
+        <div class="text-muted-foreground text-sm mb-4 flex items-center gap-3">
           <time datetime={date.toISOString()}>
             {formatDate(date)}
           </time>
+          {readingTime && (
+            <>
+              <span>·</span>
+              <span>{readingTime}</span>
+            </>
+          )}
         </div>
         {
           categories.length > 0 && (
