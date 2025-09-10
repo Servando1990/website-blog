@@ -30,74 +30,71 @@ export const GET: APIRoute = async ({ params }) => {
             flexDirection: 'column',
             alignItems: 'flex-start',
             justifyContent: 'center',
-            backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            background: '#1a1a1a',
             padding: 80,
             color: 'white',
             fontFamily: '"Geist Sans", system-ui, sans-serif',
           },
           children: [
-            // Main content centered
+            // Site branding
+            {
+              type: 'div',
+              props: {
+                style: {
+                  fontSize: 24,
+                  fontWeight: '500',
+                  color: '#ccc',
+                  marginBottom: 40,
+                },
+                children: 'servando.co',
+              },
+            },
+            // Title
+            {
+              type: 'h1',
+              props: {
+                style: {
+                  fontSize: 64,
+                  fontWeight: '800',
+                  lineHeight: 1.1,
+                  margin: 0,
+                  marginBottom: 32,
+                  color: 'white',
+                  maxWidth: '90%',
+                },
+                children: post.data.title,
+              },
+            },
+            // Description
+            {
+              type: 'p',
+              props: {
+                style: {
+                  fontSize: 28,
+                  lineHeight: 1.4,
+                  color: '#ccc',
+                  margin: 0,
+                  marginBottom: 40,
+                  maxWidth: '85%',
+                },
+                children: post.data.description,
+              },
+            },
+            // Author and date
             {
               type: 'div',
               props: {
                 style: {
                   display: 'flex',
-                  flexDirection: 'column',
                   alignItems: 'center',
-                  textAlign: 'center',
-                  maxWidth: 900,
-                  gap: 32,
+                  gap: 16,
+                  fontSize: 20,
+                  color: '#aaa',
                 },
                 children: [
-                  // Author name
-                  {
-                    type: 'div',
-                    props: {
-                      style: {
-                        fontSize: 32,
-                        fontWeight: '600',
-                        opacity: 0.9,
-                      },
-                      children: 'Servando Torres',
-                    },
-                  },
-                  // Title
-                  {
-                    type: 'h1',
-                    props: {
-                      style: {
-                        fontSize: 72,
-                        fontWeight: '700',
-                        lineHeight: 1.1,
-                        margin: 0,
-                      },
-                      children: post.data.title,
-                    },
-                  },
-                  // Description
-                  {
-                    type: 'p',
-                    props: {
-                      style: {
-                        fontSize: 32,
-                        lineHeight: 1.3,
-                        opacity: 0.9,
-                        margin: 0,
-                      },
-                      children: post.data.description,
-                    },
-                  },
-                  // Date
-                  {
-                    type: 'div',
-                    props: {
-                      style: {
-                        fontSize: 24,
-                        opacity: 0.8,
-                      },
-                      children: post.data.date.toLocaleDateString(),
-                    },
-                  },
+                  { type: 'span', props: { children: 'Servando Torres' } },
+                  { type: 'span', props: { children: '•' } },
+                  { type: 'span', props: { children: post.data.date.toLocaleDateString() } },
                 ],
               },
             },
