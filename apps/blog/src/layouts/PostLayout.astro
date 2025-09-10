@@ -14,12 +14,19 @@ export interface Props {
     slug: string;
     text: string;
   }>;
+  image?: string;
 }
 
-const { title, date, description, categories, readingTime, headings = [] } = Astro.props;
+const { title, date, description, categories, readingTime, headings = [], image } = Astro.props;
 ---
 
-<Layout title={title} description={description}>
+<Layout 
+  title={title} 
+  description={description}
+  ogType="article"
+  ogUrl={Astro.url.href}
+  ogImage={image}
+>
   <div class="flex gap-8 items-start flex-col xl:flex-row">
     {headings.length > 0 && <TableOfContents headings={headings} />}
 

@@ -5,11 +5,17 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 export interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  ogType?: string;
 }
 
 const {
   title,
   description = 'AI, machine learning, and technology insights from Servando Torres',
+  ogImage = '/profile-pic.jpg',
+  ogUrl = Astro.url.href,
+  ogType = 'website',
 } = Astro.props;
 ---
 
@@ -22,6 +28,23 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={ogUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site || Astro.url.origin).href} />
+    <meta property="og:site_name" content="Servando's Blog" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={ogUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site || Astro.url.origin).href} />
+    <meta name="twitter:creator" content="@servandodts" />
+    <meta name="twitter:site" content="@servandodts" />
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-B63GHWTW4B"></script>
