@@ -18,6 +18,9 @@ export interface Props {
 }
 
 const { title, date, description, categories, readingTime, headings = [], image } = Astro.props;
+
+// Generate OG image URL if no custom image is provided
+const ogImageUrl = image || `/api/og/${Astro.params.slug}.png`;
 ---
 
 <Layout 
@@ -25,7 +28,7 @@ const { title, date, description, categories, readingTime, headings = [], image 
   description={description}
   ogType="article"
   ogUrl={Astro.url.href}
-  ogImage={image}
+  ogImage={ogImageUrl}
 >
   <div class="flex gap-8 items-start flex-col xl:flex-row">
     {headings.length > 0 && <TableOfContents headings={headings} />}
