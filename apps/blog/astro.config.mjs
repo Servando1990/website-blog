@@ -25,6 +25,6 @@ export default defineConfig({
       ],
     ],
   },
-  site: 'https://servando.co',
+  site: 'https://www.servando.co',
   base: '/',
 });
