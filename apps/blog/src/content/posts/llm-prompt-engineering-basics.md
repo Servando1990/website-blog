@@ -1,9 +1,17 @@
 ---
-title: 'LLM Prompt Engineering: The Basics'
+categories:
+- Applied AI
 date: '2024-01-20'
-description: "A beginner's guide to prompt engineering with large language models - techniques, best practices, and common pitfalls."
-categories: ['AI', 'LLM', 'Tutorial']
+description: Learn the basics of prompt engineering for LLMs, including techniques,
+  pitfalls, and best practices for optimal AI interaction.
 published: true
+tags:
+- prompt engineering
+- large language models
+- AI techniques
+- best practices
+- machine learning
+title: 'LLM Prompt Engineering: The Basics'
 ---
 
 # LLM Prompt Engineering: The Basics

@@ -1,9 +1,17 @@
 ---
-title: 'Building AI-Powered Applications: A Practical Guide'
+categories:
+- Software Engineering
 date: '2024-01-25'
-description: 'Learn how to integrate AI capabilities into your applications with practical examples and best practices.'
-categories: ['AI', 'Software Engineering', 'Tutorial']
+description: Learn how to build AI-powered applications with practical integration
+  techniques and best practices for modern development.
 published: true
+tags:
+- AI Applications
+- Machine Learning
+- Software Development
+- RAG
+- OpenAI
+title: 'Building AI-Powered Applications: A Practical Guide'
 ---
 
 # Building AI-Powered Applications: A Practical Guide

@@ -1,0 +1,48 @@
+posts/building-ai-powered-apps.md:
+  hash: 21f1a4dbbf0628d60fc11f12b918ed30
+  summary: 'Discover how to build AI-powered applications with "Building AI-Powered
+    Applications: A Practical Guide." This comprehensive guide covers essential integration
+    techniques and best practices for leveraging AI capabilities in your software
+    development projects. Key topics include AI/ML APIs, vector databases for Retrieval-Augmented
+    Generation (RAG), architecture patterns, error handling, cost management, and
+    security considerations. Learn to implement practical solutions like a code review
+    assistant while focusing on user experience and performance optimization. Stay
+    ahead in the rapidly evolving AI landscape by mastering the core elements of modern
+    AI application development. Key keywords: AI Applications, Machine Learning, Software
+    Development, RAG, OpenAI.'
+posts/infrastructure-automation-mental-models.md:
+  hash: d491fd138fda40e7e43640fe1cf93208
+  summary: 'The article "Why Infrastructure Automation Fails: The Mental Model Gap"
+    explores the complexities teams face when adopting new automation tools like ZenML,
+    particularly focusing on the mental models associated with infrastructure automation.
+    It emphasizes that misaligned mental models can hinder successful tool adoption,
+    making it crucial for teams to map their traditional workflows to new components
+    to bridge this gap. Key insights include understanding new capabilities offered
+    by automation tools, such as artifact versioning and orchestration, and evaluating
+    minimal viable stacks to avoid unnecessary complexity. Strategies for effective
+    adoption include documenting workflows, creating comparison tables, and clarifying
+    cost structures. Essential keywords include infrastructure automation, mental
+    models, DevOps, automation tools, and software engineering.'
+posts/llm-prompt-engineering-basics.md:
+  hash: 5d466d5f45ed41e644cdea47032228e0
+  summary: '"LLM Prompt Engineering: The Basics" teaches essential skills for effective
+    interaction with large language models (LLMs) through prompt engineering. Key
+    concepts include clarity, context, structure, and constraints when crafting prompts.
+    Important techniques highlighted are specificity, few-shot learning, task breakdown,
+    and context-setting. Common pitfalls like vagueness and information overload are
+    addressed, along with best practices such as starting simple and testing variations.
+    Advanced techniques such as chain of thought prompting and Constitutional AI are
+    also discussed. Overall, mastering prompt engineering is crucial for optimizing
+    AI interactions. Key topics include prompt engineering, large language models,
+    AI techniques, and best practices.'
+posts/who-am-i.md:
+  hash: 9526d48873a471b3ba8841624b112421
+  summary: This personal journey details the transformation from a curious child in
+    Puebla, Mexico, to an entrepreneur specializing in AI and machine learning. The
+    narrative explores the author's early interests in business and art, the pivotal
+    experiences that shaped their career, including studying international trade and
+    embracing technology in Madrid. After gaining valuable insights in technical consulting
+    and addressing the gap between technical and business fields, the author founded
+    "controlthrive," focusing on helping leaders implement custom AI solutions that
+    align with their business objectives. Core keywords include entrepreneurship,
+    AI, machine learning, personal growth, career journey, and business process mapping.

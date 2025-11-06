@@ -1,15 +1,17 @@
 ---
-
-title: 'Who am I?'
-
+categories:
+- Entrepreneurship
 date: '2025-09-05'
-
-description: 'Who am I and why I started this blog?'
-
-categories: ['Personal']
-
+description: A personal journey from Puebla to becoming an entrepreneur in AI and
+  machine learning, bridging the gap between technical and business realms.
 published: true
-
+tags:
+- entrepreneurship
+- AI
+- machine learning
+- personal growth
+- career journey
+title: Who am I?
 ---
 
 ## Life Story

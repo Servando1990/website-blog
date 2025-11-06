@@ -5,12 +5,24 @@ Usage:
     python scripts/shortlinks.py create <url> [--title "Title"] [--desc "Description"] [--tags tag1,tag2] [--external-id id]
 
 Requires DUB_API_KEY environment variable.
+
+TODO: Before using this script in production:
+1. Configure a subdomain for shortlinks (e.g., go.controlthrive.com or link.servando.co)
+2. Verify domain ownership in Dub dashboard with DNS records:
+   - CNAME record: subdomain → cname.dub.co
+   - TXT record: _vercel → vc-domain-verify value
+3. DO NOT use www.controlthrive.com as it will break the main website
+4. Once domain is verified, shortlinks will use your branded domain instead of dub.co
 """
 import os
 import sys
 import dub
 import typer
 from typing import Optional
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = typer.Typer(help="Create Dub shortlinks for URLs.")
 

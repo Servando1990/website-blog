@@ -7,6 +7,10 @@ import typer
 from rich.console import Console
 from rich.progress import Progress
 import hashlib
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 console = Console()
 

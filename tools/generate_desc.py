@@ -10,6 +10,10 @@ from pydantic import BaseModel, Field
 import instructor
 import frontmatter
 from datetime import datetime
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 console = Console()
 client = instructor.from_openai(AsyncOpenAI())

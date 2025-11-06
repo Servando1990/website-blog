@@ -158,6 +158,13 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"infrastructure-automation-mental-models.md": {
+	id: "infrastructure-automation-mental-models.md";
+  slug: "infrastructure-automation-mental-models";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 "llm-prompt-engineering-basics.md": {
 	id: "llm-prompt-engineering-basics.md";
   slug: "llm-prompt-engineering-basics";
