@@ -1,5 +1,5 @@
 ---
-import { Building2, Briefcase, ShoppingCart, ExternalLink } from 'lucide-react';
+import { Building2, Briefcase, ShoppingCart, CreditCard, ExternalLink } from 'lucide-react';
 
 const industries = [
   {
@@ -16,11 +16,15 @@ const industries = [
     key: 'retail',
     name: 'Retail & E-commerce',
     IconComponent: ShoppingCart
+  },
+  {
+    key: 'credit-lending',
+    name: 'Credit and Lending',
+    IconComponent: CreditCard
   }
 ];
 
-// Duplicate industries multiple times for seamless full-width infinite scroll
-const duplicatedIndustries = [...industries, ...industries, ...industries, ...industries];
+// Use original industries array for static display
 ---
 
 <section class="py-20">
@@ -28,18 +32,18 @@ const duplicatedIndustries = [...industries, ...industries, ...industries, ...in
   <div class="container mx-auto max-w-6xl px-6">
     <div class="text-center mb-16">
       <h2 class="text-4xl md:text-6xl lg:text-7xl font-medium mb-6 text-black dark:text-white">
-        Deployed Implementations Across Industries
+        Specialized AI Solutions for Key Industries
       </h2>
       <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-        Tailored AI implementations that understand <strong class="text-black dark:text-white">your specific business context</strong>
+        Years in the trenches of these industries. We know what matters in your business.
       </p>
     </div>
   </div>
 
-  <!-- Full-width Animated Marquee Container -->
-  <div class="relative overflow-hidden mb-16 w-full">
-    <div class="flex animate-marquee-left gap-6">
-      {duplicatedIndustries.map((industry) => (
+  <!-- Static Industries Container -->
+  <div class="container mx-auto max-w-6xl px-6 mb-16">
+    <div class="flex justify-center gap-6 flex-wrap">
+      {industries.map((industry) => (
         <div class="group p-6 rounded-xl bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 text-center flex-shrink-0 w-80 hover:scale-105 hover:shadow-lg">
           <div class="flex justify-center mb-4">
             <div class="p-3 rounded-lg bg-accent-gold/10 dark:bg-accent-amber/10 transition-all duration-300 group-hover:bg-accent-gold/20 dark:group-hover:bg-accent-amber/20">
@@ -50,9 +54,6 @@ const duplicatedIndustries = [...industries, ...industries, ...industries, ...in
           <h3 class="font-medium text-lg text-black dark:text-white transition-colors duration-300 group-hover:text-accent-gold dark:group-hover:text-accent-amber">
             {industry.name}
           </h3>
-          <div class="mt-2 text-sm text-gray-600 dark:text-gray-400 transition-opacity duration-300 group-hover:opacity-80">
-            AI Solutions
-          </div>
         </div>
       ))}
     </div>
@@ -75,82 +76,4 @@ const duplicatedIndustries = [...industries, ...industries, ...industries, ...in
 </section>
 
 <style>
-  @keyframes marquee-left {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
-  @keyframes marquee-right {
-    from {
-      transform: translateX(-50%);
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
-
-  .animate-marquee-left {
-    animation: marquee-left 10s linear infinite;
-  }
-
-  .animate-marquee-right {
-    animation: marquee-right 25s linear infinite;
-  }
-
-
-  /* Add smooth gradient overlay for fade effect on sides - full width */
-  .relative::before,
-  .relative::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    width: 150px;
-    height: 100%;
-    z-index: 10;
-    pointer-events: none;
-  }
-
-  .relative::before {
-    left: 0;
-    background: linear-gradient(to right, hsl(var(--background)) 0%, hsl(var(--background) / 0) 100%);
-  }
-
-  .relative::after {
-    right: 0;
-    background: linear-gradient(to left, hsl(var(--background)) 0%, hsl(var(--background) / 0) 100%);
-  }
-
-  /* Fallback for systems without CSS custom properties */
-  @supports not (color: hsl(var(--background))) {
-    .relative::before {
-      background: linear-gradient(to right, rgb(255 255 255) 0%, rgb(255 255 255 / 0) 100%);
-    }
-
-    .relative::after {
-      background: linear-gradient(to left, rgb(255 255 255) 0%, rgb(255 255 255 / 0) 100%);
-    }
-
-    /* Dark mode fallback */
-    @media (prefers-color-scheme: dark) {
-      .relative::before {
-        background: linear-gradient(to right, rgb(0 0 0) 0%, rgb(0 0 0 / 0) 100%);
-      }
-
-      .relative::after {
-        background: linear-gradient(to left, rgb(0 0 0) 0%, rgb(0 0 0 / 0) 100%);
-      }
-    }
-
-    .dark .relative::before {
-      background: linear-gradient(to right, rgb(0 0 0) 0%, rgb(0 0 0 / 0) 100%);
-    }
-
-    .dark .relative::after {
-      background: linear-gradient(to left, rgb(0 0 0) 0%, rgb(0 0 0 / 0) 100%);
-    }
-  }
 </style>

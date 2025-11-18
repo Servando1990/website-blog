@@ -8,5 +8,8 @@ export default defineConfig({
     react()
   ],
   output: 'static',
-  site: 'https://controlthrive.com'
+  site: 'https://controlthrive.com',
+  server: {
+    port: 4322
+  }
 });
