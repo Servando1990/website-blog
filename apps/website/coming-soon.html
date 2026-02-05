@@ -44,13 +44,17 @@
             width: 100%;
         }
 
-        .title {
-            font-size: 1.5rem;
-            font-weight: 400;
+        .logo {
             margin-bottom: 2rem;
-            letter-spacing: -0.01em;
-            line-height: 1.2;
-            color: #9ca3af;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: min(360px, 70vw);
+            height: auto;
+            display: block;
         }
 
         .cal-container {
@@ -70,10 +74,6 @@
         }
 
         @media (max-width: 768px) {
-            .title {
-                font-size: 1.25rem;
-            }
-            
             body {
                 padding: 1rem;
             }
@@ -86,10 +86,6 @@
         }
 
         @media (max-width: 480px) {
-            .title {
-                font-size: 1.125rem;
-            }
-            
             .cal-container {
                 min-height: 300px;
             }
@@ -98,7 +94,9 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="title">Controlthrive is AI/ML implementation consultancy founded by Servando Torres</h1>
+        <h1 class="logo">
+            <img src="/controlthrive-logo.svg" alt="Controlthrive logo">
+        </h1>
         
         <div class="cal-container">
             <!-- Cal inline embed code begins -->
