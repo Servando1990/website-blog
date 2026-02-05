@@ -5,193 +5,109 @@ categories:
 date: '2025-01-04'
 description: Explore why infrastructure automation fails due to mental model gaps,
   and learn strategies for successful tool adoption.
-published: False
+published: True
 tags:
 - Infrastructure Automation
 - Mental Models
 - DevOps
 - Automation Tools
 - Software Engineering
-title: 'Why Infrastructure Automation Fails: The Mental Model Gap'
+title: 'Deployment Patterns for Custom Agentic Software'
 ---
 
-Infrastructure automation tools don't eliminate complexity—they redistribute it into new mental models. Your ability to map what you already know to what the tool does determines whether adoption succeeds or creates confusion.
+Agent deployment tech stacks don't remove complexity—they force you to name it. Adoption succeeds only when you translate what already works into the platform's abstractions.
 
-Through my [consulting work](https://www.controlthrive.com), I help companies navigate the transition from traditional deployment approaches to modern automation platforms. The pattern I see repeatedly: teams get stuck not because the tools are bad, but because the mental model gap never gets bridged.
+Through my [consulting work](https://www.controlthrive.com), I help companies build that translation layer so deployment platforms become leverage instead of overhead. This is part of the Agent Deployment Decisions series, and I focus on mental models because it's where architecture meets execution.
 
-This is part of the Agent Deployment Decisions series. I'm focusing on mental models because it's where architectural decisions meet practical implementation.
+## How Six Components Appear from Three
 
-## Three Components Become Six
+When I deployed an investor intelligence workflow for an investment bank, my baseline stack looked like this: *FastAPI + Docker + AWS Lightsail = 3 moving pieces.*
 
-Here's what happened with a recent investment banking client deploying an deal-matching pipeline. Traditional deployment stack I knew:
+ZenML surfaced the same system as six explicit components:
 
-```
-FastAPI + Docker + AWS Lightsail = 3 things
-```
+- **IMAGE_BUILDER** – defines how containers are built (local Docker, CodeBuild, Modal)
+- **CONTAINER_REGISTRY** – stores built images (ECR, GCR, Docker Hub)
+- **DEPLOYER** – provisions the runtime (App Runner, ECS, Kubernetes)
+- **ARTIFACT_STORE** – versions pipeline outputs (S3, GCS, local disk)
+- **ORCHESTRATOR** – coordinates multi-step runs (local, Kubeflow, Airflow)
+- **STEP_OPERATOR** – optional compute for heavyweight steps (SageMaker, Vertex)
 
-Then I evaluated ZenML and saw this in their stack configuration:
+The platform didn't invent complexity; it exposed relationships I had been tracking informally. Bridging that gap is the whole game.
 
-```
-6 components:
-- IMAGE_BUILDER
-- CONTAINER_REGISTRY
-- DEPLOYER
-- ARTIFACT_STORE
-- ORCHESTRATOR
-- STEP_OPERATOR
-```
+## Mapping Traditional Workflow to Automation Components
 
-The task became understanding these concepts and mapping them against the project diagram I had in mind. There are trade-offs and factors to consider like time involvement in infrastructure setup, and the potential for increased complexity in maintenance. As a solo entreprenuer, I have to be mindful of time-effort matrix. Also, I love tools that can help me do the heavy lifting.
+| Traditional workflow | Purpose | Automation component |
+|----------------------|---------|----------------------|
+| FastAPI routes + business logic | Serve requests | `@pipeline` / `@step` (ZenML) or `@app.function()` (Modal) |
+| Dockerfile | Define container | `IMAGE_BUILDER` or `modal.Image` |
+| `docker build` | Produce image | `IMAGE_BUILDER` execution |
+| `docker push` to ECR | Store image | `CONTAINER_REGISTRY` |
+| AWS App Runner deployment | Run container | `DEPLOYER` |
+| Manual S3 folders + naming | Persist outputs | `ARTIFACT_STORE` |
+| Python scripts + cron | Coordinate jobs | `ORCHESTRATOR` |
+| Dedicated EC2 for heavy steps | Burst compute | `STEP_OPERATOR` (optional) |
 
-This is the mental model gap. The tool isn't adding complexity arbitrarily—it's making explicit what was implicit in the traditional approach. But without understanding the mapping, it feels like bloat.
+Once the mapping was explicit, the question shifted from "Why six components?" to "Which pieces do I need today and which add net-new capability?"
 
-## Infrastructure Automation Concepts (Zenml)
+## Where Automation Adds Real Value
 
-**IMAGE_BUILDER**: Component that builds Docker images. In traditional workflows, you run `docker build` manually. Automation platforms make this a configurable component (local Docker, AWS CodeBuild, cloud build services).
+- **Artifact lineage** becomes automatic. Each run records which inputs produced which outputs without bespoke logging.
+- **Reproducibility** improves because image builds move off individual laptops and into defined builders.
+- **Operational clarity** increases: every component has an owner (even if that's you) and a clear cost center.
+- **Selective adoption** is possible. You can run ZenML locally with just an image builder and registry while postponing step operators or managed orchestrators.
 
-**CONTAINER_REGISTRY**: Storage for Docker images. Your traditional workflow pushed to ECR manually. Automation platforms configure this as a stack component.
+## Interpreting Image Builders
 
-**DEPLOYER**: Component that provisions the running service (App Runner). Replaces manual AWS console configuration or CLI commands.
+AWS CodeBuild and `modal.Image` both execute `docker build` on remote hardware. The difference is how you pay and what you manage:
 
-**ARTIFACT_STORE**: Storage for pipeline outputs and intermediate results. This is genuinely new—most traditional FastAPI deployments don't systematically version outputs.
+- **CodeBuild** bills per build minute and inherits AWS quota management.
+- **modal.Image** bundles build minutes into Modal's pricing and hides quota work.
 
-**ORCHESTRATOR**: Coordinates multi-step workflows. Simple APIs don't need this. Complex pipelines with dependencies between steps do.
-
-**STEP_OPERATOR**: Optional component for running individual steps on separate compute. 
-
-## The Direct Translation
-
-The breakthrough moment came when we created this mapping table:
-
-| Traditional Component | What It Does | Automation Equivalent |
-|----------------------|--------------|----------------------|
-| **FastAPI code** | Application logic with HTTP endpoints | **@pipeline/@step decorators** (ZenML) or **@app.function()** (Modal) |
-| **Dockerfile** | Instructions to build container | **IMAGE_BUILDER** auto-generates or **modal.Image** defines in Python |
-| **`docker build`** | Builds the image | **IMAGE_BUILDER** executes |
-| **`docker push` to ECR** | Stores image in registry | **CONTAINER_REGISTRY** handles |
-| **App Runner** | Runs container as HTTP service | **DEPLOYER** provisions |
-| **Manual S3 (if needed)** | Store outputs | **ARTIFACT_STORE** automates |
-| **None** | Coordinate steps | **ORCHESTRATOR** manages (new capability) |
-
-TODO: I cannot leave None in the table. I need to find a way to represent it.
-
-The "3 components vs 6 components" question dissolved. The tool split Docker into two explicit pieces (build vs storage) and added two genuinely new capabilities (artifact versioning and orchestration).
-
-## Why "Docker in the Cloud" Matters
-
-Another insight came from comparing AWS CodeBuild and Modal's image builder. The client asked: "Aren't these essentially the same thing?"
-
-Yes. Both are "Docker build on cloud servers instead of your laptop."
-
-**CodeBuild:** AWS runs `docker build` on their infrastructure. You pay per build minute. Subject to AWS service quotas.
-
-**modal.Image:** Modal runs image builds on their infrastructure (likely using AWS/GCP underneath). Included in platform pricing. No quotas to manage.
-
-Recognizing this equivalence cuts through marketing abstractions. The choice isn't about fundamentally different technologies—it's about pricing models, quota management, and integration preferences.
-
-## When Automation Adds Real Value
-
-Not all abstraction is overhead. The client's traditional workflow had gaps:
-
-**Artifact versioning:** No systematic way to trace which investor list came from which scoring run. The ARTIFACT_STORE component solves this automatically.
-
-**Audit trail:** Manual S3 uploads with inconsistent naming. ZenML's artifact store creates lineage graphs showing exactly how each output was produced.
-
-**Deployment consistency:** Manual docker builds meant "works on my machine" issues. Automated image builders guarantee reproducibility.
-
-These are genuine capabilities the traditional approach lacked. The value proposition isn't "fewer components"—it's systematic solutions to real operational gaps.
-
-## The Hidden Cost of Local Image Builders
-
-One technical detail revealed broader infrastructure tradeoffs. When AWS CodeBuild hit quota limits, we considered switching to local image building (using Docker on the developer's laptop).
-
-The catch: The laptop had 8GB RAM. Python dependencies for the pipeline (Pydantic AI, FastAPI, PDF parsing libraries) might exceed available memory during Docker builds.
-
-This illustrates why "just build locally" isn't always simpler:
-- Cloud builders have abundant RAM
-- Local builds compete with your development environment
-- Resource limits surface at inconvenient times
-
-The "simple" local option has hidden constraints. The "complex" cloud option (with quota management) provides predictable resources.
+Switching back to local builds is rarely "simpler." Laptops with 8 GB RAM choke on dependency-heavy builds, and background jobs fight for the same resources you're coding with. Remote builders provide predictable RAM/CPU at the cost of either AWS quotas or vendor pricing.
 
 ## Implementation Strategy
 
-Here's how we resolved the mental model gap:
+1. **Map first.** Write the table above for your own stack so everyone sees the translation.
+2. **Tag new capabilities.** Label which components automate existing tasks (image builder, registry) and which add net-new value (artifact store, orchestrator).
+3. **Assemble a minimal stack.** Start with the automated equivalents plus one new capability that solves a pain point. Leave STEP_OPERATOR disabled until you need burst compute.
+4. **Price the options.** Local builders cost laptop time; CodeBuild charges per-minute; Modal bundles usage; SageMaker orchestrators bill hourly per instance. Put current numbers next to each choice.
 
-**Step 1: Map existing workflow to new components**
-Create a side-by-side table showing exactly which automation component replaces which manual step. Don't skip this—without the mapping, team members build incorrect mental models.
-
-**Step 2: Identify genuinely new capabilities**
-Distinguish between "this automates what I already do" versus "this does something I couldn't do before." Artifact versioning and orchestration are new. Image building and registry management are automation.
-
-**Step 3: Evaluate minimal viable stack**
-Start with only the components that map to your current workflow plus one new capability you need. Resist the temptation to use all available components because they're there.
-
-For this client:
-```
-Minimal stack:
-- IMAGE_BUILDER (local or cloud)
+"""
+Minimal stack I shipped:
+- IMAGE_BUILDER (CodeBuild for predictability)
 - CONTAINER_REGISTRY (existing ECR)
-- DEPLOYER (existing App Runner setup)
-- ARTIFACT_STORE (new capability: audit trail)
-- ORCHESTRATOR (local, not SageMaker)
+- DEPLOYER (existing App Runner)
+- ARTIFACT_STORE (S3 for lineage)
+- ORCHESTRATOR (local to start)
+"""
 
-Remove:
-- STEP_OPERATOR (not needed for their pipeline)
-```
+## Decision Guide
 
-**Step 4: Clarify cost model**
-Local builders use developer machine resources. Cloud builders (CodeBuild, Modal) use provider resources but may have quotas or per-minute charges. SageMaker orchestrators cost $0.23/hour per instance. Make costs explicit.
+- **Stay with FastAPI + Docker + App Runner** when the workload is a few deterministic endpoints and artifact lineage is optional.
+- **Adopt ZenML** when you manage multi-step pipelines, need audit trails, or want stack components you can swap (local today, SageMaker tomorrow).
+- **Reach for Modal** when you prefer Python-native configuration, want one-command deployment, and do not want to juggle AWS quotas.
 
-## When to Choose Each Approach
-
-**Traditional FastAPI + Docker + App Runner when:**
-- You have 1-3 endpoints with straightforward logic
-- No need for systematic artifact versioning
-- Team comfortable with Docker workflows
-- Full control over infrastructure preferred
-
-**ZenML when:**
-- Multi-step pipelines with dependencies
-- Audit trail and run lineage required
-- Already using AWS infrastructure
-- Willing to manage stack components
-
-**Modal when:**
-- Want one-command deployment
-- Prefer Python configuration over YAML/stack management
-- Don't want to manage AWS quotas
-- Serverless pricing model fits usage pattern
-
-**The real decision:** How much control do you need versus how much automation do you want? There's no universal right answer—it depends on team capabilities and operational requirements.
+The real decision is about control versus leverage. Automation platforms earn their keep when you can describe exactly what they automate and what they add that you cannot feasibly maintain by hand.
 
 ## Why This Matters Now
 
-The infrastructure automation landscape is fragmenting. Teams evaluate ZenML, Modal, Airflow, Prefect, Dagster, and custom solutions. Each tool has different mental models.
+Infra tooling is fragmenting across ZenML, Modal, Airflow, Prefect, Dagster, and custom scripts. Teams that win are not picking a perfect tool—they are the ones who:
 
-The companies that succeed aren't necessarily choosing the "best" tool. They're the ones who:
-1. Explicitly map existing workflows to new abstractions
-2. Distinguish genuine new capabilities from automated existing tasks
-3. Start with minimal viable stacks
-4. Make infrastructure costs visible
+1. Translate existing workflows into each platform's primitives.
+2. Separate automation from new capability.
+3. Ship only the components they need today.
+4. Track costs before flipping new switches.
 
-Bad mental models are cheap to form but expensive to unlearn. A week spent understanding the mapping saves months of confused implementation.
+Bad mental models are cheap to form and expensive to unwind. A few hours of translation work saves months of tool thrash.
 
 ## Next Steps
 
-If you're evaluating infrastructure automation platforms:
+1. Document your current pipeline end-to-end.
+2. Build your own translation table.
+3. Pilot the minimal stack and measure actual build plus runtime costs.
+4. Expand only when the metrics justify more automation.
 
-1. **Document your current workflow explicitly** - Write down every step from code to deployment. You can't map what you haven't articulated.
-
-2. **Create comparison tables** - For each tool, map traditional components to platform components. Use the tables in this post as templates.
-
-3. **Test with minimal stack** - Resist using all available features. Start with what you need today.
-
-4. **Measure actual costs** - Local builds, cloud builds, and managed services have different cost structures. Get real numbers before committing.
-
-5. **Plan for the mental model gap** - Budget time for team members to understand mappings. This isn't optional documentation—it's the difference between adoption and abandonment.
-
-If these approaches resonate with your infrastructure challenges, or if you're evaluating deployment platforms and want help navigating the mental model gap, I'd love to work together. Reach out through the contact page or connect on LinkedIn.
+If these approaches resonate with your infrastructure challenges or you're weighing ZenML and Modal for the first time, I'd love to help. Reach out via the contact page or LinkedIn, and after publishing remember to run the blog-crosslink-optimizer agent to layer in relevant internal links.
 
 ---
 

@@ -38,6 +38,7 @@ cd tools && uv run python check_links.py ../apps/blog          # Validate blog l
 cd tools && uv run python generate_sitemap.py ../apps/blog     # Generate SEO sitemap
 cd tools && uv run python generate_desc.py ../apps/blog        # Add AI descriptions
 cd tools && uv run python shortlinks.py                        # URL shortening utility
+cd tools && uv run python listen_post.py ../apps/blog/src/content/posts/your-post.md  # Listen to post via TTS (auto-deleted after)
 
 # UI package
 npm run ui:build              # Build shared design system
@@ -105,6 +106,7 @@ The blog includes specialized Python automation tools in the `tools/` directory:
 - **SEO Optimization**: Generate sitemaps with AI-powered descriptions
 - **Content Enhancement**: Add AI-generated descriptions to posts
 - **URL Management**: Create and manage shortlinks for external references
+- **Text-to-Speech**: Convert blog posts to audio using ElevenLabs (requires `ELEVENLABS_API_KEY` in `.env`)
 
 Always use the shortlinks CLI with `--blog-tag` when adding external links to blog posts.
 

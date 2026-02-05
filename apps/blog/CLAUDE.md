@@ -66,6 +66,36 @@ When adding new blog posts:
 - Type-safe content validation ensures data integrity
 - Google Analytics enabled (tag: G-B63GHWTW4B)
 
+## Thought Leadership Post Rules
+
+**Structure:** Core insights upfront → glossary of key terms → concrete examples → actionable next steps
+
+**Opening Format:** Use "The core insight:" or "Two core insights:" followed by direct statement. Include series positioning: "This is part of the Series Name. I'm focusing on X because it's where theory meets practice."
+
+**Subheadings:** Avoid corny/dramatic language. Use direct, descriptive headers like "Implementation Strategy" instead of "The Evolution from Chunks to Context" or "Why Agents Need Different Information Architecture" instead of "The Persistence Advantage: Why Agents Change Everything"
+
+**Citations:** Weave research naturally to support arguments. Use descriptive link text ("research shows", "Anthropic's approach"). Position strategically where they strengthen specific points.
+
+**Key insights to emphasize:** "Bad context is cheap but toxic" (computational cheapness ≠ business value), coding agents as leading edge, economics/ergonomics matter, transferable principles across industries.
+
+**Tone:** Concise, practical urgency ("this matters now"), concrete metrics, honest about complexity. First-person perspective from consulting experience.
+
+**Consulting Attribution:** Include early reference: "Through my consulting work, I help companies..." and conclude with collaboration invitation: "If these approaches resonate with your challenges or if you're interested in working together, I'd love to help."
+
+**Cross-linking:** Note at the end to use blog-crosslink-optimizer agent to enhance posts with natural internal links that add reader value.
+
+PREFERBLY NO MORE THAN 4 MIN READ 
+
+## Voice and Framing
+
+**CRITICAL: This is YOUR thought leadership, not client documentation.**
+
+**NEVER:**
+- Reference "the client", "they", "the team", "the company"
+- Use phrases like "they wanted", "they needed", "they asked for"
+- Frame as executing client requirements
+- Use third-party language: "their system", "their challenge"
+
 ## Shortlink CLI Rule
 
 - When adding new external links to any blog post, always use the `tools/shortlinks.py` CLI to generate a shortlink.

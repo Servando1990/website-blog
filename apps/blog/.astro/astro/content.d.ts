@@ -158,6 +158,34 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"data-layer-tension-proprietary-vs-third-party.md": {
+	id: "data-layer-tension-proprietary-vs-third-party.md";
+  slug: "data-layer-tension-proprietary-vs-third-party";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"deal-structure-positioning-not-classification.md": {
+	id: "deal-structure-positioning-not-classification.md";
+  slug: "deal-structure-positioning-not-classification";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"filtering-hierarchy-contact-type-first.md": {
+	id: "filtering-hierarchy-contact-type-first.md";
+  slug: "filtering-hierarchy-contact-type-first";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"incomplete-data-invisible-matches.md": {
+	id: "incomplete-data-invisible-matches.md";
+  slug: "incomplete-data-invisible-matches";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 "infrastructure-automation-mental-models.md": {
 	id: "infrastructure-automation-mental-models.md";
   slug: "infrastructure-automation-mental-models";
@@ -165,9 +193,23 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"investor-intelligence-lives-in-email-threads.md": {
+	id: "investor-intelligence-lives-in-email-threads.md";
+  slug: "investor-intelligence-lives-in-email-threads";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 "llm-prompt-engineering-basics.md": {
 	id: "llm-prompt-engineering-basics.md";
   slug: "llm-prompt-engineering-basics";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"my-ideal-work-routine.md": {
+	id: "my-ideal-work-routine.md";
+  slug: "my-ideal-work-routine";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
