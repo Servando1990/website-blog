@@ -57,12 +57,25 @@ import Footer from '../../components/Footer.astro';
             </h2>
             <div class="prose prose-lg dark:prose-invert">
               <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                A machine learning-driven matching engine, combined with human-in-the-loop logic, successfully categorized matches with high confidence and restored CRM single source of truth.
+                A Spark-based matching engine combined with human-in-the-loop review. The system normalizes messy fields, uses blocking keys to avoid brute-force comparisons, applies weighted scoring across name, address, phone, and geo signals, and then buckets outcomes into Correct, Manual Review, or Incorrect for operational follow-through.
               </p>
               <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
                 This solution was successfully implemented in partnership with Databris and their top-notch data engineers, who made data readiness possible. See more results in <a href="https://www.databris.com/case-study-details.html#case-details2" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">this post</a>.
               </p>
             </div>
+          </div>
+
+          <!-- Implementation Highlights -->
+          <div>
+            <h2 class="text-3xl font-bold text-black dark:text-white mb-6">
+              Implementation Highlights
+            </h2>
+            <ul class="list-disc pl-6 space-y-3 text-gray-600 dark:text-gray-300 leading-relaxed">
+              <li>Blocking keys reduce comparisons by grouping records on shared phone and ZIP fragments.</li>
+              <li>Weighted scoring and validation rules surface high-confidence matches and isolate ambiguous ones for review.</li>
+              <li>Configuration-driven mappings allow source schema changes without rewriting core matching logic.</li>
+            </ul>
+            <pre class="mt-6 rounded-lg bg-gray-100 dark:bg-gray-900 p-4 overflow-x-auto"><code>F.when(F.length('phone') >= 4, F.substring('phone', -4, 4)).alias('phone_block')</code></pre>
           </div>
 
           <!-- Result -->

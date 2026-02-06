@@ -57,9 +57,22 @@ import Footer from '../../components/Footer.astro';
             </h2>
             <div class="prose prose-lg dark:prose-invert">
               <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                We built a backend in charge of extracting transcripts and audio data from recent earnings calls and then feeding this to LLMs and vocal tone models to trigger inference on sentiment and key insights.
+                We built a FastAPI backend to ingest transcripts and audio, plus a React dashboard to visualize sentiment, playback, and transcripts together. Audio is segmented for vocal-tone inference, results are cached for fast reuse, and the UI synchronizes sentiment timelines with transcript highlights so analysts can jump to moments that matter.
               </p>
             </div>
+          </div>
+
+          <!-- Implementation Highlights -->
+          <div>
+            <h2 class="text-3xl font-bold text-black dark:text-white mb-6">
+              Implementation Highlights
+            </h2>
+            <ul class="list-disc pl-6 space-y-3 text-gray-600 dark:text-gray-300 leading-relaxed">
+              <li>Audio sentiment runs on short overlapping windows to capture tone shifts over time.</li>
+              <li>Sentiment is returned as a time series and rendered directly in the chart layer.</li>
+              <li>The UI links playback time to transcript segments so researchers can quickly inspect key moments.</li>
+            </ul>
+            <pre class="mt-6 rounded-lg bg-gray-100 dark:bg-gray-900 p-4 overflow-x-auto"><code>const response = await fetch(`/api/earnings-calls?analyze_sentiment=true`);</code></pre>
           </div>
 
           <!-- Result -->

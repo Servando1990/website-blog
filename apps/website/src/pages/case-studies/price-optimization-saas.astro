@@ -65,6 +65,19 @@ import Footer from '../../components/Footer.astro';
             </div>
           </div>
 
+          <!-- Implementation Highlights -->
+          <div>
+            <h2 class="text-3xl font-bold text-black dark:text-white mb-6">
+              Implementation Highlights
+            </h2>
+            <ul class="list-disc pl-6 space-y-3 text-gray-600 dark:text-gray-300 leading-relaxed">
+              <li>Quantile regression models predict demand curves instead of single-point forecasts, making pricing more robust under uncertainty.</li>
+              <li>Lagrangian optimization balances GMV growth and profit protection with a tunable parameter.</li>
+              <li>Constraint handlers and repricing rules keep recommended prices aligned with business guardrails.</li>
+            </ul>
+            <pre class="mt-6 rounded-lg bg-gray-100 dark:bg-gray-900 p-4 overflow-x-auto"><code>return demand * (price + lambda_value * (price - cost))</code></pre>
+          </div>
+
           <!-- Result -->
           <div>
             <h2 class="text-3xl font-bold text-black dark:text-white mb-6">
