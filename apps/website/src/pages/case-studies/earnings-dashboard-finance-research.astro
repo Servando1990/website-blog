@@ -72,7 +72,15 @@ import Footer from '../../components/Footer.astro';
               <li>Sentiment is returned as a time series and rendered directly in the chart layer.</li>
               <li>The UI links playback time to transcript segments so researchers can quickly inspect key moments.</li>
             </ul>
-            <pre class="mt-6 rounded-lg bg-gray-100 dark:bg-gray-900 p-4 overflow-x-auto"><code>const response = await fetch(`/api/earnings-calls?analyze_sentiment=true`);</code></pre>
+            <div class="mt-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-4 overflow-x-auto">
+              <pre class="mermaid">
+flowchart LR
+  A["Earnings Audio + Transcript"] --> B["FastAPI Ingestion"]
+  B --> C["Sentiment + Insight Inference"]
+  C --> D["Time-series Signals"]
+  D --> E["Dashboard Alerts for PMs"]
+              </pre>
+            </div>
           </div>
 
           <!-- Result -->

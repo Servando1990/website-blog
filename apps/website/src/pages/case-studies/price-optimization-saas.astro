@@ -75,7 +75,15 @@ import Footer from '../../components/Footer.astro';
               <li>Lagrangian optimization balances GMV growth and profit protection with a tunable parameter.</li>
               <li>Constraint handlers and repricing rules keep recommended prices aligned with business guardrails.</li>
             </ul>
-            <pre class="mt-6 rounded-lg bg-gray-100 dark:bg-gray-900 p-4 overflow-x-auto"><code>return demand * (price + lambda_value * (price - cost))</code></pre>
+            <div class="mt-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-4 overflow-x-auto">
+              <pre class="mermaid">
+flowchart LR
+  A["Raw Commerce Data"] --> B["Demand Curves (Quantile Models)"]
+  B --> C["Price Optimizer (Lagrangian)"]
+  C --> D["Business Constraints + Repricing Rules"]
+  D --> E["Recommended Prices"]
+              </pre>
+            </div>
           </div>
 
           <!-- Result -->
