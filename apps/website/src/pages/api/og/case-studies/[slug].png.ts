@@ -4,8 +4,8 @@ import { caseStudies, getCaseStudyBySlug } from '../../../../lib/caseStudies';
 
 const logoSvg = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
-  <path d="M112 152V280H368" stroke="#ffffff" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M368 280L304 216M368 280L304 344" stroke="#ffffff" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M44 184V270H420" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M420 270L344 224M420 270L344 316" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 `;
 
@@ -41,8 +41,8 @@ export const GET: APIRoute = async ({ params }) => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: 'linear-gradient(135deg, #050B16 0%, #0A1426 52%, #111C31 100%)',
-          color: '#F8FAFC',
+          background: '#000000',
+          color: '#FFFFFF',
           padding: '54px 64px',
           fontFamily: '"Geist", "Inter", "Segoe UI", sans-serif',
           position: 'relative',
@@ -52,55 +52,26 @@ export const GET: APIRoute = async ({ params }) => {
             type: 'div',
             props: {
               style: {
-                position: 'absolute',
-                top: '-120px',
-                right: '-80px',
-                width: '440px',
-                height: '440px',
-                borderRadius: '9999px',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-              },
-            },
-          },
-          {
-            type: 'div',
-            props: {
-              style: {
                 display: 'flex',
                 alignItems: 'center',
-                gap: '18px',
+                gap: '22px',
               },
               children: [
                 {
-                  type: 'div',
+                  type: 'img',
                   props: {
-                    style: {
-                      width: '56px',
-                      height: '56px',
-                      borderRadius: '14px',
-                      border: '1px solid rgba(255, 255, 255, 0.25)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      background: 'rgba(255, 255, 255, 0.04)',
-                    },
-                    children: {
-                      type: 'img',
-                      props: {
-                        src: logoDataUri,
-                        width: 34,
-                        height: 34,
-                      },
-                    },
+                    src: logoDataUri,
+                    width: 86,
+                    height: 86,
                   },
                 },
                 {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '28px',
+                      fontSize: '30px',
                       fontWeight: '700',
-                      letterSpacing: '0.08em',
+                      letterSpacing: '0.16em',
                     },
                     children: 'CONTROLTHRIVE',
                   },
@@ -123,7 +94,7 @@ export const GET: APIRoute = async ({ params }) => {
                   props: {
                     style: {
                       fontSize: `${titleFontSize}px`,
-                      lineHeight: '1.04',
+                      lineHeight: '1.05',
                       fontWeight: '800',
                       letterSpacing: '-0.03em',
                       textTransform: 'uppercase',
@@ -149,7 +120,7 @@ export const GET: APIRoute = async ({ params }) => {
                     style: {
                       fontSize: '24px',
                       fontWeight: '600',
-                      opacity: '0.95',
+                      opacity: '0.98',
                       letterSpacing: '0.1em',
                     },
                     children: 'CASE STUDY',
@@ -163,8 +134,8 @@ export const GET: APIRoute = async ({ params }) => {
                       fontWeight: '600',
                       padding: '10px 18px',
                       borderRadius: '9999px',
-                      border: '1px solid rgba(255, 255, 255, 0.3)',
-                      background: 'rgba(255, 255, 255, 0.04)',
+                      border: '1px solid rgba(255, 255, 255, 0.45)',
+                      background: 'rgba(255, 255, 255, 0.1)',
                     },
                     children: caseStudy.industry,
                   },
