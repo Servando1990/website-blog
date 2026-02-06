@@ -2,33 +2,15 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { caseStudies } from '../lib/caseStudies';
 
-const caseStudies = [
-  {
-    id: 'price-optimization-saas',
-    title: 'Price Optimization for SaaS Product',
-    industry: 'SaaS',
-    summary: 'Designed an end-to-end dynamic pricing optimization system, that allowed single and multi optimization goals, while respecting business rules and constraints for e-commerces',
-    tags: ['Machine Learning', 'Pricing Strategy', 'Revenue Optimization']
-  },
-  {
-    id: 'ai-matching-engine-manufacturing',
-    title: 'AI Matching Engine.',
-    industry: 'Manufacturing',
-    summary: 'Successfully integrated an AI matching engine that fetches data from various sources, addressing 200,000 incomplete entries',
-    tags: ['AI/ML', 'Supply Chain', 'Process Optimization']
-  },
-  {
-    id: 'earnings-dashboard-finance-research',
-    title: 'Earnings Call Dashboard for Financial Research',
-    industry: 'Private Equity',
-    summary: 'Created an automated dashboard that processes earnings calls from 500+ portfolio companies, extracting key insights and predicting sentiment with vocal tone AI models.',
-    tags: ['NLP', 'Dashboard', 'Financial Analytics']
-  }
-];
+const publishedCaseStudies = caseStudies.filter((caseStudy) => caseStudy.isPublished);
 ---
 
-<Layout title="Case Studies - controlthrive">
+<Layout
+  title="Case Studies - controlthrive"
+  description="Case studies on AI and data products delivered by controlthrive across SaaS, manufacturing, and private equity."
+>
   <Header />
   
   <main class="min-h-screen bg-background">
@@ -50,7 +32,7 @@ const caseStudies = [
     <section class="pb-24">
       <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8 max-w-4xl mx-auto">
-          {caseStudies.map((study) => (
+          {publishedCaseStudies.map((study) => (
             <div class="bg-card rounded-lg border border-border p-8 hover:shadow-lg transition-all duration-300">
               <!-- Industry Tag -->
               <div class="inline-block bg-accent/10 text-accent-foreground px-3 py-1 rounded-full text-sm font-medium mb-4">
@@ -78,7 +60,7 @@ const caseStudies = [
               
               <!-- CTA Button -->
               <a 
-                href={`/case-studies/${study.id}`}
+                href={`/case-studies/${study.slug}`}
                 class="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 transition-colors px-6 py-3 rounded-lg font-medium"
               >
                 Read Full Case Study

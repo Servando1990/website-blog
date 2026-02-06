@@ -2,9 +2,22 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { getCaseStudyBySlug } from '../../lib/caseStudies';
+
+const slug = 'earnings-dashboard-finance-research';
+const caseStudy = getCaseStudyBySlug(slug);
+
+if (!caseStudy) {
+  throw new Error(`Missing case study metadata for ${slug}`);
+}
 ---
 
-<Layout title="Earnings Call Dashboard for Financial Research - Case Study - controlthrive">
+<Layout
+  title={`${caseStudy.title} - Case Study - controlthrive`}
+  description={caseStudy.summary}
+  ogType="article"
+  ogImage={`/api/og/case-studies/${slug}.png`}
+>
   <Header />
   
   <main class="min-h-screen bg-background">

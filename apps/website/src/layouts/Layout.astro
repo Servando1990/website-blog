@@ -2,9 +2,23 @@
 export interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  ogType?: string;
+  ogSiteName?: string;
 }
 
-const { title, description = "Transform AI/ML confusion into competitive advantage. Strategic AI consulting and RAG implementation training that moves you from overwhelm to concrete action plans and measurable results." } = Astro.props;
+const {
+  title,
+  description = 'AI Partners that understand, ship and stay',
+  ogImage = '/controlthrive-logo.svg',
+  ogUrl = Astro.url.href,
+  ogType = 'website',
+  ogSiteName = 'controlthrive',
+} = Astro.props;
+
+const baseUrl = Astro.site || Astro.url.origin;
+const resolvedOgImage = new URL(ogImage, baseUrl).href;
 ---
 
 <!doctype html>
@@ -14,7 +28,23 @@ const { title, description = "Transform AI/ML confusion into competitive advanta
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={ogUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:site_name" content={ogSiteName} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={ogUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedOgImage} />
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LLMXBYB3P8"></script>
