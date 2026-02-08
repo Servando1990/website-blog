@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import InteractiveCaseStudyDiagram from '../../components/InteractiveCaseStudyDiagram';
 import { getCaseStudyBySlug } from '../../lib/caseStudies';
 
 const slug = 'ai-matching-engine-manufacturing';
@@ -10,6 +11,59 @@ const caseStudy = getCaseStudyBySlug(slug);
 if (!caseStudy) {
   throw new Error(`Missing case study metadata for ${slug}`);
 }
+
+const diagramSteps = [
+  {
+    id: 'ingest',
+    title: 'Multi-source account data',
+    summary: 'CRM, ERP, and operations records are consolidated into one ingestion layer.',
+    detail:
+      'Raw account records from multiple business units are brought into a common staging pipeline so matching can run across the full customer footprint.',
+    tag: 'Data Inputs',
+    tone: 'source',
+    metric: '200k problematic records',
+  },
+  {
+    id: 'normalize',
+    title: 'Normalize fields',
+    summary: 'Names, addresses, phone numbers, and geo fields are standardized before comparison.',
+    detail:
+      'Normalization removes formatting noise and applies canonical representations to reduce false negatives during pair evaluation.',
+    tag: 'Processing',
+    tone: 'processing',
+    metric: 'Schema-agnostic mappings',
+  },
+  {
+    id: 'blocking',
+    title: 'Blocking keys',
+    summary: 'Candidate pairs are pre-grouped by phone/ZIP fragments to avoid brute-force matching.',
+    detail:
+      'Blocking narrows pair generation to likely candidates and cuts the computational footprint of downstream weighted scoring.',
+    tag: 'Candidate Generation',
+    tone: 'processing',
+    metric: 'Large comparison reduction',
+  },
+  {
+    id: 'score',
+    title: 'Weighted match scoring',
+    summary: 'Signals across identity and location are scored to produce confidence rankings.',
+    detail:
+      'Feature-level weights and validation rules create confidence scores that separate high-certainty matches from ambiguous records.',
+    tag: 'Model Layer',
+    tone: 'model',
+    metric: 'High-confidence segmentation',
+  },
+  {
+    id: 'bucket',
+    title: 'Action buckets',
+    summary: 'Records route to Correct, Manual Review, or Incorrect for operational follow-through.',
+    detail:
+      'The final decision layer balances automation and human-in-the-loop review so teams can remediate data quality quickly and safely.',
+    tag: 'Decision Output',
+    tone: 'decision',
+    metric: '70% duplicate reduction',
+  },
+];
 ---
 
 <Layout
@@ -88,15 +142,12 @@ if (!caseStudy) {
               <li>Weighted scoring and validation rules surface high-confidence matches and isolate ambiguous ones for review.</li>
               <li>Configuration-driven mappings allow source schema changes without rewriting core matching logic.</li>
             </ul>
-            <div class="mt-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-4 overflow-x-auto">
-              <pre class="mermaid">
-flowchart LR
-  A["Multi-source Account Data"] --> B["Normalize Fields"]
-  B --> C["Blocking (Phone/ZIP)"]
-  C --> D["Weighted Match Scoring"]
-  D --> E["Bucket: Correct | Review | Incorrect"]
-              </pre>
-            </div>
+            <InteractiveCaseStudyDiagram
+              client:visible
+              title="Entity Matching Flow"
+              subtitle="Click each stage to inspect its role in the production pipeline."
+              steps={diagramSteps}
+            />
           </div>
 
           <!-- Result -->

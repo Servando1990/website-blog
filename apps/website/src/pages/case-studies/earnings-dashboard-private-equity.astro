@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import InteractiveCaseStudyDiagram from '../../components/InteractiveCaseStudyDiagram';
 import { getCaseStudyBySlug } from '../../lib/caseStudies';
 
 const slug = 'earnings-dashboard-private-equity';
@@ -10,6 +11,59 @@ const caseStudy = getCaseStudyBySlug(slug);
 if (!caseStudy) {
   throw new Error(`Missing case study metadata for ${slug}`);
 }
+
+const diagramSteps = [
+  {
+    id: 'capture',
+    title: 'Call data capture',
+    summary: 'Earnings call recordings and transcripts are collected for each portfolio company.',
+    detail:
+      'The intake layer standardizes incoming call artifacts so they can be processed with consistent quality and metadata.',
+    tag: 'Data Inputs',
+    tone: 'source',
+    metric: 'Portfolio-wide ingestion',
+  },
+  {
+    id: 'enrich',
+    title: 'Signal enrichment',
+    summary: 'Transcripts are segmented and enriched with speaker context and temporal markers.',
+    detail:
+      'Context enrichment maps statements to speakers and time windows, preparing data for sentiment and topic-level interpretation.',
+    tag: 'Processing',
+    tone: 'processing',
+    metric: 'Speaker-aware segmentation',
+  },
+  {
+    id: 'inference',
+    title: 'Risk and sentiment inference',
+    summary: 'Models score sentiment trajectories and identify anomalous language patterns.',
+    detail:
+      'Inference highlights positive and negative shifts that may indicate performance risk, execution friction, or upside opportunities.',
+    tag: 'Model Layer',
+    tone: 'model',
+    metric: 'Trend-sensitive scoring',
+  },
+  {
+    id: 'prioritize',
+    title: 'Portfolio prioritization',
+    summary: 'Signals are ranked by urgency and materiality for investment teams.',
+    detail:
+      'A decision layer converts model output into ranked action queues so teams can triage high-impact calls first.',
+    tag: 'Decision Output',
+    tone: 'decision',
+    metric: 'Urgency-ranked insights',
+  },
+  {
+    id: 'delivery',
+    title: 'Analyst workflow delivery',
+    summary: 'Findings are surfaced in dashboards and alerts for daily monitoring.',
+    detail:
+      'The final interface ties evidence to each alert so analysts can validate context quickly and act with confidence.',
+    tag: 'Outcome',
+    tone: 'outcome',
+    metric: 'Faster analyst review',
+  },
+];
 ---
 
 <Layout
@@ -73,6 +127,24 @@ if (!caseStudy) {
                 [Content to be added]
               </p>
             </div>
+          </div>
+
+          <!-- Implementation Highlights -->
+          <div>
+            <h2 class="text-3xl font-bold text-black dark:text-white mb-6">
+              Implementation Highlights
+            </h2>
+            <ul class="list-disc pl-6 space-y-3 text-gray-600 dark:text-gray-300 leading-relaxed">
+              <li>Combined transcript and audio features to capture both semantic and vocal sentiment signals.</li>
+              <li>Ranked insights by risk materiality to focus analyst attention on high-impact portfolio updates.</li>
+              <li>Linked alerts to timestamped evidence so teams can audit and validate model output quickly.</li>
+            </ul>
+            <InteractiveCaseStudyDiagram
+              client:visible
+              title="Private Equity Monitoring Pipeline"
+              subtitle="Track how call intelligence is transformed into ranked analyst actions."
+              steps={diagramSteps}
+            />
           </div>
 
           <!-- Result -->

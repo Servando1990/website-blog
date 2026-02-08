@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import InteractiveCaseStudyDiagram from '../../components/InteractiveCaseStudyDiagram';
 import { getCaseStudyBySlug } from '../../lib/caseStudies';
 
 const slug = 'price-optimization-saas';
@@ -10,6 +11,59 @@ const caseStudy = getCaseStudyBySlug(slug);
 if (!caseStudy) {
   throw new Error(`Missing case study metadata for ${slug}`);
 }
+
+const diagramSteps = [
+  {
+    id: 'raw-data',
+    title: 'Raw commerce data',
+    summary: 'Catalog, demand, margin, and transaction signals are pulled from source systems.',
+    detail:
+      'The ingestion layer unifies product, customer, and historical sales data to provide a consistent feature store for pricing decisions.',
+    tag: 'Data Inputs',
+    tone: 'source',
+    metric: 'Multi-source ingestion',
+  },
+  {
+    id: 'demand-curves',
+    title: 'Demand curves',
+    summary: 'Quantile models estimate demand response under different price points.',
+    detail:
+      'Quantile regression creates a robust view of likely demand outcomes, not just a single-point prediction, improving pricing reliability.',
+    tag: 'Modeling',
+    tone: 'model',
+    metric: 'Uncertainty-aware forecasts',
+  },
+  {
+    id: 'optimizer',
+    title: 'Lagrangian optimizer',
+    summary: 'Objective trade-offs are tuned between profit, GMV, and growth targets.',
+    detail:
+      'The optimization layer applies weighted constraints to generate candidate prices aligned with business priorities and experimentation goals.',
+    tag: 'Optimization',
+    tone: 'decision',
+    metric: 'Multi-objective control',
+  },
+  {
+    id: 'constraints',
+    title: 'Business constraints',
+    summary: 'Guardrails enforce repricing rules, floors, and strategic boundaries.',
+    detail:
+      'Constraint handlers validate each recommendation so published prices remain operationally safe and aligned with policy.',
+    tag: 'Policy Layer',
+    tone: 'processing',
+    metric: 'Rule-safe outputs',
+  },
+  {
+    id: 'outputs',
+    title: 'Recommended prices',
+    summary: 'Final price actions are delivered back to the e-commerce platform.',
+    detail:
+      'Approved prices are published through automated workflows, creating a repeatable loop between model updates and commercial execution.',
+    tag: 'Outcome',
+    tone: 'outcome',
+    metric: '35% revenue uplift',
+  },
+];
 ---
 
 <Layout
@@ -88,15 +142,12 @@ if (!caseStudy) {
               <li>Lagrangian optimization balances GMV growth and profit protection with a tunable parameter.</li>
               <li>Constraint handlers and repricing rules keep recommended prices aligned with business guardrails.</li>
             </ul>
-            <div class="mt-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-4 overflow-x-auto">
-              <pre class="mermaid">
-flowchart LR
-  A["Raw Commerce Data"] --> B["Demand Curves (Quantile Models)"]
-  B --> C["Price Optimizer (Lagrangian)"]
-  C --> D["Business Constraints + Repricing Rules"]
-  D --> E["Recommended Prices"]
-              </pre>
-            </div>
+            <InteractiveCaseStudyDiagram
+              client:visible
+              title="Dynamic Pricing Pipeline"
+              subtitle="Explore how data, optimization, and guardrails shape final price recommendations."
+              steps={diagramSteps}
+            />
           </div>
 
           <!-- Result -->

@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import InteractiveCaseStudyDiagram from '../../components/InteractiveCaseStudyDiagram';
 import { getCaseStudyBySlug } from '../../lib/caseStudies';
 
 const slug = 'earnings-dashboard-finance-research';
@@ -10,6 +11,59 @@ const caseStudy = getCaseStudyBySlug(slug);
 if (!caseStudy) {
   throw new Error(`Missing case study metadata for ${slug}`);
 }
+
+const diagramSteps = [
+  {
+    id: 'input',
+    title: 'Earnings audio + transcript',
+    summary: 'Quarterly call audio and text are ingested from portfolio company feeds.',
+    detail:
+      'The pipeline combines spoken and textual context so models can read content and detect tonal shifts in executive communication.',
+    tag: 'Data Inputs',
+    tone: 'source',
+    metric: '500+ companies',
+  },
+  {
+    id: 'ingestion',
+    title: 'FastAPI ingestion',
+    summary: 'Audio segmentation, transcript alignment, and caching are orchestrated in backend services.',
+    detail:
+      'FastAPI endpoints handle preprocessing and retrieval, allowing analysts to revisit prior calls quickly without recomputation.',
+    tag: 'Backend Services',
+    tone: 'processing',
+    metric: 'Reusable cache layer',
+  },
+  {
+    id: 'inference',
+    title: 'Sentiment + insight inference',
+    summary: 'NLP and vocal-tone models score confidence, tone, and notable events.',
+    detail:
+      'Inference combines lexical and acoustic signals to detect narrative changes and prioritize moments requiring analyst attention.',
+    tag: 'Model Layer',
+    tone: 'model',
+    metric: 'Window-based sentiment',
+  },
+  {
+    id: 'signals',
+    title: 'Time-series signals',
+    summary: 'Model output is transformed into synchronized timeline data.',
+    detail:
+      'Signals are mapped to precise call timestamps so playback, charting, and transcript highlights remain aligned in the UI.',
+    tag: 'Signal Processing',
+    tone: 'processing',
+    metric: 'Timestamp-linked output',
+  },
+  {
+    id: 'dashboard',
+    title: 'Dashboard alerts for PMs',
+    summary: 'Portfolio managers receive prioritized call-level risk and opportunity alerts.',
+    detail:
+      'The final dashboard layer surfaces sentiment deltas and key excerpts to support faster decision cycles.',
+    tag: 'Outcome',
+    tone: 'outcome',
+    metric: 'Live PM alerting',
+  },
+];
 ---
 
 <Layout
@@ -85,15 +139,12 @@ if (!caseStudy) {
               <li>Sentiment is returned as a time series and rendered directly in the chart layer.</li>
               <li>The UI links playback time to transcript segments so researchers can quickly inspect key moments.</li>
             </ul>
-            <div class="mt-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-4 overflow-x-auto">
-              <pre class="mermaid">
-flowchart LR
-  A["Earnings Audio + Transcript"] --> B["FastAPI Ingestion"]
-  B --> C["Sentiment + Insight Inference"]
-  C --> D["Time-series Signals"]
-  D --> E["Dashboard Alerts for PMs"]
-              </pre>
-            </div>
+            <InteractiveCaseStudyDiagram
+              client:visible
+              title="Earnings Intelligence Pipeline"
+              subtitle="Navigate each stage from ingestion to PM-facing alerts."
+              steps={diagramSteps}
+            />
           </div>
 
           <!-- Result -->
