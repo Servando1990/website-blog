@@ -74,7 +74,7 @@ const diagramSteps = [
 >
   <Header />
   
-  <main class="min-h-screen bg-background">
+  <main class="min-h-screen bg-background editorial-headings">
     <!-- Hero Section -->
     <section class="pt-24 pb-16">
       <div class="container mx-auto px-6">
@@ -86,13 +86,13 @@ const diagramSteps = [
             Earnings Call Dashboard for Financial Research
           </h1>
           <div class="flex flex-wrap gap-2 mb-8">
-            <span class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm">
+            <span class="bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 px-3 py-1 rounded-full text-sm">
               NLP
             </span>
-            <span class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm">
+            <span class="bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 px-3 py-1 rounded-full text-sm">
               Dashboard
             </span>
-            <span class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm">
+            <span class="bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 px-3 py-1 rounded-full text-sm">
               Financial Analytics
             </span>
           </div>
@@ -111,7 +111,7 @@ const diagramSteps = [
               Challenge
             </h2>
             <div class="prose prose-lg dark:prose-invert">
-              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p class="text-zinc-600 dark:text-zinc-300 leading-relaxed">
                 Financial research firm needed a dashboard to process earnings calls from 500+ portfolio companies, extracting key insights and predicting sentiment with vocal tone AI models.
               </p>
             </div>
@@ -123,7 +123,7 @@ const diagramSteps = [
               Design
             </h2>
             <div class="prose prose-lg dark:prose-invert">
-              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p class="text-zinc-600 dark:text-zinc-300 leading-relaxed">
                 We built a FastAPI backend to ingest transcripts and audio, plus a React dashboard to visualize sentiment, playback, and transcripts together. Audio is segmented for vocal-tone inference, results are cached for fast reuse, and the UI synchronizes sentiment timelines with transcript highlights so analysts can jump to moments that matter.
               </p>
             </div>
@@ -134,7 +134,7 @@ const diagramSteps = [
             <h2 class="text-3xl font-bold text-black dark:text-white mb-6">
               Implementation Highlights
             </h2>
-            <ul class="list-disc pl-6 space-y-3 text-gray-600 dark:text-gray-300 leading-relaxed">
+            <ul class="list-disc pl-6 space-y-3 text-zinc-600 dark:text-zinc-300 leading-relaxed">
               <li>Audio sentiment runs on short overlapping windows to capture tone shifts over time.</li>
               <li>Sentiment is returned as a time series and rendered directly in the chart layer.</li>
               <li>The UI links playback time to transcript segments so researchers can quickly inspect key moments.</li>
@@ -153,7 +153,7 @@ const diagramSteps = [
               Result
             </h2>
             <div class="prose prose-lg dark:prose-invert">
-              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p class="text-zinc-600 dark:text-zinc-300 leading-relaxed">
                 The dashboard is now serving as key alert tooling for portfolio managers, enhancing their decision making on the fly.
               </p>
             </div>
@@ -165,7 +165,7 @@ const diagramSteps = [
               Takeaway
             </h2>
             <div class="prose prose-lg dark:prose-invert">
-              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p class="text-zinc-600 dark:text-zinc-300 leading-relaxed">
                 Being able to visually display negative and positive alerts across multiple companies was a key differentiator for the firm.
               </p>
             </div>
@@ -176,13 +176,13 @@ const diagramSteps = [
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16 bg-gray-50 dark:bg-gray-900/50">
+    <section class="py-16 bg-zinc-50 dark:bg-zinc-900/50">
       <div class="container mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto">
           <h2 class="text-3xl font-bold text-black dark:text-white mb-4">
             Ready to Transform Your Business?
           </h2>
-          <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+          <p class="text-lg text-zinc-600 dark:text-zinc-300 mb-8">
             Let's discuss how AI solutions can drive similar results for your organization.
           </p>
           <a 
