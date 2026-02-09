@@ -12,10 +12,19 @@ import ProfileSection from '../components/ProfileSection.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="controlthrive - Strategic AI Solutions">
+<Layout title="Homepage Visual v2 - controlthrive">
   <Header />
-  
-  <main class="home-visual visual-2-home">
+
+  <main class="home-visual visual-2">
+    <section class="px-6 pt-6">
+      <div class="container mx-auto max-w-6xl">
+        <div class="inline-flex flex-wrap items-center gap-2 rounded-lg border border-zinc-300 bg-white p-2 text-xs font-medium dark:border-zinc-700 dark:bg-zinc-950">
+          <a href="/home-visual-1" class="rounded-md px-3 py-1 text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800">Visual v1</a>
+          <span class="rounded-md bg-zinc-900 px-3 py-1 text-white dark:bg-zinc-100 dark:text-zinc-900">Visual v2</span>
+          <a href="/home-visual-3" class="rounded-md px-3 py-1 text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800">Visual v3</a>
+        </div>
+      </div>
+    </section>
     <Hero />
     <SocialProof client:load />
     <TrustedBy />
@@ -25,27 +34,27 @@ import Footer from '../components/Footer.astro';
     <ProfileSection />
     <Partners />
   </main>
-  
+
   <Footer />
 </Layout>
 
 <style is:global>
-  .visual-2-home {
+  .visual-2 {
     background-color: hsl(var(--background));
   }
 
-  .visual-2-home h1,
-  .visual-2-home h2,
-  .visual-2-home h3 {
+  .visual-2 h1,
+  .visual-2 h2,
+  .visual-2 h3 {
     font-family: var(--font-serif), ui-serif, Georgia, serif !important;
     letter-spacing: -0.01em;
   }
 
-  .visual-2-home section {
+  .visual-2 section {
     position: relative;
   }
 
-  .visual-2-home section::before {
+  .visual-2 section::before {
     content: '';
     position: absolute;
     left: 50%;
@@ -56,11 +65,11 @@ import Footer from '../components/Footer.astro';
     pointer-events: none;
   }
 
-  .dark .visual-2-home section::before {
+  .dark .visual-2 section::before {
     border-top-color: rgba(113, 113, 122, 0.35);
   }
 
-  .visual-2-home #home .mx-auto {
+  .visual-2 #home .mx-auto {
     background: transparent !important;
     border: 0 !important;
     box-shadow: none !important;
@@ -69,8 +78,8 @@ import Footer from '../components/Footer.astro';
     padding-right: 0 !important;
   }
 
-  .visual-2-home #social-proof .rounded-2xl,
-  .visual-2-home #trusted-by .rounded-2xl {
+  .visual-2 #social-proof .rounded-2xl,
+  .visual-2 #trusted-by .rounded-2xl {
     background: transparent !important;
     border: 0 !important;
     border-radius: 0 !important;
@@ -79,12 +88,12 @@ import Footer from '../components/Footer.astro';
     padding-right: 0 !important;
   }
 
-  .visual-2-home #social-proof .rounded-xl,
-  .visual-2-home #solutions .group,
-  .visual-2-home #industries .group,
-  .visual-2-home #trusted-by .group,
-  .visual-2-home #testimonial-squares .grid > div,
-  .visual-2-home #profile-section .relative {
+  .visual-2 #social-proof .rounded-xl,
+  .visual-2 #solutions .group,
+  .visual-2 #industries .group,
+  .visual-2 #trusted-by .group,
+  .visual-2 #testimonial-squares .grid > div,
+  .visual-2 #profile-section .relative {
     background: transparent !important;
     border: 0 !important;
     border-bottom: 1px solid rgba(161, 161, 170, 0.35) !important;
@@ -96,29 +105,29 @@ import Footer from '../components/Footer.astro';
     padding-bottom: 1rem !important;
   }
 
-  .dark .visual-2-home #social-proof .rounded-xl,
-  .dark .visual-2-home #solutions .group,
-  .dark .visual-2-home #industries .group,
-  .dark .visual-2-home #trusted-by .group,
-  .dark .visual-2-home #testimonial-squares .grid > div,
-  .dark .visual-2-home #profile-section .relative {
+  .dark .visual-2 #social-proof .rounded-xl,
+  .dark .visual-2 #solutions .group,
+  .dark .visual-2 #industries .group,
+  .dark .visual-2 #trusted-by .group,
+  .dark .visual-2 #testimonial-squares .grid > div,
+  .dark .visual-2 #profile-section .relative {
     border-bottom-color: rgba(82, 82, 91, 0.75) !important;
   }
 
-  .visual-2-home #industries .group:hover,
-  .visual-2-home #solutions .group:hover,
-  .visual-2-home #testimonial-squares .grid > div:hover,
-  .visual-2-home #trusted-by .group:hover {
+  .visual-2 #industries .group:hover,
+  .visual-2 #solutions .group:hover,
+  .visual-2 #testimonial-squares .grid > div:hover,
+  .visual-2 #trusted-by .group:hover {
     transform: none !important;
     background: transparent !important;
   }
 
-  .visual-2-home #home .pointer-events-none {
+  .visual-2 #home .pointer-events-none {
     display: none !important;
   }
 
-  .visual-2-home #home .inline-flex.rounded-full,
-  .visual-2-home #home .h-11 {
+  .visual-2 #home .inline-flex.rounded-full,
+  .visual-2 #home .h-11 {
     border-radius: 0 !important;
   }
 </style>

@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import TrustedBy from '../components/TrustedBy.astro';
+import SocialProof from '../components/SocialProof';
+import Solutions from '../components/Solutions-Option3.astro';
+import Industries from '../components/Industries.astro';
+import TestimonialSquares from '../components/TestimonialSquares';
+import Partners from '../components/Partners-Option3.astro';
+import ProfileSection from '../components/ProfileSection.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Homepage Visual v1 - controlthrive">
+  <Header />
+
+  <main class="home-visual visual-1">
+    <section class="px-6 pt-6">
+      <div class="container mx-auto max-w-6xl">
+        <div class="inline-flex flex-wrap items-center gap-2 rounded-lg border border-zinc-300 bg-white p-2 text-xs font-medium dark:border-zinc-700 dark:bg-zinc-950">
+          <span class="rounded-md bg-zinc-900 px-3 py-1 text-white dark:bg-zinc-100 dark:text-zinc-900">Visual v1</span>
+          <a href="/home-visual-2" class="rounded-md px-3 py-1 text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800">Visual v2</a>
+          <a href="/home-visual-3" class="rounded-md px-3 py-1 text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800">Visual v3</a>
+        </div>
+      </div>
+    </section>
+    <Hero />
+    <SocialProof client:load />
+    <TrustedBy />
+    <Solutions />
+    <Industries />
+    <TestimonialSquares client:load />
+    <ProfileSection />
+    <Partners />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style is:global>
+  .visual-1 {
+    background:
+      radial-gradient(900px 420px at 10% -4%, rgba(24, 24, 27, 0.06), transparent 72%),
+      radial-gradient(700px 320px at 100% 8%, rgba(63, 63, 70, 0.05), transparent 68%);
+  }
+
+  .dark .visual-1 {
+    background:
+      radial-gradient(900px 420px at 10% -4%, rgba(161, 161, 170, 0.12), transparent 72%),
+      radial-gradient(700px 320px at 100% 8%, rgba(113, 113, 122, 0.08), transparent 68%);
+  }
+
+  .visual-1 section {
+    scroll-margin-top: 96px;
+  }
+
+  .visual-1 #social-proof .rounded-xl,
+  .visual-1 #solutions .group,
+  .visual-1 #industries .group,
+  .visual-1 #trusted-by .group,
+  .visual-1 #testimonial-squares .grid > div {
+    border-color: rgb(228 228 231) !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 10px 22px -18px rgba(24, 24, 27, 0.35);
+  }
+
+  .visual-1 #home .mx-auto {
+    border-radius: 1.6rem !important;
+    border-color: rgba(212, 212, 216, 0.75) !important;
+    box-shadow: 0 24px 48px -36px rgba(39, 39, 42, 0.45) !important;
+  }
+
+  .visual-1 #home h1 {
+    letter-spacing: -0.02em;
+  }
+
+  .dark .visual-1 #social-proof .rounded-xl,
+  .dark .visual-1 #solutions .group,
+  .dark .visual-1 #industries .group,
+  .dark .visual-1 #trusted-by .group,
+  .dark .visual-1 #testimonial-squares .grid > div {
+    border-color: rgb(63 63 70) !important;
+    box-shadow: 0 12px 26px -20px rgba(0, 0, 0, 0.65);
+  }
+
+  .dark .visual-1 #home .mx-auto {
+    border-color: rgba(82, 82, 91, 0.9) !important;
+    box-shadow: 0 28px 54px -40px rgba(0, 0, 0, 0.8) !important;
+  }
+</style>
