@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const tools = [
+  {
+    name: 'AI Assessment',
+    href: 'https://ai-framework-demo.vercel.app/',
+    description:
+      'Run a quick AI readiness check and get practical next steps for your team.',
+  },
+  {
+    name: 'Enrichment Calculator',
+    href: 'https://enrichmet-calculator.vercel.app',
+    description:
+      'Estimate the potential impact of better data enrichment on your pipeline.',
+  },
+];
+---
+
+<Layout
+  title="Tools - controlthrive"
+  description="Explore practical tools from controlthrive, including AI assessment and enrichment impact calculators."
+>
+  <Header />
+
+  <main class="min-h-screen bg-background editorial-headings">
+    <section class="pt-24 pb-12">
+      <div class="container mx-auto px-6">
+        <div class="max-w-3xl">
+          <h1 class="text-4xl md:text-5xl font-bold text-black dark:text-white mb-6">
+            Tools
+          </h1>
+          <p class="text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
+            Explore quick tools to evaluate opportunities and plan your next AI move.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-24">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {tools.map((tool) => (
+            <article class="bg-card rounded-lg border border-border p-8 hover:shadow-lg transition-all duration-300">
+              <h2 class="text-2xl font-bold text-black dark:text-white mb-4">
+                {tool.name}
+              </h2>
+              <p class="text-zinc-600 dark:text-zinc-300 leading-relaxed mb-6">
+                {tool.description}
+              </p>
+              <a
+                href={tool.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 transition-colors px-6 py-3 rounded-lg font-medium"
+              >
+                Open Tool
+                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 3h7m0 0v7m0-7L10 14"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h6M5 5v14h14v-6"></path>
+                </svg>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
