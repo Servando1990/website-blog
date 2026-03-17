@@ -9,6 +9,15 @@ export interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
+    slug: 'ai-investor-matching-platform-capital-advisory',
+    title: 'AI Investor Matching Platform',
+    industry: 'Capital Advisory',
+    summary:
+      'Built an AI-assisted platform that turns deal materials and CRM history into ranked investor shortlists with explainable reasoning.',
+    tags: ['LLM', 'CRM Intelligence', 'Workflow Automation'],
+    isPublished: true,
+  },
+  {
     slug: 'price-optimization-saas',
     title: 'Price Optimization for SaaS Product',
     industry: 'SaaS',
