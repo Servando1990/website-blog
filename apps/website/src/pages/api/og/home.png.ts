@@ -12,10 +12,10 @@ export const GET: APIRoute = async () => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: '#f3f0e8',
-          color: '#1e2433',
+          background: '#ffffff',
+          color: '#111111',
           padding: '54px 64px',
-          fontFamily: '"Instrument Sans", "Segoe UI", sans-serif',
+          fontFamily: '"Inter", "Segoe UI", sans-serif',
         },
         children: [
           {
@@ -34,14 +34,14 @@ export const GET: APIRoute = async () => {
                       width: '62px',
                       height: '62px',
                       borderRadius: '16px',
-                      border: '1px solid rgba(78, 91, 122, 0.22)',
+                      border: '1px solid #E5E7EB',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontFamily: '"Fraunces", serif',
-                      fontSize: '28px',
-                      fontWeight: '700',
-                      color: '#26324a',
+                      fontSize: '26px',
+                      fontWeight: '500',
+                      color: '#4F46E5',
+                      letterSpacing: '-0.03em',
                     },
                     children: 'CT',
                   },
@@ -60,7 +60,8 @@ export const GET: APIRoute = async () => {
                         props: {
                           style: {
                             fontSize: '32px',
-                            fontWeight: '700',
+                            fontWeight: '500',
+                            letterSpacing: '-0.03em',
                           },
                           children: 'ControlThrive',
                         },
@@ -70,7 +71,7 @@ export const GET: APIRoute = async () => {
                         props: {
                           style: {
                             fontSize: '18px',
-                            color: '#5f6775',
+                            color: '#6B7280',
                           },
                           children: 'Founder-led software partner for private capital',
                         },
@@ -95,10 +96,10 @@ export const GET: APIRoute = async () => {
                   type: 'div',
                   props: {
                     style: {
-                      fontFamily: '"Fraunces", serif',
-                      fontSize: '82px',
-                      lineHeight: '0.94',
-                      letterSpacing: '-0.05em',
+                      fontSize: '76px',
+                      lineHeight: '1.02',
+                      letterSpacing: '-0.04em',
+                      fontWeight: '500',
                     },
                     children: 'We build software for private capital teams that work on judgment.',
                   },
@@ -108,8 +109,8 @@ export const GET: APIRoute = async () => {
                   props: {
                     style: {
                       fontSize: '28px',
-                      lineHeight: '1.35',
-                      color: '#5f6775',
+                      lineHeight: '1.55',
+                      color: '#6B7280',
                       maxWidth: '900px',
                     },
                     children:
@@ -127,7 +128,7 @@ export const GET: APIRoute = async () => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 fontSize: '22px',
-                color: '#5f6775',
+                color: '#6B7280',
               },
               children: [
                 {
@@ -140,8 +141,8 @@ export const GET: APIRoute = async () => {
                   type: 'div',
                   props: {
                     style: {
-                      fontWeight: '600',
-                      letterSpacing: '0.14em',
+                      fontWeight: '500',
+                      letterSpacing: '0.1em',
                       textTransform: 'uppercase',
                     },
                     children: 'Homepage',

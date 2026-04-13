@@ -32,10 +32,10 @@ export const GET: APIRoute = async ({ params }) => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: '#f3f0e8',
-          color: '#1e2433',
+          background: '#ffffff',
+          color: '#111111',
           padding: '54px 64px',
-          fontFamily: '"Instrument Sans", "Segoe UI", sans-serif',
+          fontFamily: '"Inter", "Segoe UI", sans-serif',
         },
         children: [
           {
@@ -63,14 +63,14 @@ export const GET: APIRoute = async ({ params }) => {
                             width: '60px',
                             height: '60px',
                             borderRadius: '16px',
-                            border: '1px solid rgba(78, 91, 122, 0.18)',
+                            border: '1px solid #E5E7EB',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            fontFamily: '"Fraunces", serif',
-                            fontSize: '28px',
-                            fontWeight: '700',
-                            color: '#26324a',
+                            fontSize: '26px',
+                            fontWeight: '500',
+                            color: '#4F46E5',
+                            letterSpacing: '-0.03em',
                           },
                           children: 'CT',
                         },
@@ -89,7 +89,8 @@ export const GET: APIRoute = async ({ params }) => {
                               props: {
                                 style: {
                                   fontSize: '30px',
-                                  fontWeight: '700',
+                                  fontWeight: '500',
+                                  letterSpacing: '-0.03em',
                                 },
                                 children: 'ControlThrive',
                               },
@@ -99,7 +100,7 @@ export const GET: APIRoute = async ({ params }) => {
                               props: {
                                 style: {
                                   fontSize: '18px',
-                                  color: '#5f6775',
+                                  color: '#6B7280',
                                 },
                                 children: caseStudy.industry,
                               },
@@ -116,12 +117,12 @@ export const GET: APIRoute = async ({ params }) => {
                     style: {
                       padding: '10px 18px',
                       borderRadius: '999px',
-                      border: '1px solid rgba(78, 91, 122, 0.18)',
-                      color: '#5f6775',
+                      border: '1px solid #E5E7EB',
+                      color: '#6B7280',
                       fontSize: '18px',
-                      fontWeight: '600',
+                      fontWeight: '500',
                       textTransform: 'uppercase',
-                      letterSpacing: '0.12em',
+                      letterSpacing: '0.1em',
                     },
                     children: 'Case Study',
                   },
@@ -143,10 +144,10 @@ export const GET: APIRoute = async ({ params }) => {
                   type: 'div',
                   props: {
                     style: {
-                      fontFamily: '"Fraunces", serif',
                       fontSize: `${titleFontSize}px`,
-                      lineHeight: '0.98',
-                      letterSpacing: '-0.05em',
+                      lineHeight: '1.04',
+                      letterSpacing: '-0.04em',
+                      fontWeight: '500',
                     },
                     children: caseStudy.title,
                   },
@@ -156,8 +157,8 @@ export const GET: APIRoute = async ({ params }) => {
                   props: {
                     style: {
                       fontSize: '28px',
-                      lineHeight: '1.35',
-                      color: '#5f6775',
+                      lineHeight: '1.55',
+                      color: '#6B7280',
                       maxWidth: '930px',
                     },
                     children: caseStudy.summary,
@@ -189,9 +190,9 @@ export const GET: APIRoute = async ({ params }) => {
                       props: {
                         style: {
                           fontSize: '18px',
-                          color: '#5f6775',
+                          color: '#6B7280',
                           textTransform: 'uppercase',
-                          letterSpacing: '0.12em',
+                          letterSpacing: '0.1em',
                         },
                         children: tag,
                       },
@@ -203,7 +204,7 @@ export const GET: APIRoute = async ({ params }) => {
                   props: {
                     style: {
                       fontSize: '20px',
-                      color: '#5f6775',
+                      color: '#6B7280',
                     },
                     children: 'controlthrive.com',
                   },
