@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { HeroAsciiField } from '../components/HeroAsciiField';
 import {
   bookingUrl,
   founderProfile,
@@ -26,24 +27,33 @@ const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
     <section class="section-frame">
       <div class="site-container">
         <div class="hero-shell page-stack">
-          <div class="hero-copy hero-copy--wide">
-            <span class="eyebrow">Founder-led software partner for private capital</span>
-            <h1 class="display-title">
-              We build software for private capital teams that work on judgment.
-            </h1>
-            <p class="lede">
-              From investor targeting and portfolio monitoring to internal research workflows,
-              ControlThrive helps firms turn high-context processes into systems people can actually
-              use and trust.
-            </p>
-            <div class="hero-actions">
-              <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-                Book a founder call
-              </a>
-              <a class="button-secondary" href="/case-studies">
-                See private capital work
-              </a>
+          <div class="hero-grid">
+            <div class="hero-copy hero-copy--wide">
+              <span class="eyebrow">Founder-led software partner for private capital</span>
+              <h1 class="display-title">
+                We build software for private capital teams that work on judgment.
+              </h1>
+              <p class="lede">
+                From investor targeting and portfolio monitoring to internal research workflows,
+                ControlThrive helps firms turn high-context processes into systems people can
+                actually use and trust.
+              </p>
+              <div class="hero-actions">
+                <a
+                  class="button-primary"
+                  href={bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Book a founder call
+                </a>
+                <a class="button-secondary" href="/case-studies">
+                  See private capital work
+                </a>
+              </div>
             </div>
+
+            <HeroAsciiField client:load />
           </div>
 
           <div class="trust-strip">
