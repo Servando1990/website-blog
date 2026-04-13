@@ -514,21 +514,30 @@
   }
 
   .testimonial-grid {
-    @apply grid gap-4 lg:grid-cols-2;
+    @apply grid gap-6 lg:grid-cols-3;
   }
 
   .testimonial-card {
-    @apply border-t pt-5;
+    @apply flex h-full flex-col gap-4 border-t pt-5;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
   }
 
-  .testimonial-card p {
-    @apply text-base leading-7 italic;
+  .testimonial-card__quote {
+    @apply text-base leading-7;
     color: var(--page-ink);
   }
 
-  .testimonial-card span {
-    @apply mt-4 block text-sm;
+  .testimonial-card__meta {
+    @apply mt-auto flex flex-col gap-1;
+  }
+
+  .testimonial-card__meta strong {
+    @apply text-sm font-semibold;
+    color: var(--page-ink);
+  }
+
+  .testimonial-card__meta span {
+    @apply text-sm;
     color: var(--page-muted);
   }
 

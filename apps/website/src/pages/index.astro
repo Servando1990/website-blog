@@ -6,6 +6,8 @@ import {
   bookingUrl,
   founderProfile,
   serviceAreas,
+  testimonials,
+  trustPrinciples,
   trustedCompanies,
 } from '../lib/siteContent';
 import { publishedCaseStudies } from '../lib/caseStudies';
@@ -115,6 +117,34 @@ const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
     </section>
 
     <section class="section-frame section-divider">
+      <div class="site-container editorial-grid">
+        <div class="page-stack">
+          <span class="eyebrow">Client perspective</span>
+          <h2 class="section-title">Built for teams that want a partner, not a pitch.</h2>
+          <p class="supporting-copy max-w-[36rem]">
+            The work tends to land best when the team needs a clear technical counterpart who can
+            stay close to the workflow, explain tradeoffs plainly, and ship something people
+            actually trust.
+          </p>
+        </div>
+
+        <div class="testimonial-grid">
+          {testimonials.map((testimonial) => (
+            <article class="testimonial-card">
+              <p class="testimonial-card__quote">“{testimonial.quote}”</p>
+              <div class="testimonial-card__meta">
+                <strong>{testimonial.name}</strong>
+                <span>
+                  {testimonial.role}, {testimonial.company}
+                </span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
       <div class="site-container founder-grid">
         <div class="founder-photo">
           <img src="/profile-pic.jpg" alt="Portrait of Servando Torres, founder of ControlThrive" />
@@ -133,6 +163,28 @@ const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
               Explore the work
             </a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container editorial-grid">
+        <div class="page-stack">
+          <span class="eyebrow">Built for trust</span>
+          <h2 class="section-title">A quieter way to make software decisions feel safer.</h2>
+          <p class="supporting-copy max-w-[36rem]">
+            The point is to help a team move with more confidence, not to hide the process behind
+            a louder interface or a vague promise about AI.
+          </p>
+        </div>
+
+        <div class="stack-list">
+          {trustPrinciples.map((principle) => (
+            <article class="service-block">
+              <h3>{principle.title}</h3>
+              <p>{principle.summary}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>

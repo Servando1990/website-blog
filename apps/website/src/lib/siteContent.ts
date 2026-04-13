@@ -109,12 +109,41 @@ export const testimonials = [
   {
     quote:
       'Servando helped our team at Orange turn complex data into business insight that directly shaped better decisions and improved how we operated.',
-    attribution: 'Pedro San Inocencio, Director at Orange',
+    name: 'Pedro San Inocencio',
+    role: 'Director',
+    company: 'Orange',
   },
   {
     quote:
       'Servando built the AI matching workflow that became core to our process. It reduced duplicates by more than 70% and removed a meaningful amount of manual effort.',
-    attribution: 'Kamil Kapturkiewicz, Founder at Databris',
+    name: 'Kamil Kapturkiewicz',
+    role: 'Founder',
+    company: 'Databris',
+  },
+  {
+    quote:
+      'Servando helped improve our lending algorithms and identify high-impact issues in our fraud system. His work delivered results that made a real difference to our business outcomes.',
+    name: 'Francisco Llaneza',
+    role: 'Principal Data Scientist',
+    company: 'Fintonic',
+  },
+];
+
+export const trustPrinciples = [
+  {
+    title: 'Source-linked outputs',
+    summary:
+      'The systems are designed so teams can still see the reasoning, supporting material, and tradeoffs behind an output before they act on it.',
+  },
+  {
+    title: 'Founder continuity',
+    summary:
+      'The same person who scopes the workflow stays close through delivery, which keeps decisions clearer and reduces handoff noise.',
+  },
+  {
+    title: 'Built for day-to-day use',
+    summary:
+      'The goal is not a polished demo. The goal is software that holds up when a real team uses it under pressure and over time.',
   },
 ];
 
