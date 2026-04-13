@@ -12,31 +12,16 @@ export const GET: APIRoute = async () => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background:
-            'linear-gradient(160deg, #f6efe4 0%, #f4ecde 54%, #ede2d3 100%)',
-          color: '#1f2433',
+          background: '#f3f0e8',
+          color: '#1e2433',
           padding: '54px 64px',
           fontFamily: '"Instrument Sans", "Segoe UI", sans-serif',
-          position: 'relative',
-          overflow: 'hidden',
         },
         children: [
           {
             type: 'div',
             props: {
               style: {
-                position: 'absolute',
-                inset: '0',
-                background:
-                  'radial-gradient(circle at top right, rgba(183, 130, 92, 0.25) 0, transparent 35%), radial-gradient(circle at top left, rgba(214, 190, 154, 0.35) 0, transparent 30%)',
-              },
-            },
-          },
-          {
-            type: 'div',
-            props: {
-              style: {
-                position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '18px',
@@ -48,16 +33,15 @@ export const GET: APIRoute = async () => {
                     style: {
                       width: '62px',
                       height: '62px',
-                      borderRadius: '18px',
-                      border: '1px solid rgba(140, 95, 63, 0.28)',
-                      background: 'rgba(255,255,255,0.7)',
+                      borderRadius: '16px',
+                      border: '1px solid rgba(78, 91, 122, 0.22)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       fontFamily: '"Fraunces", serif',
                       fontSize: '28px',
                       fontWeight: '700',
-                      color: '#8a5138',
+                      color: '#26324a',
                     },
                     children: 'CT',
                   },
@@ -86,9 +70,9 @@ export const GET: APIRoute = async () => {
                         props: {
                           style: {
                             fontSize: '18px',
-                            color: '#646b78',
+                            color: '#5f6775',
                           },
-                          children: 'Founder-led AI software partner',
+                          children: 'Founder-led software partner for private capital',
                         },
                       },
                     ],
@@ -101,11 +85,10 @@ export const GET: APIRoute = async () => {
             type: 'div',
             props: {
               style: {
-                position: 'relative',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '22px',
-                maxWidth: '960px',
+                maxWidth: '970px',
               },
               children: [
                 {
@@ -113,11 +96,11 @@ export const GET: APIRoute = async () => {
                   props: {
                     style: {
                       fontFamily: '"Fraunces", serif',
-                      fontSize: '88px',
+                      fontSize: '82px',
                       lineHeight: '0.94',
                       letterSpacing: '-0.05em',
                     },
-                    children: 'We help business leaders turn AI ambition into working software.',
+                    children: 'We build software for private capital teams that work on judgment.',
                   },
                 },
                 {
@@ -126,11 +109,11 @@ export const GET: APIRoute = async () => {
                     style: {
                       fontSize: '28px',
                       lineHeight: '1.35',
-                      color: '#59606c',
-                      maxWidth: '860px',
+                      color: '#5f6775',
+                      maxWidth: '900px',
                     },
                     children:
-                      'Clear strategy, stronger workflows, and founder-led delivery for teams that need a trusted technical partner.',
+                      'Investor coverage, portfolio monitoring, and internal systems designed for teams that need software people can actually use.',
                   },
                 },
               ],
@@ -140,38 +123,17 @@ export const GET: APIRoute = async () => {
             type: 'div',
             props: {
               style: {
-                position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 fontSize: '22px',
-                color: '#59606c',
+                color: '#5f6775',
               },
               children: [
                 {
                   type: 'div',
                   props: {
-                    style: {
-                      display: 'flex',
-                      gap: '14px',
-                      alignItems: 'center',
-                    },
-                    children: [
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            padding: '10px 18px',
-                            borderRadius: '999px',
-                            background: 'rgba(255,255,255,0.72)',
-                            border: '1px solid rgba(140, 95, 63, 0.22)',
-                            color: '#8a5138',
-                            fontWeight: '600',
-                          },
-                          children: 'controlthrive.com',
-                        },
-                      },
-                    ],
+                    children: 'controlthrive.com',
                   },
                 },
                 {

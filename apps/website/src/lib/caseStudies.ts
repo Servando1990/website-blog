@@ -531,11 +531,29 @@ export const caseStudies: CaseStudy[] = [
         },
       ],
     },
-    isPublished: false,
+    isPublished: true,
   },
 ];
 
-export const publishedCaseStudies = caseStudies.filter((caseStudy) => caseStudy.isPublished);
+const publishedOrder = [
+  'ai-investor-matching-platform-capital-advisory',
+  'earnings-dashboard-private-equity',
+  'earnings-dashboard-finance-research',
+  'price-optimization-saas',
+  'ai-matching-engine-manufacturing',
+] as const;
+
+const publishedOrderIndex = new Map<string, number>(
+  publishedOrder.map((slug, index) => [slug, index])
+);
+
+export const publishedCaseStudies = caseStudies
+  .filter((caseStudy) => caseStudy.isPublished)
+  .sort(
+    (left, right) =>
+      (publishedOrderIndex.get(left.slug) ?? Number.MAX_SAFE_INTEGER) -
+      (publishedOrderIndex.get(right.slug) ?? Number.MAX_SAFE_INTEGER)
+  );
 
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
   return caseStudies.find((caseStudy) => caseStudy.slug === slug);

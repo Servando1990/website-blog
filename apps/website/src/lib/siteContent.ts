@@ -6,26 +6,29 @@ export const navigation = [
   { href: '/tools', label: 'Tools' },
 ];
 
-export const trustedCompanies = ['BBVA', 'Orange', 'PwC', 'KPMG', 'Fintonic', 'Minsait'];
+export const trustedCompanies = ['BBVA', 'KPMG', 'PwC', 'Fintonic', 'Minsait'];
 
 export const serviceAreas = [
   {
-    title: 'Find the right AI wedge',
+    title: 'Investor coverage and targeting',
     summary:
-      'We help leadership teams decide where AI should create leverage, where it should not, and what success should look like before delivery starts.',
-    detail: 'Good strategy work removes noise, exposes operational constraints, and gives the build a credible commercial target.',
+      'We build workflows that help advisory and capital formation teams move from scattered deal context to ranked investor coverage with reasoning people can review.',
+    detail:
+      'That usually means combining source material, relationship memory, and decision rules in one system that stays usable under real deadlines.',
   },
   {
-    title: 'Build custom operating software',
+    title: 'Portfolio monitoring and research workflows',
     summary:
-      'From internal copilots to decision tools and workflow automation, we design systems around how the business actually works.',
-    detail: 'The goal is not novelty. The goal is a tool your team can trust, explain, and use every week.',
+      'We design dashboards, alerting layers, and evidence-linked review tools that help teams act faster without losing the underlying context.',
+    detail:
+      'The goal is not a black box. The goal is a workflow where the signal, source material, and next action still make sense to the team using it.',
   },
   {
-    title: 'Stay close through rollout',
+    title: 'Internal operating systems for deal teams',
     summary:
-      'ControlThrive works as a hands-on technical partner from scope to adoption, so teams are not left with a demo and a handoff.',
-    detail: 'That founder-led continuity helps leaders move faster without losing confidence in the process.',
+      'From internal tooling to decision support systems, we shape software around how a team already works instead of asking them to adopt a new operating religion.',
+    detail:
+      'Founder-led continuity helps the system survive contact with the real process, not just the scoped idea.',
   },
 ];
 
@@ -84,18 +87,20 @@ export const tools = [
     name: 'AI Assessment',
     href: 'https://ai-framework-demo.vercel.app/',
     summary:
-      'A fast way for decision-makers to separate promising AI bets from vague internal enthusiasm.',
-    audience: 'Best for leaders who need a smarter starting point before investing in a build.',
-    outcome: 'You leave with a practical readiness view and a clearer next move.',
+      'A fast way to separate a credible workflow opportunity from vague internal enthusiasm.',
+    audience:
+      'Best for leaders who want a cleaner view of whether an internal build is actually worth pursuing.',
+    outcome: 'You leave with a practical readiness view and a clearer next step.',
     ctaLabel: 'Open assessment',
   },
   {
     name: 'Enrichment Calculator',
     href: 'https://enrichmet-calculator.vercel.app',
     summary:
-      'A simple calculator for teams estimating how better data quality could change pipeline performance.',
-    audience: 'Best for operators who suspect their workflow is losing value because the underlying data is weak.',
-    outcome: 'You get a quick estimate of upside before committing to a larger data initiative.',
+      'A simple calculator for teams estimating how much weak underlying data may be slowing a workflow down.',
+    audience:
+      'Best for operators who suspect the process is losing value because source records are incomplete or inconsistent.',
+    outcome: 'You get a quick estimate of upside before committing to a larger data effort.',
     ctaLabel: 'Open calculator',
   },
 ];
@@ -114,11 +119,11 @@ export const testimonials = [
 ];
 
 export const founderProfile = {
-  title: 'A founder-led partnership, not a handoff.',
+  title: 'A founder-led partner for private capital workflows.',
   summary:
-    'You work directly with Servando Torres from the first conversation through delivery. The goal is straightforward: make the problem clear, build the right software, and keep the team confident through rollout.',
+    'You work directly with Servando Torres from the first conversation through delivery. The goal is straightforward: make the workflow clear, build the right system, and keep the team confident through rollout.',
   note:
-    'Most clients do not need more jargon. They need a trusted technical partner who can explain tradeoffs clearly, ship carefully, and stay close enough to make the work stick.',
+    'Most clients do not need more jargon. They need a technical partner who can understand judgment-heavy work, explain tradeoffs clearly, and stay close enough to make the system stick.',
 };
 
 export const partnerNetwork = [

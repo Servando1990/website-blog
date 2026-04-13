@@ -8,40 +8,70 @@
     --font-display: 'Fraunces', 'Iowan Old Style', 'Times New Roman', serif;
     --font-mono: ui-monospace, 'SFMono-Regular', monospace;
 
-    --background: 40 44% 96%;
-    --foreground: 224 20% 12%;
-    --card: 40 45% 98%;
-    --card-foreground: 224 20% 12%;
-    --popover: 40 45% 98%;
-    --popover-foreground: 224 20% 12%;
-    --primary: 16 44% 34%;
-    --primary-foreground: 40 45% 98%;
-    --secondary: 34 26% 88%;
-    --secondary-foreground: 224 20% 12%;
-    --muted: 34 26% 91%;
-    --muted-foreground: 226 12% 39%;
-    --accent: 35 32% 84%;
-    --accent-foreground: 224 20% 12%;
+    --background: 42 28% 95%;
+    --foreground: 225 22% 13%;
+    --card: 42 25% 97%;
+    --card-foreground: 225 22% 13%;
+    --popover: 42 25% 97%;
+    --popover-foreground: 225 22% 13%;
+    --primary: 224 30% 24%;
+    --primary-foreground: 42 25% 97%;
+    --secondary: 38 18% 88%;
+    --secondary-foreground: 225 22% 13%;
+    --muted: 40 16% 91%;
+    --muted-foreground: 220 11% 42%;
+    --accent: 40 20% 87%;
+    --accent-foreground: 225 22% 13%;
     --destructive: 5 72% 52%;
-    --destructive-foreground: 40 45% 98%;
-    --border: 32 20% 82%;
-    --input: 32 20% 82%;
-    --ring: 16 44% 34%;
+    --destructive-foreground: 42 25% 97%;
+    --border: 36 16% 82%;
+    --input: 36 16% 82%;
+    --ring: 224 30% 24%;
     --radius: 1.25rem;
 
-    --page-bg: oklch(0.97 0.013 79);
-    --page-bg-strong: oklch(0.93 0.024 70);
-    --page-surface: oklch(0.985 0.01 84 / 0.88);
-    --page-surface-strong: oklch(0.935 0.028 74 / 0.96);
-    --page-ink: oklch(0.24 0.024 255);
-    --page-muted: oklch(0.52 0.021 255);
-    --page-line: oklch(0.84 0.015 82 / 0.9);
-    --page-accent: oklch(0.56 0.09 36);
-    --page-accent-strong: oklch(0.42 0.07 30);
-    --page-accent-soft: oklch(0.89 0.03 65);
-    --page-highlight: oklch(0.76 0.06 92);
+    --page-bg: oklch(0.962 0.004 85);
+    --page-bg-strong: oklch(0.935 0.006 85);
+    --page-surface: oklch(0.985 0.003 85 / 0.94);
+    --page-surface-strong: oklch(0.97 0.005 85 / 0.98);
+    --page-ink: oklch(0.245 0.025 259);
+    --page-muted: oklch(0.54 0.01 255);
+    --page-line: oklch(0.86 0.006 84 / 0.92);
+    --page-accent: oklch(0.42 0.034 255);
+    --page-accent-strong: oklch(0.33 0.03 255);
+    --page-accent-soft: oklch(0.92 0.01 250);
+    --page-highlight: oklch(0.78 0.018 240);
     --shadow-soft: 0 22px 60px rgba(54, 39, 28, 0.08);
     --shadow-edge: 0 14px 32px rgba(54, 39, 28, 0.06);
+  }
+
+  :root[data-palette='stone'] {
+    --primary: 16 44% 34%;
+    --ring: 16 44% 34%;
+    --page-bg: oklch(0.968 0.012 79);
+    --page-bg-strong: oklch(0.94 0.02 74);
+    --page-surface: oklch(0.986 0.01 84 / 0.94);
+    --page-surface-strong: oklch(0.97 0.015 80 / 0.98);
+    --page-ink: oklch(0.245 0.024 255);
+    --page-muted: oklch(0.55 0.012 255);
+    --page-line: oklch(0.85 0.014 82 / 0.92);
+    --page-accent: oklch(0.56 0.09 36);
+    --page-accent-strong: oklch(0.42 0.07 30);
+    --page-accent-soft: oklch(0.91 0.025 70);
+  }
+
+  :root[data-palette='olive'] {
+    --primary: 150 23% 27%;
+    --ring: 150 23% 27%;
+    --page-bg: oklch(0.965 0.01 108);
+    --page-bg-strong: oklch(0.94 0.012 108);
+    --page-surface: oklch(0.985 0.006 102 / 0.95);
+    --page-surface-strong: oklch(0.97 0.01 102 / 0.98);
+    --page-ink: oklch(0.28 0.02 158);
+    --page-muted: oklch(0.56 0.012 150);
+    --page-line: oklch(0.86 0.01 108 / 0.92);
+    --page-accent: oklch(0.48 0.05 156);
+    --page-accent-strong: oklch(0.39 0.04 156);
+    --page-accent-soft: oklch(0.93 0.012 108);
   }
 
   .dark {
@@ -78,6 +108,18 @@
     --page-highlight: oklch(0.46 0.04 95);
     --shadow-soft: 0 24px 70px rgba(0, 0, 0, 0.36);
     --shadow-edge: 0 14px 40px rgba(0, 0, 0, 0.24);
+  }
+
+  .dark[data-palette='stone'] {
+    --page-accent: oklch(0.72 0.08 44);
+    --page-accent-strong: oklch(0.78 0.1 66);
+    --page-accent-soft: oklch(0.35 0.04 245);
+  }
+
+  .dark[data-palette='olive'] {
+    --page-accent: oklch(0.73 0.06 152);
+    --page-accent-strong: oklch(0.8 0.07 152);
+    --page-accent-soft: oklch(0.34 0.02 155);
   }
 
   * {
@@ -144,7 +186,7 @@
   }
 
   .site-container {
-    width: min(1120px, calc(100% - 2rem));
+    width: min(1080px, calc(100% - 2rem));
     margin-inline: auto;
   }
 
@@ -232,7 +274,7 @@
   }
 
   .section-frame {
-    padding-block: clamp(3.5rem, 7vw, 5.75rem);
+    padding-block: clamp(4rem, 7vw, 6.5rem);
   }
 
   .section-divider {
@@ -251,8 +293,8 @@
   }
 
   .display-title {
-    font-size: clamp(3rem, 7vw, 6rem);
-    max-width: 12ch;
+    font-size: clamp(3.2rem, 7.2vw, 6.3rem);
+    max-width: 11ch;
   }
 
   .display-title--compact {
@@ -260,12 +302,12 @@
   }
 
   .section-title {
-    font-size: clamp(2.1rem, 4.4vw, 3.8rem);
+    font-size: clamp(2.05rem, 4vw, 3.5rem);
     max-width: 12ch;
   }
 
   .lede {
-    @apply max-w-[41rem] text-lg leading-8 md:text-xl;
+    @apply max-w-[44rem] text-lg leading-8 md:text-xl;
     color: var(--page-muted);
   }
 
@@ -346,6 +388,10 @@
     @apply flex flex-col gap-6;
   }
 
+  .hero-copy--wide {
+    max-width: 54rem;
+  }
+
   .hero-actions {
     @apply flex flex-col gap-3 sm:flex-row sm:items-center;
   }
@@ -385,7 +431,7 @@
   }
 
   .trust-strip {
-    @apply flex flex-col gap-4 border-y py-4 md:flex-row md:items-center md:justify-between;
+    @apply flex flex-col gap-4 border-y py-5 md:flex-row md:items-center md:justify-between;
     border-color: color-mix(in oklab, var(--page-line) 95%, transparent);
   }
 
@@ -487,7 +533,7 @@
   }
 
   .founder-grid {
-    @apply grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center;
+    @apply grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start;
   }
 
   .founder-photo {
@@ -500,9 +546,8 @@
   }
 
   .founder-note {
-    @apply flex flex-col gap-4 rounded-[1.1rem] border p-6 md:p-7;
+    @apply flex flex-col gap-4 border-t pt-5 md:pt-6;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 88%, white);
   }
 
   .tool-grid {
@@ -510,9 +555,8 @@
   }
 
   .tool-card {
-    @apply flex h-full flex-col gap-4 rounded-[1.1rem] border p-6;
+    @apply flex h-full flex-col gap-4 border-t pt-5;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: transparent;
   }
 
   .tool-card h3 {
@@ -525,9 +569,7 @@
   }
 
   .cta-band {
-    @apply rounded-[1.1rem] border p-6 md:p-8;
-    border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 86%, white);
+    @apply py-1;
   }
 
   .cta-band__grid {

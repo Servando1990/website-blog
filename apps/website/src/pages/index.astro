@@ -10,12 +10,12 @@ import {
 } from '../lib/siteContent';
 import { publishedCaseStudies } from '../lib/caseStudies';
 
-const featuredCaseStudies = publishedCaseStudies.slice(0, 2);
+const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
 ---
 
 <Layout
-  title="ControlThrive | Trusted AI Software Partner for Business Leaders"
-  description="Founder-led AI software partnership for business owners and decision-makers who need clear strategy, strong delivery, and working systems."
+  title="ControlThrive | Software Partner for Private Capital Teams"
+  description="Founder-led software partner for private capital teams that need clearer investor workflows, portfolio monitoring, and internal systems that hold up in practice."
   ogImage="/api/og/home.png"
 >
   <Header />
@@ -23,47 +23,28 @@ const featuredCaseStudies = publishedCaseStudies.slice(0, 2);
   <main class="site-main">
     <section class="section-frame">
       <div class="site-container page-stack">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <span class="eyebrow">Founder-led AI software partnership</span>
-            <h1 class="display-title">
-              We help business leaders turn AI ambition into working software.
-            </h1>
-            <p class="lede">
-              ControlThrive works like a trusted technical partner: clarifying the opportunity,
-              designing the right workflow, and staying close through delivery so your team gets a
-              system it can actually use.
-            </p>
-            <div class="hero-actions">
-              <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-                Book a founder call
-              </a>
-              <a class="button-secondary" href="/case-studies">
-                See recent work
-              </a>
-            </div>
+        <div class="hero-copy hero-copy--wide">
+          <span class="eyebrow">Founder-led software partner for private capital</span>
+          <h1 class="display-title">
+            We build software for private capital teams that work on judgment.
+          </h1>
+          <p class="lede">
+            From investor targeting and portfolio monitoring to internal research workflows,
+            ControlThrive helps firms turn high-context processes into systems people can actually
+            use and trust.
+          </p>
+          <div class="hero-actions">
+            <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+              Book a founder call
+            </a>
+            <a class="button-secondary" href="/case-studies">
+              See private capital work
+            </a>
           </div>
-
-          <aside class="hero-panel surface-panel-strong">
-            <span class="label-chip">How we show up</span>
-            <h2 class="hero-panel__title">
-              Warm, direct guidance from the first conversation to the rollout.
-            </h2>
-            <p class="hero-panel__body">
-              Most clients do not need more AI language. They need a partner who can explain
-              tradeoffs clearly, make the product path concrete, and stay close enough that the
-              work survives contact with the business.
-            </p>
-            <ul class="trust-list">
-              <li>Strategy starts with the commercial problem, not the model choice.</li>
-              <li>Delivery is shaped around the workflow your team already owns.</li>
-              <li>Founder-led continuity means less friction, fewer handoffs, and faster trust.</li>
-            </ul>
-          </aside>
         </div>
 
         <div class="trust-strip">
-          <span class="trust-strip__label">Trusted by teams from</span>
+          <span class="trust-strip__label">Experience across finance, advisory, and operating teams</span>
           <div class="trust-strip__list">
             {trustedCompanies.map((company) => (
               <span>{company}</span>
@@ -76,11 +57,11 @@ const featuredCaseStudies = publishedCaseStudies.slice(0, 2);
     <section class="section-frame section-divider">
       <div class="site-container editorial-grid">
         <div class="page-stack">
-          <span class="eyebrow">What the partnership covers</span>
-          <h2 class="section-title">Three ways we usually help.</h2>
+          <span class="eyebrow">Where we usually help</span>
+          <h2 class="section-title">A narrower wedge, built for real workflows.</h2>
           <p class="supporting-copy max-w-[34rem]">
-            We work best with decision-makers who want a technical partner that can translate
-            business context into software without turning the process into a spectacle.
+            The work is most effective when the team already knows the process matters, but needs a
+            partner who can make the software path concrete without flattening the business logic.
           </p>
         </div>
 
@@ -100,10 +81,10 @@ const featuredCaseStudies = publishedCaseStudies.slice(0, 2);
       <div class="site-container page-stack">
         <div class="page-intro">
           <span class="eyebrow">Selected work</span>
-          <h2 class="section-title">Proof from delivery, not from promises.</h2>
+          <h2 class="section-title">Private capital workflows, made operational.</h2>
           <p class="supporting-copy max-w-[40rem]">
-            These are the kinds of systems we build when leaders need a trusted technical partner
-            and a clear path from idea to execution.
+            These are the kinds of systems we build when investor teams, research groups, and
+            advisory operators need software that respects source material and still moves quickly.
           </p>
         </div>
 
@@ -163,12 +144,12 @@ const featuredCaseStudies = publishedCaseStudies.slice(0, 2);
             <div class="page-stack">
               <span class="eyebrow">Next step</span>
               <h2 class="section-title">
-                If the business problem is real, the software path should feel clear.
+                If the workflow matters, the software path should feel clear.
               </h2>
               <p class="supporting-copy max-w-[36rem]">
-                Bring the workflow, decision, or opportunity you are trying to improve. We can sort
-                out what deserves a product, what needs a lighter intervention, and how to move
-                without adding more noise.
+                Bring the investor coverage, monitoring, or internal workflow you are trying to
+                improve. We can sort out what deserves a product, what needs a lighter layer, and
+                how to move without adding more noise.
               </p>
             </div>
 

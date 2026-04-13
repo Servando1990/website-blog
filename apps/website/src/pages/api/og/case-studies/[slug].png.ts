@@ -32,31 +32,16 @@ export const GET: APIRoute = async ({ params }) => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background:
-            'linear-gradient(160deg, #1f2433 0%, #242b3c 58%, #2e3647 100%)',
-          color: '#f5efe4',
+          background: '#f3f0e8',
+          color: '#1e2433',
           padding: '54px 64px',
           fontFamily: '"Instrument Sans", "Segoe UI", sans-serif',
-          position: 'relative',
-          overflow: 'hidden',
         },
         children: [
           {
             type: 'div',
             props: {
               style: {
-                position: 'absolute',
-                inset: '0',
-                background:
-                  'radial-gradient(circle at top right, rgba(195, 144, 105, 0.22) 0, transparent 34%), radial-gradient(circle at bottom left, rgba(111, 88, 60, 0.28) 0, transparent 26%)',
-              },
-            },
-          },
-          {
-            type: 'div',
-            props: {
-              style: {
-                position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
@@ -77,16 +62,15 @@ export const GET: APIRoute = async ({ params }) => {
                           style: {
                             width: '60px',
                             height: '60px',
-                            borderRadius: '18px',
-                            border: '1px solid rgba(243, 227, 206, 0.18)',
-                            background: 'rgba(255,255,255,0.06)',
+                            borderRadius: '16px',
+                            border: '1px solid rgba(78, 91, 122, 0.18)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             fontFamily: '"Fraunces", serif',
                             fontSize: '28px',
                             fontWeight: '700',
-                            color: '#f5d5b7',
+                            color: '#26324a',
                           },
                           children: 'CT',
                         },
@@ -115,7 +99,7 @@ export const GET: APIRoute = async ({ params }) => {
                               props: {
                                 style: {
                                   fontSize: '18px',
-                                  color: 'rgba(245, 239, 228, 0.78)',
+                                  color: '#5f6775',
                                 },
                                 children: caseStudy.industry,
                               },
@@ -132,9 +116,8 @@ export const GET: APIRoute = async ({ params }) => {
                     style: {
                       padding: '10px 18px',
                       borderRadius: '999px',
-                      border: '1px solid rgba(243, 227, 206, 0.18)',
-                      background: 'rgba(255,255,255,0.08)',
-                      color: '#f5d5b7',
+                      border: '1px solid rgba(78, 91, 122, 0.18)',
+                      color: '#5f6775',
                       fontSize: '18px',
                       fontWeight: '600',
                       textTransform: 'uppercase',
@@ -150,7 +133,6 @@ export const GET: APIRoute = async ({ params }) => {
             type: 'div',
             props: {
               style: {
-                position: 'relative',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '24px',
@@ -175,7 +157,7 @@ export const GET: APIRoute = async ({ params }) => {
                     style: {
                       fontSize: '28px',
                       lineHeight: '1.35',
-                      color: 'rgba(245, 239, 228, 0.82)',
+                      color: '#5f6775',
                       maxWidth: '930px',
                     },
                     children: caseStudy.summary,
@@ -188,7 +170,6 @@ export const GET: APIRoute = async ({ params }) => {
             type: 'div',
             props: {
               style: {
-                position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
@@ -207,12 +188,10 @@ export const GET: APIRoute = async ({ params }) => {
                       type: 'div',
                       props: {
                         style: {
-                          padding: '10px 16px',
-                          borderRadius: '999px',
-                          background: 'rgba(255,255,255,0.08)',
-                          border: '1px solid rgba(243, 227, 206, 0.14)',
                           fontSize: '18px',
-                          color: 'rgba(245, 239, 228, 0.9)',
+                          color: '#5f6775',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.12em',
                         },
                         children: tag,
                       },
@@ -224,7 +203,7 @@ export const GET: APIRoute = async ({ params }) => {
                   props: {
                     style: {
                       fontSize: '20px',
-                      color: 'rgba(245, 239, 228, 0.74)',
+                      color: '#5f6775',
                     },
                     children: 'controlthrive.com',
                   },
