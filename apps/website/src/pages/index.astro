@@ -24,33 +24,35 @@ const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
 
   <main class="site-main">
     <section class="section-frame">
-      <div class="site-container page-stack">
-        <div class="hero-copy hero-copy--wide">
-          <span class="eyebrow">Founder-led software partner for private capital</span>
-          <h1 class="display-title">
-            We build software for private capital teams that work on judgment.
-          </h1>
-          <p class="lede">
-            From investor targeting and portfolio monitoring to internal research workflows,
-            ControlThrive helps firms turn high-context processes into systems people can actually
-            use and trust.
-          </p>
-          <div class="hero-actions">
-            <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-              Book a founder call
-            </a>
-            <a class="button-secondary" href="/case-studies">
-              See private capital work
-            </a>
+      <div class="site-container">
+        <div class="hero-shell page-stack">
+          <div class="hero-copy hero-copy--wide">
+            <span class="eyebrow">Founder-led software partner for private capital</span>
+            <h1 class="display-title">
+              We build software for private capital teams that work on judgment.
+            </h1>
+            <p class="lede">
+              From investor targeting and portfolio monitoring to internal research workflows,
+              ControlThrive helps firms turn high-context processes into systems people can actually
+              use and trust.
+            </p>
+            <div class="hero-actions">
+              <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+                Book a founder call
+              </a>
+              <a class="button-secondary" href="/case-studies">
+                See private capital work
+              </a>
+            </div>
           </div>
-        </div>
 
-        <div class="trust-strip">
-          <span class="trust-strip__label">Experience across finance, advisory, and operating teams</span>
-          <div class="trust-strip__list">
-            {trustedCompanies.map((company) => (
-              <span>{company}</span>
-            ))}
+          <div class="trust-strip">
+            <span class="trust-strip__label">Experience across finance, advisory, and operating teams</span>
+            <div class="trust-strip__list">
+              {trustedCompanies.map((company) => (
+                <span>{company}</span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
