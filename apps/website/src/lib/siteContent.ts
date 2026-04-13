@@ -127,6 +127,13 @@ export const testimonials = [
     role: 'Principal Data Scientist',
     company: 'Fintonic',
   },
+  {
+    quote:
+      'Servando has a great knack for data science and for building ML systems that stand up in real-world environments. We worked on recommendation systems together.',
+    name: 'Ed Mattia',
+    role: 'AI Engineer',
+    company: 'Outerbounds',
+  },
 ];
 
 export const trustPrinciples = [
