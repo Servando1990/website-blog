@@ -52,7 +52,7 @@ export const caseStudies: CaseStudy[] = [
     tags: ['Workflow design', 'CRM intelligence', 'LLM reasoning'],
     metrics: [
       { value: 'One line', label: 'per target firm in the final shortlist' },
-      { value: 'Shared run', label: 'dashboard, CSV, PDF, and Clay handoff' },
+      { value: 'Shared run', label: 'review workspace, CSV, PDF, and Clay handoff' },
       { value: 'Human review', label: 'kept in the loop before outreach' },
     ],
     facts: [
@@ -341,14 +341,14 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'earnings-dashboard-finance-research',
-    title: 'Earnings Intelligence Dashboard for Financial Research',
+    title: 'Earnings Intelligence Platform for Financial Research',
     industry: 'Financial Research',
     summary:
-      'Created a dashboard that helps portfolio teams review earnings calls across 500+ companies with sentiment and playback context in one place.',
+      'Created a research platform that helps portfolio teams review earnings calls across 500+ companies with sentiment and playback context in one place.',
     cardSummary:
       'A research workflow that brought audio, transcript, and signal review into one interface so teams could spot risk and opportunity faster.',
     featuredOutcome: 'Portfolio teams reviewing 500+ earnings calls from one alerting surface',
-    tags: ['Research workflow', 'NLP', 'Dashboard delivery'],
+    tags: ['Research workflow', 'NLP', 'Signal delivery'],
     metrics: [
       { value: '500+', label: 'portfolio companies monitored' },
       { value: 'Time-linked', label: 'sentiment signals tied to transcript evidence' },
@@ -356,7 +356,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     facts: [
       { label: 'Business problem', value: 'Too many earnings calls to review manually at depth' },
-      { label: 'Delivery shape', value: 'Backend ingestion with a synchronized research dashboard' },
+      { label: 'Delivery shape', value: 'Backend ingestion with a synchronized research platform' },
       { label: 'Why it worked', value: 'Signals were always tied back to evidence in context' },
     ],
     challenge: [
@@ -364,7 +364,7 @@ export const caseStudies: CaseStudy[] = [
       'That meant building something more useful than raw transcript search. The interface needed to keep sentiment, playback, and evidence connected in one place.',
     ],
     design: [
-      'We built a FastAPI backend to ingest transcripts and audio, plus a React dashboard that synchronizes sentiment timelines, playback, and transcript highlights.',
+      'We built a FastAPI backend to ingest transcripts and audio, plus a React platform that synchronizes sentiment timelines, playback, and transcript highlights.',
       'Audio is segmented for vocal-tone inference, results are cached for fast reuse, and the final experience lets analysts jump straight to the moments that matter instead of scanning whole calls manually.',
     ],
     implementationHighlights: [
@@ -373,7 +373,7 @@ export const caseStudies: CaseStudy[] = [
       'Playback, charting, and transcript context stay aligned so users can validate why an alert exists.',
     ],
     result: [
-      'The dashboard became key alert tooling for portfolio managers and researchers, helping them act on earnings-call changes more quickly and with better context.',
+      'The platform became key alert tooling for portfolio managers and researchers, helping them act on earnings-call changes more quickly and with better context.',
       'Because the evidence stays attached to the signal, the workflow supports speed without forcing users to take the model on faith.',
     ],
     takeaway:
@@ -423,11 +423,11 @@ export const caseStudies: CaseStudy[] = [
           metric: 'Timestamp-linked output',
         },
         {
-          id: 'dashboard',
-          title: 'Research dashboard',
+          id: 'platform',
+          title: 'Research platform',
           summary: 'Portfolio managers receive prioritized call-level alerts with supporting evidence.',
           detail:
-            'The final dashboard surfaces sentiment deltas and key excerpts so teams can act faster without losing context.',
+            'The final platform surfaces sentiment deltas and key excerpts so teams can act faster without losing context.',
           tag: 'Outcome',
           tone: 'outcome',
           metric: 'Live PM alerting',
@@ -438,10 +438,10 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'earnings-dashboard-private-equity',
-    title: 'Portfolio Monitoring Dashboard for a Private Equity Team',
+    title: 'Portfolio Monitoring System for a Private Equity Team',
     industry: 'Private Equity',
     summary:
-      'Developed a dashboard concept for investment teams tracking portfolio company earnings calls, sentiment shifts, and analyst follow-up.',
+      'Developed a monitoring system concept for investment teams tracking portfolio company earnings calls, sentiment shifts, and analyst follow-up.',
     cardSummary:
       'A portfolio monitoring workflow designed to help investment teams prioritize what deserves a closer look after quarterly calls.',
     featuredOutcome: 'Faster portfolio review through ranked alerts and supporting evidence',
@@ -453,7 +453,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     facts: [
       { label: 'Business problem', value: 'Analysts needed faster visibility across many earnings calls' },
-      { label: 'Delivery shape', value: 'Monitoring dashboard with ranked alerting' },
+      { label: 'Delivery shape', value: 'Monitoring system with ranked alerting' },
       { label: 'Why it worked', value: 'Signals stayed auditable and easy to validate' },
     ],
     challenge: [
@@ -462,7 +462,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     design: [
       'We designed a monitoring flow that captures call artifacts, enriches them with speaker and timeline context, runs risk and sentiment inference, and turns the output into ranked alerts for the investment team.',
-      'The dashboard keeps the supporting evidence attached to each alert so analysts can move from signal to source without leaving the workflow.',
+      'The system keeps the supporting evidence attached to each alert so analysts can move from signal to source without leaving the workflow.',
     ],
     implementationHighlights: [
       'Transcript and audio features were combined so the system could capture both semantic and tonal shifts.',
@@ -522,9 +522,9 @@ export const caseStudies: CaseStudy[] = [
         {
           id: 'delivery',
           title: 'Analyst workflow delivery',
-          summary: 'Findings are surfaced in dashboards and alerts for daily monitoring.',
+          summary: 'Findings are surfaced in ranked alerts and review views for daily monitoring.',
           detail:
-            'The final interface ties evidence to each alert so analysts can validate context quickly and act with confidence.',
+            'The final system ties evidence to each alert so analysts can validate context quickly and act with confidence.',
           tag: 'Outcome',
           tone: 'outcome',
           metric: 'Faster analyst review',
