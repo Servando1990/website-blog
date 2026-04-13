@@ -1,15 +1,6 @@
 import type { APIRoute } from 'astro';
 import { ImageResponse } from '@vercel/og';
 
-const logoSvg = `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
-  <path d="M44 184V270H420" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M420 270L344 224M420 270L344 316" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-`;
-
-const logoDataUri = `data:image/svg+xml;base64,${Buffer.from(logoSvg).toString('base64')}`;
-
 export const GET: APIRoute = async () => {
   return new ImageResponse(
     {
@@ -21,38 +12,86 @@ export const GET: APIRoute = async () => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: '#000000',
-          color: '#FFFFFF',
+          background:
+            'linear-gradient(160deg, #f6efe4 0%, #f4ecde 54%, #ede2d3 100%)',
+          color: '#1f2433',
           padding: '54px 64px',
-          fontFamily: '"Geist", "Inter", "Segoe UI", sans-serif',
+          fontFamily: '"Instrument Sans", "Segoe UI", sans-serif',
+          position: 'relative',
+          overflow: 'hidden',
         },
         children: [
           {
             type: 'div',
             props: {
               style: {
+                position: 'absolute',
+                inset: '0',
+                background:
+                  'radial-gradient(circle at top right, rgba(183, 130, 92, 0.25) 0, transparent 35%), radial-gradient(circle at top left, rgba(214, 190, 154, 0.35) 0, transparent 30%)',
+              },
+            },
+          },
+          {
+            type: 'div',
+            props: {
+              style: {
+                position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '22px',
+                gap: '18px',
               },
               children: [
                 {
-                  type: 'img',
+                  type: 'div',
                   props: {
-                    src: logoDataUri,
-                    width: 86,
-                    height: 86,
+                    style: {
+                      width: '62px',
+                      height: '62px',
+                      borderRadius: '18px',
+                      border: '1px solid rgba(140, 95, 63, 0.28)',
+                      background: 'rgba(255,255,255,0.7)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontFamily: '"Fraunces", serif',
+                      fontSize: '28px',
+                      fontWeight: '700',
+                      color: '#8a5138',
+                    },
+                    children: 'CT',
                   },
                 },
                 {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '30px',
-                      fontWeight: '700',
-                      letterSpacing: '0.16em',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '4px',
                     },
-                    children: 'CONTROLTHRIVE',
+                    children: [
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            fontSize: '32px',
+                            fontWeight: '700',
+                          },
+                          children: 'ControlThrive',
+                        },
+                      },
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            fontSize: '18px',
+                            color: '#646b78',
+                          },
+                          children: 'Founder-led AI software partner',
+                        },
+                      },
+                    ],
                   },
                 },
               ],
@@ -62,34 +101,36 @@ export const GET: APIRoute = async () => {
             type: 'div',
             props: {
               style: {
+                position: 'relative',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '24px',
-                maxWidth: '1000px',
+                gap: '22px',
+                maxWidth: '960px',
               },
               children: [
                 {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '86px',
-                      lineHeight: '0.98',
-                      fontWeight: '800',
-                      letterSpacing: '-0.03em',
-                      textTransform: 'uppercase',
+                      fontFamily: '"Fraunces", serif',
+                      fontSize: '88px',
+                      lineHeight: '0.94',
+                      letterSpacing: '-0.05em',
                     },
-                    children: 'Strategic AI Solutions',
+                    children: 'We help business leaders turn AI ambition into working software.',
                   },
                 },
                 {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '34px',
-                      lineHeight: '1.25',
-                      opacity: '0.9',
+                      fontSize: '28px',
+                      lineHeight: '1.35',
+                      color: '#59606c',
+                      maxWidth: '860px',
                     },
-                    children: 'AI Partners for Capital Markets',
+                    children:
+                      'Clear strategy, stronger workflows, and founder-led delivery for teams that need a trusted technical partner.',
                   },
                 },
               ],
@@ -99,31 +140,49 @@ export const GET: APIRoute = async () => {
             type: 'div',
             props: {
               style: {
+                position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
+                fontSize: '22px',
+                color: '#59606c',
               },
               children: [
                 {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '24px',
-                      fontWeight: '600',
-                      opacity: '0.98',
-                      letterSpacing: '0.1em',
+                      display: 'flex',
+                      gap: '14px',
+                      alignItems: 'center',
                     },
-                    children: 'HOMEPAGE',
+                    children: [
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            padding: '10px 18px',
+                            borderRadius: '999px',
+                            background: 'rgba(255,255,255,0.72)',
+                            border: '1px solid rgba(140, 95, 63, 0.22)',
+                            color: '#8a5138',
+                            fontWeight: '600',
+                          },
+                          children: 'controlthrive.com',
+                        },
+                      },
+                    ],
                   },
                 },
                 {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '22px',
-                      opacity: '0.84',
+                      fontWeight: '600',
+                      letterSpacing: '0.14em',
+                      textTransform: 'uppercase',
                     },
-                    children: 'www.controlthrive.com',
+                    children: 'Homepage',
                   },
                 },
               ],

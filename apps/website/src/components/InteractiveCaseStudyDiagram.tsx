@@ -29,34 +29,34 @@ const toneStyles: Record<
   }
 > = {
   source: {
-    activeBorder: 'border-sky-300 bg-sky-50/70 dark:border-sky-800 dark:bg-sky-950/30',
-    activeDot: 'bg-sky-500',
-    badge: 'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300',
+    activeBorder: 'border-stone-300 bg-stone-50 dark:border-stone-700 dark:bg-stone-900/60',
+    activeDot: 'bg-stone-500',
+    badge: 'bg-stone-100 text-stone-700 dark:bg-stone-900 dark:text-stone-300',
   },
   processing: {
-    activeBorder: 'border-emerald-300 bg-emerald-50/70 dark:border-emerald-800 dark:bg-emerald-950/30',
+    activeBorder: 'border-emerald-300 bg-emerald-50 dark:border-emerald-800 dark:bg-emerald-950/30',
     activeDot: 'bg-emerald-500',
     badge: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
   },
   model: {
-    activeBorder: 'border-indigo-300 bg-indigo-50/70 dark:border-indigo-800 dark:bg-indigo-950/30',
-    activeDot: 'bg-indigo-500',
-    badge: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300',
+    activeBorder: 'border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/70',
+    activeDot: 'bg-slate-600',
+    badge: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200',
   },
   decision: {
-    activeBorder: 'border-amber-300 bg-amber-50/70 dark:border-amber-800 dark:bg-amber-950/30',
+    activeBorder: 'border-amber-300 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/30',
     activeDot: 'bg-amber-500',
     badge: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
   },
   outcome: {
-    activeBorder: 'border-rose-300 bg-rose-50/70 dark:border-rose-800 dark:bg-rose-950/30',
-    activeDot: 'bg-rose-500',
-    badge: 'bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300',
+    activeBorder: 'border-orange-300 bg-orange-50 dark:border-orange-800 dark:bg-orange-950/30',
+    activeDot: 'bg-orange-500',
+    badge: 'bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300',
   },
 };
 
 const inactiveStyles =
-  'border-slate-200/80 bg-white/70 hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950/40 dark:hover:border-slate-700';
+  'border-stone-200/80 bg-white/70 hover:border-stone-300 dark:border-slate-800 dark:bg-slate-950/50 dark:hover:border-slate-700';
 
 function resolveTone(tone?: string): DiagramTone {
   if (tone && tone in toneStyles) {
@@ -100,11 +100,11 @@ export default function InteractiveCaseStudyDiagram({
   const activeToneStyle = toneStyles[activeTone];
 
   return (
-    <section className="mt-6 rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4 shadow-sm dark:border-slate-800 dark:from-slate-900 dark:to-slate-950 md:p-6">
+    <section className="mt-2 rounded-[1.75rem] border border-stone-200 bg-gradient-to-br from-stone-50 to-white p-4 shadow-sm dark:border-slate-800 dark:from-slate-900 dark:to-slate-950 md:p-6">
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-            Interactive Architecture
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-stone-500 dark:text-slate-400">
+            Workflow View
           </p>
           <h3 className="mt-1 text-xl font-semibold text-slate-900 dark:text-white">{title}</h3>
           {subtitle ? (
@@ -115,7 +115,7 @@ export default function InteractiveCaseStudyDiagram({
           <button
             type="button"
             onClick={() => setAutoplay((current) => !current)}
-            className="inline-flex items-center justify-center rounded-full border border-slate-300 px-3 py-1 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+            className="inline-flex items-center justify-center rounded-full border border-stone-300 px-3 py-1 text-xs font-medium text-slate-700 transition-colors hover:bg-stone-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
           >
             {autoplay ? 'Pause autoplay' : 'Resume autoplay'}
           </button>
@@ -123,7 +123,7 @@ export default function InteractiveCaseStudyDiagram({
       </div>
 
       <div className="mt-6 grid gap-4 lg:grid-cols-[1.25fr_1fr]">
-        <ol className="rounded-xl border border-slate-200/80 bg-white/70 p-4 dark:border-slate-800 dark:bg-slate-950/50 md:p-5">
+        <ol className="rounded-[1.35rem] border border-stone-200/80 bg-white/80 p-4 dark:border-slate-800 dark:bg-slate-950/50 md:p-5">
           {steps.map((step, index) => {
             const isActive = index === activeIndex;
             const tone = resolveTone(step.tone);
@@ -171,11 +171,11 @@ export default function InteractiveCaseStudyDiagram({
           })}
         </ol>
 
-        <div className="rounded-xl border border-slate-200 bg-white/95 p-5 dark:border-slate-800 dark:bg-slate-950/60">
-          <AnimatePresence mode="wait">
+        <div className="rounded-[1.35rem] border border-stone-200 bg-white/95 p-5 dark:border-slate-800 dark:bg-slate-950/60">
+          <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={activeStep.id}
-              initial={{ opacity: 0, y: 10 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}

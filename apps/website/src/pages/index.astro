@@ -1,128 +1,295 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import TrustedBy from '../components/TrustedBy.astro';
-import SocialProof from '../components/SocialProof';
-import Solutions from '../components/Solutions-Option3.astro';
-import Industries from '../components/Industries.astro';
-import TestimonialSquares from '../components/TestimonialSquares';
-import Partners from '../components/Partners-Option3.astro';
-import ProfileSection from '../components/ProfileSection.astro';
 import Footer from '../components/Footer.astro';
+import {
+  bookingUrl,
+  engagementSteps,
+  founderProfile,
+  industryFocus,
+  serviceAreas,
+  testimonials,
+  tools,
+  trustedCompanies,
+} from '../lib/siteContent';
+import { publishedCaseStudies } from '../lib/caseStudies';
+
+const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
+const homepageTools = tools.slice(0, 2);
 ---
 
 <Layout
-  title="controlthrive - Strategic AI Solutions"
-  description="AI partners that understand, ship, and stay."
-  ogImage="https://www.controlthrive.com/api/og/home.png"
+  title="ControlThrive | Trusted AI Software Partner for Business Leaders"
+  description="Founder-led AI software partnership for business owners and decision-makers who need clear strategy, strong delivery, and working systems."
+  ogImage="/api/og/home.png"
 >
   <Header />
-  
-  <main class="home-visual visual-2-home">
-    <Hero />
-    <SocialProof client:load />
-    <TrustedBy />
-    <Solutions />
-    <Industries />
-    <TestimonialSquares client:load />
-    <ProfileSection />
-    <Partners />
+
+  <main class="site-main">
+    <section class="section-frame">
+      <div class="site-container page-stack">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Founder-led AI software partnership</span>
+            <h1 class="display-title">
+              We help business leaders turn AI ambition into working software.
+            </h1>
+            <p class="lede">
+              ControlThrive works like a trusted technical partner: clarifying the opportunity,
+              designing the right workflow, and staying close through delivery so your team gets a
+              system it can actually use.
+            </p>
+            <div class="hero-actions">
+              <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+                Book a founder call
+              </a>
+              <a class="button-secondary" href="/case-studies">
+                See recent work
+              </a>
+            </div>
+          </div>
+
+          <aside class="hero-panel surface-panel-strong">
+            <span class="label-chip">How we show up</span>
+            <h2 class="hero-panel__title">
+              Warm, direct guidance from the first conversation to the rollout.
+            </h2>
+            <p class="hero-panel__body">
+              Most clients do not need more AI language. They need a partner who can explain
+              tradeoffs clearly, make the product path concrete, and stay close enough that the
+              work survives contact with the business.
+            </p>
+            <ul class="trust-list">
+              <li>Strategy starts with the commercial problem, not the model choice.</li>
+              <li>Delivery is shaped around the workflow your team already owns.</li>
+              <li>Founder-led continuity means less friction, fewer handoffs, and faster trust.</li>
+            </ul>
+          </aside>
+        </div>
+
+        <div class="trust-strip">
+          <span class="trust-strip__label">Trusted by teams from</span>
+          <div class="trust-strip__list">
+            {trustedCompanies.map((company) => (
+              <span>{company}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container editorial-grid">
+        <div class="page-stack">
+          <span class="eyebrow">What leaders bring us in for</span>
+          <h2 class="section-title">
+            The gap between "we should use AI" and "this now runs the business better."
+          </h2>
+          <p class="supporting-copy max-w-[34rem]">
+            We work best with decision-makers who want a technical partner that can translate
+            business context into software, not just experiments. That usually means helping with
+            three kinds of work.
+          </p>
+        </div>
+
+        <div class="stack-list">
+          {serviceAreas.map((service) => (
+            <article class="service-block">
+              <h3>{service.title}</h3>
+              <p>{service.summary}</p>
+              <p class="mt-3">{service.detail}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container page-stack">
+        <div class="page-intro">
+          <span class="eyebrow">How the work moves</span>
+          <h2 class="section-title">A delivery rhythm built for trust, not theater.</h2>
+          <p class="supporting-copy max-w-[40rem]">
+            The process is deliberately simple: understand the operating constraint, shape the
+            software around it, ship the right system, and stay close until the team trusts the
+            outcome.
+          </p>
+        </div>
+
+        <div class="flow-grid">
+          {engagementSteps.map((step) => (
+            <article class="flow-step">
+              <span class="flow-step__number">{step.step}</span>
+              <h3>{step.title}</h3>
+              <p>{step.summary}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container page-stack">
+        <div class="page-intro">
+          <span class="eyebrow">Selected work</span>
+          <h2 class="section-title">Proof from delivery, not from promises.</h2>
+          <p class="supporting-copy max-w-[40rem]">
+            These are the kinds of systems we build when leaders need a trusted technical partner
+            and a clear path from idea to execution.
+          </p>
+        </div>
+
+        <div class="featured-study-list">
+          {featuredCaseStudies.map((study) => (
+            <article class="featured-study">
+              <div class="page-stack gap-4">
+                <span class="label-chip">{study.industry}</span>
+                <p class="featured-study__outcome">{study.featuredOutcome}</p>
+                <div class="metric-list">
+                  {study.metrics.map((metric) => (
+                    <span class="metric-pill">
+                      {metric.value} {metric.label}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div class="page-stack gap-5">
+                <h3 class="text-[2rem] md:text-[2.5rem]">{study.title}</h3>
+                <p class="featured-study__summary">{study.cardSummary}</p>
+                <div class="hero-actions">
+                  <a class="button-primary" href={`/case-studies/${study.slug}`}>
+                    Read the case study
+                  </a>
+                  <a class="button-ghost" href="/case-studies">
+                    View all work
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container editorial-grid">
+        <div class="page-stack">
+          <span class="eyebrow">Where we usually help</span>
+          <h2 class="section-title">Business contexts where clear technical partnership matters most.</h2>
+          <p class="supporting-copy max-w-[34rem]">
+            We often work with leaders navigating high-context decisions, messy workflows, and data
+            environments where better software compounds quickly.
+          </p>
+        </div>
+
+        <div class="industry-list">
+          {industryFocus.map((industry) => (
+            <article class="industry-block">
+              <h3>{industry.title}</h3>
+              <p>{industry.summary}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container editorial-grid">
+        <div class="page-stack">
+          <span class="eyebrow">Start with a lighter entry point</span>
+          <h2 class="section-title">Useful tools for leaders who want signal before a bigger build.</h2>
+          <p class="supporting-copy max-w-[36rem]">
+            If you want to pressure-test an idea before booking time, these tools give you a quick
+            way to sharpen the conversation.
+          </p>
+        </div>
+
+        <div class="tool-grid">
+          {homepageTools.map((tool) => (
+            <article class="tool-card">
+              <span class="label-chip">Self-serve diagnostic</span>
+              <h3>{tool.name}</h3>
+              <p>{tool.summary}</p>
+              <p>{tool.audience}</p>
+              <p>{tool.outcome}</p>
+              <div class="hero-actions">
+                <a class="button-secondary" href={tool.href} target="_blank" rel="noopener noreferrer">
+                  {tool.ctaLabel}
+                </a>
+                <a class="button-ghost" href="/tools">
+                  View all tools
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container page-stack">
+        <div class="testimonial-grid">
+          {testimonials.map((testimonial) => (
+            <article class="testimonial-card">
+              <p>"{testimonial.quote}"</p>
+              <span>{testimonial.attribution}</span>
+            </article>
+          ))}
+        </div>
+
+        <div class="founder-grid">
+          <div class="founder-photo">
+            <img src="/profile-pic.jpg" alt="Portrait of Servando Torres, founder of ControlThrive" />
+          </div>
+
+          <div class="founder-note">
+            <span class="eyebrow">Who you work with</span>
+            <h2 class="section-title">{founderProfile.title}</h2>
+            <p class="supporting-copy">{founderProfile.summary}</p>
+            <p class="supporting-copy">{founderProfile.note}</p>
+            <div class="hero-actions">
+              <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+                Talk to Servando
+              </a>
+              <a class="button-secondary" href="/case-studies">
+                Explore the work
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container">
+        <div class="cta-band">
+          <div class="cta-band__grid">
+            <div class="page-stack">
+              <span class="eyebrow">Next step</span>
+              <h2 class="section-title">
+                If the business problem is real, the software path should feel clear.
+              </h2>
+              <p class="supporting-copy max-w-[36rem]">
+                Bring the workflow, decision, or opportunity you are trying to improve. We can sort
+                out what deserves a product, what needs a lighter intervention, and how to move
+                without adding more noise.
+              </p>
+            </div>
+
+            <div class="page-stack lg:items-end">
+              <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+                Book a founder call
+              </a>
+              <a class="button-secondary" href="mailto:servando@controlthrive.com">
+                Email ControlThrive
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
-  
+
   <Footer />
 </Layout>
-
-<style is:global>
-  .visual-2-home {
-    background-color: hsl(var(--background));
-  }
-
-  .visual-2-home h1,
-  .visual-2-home h2,
-  .visual-2-home h3 {
-    font-family: var(--font-serif), ui-serif, Georgia, serif !important;
-    letter-spacing: -0.01em;
-  }
-
-  .visual-2-home section {
-    position: relative;
-  }
-
-  .visual-2-home section::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: min(86rem, 94vw);
-    transform: translateX(-50%);
-    border-top: 1px solid rgba(161, 161, 170, 0.22);
-    pointer-events: none;
-  }
-
-  .dark .visual-2-home section::before {
-    border-top-color: rgba(113, 113, 122, 0.35);
-  }
-
-  .visual-2-home #home .mx-auto {
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  .visual-2-home #social-proof .rounded-2xl,
-  .visual-2-home #trusted-by .rounded-2xl {
-    background: transparent !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  .visual-2-home #social-proof .rounded-xl,
-  .visual-2-home #solutions .group,
-  .visual-2-home #industries .group,
-  .visual-2-home #trusted-by .group,
-  .visual-2-home #testimonial-squares .grid > div,
-  .visual-2-home #profile-section .relative {
-    background: transparent !important;
-    border: 0 !important;
-    border-bottom: 1px solid rgba(161, 161, 170, 0.35) !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
-  }
-
-  .dark .visual-2-home #social-proof .rounded-xl,
-  .dark .visual-2-home #solutions .group,
-  .dark .visual-2-home #industries .group,
-  .dark .visual-2-home #trusted-by .group,
-  .dark .visual-2-home #testimonial-squares .grid > div,
-  .dark .visual-2-home #profile-section .relative {
-    border-bottom-color: rgba(82, 82, 91, 0.75) !important;
-  }
-
-  .visual-2-home #industries .group:hover,
-  .visual-2-home #solutions .group:hover,
-  .visual-2-home #testimonial-squares .grid > div:hover,
-  .visual-2-home #trusted-by .group:hover {
-    transform: none !important;
-    background: transparent !important;
-  }
-
-  .visual-2-home #home .pointer-events-none {
-    display: none !important;
-  }
-
-  .visual-2-home #home .inline-flex.rounded-full,
-  .visual-2-home #home .h-11 {
-    border-radius: 0 !important;
-  }
-</style>

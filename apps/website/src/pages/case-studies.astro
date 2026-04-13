@@ -2,100 +2,109 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { caseStudies } from '../lib/caseStudies';
-
-const publishedCaseStudies = caseStudies.filter((caseStudy) => caseStudy.isPublished);
+import { bookingUrl } from '../lib/siteContent';
+import { publishedCaseStudies } from '../lib/caseStudies';
 ---
 
 <Layout
-  title="Case Studies - controlthrive"
-  description="Case studies on AI and data products delivered by controlthrive across SaaS, manufacturing, and private equity."
+  title="Case Studies | ControlThrive"
+  description="Selected ControlThrive case studies showing how founder-led technical partnership turns AI ideas into working business systems."
 >
   <Header />
-  
-  <main class="min-h-screen bg-background editorial-headings">
-    <!-- Hero Section -->
-    <section class="pt-24 pb-16">
-      <div class="container mx-auto px-6">
-        <div class="text-center max-w-4xl mx-auto">
-          <h1 class="text-4xl md:text-5xl font-bold text-black dark:text-white mb-6">
-            How we have helped
+
+  <main class="site-main">
+    <section class="section-frame">
+      <div class="site-container page-stack">
+        <div class="page-intro">
+          <span class="eyebrow">Case studies</span>
+          <h1 class="display-title display-title--compact">
+            Delivery stories for teams that needed more than a vendor.
           </h1>
-          <p class="text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
-            Explore our successful AI implementations across various industries and see how we've helped businesses transform their operations.
+          <p class="lede">
+            These projects show what it looks like when ControlThrive works as a close technical
+            partner: clear business framing, careful system design, and delivery that stands up in
+            real workflows.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Case Studies Grid -->
-    <section class="pb-24">
-      <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8 max-w-4xl mx-auto">
-          {publishedCaseStudies.map((study) => (
-            <div class="bg-card rounded-lg border border-border p-8 hover:shadow-lg transition-all duration-300">
-              <!-- Industry Tag -->
-              <div class="inline-block bg-accent/10 text-accent-foreground px-3 py-1 rounded-full text-sm font-medium mb-4">
-                {study.industry}
-              </div>
-              
-              <!-- Title -->
-              <h2 class="text-2xl font-bold text-black dark:text-white mb-4">
-                {study.title}
-              </h2>
-              
-              <!-- Summary -->
-              <p class="text-zinc-600 dark:text-zinc-300 leading-relaxed mb-6">
-                {study.summary}
-              </p>
-              
-              <!-- Tags -->
-              <div class="flex flex-wrap gap-2 mb-6">
-                {study.tags.map((tag) => (
-                  <span class="bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 px-3 py-1 rounded-full text-sm">
-                    {tag}
+    <section class="section-frame section-divider">
+      <div class="site-container case-list">
+        {publishedCaseStudies.map((study) => (
+          <article class="case-card">
+            <div class="case-card__meta">
+              <span class="label-chip">{study.industry}</span>
+              <p class="featured-study__outcome">{study.featuredOutcome}</p>
+              <div class="metric-list">
+                {study.metrics.map((metric) => (
+                  <span class="metric-pill">
+                    {metric.value} {metric.label}
                   </span>
                 ))}
               </div>
-              
-              <!-- CTA Button -->
-              <a 
-                href={`/case-studies/${study.slug}`}
-                class="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 transition-colors px-6 py-3 rounded-lg font-medium"
-              >
-                Read Full Case Study
-                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-              </a>
             </div>
-          ))}
-        </div>
+
+            <div class="case-card__content">
+              <h2 class="text-[2rem] md:text-[2.55rem]">{study.title}</h2>
+              <p class="case-card__summary">{study.cardSummary}</p>
+
+              <div class="grid gap-3 md:grid-cols-3">
+                {study.facts.map((fact) => (
+                  <div class="fact-item">
+                    <span>{fact.label}</span>
+                    <strong>{fact.value}</strong>
+                  </div>
+                ))}
+              </div>
+
+              <div class="hero-actions">
+                <a class="button-primary" href={`/case-studies/${study.slug}`}>
+                  Read the case study
+                </a>
+                {study.proofLink ? (
+                  <a
+                    class="button-secondary"
+                    href={study.proofLink.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {study.proofLink.label}
+                  </a>
+                ) : null}
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-16 bg-zinc-50 dark:bg-zinc-900/50">
-      <div class="container mx-auto px-6">
-        <div class="text-center max-w-3xl mx-auto">
-          <h2 class="text-3xl font-bold text-black dark:text-white mb-4">
-            Ready to Transform Your Business?
-          </h2>
-          <p class="text-lg text-zinc-600 dark:text-zinc-300 mb-8">
-            Let's discuss how AI solutions can drive similar results for your organization.
-          </p>
-          <a 
-            href="https://cal.com/servando-torres/discovery-call" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 transition-colors px-8 py-4 rounded-lg font-medium text-lg"
-          >
-            Talk to founder
-          </a>
+    <section class="section-frame section-divider">
+      <div class="site-container">
+        <div class="cta-band">
+          <div class="cta-band__grid">
+            <div class="page-stack">
+              <span class="eyebrow">Work with ControlThrive</span>
+              <h2 class="section-title">Need a technical partner who can make the path feel concrete?</h2>
+              <p class="supporting-copy max-w-[36rem]">
+                If you are evaluating a workflow, internal tool, or AI product opportunity, we can
+                pressure-test the idea together and define the right next build.
+              </p>
+            </div>
+
+            <div class="page-stack lg:items-end">
+              <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+                Book a founder call
+              </a>
+              <a class="button-secondary" href="/tools">
+                Explore the tools first
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   </main>
-  
+
   <Footer />
 </Layout>

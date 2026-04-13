@@ -2,68 +2,84 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-
-const tools = [
-  {
-    name: 'AI Assessment',
-    href: 'https://ai-framework-demo.vercel.app/',
-    description:
-      'Run a quick AI readiness check and get practical next steps for your team.',
-  },
-  {
-    name: 'Enrichment Calculator',
-    href: 'https://enrichmet-calculator.vercel.app',
-    description:
-      'Estimate the potential impact of better data enrichment on your pipeline.',
-  },
-];
+import { bookingUrl, tools } from '../lib/siteContent';
 ---
 
 <Layout
-  title="Tools - controlthrive"
-  description="Explore practical tools from controlthrive, including AI assessment and enrichment impact calculators."
+  title="Tools | ControlThrive"
+  description="Self-serve ControlThrive tools for decision-makers who want a clearer view of AI readiness and data opportunity before a larger build."
 >
   <Header />
 
-  <main class="min-h-screen bg-background editorial-headings">
-    <section class="pt-24 pb-12">
-      <div class="container mx-auto px-6">
-        <div class="max-w-3xl">
-          <h1 class="text-4xl md:text-5xl font-bold text-black dark:text-white mb-6">
-            Tools
+  <main class="site-main">
+    <section class="section-frame">
+      <div class="site-container page-stack">
+        <div class="page-intro">
+          <span class="eyebrow">Tools</span>
+          <h1 class="display-title display-title--compact">
+            Quick diagnostics for leaders who want a clearer next move.
           </h1>
-          <p class="text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
-            Explore quick tools to evaluate opportunities and plan your next AI move.
+          <p class="lede">
+            These tools are built to help decision-makers sharpen the conversation before a bigger
+            delivery effort starts. Use them when you want signal, not a sales funnel.
           </p>
         </div>
       </div>
     </section>
 
-    <section class="pb-24">
-      <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {tools.map((tool) => (
-            <article class="bg-card rounded-lg border border-border p-8 hover:shadow-lg transition-all duration-300">
-              <h2 class="text-2xl font-bold text-black dark:text-white mb-4">
-                {tool.name}
-              </h2>
-              <p class="text-zinc-600 dark:text-zinc-300 leading-relaxed mb-6">
-                {tool.description}
-              </p>
-              <a
-                href={tool.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 transition-colors px-6 py-3 rounded-lg font-medium"
-              >
-                Open Tool
-                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 3h7m0 0v7m0-7L10 14"></path>
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h6M5 5v14h14v-6"></path>
-                </svg>
+    <section class="section-frame section-divider">
+      <div class="site-container tool-grid">
+        {tools.map((tool) => (
+          <article class="tool-card">
+            <span class="label-chip">Self-serve tool</span>
+            <h2>{tool.name}</h2>
+            <p>{tool.summary}</p>
+            <div class="grid gap-3">
+              <div class="fact-item">
+                <span>Best for</span>
+                <strong>{tool.audience}</strong>
+              </div>
+              <div class="fact-item">
+                <span>What you get</span>
+                <strong>{tool.outcome}</strong>
+              </div>
+            </div>
+            <div class="hero-actions">
+              <a class="button-primary" href={tool.href} target="_blank" rel="noopener noreferrer">
+                {tool.ctaLabel}
               </a>
-            </article>
-          ))}
+              <a class="button-secondary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+                Talk to the founder instead
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container">
+        <div class="cta-band">
+          <div class="cta-band__grid">
+            <div class="page-stack">
+              <span class="eyebrow">Prefer a conversation?</span>
+              <h2 class="section-title">Sometimes the fastest route is just getting the workflow on the table.</h2>
+              <p class="supporting-copy max-w-[36rem]">
+                If the problem is complex, high-stakes, or tied to multiple teams, a founder call is
+                usually the better starting point. We can sort the priorities together and decide
+                whether a tool, workshop, or build makes the most sense.
+              </p>
+            </div>
+
+            <div class="page-stack lg:items-end">
+              <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+                Book a founder call
+              </a>
+              <a class="button-secondary" href="/case-studies">
+                Review the work first
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 export interface Props {
   title: string;
   description?: string;
@@ -10,14 +12,14 @@ export interface Props {
 
 const {
   title,
-  description = 'AI Partners that understand, ship and stay',
-  ogImage = '/controlthrive-logo.svg',
+  description = 'Founder-led AI software partnership for business leaders who need clear strategy, strong delivery, and working systems.',
+  ogImage = '/api/og/home.png',
   ogUrl = Astro.url.href,
   ogType = 'website',
-  ogSiteName = 'controlthrive',
+  ogSiteName = 'ControlThrive',
 } = Astro.props;
 
-const baseUrl = Astro.site || Astro.url.origin;
+const baseUrl = (Astro.site || Astro.url.origin).toString();
 const ogVersion =
   process.env.VERCEL_GIT_COMMIT_SHA ||
   process.env.VERCEL_DEPLOYMENT_ID ||
@@ -38,7 +40,6 @@ const resolvedOgImage = resolvedOgImageUrl.href;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
 
-    <!-- Open Graph -->
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={ogUrl} />
     <meta property="og:title" content={title} />
@@ -46,114 +47,73 @@ const resolvedOgImage = resolvedOgImageUrl.href;
     <meta property="og:image" content={resolvedOgImage} />
     <meta property="og:site_name" content={ogSiteName} />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={ogUrl} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={resolvedOgImage} />
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LLMXBYB3P8"></script>
+
+    <meta name="theme-color" content="#f5efe4" />
+
+    <script async is:inline src="https://www.googletagmanager.com/gtag/js?id=G-LLMXBYB3P8"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
       gtag('config', 'G-LLMXBYB3P8');
     </script>
-    
-    <!-- Theme detection script (runs before page load) -->
+
     <script is:inline>
-      // Prevent flash of incorrect theme
-      const getThemePreference = () => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      const getStoredTheme = () => {
+        try {
           return localStorage.getItem('theme');
+        } catch {
+          return null;
         }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       };
-      const isDark = getThemePreference() === 'dark';
-      document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
-      
-      if (typeof localStorage !== 'undefined') {
-        // Watch for changes in localStorage
-        const observer = new MutationObserver(() => {
-          const isDarkMode = document.documentElement.classList.contains('dark');
-          localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-        });
-        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-      }
-    </script>
-    
-    <!-- Geist Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- Font CSS Variables -->
-    <style is:global>
-      :root {
-        --font-geist-sans: 'Geist', system-ui, sans-serif;
-        --font-geist-mono: 'Geist Mono', ui-monospace, monospace;
-        --font-serif: var(--font-geist-sans), system-ui, sans-serif;
-      }
-    </style>
-    
-    <!-- Shared UI styles -->
-    <style is:global>
-      @import '@website-blog/ui/styles/index.css';
 
-      html,
-      body,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      p,
-      span,
-      li,
-      a,
-      button,
-      input,
-      textarea,
-      select {
-        font-family: var(--font-geist-sans), system-ui, sans-serif;
-      }
+      const preferredTheme = getStoredTheme();
+      const resolvedTheme =
+        preferredTheme ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
-      code,
-      pre,
-      kbd,
-      samp {
-        font-family: var(--font-geist-mono), ui-monospace, monospace;
-      }
-    </style>
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization", 
-      "name": "controlthrive",
-      "founder": {
-        "@type": "Person",
-        "name": "Servando Torres"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "London",
-        "addressRegion": "UK"
-      },
-      "email": "servando@controlthrive.com",
-      "sameAs": [
-        "https://x.com/servandotorres",
-        "https://linkedin.com/in/servandotorres"
-      ],
-      "description": "AI Consulting Services"
-    }
+      document.documentElement.classList.toggle('dark', resolvedTheme === 'dark');
+      document.documentElement.dataset.theme = resolvedTheme;
     </script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Instrument+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" is:inline>
+      {JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ProfessionalService',
+        name: 'ControlThrive',
+        founder: {
+          '@type': 'Person',
+          name: 'Servando Torres',
+        },
+        email: 'servando@controlthrive.com',
+        url: baseUrl,
+        description,
+        sameAs: [
+          'https://x.com/servandotorres',
+          'https://linkedin.com/in/servandotorres',
+          'https://github.com/servandotg',
+        ],
+        serviceType: [
+          'AI software strategy',
+          'Workflow automation',
+          'Custom AI product delivery',
+        ],
+      })}
+    </script>
   </head>
   <body>
     <slot />

@@ -1,20 +1,11 @@
 import type { APIRoute } from 'astro';
 import { ImageResponse } from '@vercel/og';
-import { caseStudies, getCaseStudyBySlug } from '../../../../lib/caseStudies';
-
-const logoSvg = `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
-  <path d="M44 184V270H420" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M420 270L344 224M420 270L344 316" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-`;
-
-const logoDataUri = `data:image/svg+xml;base64,${Buffer.from(logoSvg).toString('base64')}`;
+import { getCaseStudyBySlug, publishedCaseStudies } from '../../../../lib/caseStudies';
 
 function getTitleFontSize(title: string): number {
-  if (title.length > 54) return 62;
-  if (title.length > 42) return 70;
-  return 78;
+  if (title.length > 54) return 54;
+  if (title.length > 42) return 62;
+  return 68;
 }
 
 export const GET: APIRoute = async ({ params }) => {
@@ -25,7 +16,7 @@ export const GET: APIRoute = async ({ params }) => {
   }
 
   const caseStudy = getCaseStudyBySlug(slug);
-  if (!caseStudy) {
+  if (!caseStudy || !caseStudy.isPublished) {
     return new Response('Case study not found', { status: 404 });
   }
 
@@ -41,74 +32,31 @@ export const GET: APIRoute = async ({ params }) => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: '#000000',
-          color: '#FFFFFF',
+          background:
+            'linear-gradient(160deg, #1f2433 0%, #242b3c 58%, #2e3647 100%)',
+          color: '#f5efe4',
           padding: '54px 64px',
-          fontFamily: '"Geist", "Inter", "Segoe UI", sans-serif',
+          fontFamily: '"Instrument Sans", "Segoe UI", sans-serif',
           position: 'relative',
+          overflow: 'hidden',
         },
         children: [
           {
             type: 'div',
             props: {
               style: {
-                display: 'flex',
-                alignItems: 'center',
-                gap: '22px',
+                position: 'absolute',
+                inset: '0',
+                background:
+                  'radial-gradient(circle at top right, rgba(195, 144, 105, 0.22) 0, transparent 34%), radial-gradient(circle at bottom left, rgba(111, 88, 60, 0.28) 0, transparent 26%)',
               },
-              children: [
-                {
-                  type: 'img',
-                  props: {
-                    src: logoDataUri,
-                    width: 86,
-                    height: 86,
-                  },
-                },
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontSize: '30px',
-                      fontWeight: '700',
-                      letterSpacing: '0.16em',
-                    },
-                    children: 'CONTROLTHRIVE',
-                  },
-                },
-              ],
             },
           },
           {
             type: 'div',
             props: {
               style: {
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '20px',
-                maxWidth: '1000px',
-              },
-              children: [
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontSize: `${titleFontSize}px`,
-                      lineHeight: '1.05',
-                      fontWeight: '800',
-                      letterSpacing: '-0.03em',
-                      textTransform: 'uppercase',
-                    },
-                    children: caseStudy.title,
-                  },
-                },
-              ],
-            },
-          },
-          {
-            type: 'div',
-            props: {
-              style: {
+                position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
@@ -118,34 +66,165 @@ export const GET: APIRoute = async ({ params }) => {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '24px',
-                      fontWeight: '600',
-                      opacity: '0.98',
-                      letterSpacing: '0.1em',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '16px',
                     },
-                    children: 'CASE STUDY',
+                    children: [
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            width: '60px',
+                            height: '60px',
+                            borderRadius: '18px',
+                            border: '1px solid rgba(243, 227, 206, 0.18)',
+                            background: 'rgba(255,255,255,0.06)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontFamily: '"Fraunces", serif',
+                            fontSize: '28px',
+                            fontWeight: '700',
+                            color: '#f5d5b7',
+                          },
+                          children: 'CT',
+                        },
+                      },
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '4px',
+                          },
+                          children: [
+                            {
+                              type: 'div',
+                              props: {
+                                style: {
+                                  fontSize: '30px',
+                                  fontWeight: '700',
+                                },
+                                children: 'ControlThrive',
+                              },
+                            },
+                            {
+                              type: 'div',
+                              props: {
+                                style: {
+                                  fontSize: '18px',
+                                  color: 'rgba(245, 239, 228, 0.78)',
+                                },
+                                children: caseStudy.industry,
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
                   },
                 },
                 {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '22px',
-                      fontWeight: '600',
                       padding: '10px 18px',
-                      borderRadius: '9999px',
-                      border: '1px solid rgba(255, 255, 255, 0.45)',
-                      background: 'rgba(255, 255, 255, 0.1)',
+                      borderRadius: '999px',
+                      border: '1px solid rgba(243, 227, 206, 0.18)',
+                      background: 'rgba(255,255,255,0.08)',
+                      color: '#f5d5b7',
+                      fontSize: '18px',
+                      fontWeight: '600',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.12em',
                     },
-                    children: caseStudy.industry,
+                    children: 'Case Study',
+                  },
+                },
+              ],
+            },
+          },
+          {
+            type: 'div',
+            props: {
+              style: {
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '24px',
+                maxWidth: '1000px',
+              },
+              children: [
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      fontFamily: '"Fraunces", serif',
+                      fontSize: `${titleFontSize}px`,
+                      lineHeight: '0.98',
+                      letterSpacing: '-0.05em',
+                    },
+                    children: caseStudy.title,
                   },
                 },
                 {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '22px',
-                      opacity: '0.84',
+                      fontSize: '28px',
+                      lineHeight: '1.35',
+                      color: 'rgba(245, 239, 228, 0.82)',
+                      maxWidth: '930px',
+                    },
+                    children: caseStudy.summary,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            type: 'div',
+            props: {
+              style: {
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '18px',
+              },
+              children: [
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      display: 'flex',
+                      gap: '12px',
+                      flexWrap: 'wrap',
+                    },
+                    children: caseStudy.tags.slice(0, 3).map((tag) => ({
+                      type: 'div',
+                      props: {
+                        style: {
+                          padding: '10px 16px',
+                          borderRadius: '999px',
+                          background: 'rgba(255,255,255,0.08)',
+                          border: '1px solid rgba(243, 227, 206, 0.14)',
+                          fontSize: '18px',
+                          color: 'rgba(245, 239, 228, 0.9)',
+                        },
+                        children: tag,
+                      },
+                    })),
+                  },
+                },
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      fontSize: '20px',
+                      color: 'rgba(245, 239, 228, 0.74)',
                     },
                     children: 'controlthrive.com',
                   },
@@ -164,7 +243,7 @@ export const GET: APIRoute = async ({ params }) => {
 };
 
 export async function getStaticPaths() {
-  return caseStudies.map((caseStudy) => ({
+  return publishedCaseStudies.map((caseStudy) => ({
     params: { slug: caseStudy.slug },
   }));
 }

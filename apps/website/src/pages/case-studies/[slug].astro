@@ -1,0 +1,203 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import InteractiveCaseStudyDiagram from '../../components/InteractiveCaseStudyDiagram';
+import { bookingUrl } from '../../lib/siteContent';
+import { getCaseStudyBySlug, publishedCaseStudies } from '../../lib/caseStudies';
+
+export function getStaticPaths() {
+  return publishedCaseStudies.map((caseStudy) => ({
+    params: { slug: caseStudy.slug },
+  }));
+}
+
+const slug = Astro.params.slug;
+const caseStudy = slug ? getCaseStudyBySlug(slug) : undefined;
+
+if (!caseStudy || !caseStudy.isPublished) {
+  throw new Error(`Unknown published case study: ${slug}`);
+}
+
+const relatedStudies = publishedCaseStudies.filter((study) => study.slug !== caseStudy.slug).slice(0, 2);
+---
+
+<Layout
+  title={`${caseStudy.title} | ControlThrive`}
+  description={caseStudy.summary}
+  ogType="article"
+  ogImage={`/api/og/case-studies/${caseStudy.slug}.png`}
+>
+  <Header />
+
+  <main class="site-main">
+    <section class="section-frame">
+      <div class="site-container case-shell">
+        <a class="text-link" href="/case-studies">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M15 6 9 12l6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          Back to all case studies
+        </a>
+
+        <div class="case-hero">
+          <div class="page-stack">
+            <span class="eyebrow">{caseStudy.industry}</span>
+            <h1 class="display-title display-title--compact">{caseStudy.title}</h1>
+            <p class="lede">{caseStudy.summary}</p>
+            <div class="metric-list">
+              {caseStudy.tags.map((tag) => (
+                <span class="metric-pill">{tag}</span>
+              ))}
+            </div>
+            <div class="metric-list">
+              {caseStudy.metrics.map((metric) => (
+                <span class="metric-pill">
+                  {metric.value} {metric.label}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <aside class="case-sidebar">
+            <div class="surface-panel hero-panel">
+              <span class="label-chip">At a glance</span>
+              <div class="fact-list">
+                {caseStudy.facts.map((fact) => (
+                  <div class="fact-item">
+                    <span>{fact.label}</span>
+                    <strong>{fact.value}</strong>
+                  </div>
+                ))}
+              </div>
+              {caseStudy.proofLink ? (
+                <a
+                  class="button-secondary"
+                  href={caseStudy.proofLink.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {caseStudy.proofLink.label}
+                </a>
+              ) : null}
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container case-content">
+        <article class="case-body">
+          <section>
+            <span class="eyebrow">What was at stake</span>
+            <h2>The business problem behind the build.</h2>
+            {caseStudy.challenge.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </section>
+
+          <section>
+            <span class="eyebrow">What we built</span>
+            <h2>A system designed for real decision-making.</h2>
+            {caseStudy.design.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </section>
+
+          <section>
+            <span class="eyebrow">Implementation highlights</span>
+            <h2>The decisions that made the workflow hold up.</h2>
+            <ul>
+              {caseStudy.implementationHighlights.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+            <InteractiveCaseStudyDiagram
+              client:load
+              title={caseStudy.diagram.title}
+              subtitle={caseStudy.diagram.subtitle}
+              steps={caseStudy.diagram.steps}
+            />
+          </section>
+
+          <section>
+            <span class="eyebrow">What changed</span>
+            <h2>Result</h2>
+            {caseStudy.result.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </section>
+
+          <section>
+            <span class="eyebrow">Takeaway</span>
+            <h2>What this work says about how ControlThrive builds.</h2>
+            <p>{caseStudy.takeaway}</p>
+          </section>
+        </article>
+
+        <aside class="case-sticky">
+          <div class="surface-panel hero-panel">
+            <span class="label-chip">Why it matters</span>
+            <p class="hero-panel__body">
+              ControlThrive is most useful when the software has to respect business judgment,
+              operational constraints, and adoption realities at the same time.
+            </p>
+            <ul class="trust-list">
+              <li>We frame the system around how the team already makes decisions.</li>
+              <li>We keep the workflow explainable enough that people can trust it.</li>
+              <li>We stay close until the product works in the actual business context.</li>
+            </ul>
+          </div>
+
+          <div class="surface-panel hero-panel">
+            <span class="label-chip">Next step</span>
+            <h2 class="hero-panel__title">Have a similar workflow in mind?</h2>
+            <p class="hero-panel__body">
+              Bring the process, bottleneck, or decision you want to improve. We can sort out
+              whether it needs a workshop, a lighter tool, or a full build.
+            </p>
+            <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+              Book a founder call
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container page-stack">
+        <div class="page-intro">
+          <span class="eyebrow">More work</span>
+          <h2 class="section-title">Two more examples of how the partnership shows up.</h2>
+        </div>
+
+        <div class="case-list">
+          {relatedStudies.map((study) => (
+            <article class="case-card">
+              <div class="case-card__meta">
+                <span class="label-chip">{study.industry}</span>
+                <p class="featured-study__outcome">{study.featuredOutcome}</p>
+              </div>
+
+              <div class="case-card__content">
+                <h3 class="text-[1.8rem] md:text-[2.25rem]">{study.title}</h3>
+                <p class="case-card__summary">{study.cardSummary}</p>
+                <div class="hero-actions">
+                  <a class="button-primary" href={`/case-studies/${study.slug}`}>
+                    Read this case study
+                  </a>
+                  <a class="button-ghost" href="/case-studies">
+                    View all work
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

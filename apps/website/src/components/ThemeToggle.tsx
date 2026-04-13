@@ -1,37 +1,40 @@
-import { useState, useEffect } from 'react'
-import { Sun, Moon } from 'lucide-react'
+import { useEffect, useState } from 'react';
+import { Moon, Sun } from 'lucide-react';
+
+type ThemeMode = 'light' | 'dark';
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState('light')
+  const [theme, setTheme] = useState<ThemeMode>('light');
 
   useEffect(() => {
-    // Get initial theme from localStorage or system preference
-    const savedTheme = localStorage.getItem('theme')
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    const initialTheme = savedTheme || systemTheme
-    
-    setTheme(initialTheme)
-    document.documentElement.classList.toggle('dark', initialTheme === 'dark')
-  }, [])
+    const storedTheme = localStorage.getItem('theme') as ThemeMode | null;
+    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+    const resolvedTheme = storedTheme ?? preferredTheme;
+
+    setTheme(resolvedTheme);
+    document.documentElement.classList.toggle('dark', resolvedTheme === 'dark');
+    document.documentElement.dataset.theme = resolvedTheme;
+  }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light'
-    setTheme(newTheme)
-    localStorage.setItem('theme', newTheme)
-    document.documentElement.classList.toggle('dark', newTheme === 'dark')
-  }
+    const nextTheme: ThemeMode = theme === 'light' ? 'dark' : 'light';
+
+    setTheme(nextTheme);
+    localStorage.setItem('theme', nextTheme);
+    document.documentElement.classList.toggle('dark', nextTheme === 'dark');
+    document.documentElement.dataset.theme = nextTheme;
+  };
 
   return (
     <button
       onClick={toggleTheme}
-      className="inline-flex items-center justify-center h-9 w-9 border border-input bg-transparent hover:bg-accent hover:text-accent-foreground rounded-lg transition-colors"
-      aria-label="Toggle theme"
+      className="theme-toggle"
+      aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+      type="button"
     >
-      {theme === 'light' ? (
-        <Moon className="h-4 w-4" />
-      ) : (
-        <Sun className="h-4 w-4" />
-      )}
+      {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
     </button>
-  )
+  );
 }
