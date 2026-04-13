@@ -100,7 +100,7 @@ export default function InteractiveCaseStudyDiagram({
   const activeToneStyle = toneStyles[activeTone];
 
   return (
-    <section className="mt-2 rounded-[1.75rem] border border-stone-200 bg-gradient-to-br from-stone-50 to-white p-4 shadow-sm dark:border-slate-800 dark:from-slate-900 dark:to-slate-950 md:p-6">
+    <section className="mt-2 rounded-[1.25rem] border border-stone-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-950 md:p-5">
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-stone-500 dark:text-slate-400">
@@ -122,8 +122,8 @@ export default function InteractiveCaseStudyDiagram({
         ) : null}
       </div>
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-[1.25fr_1fr]">
-        <ol className="rounded-[1.35rem] border border-stone-200/80 bg-white/80 p-4 dark:border-slate-800 dark:bg-slate-950/50 md:p-5">
+      <div className="mt-6 grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+        <ol className="rounded-[1.1rem] border border-stone-200/80 bg-white p-4 dark:border-slate-800 dark:bg-slate-950 md:p-5">
           {steps.map((step, index) => {
             const isActive = index === activeIndex;
             const tone = resolveTone(step.tone);
@@ -148,7 +148,7 @@ export default function InteractiveCaseStudyDiagram({
                     setAutoplay(false);
                   }}
                   onFocus={() => setActiveIndex(index)}
-                  className={`w-full rounded-xl border p-3 text-left transition-all duration-200 ${
+                  className={`w-full rounded-[0.95rem] border p-3 text-left transition-all duration-200 ${
                     isActive ? style.activeBorder : inactiveStyles
                   }`}
                 >
@@ -171,7 +171,7 @@ export default function InteractiveCaseStudyDiagram({
           })}
         </ol>
 
-        <div className="rounded-[1.35rem] border border-stone-200 bg-white/95 p-5 dark:border-slate-800 dark:bg-slate-950/60">
+        <div className="rounded-[1.1rem] border border-stone-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-950">
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={activeStep.id}

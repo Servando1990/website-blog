@@ -93,36 +93,10 @@
     @apply min-h-screen bg-background text-foreground;
     font-family: var(--font-body);
     color: var(--page-ink);
-    background:
-      radial-gradient(circle at top left, color-mix(in oklab, var(--page-highlight) 34%, transparent) 0, transparent 32%),
-      radial-gradient(circle at top right, color-mix(in oklab, var(--page-accent-soft) 62%, transparent) 0, transparent 28%),
-      linear-gradient(180deg, color-mix(in oklab, var(--page-bg-strong) 35%, var(--page-bg)) 0%, var(--page-bg) 42%, color-mix(in oklab, var(--page-bg) 92%, white) 100%);
+    background: color-mix(in oklab, var(--page-bg) 96%, white);
     font-feature-settings: 'rlig' 1, 'calt' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background-image:
-      linear-gradient(to right, transparent 0, transparent calc(100% - 1px), color-mix(in oklab, var(--page-line) 56%, transparent) calc(100% - 1px)),
-      linear-gradient(to bottom, transparent 0, transparent calc(100% - 1px), color-mix(in oklab, var(--page-line) 38%, transparent) calc(100% - 1px));
-    background-size: 120px 120px;
-    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.08), transparent 32%);
-    opacity: 0.6;
-    z-index: -2;
-  }
-
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.14) 45%, transparent 100%);
-    z-index: -1;
   }
 
   h1,
@@ -179,8 +153,7 @@
     top: 0;
     z-index: 50;
     border-bottom: 1px solid color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-bg) 88%, transparent);
-    backdrop-filter: blur(18px);
+    background: color-mix(in oklab, var(--page-bg) 96%, white);
   }
 
   .site-nav {
@@ -192,10 +165,9 @@
   }
 
   .brand-mark__badge {
-    @apply inline-flex h-11 w-11 items-center justify-center rounded-2xl border;
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-xl border;
     border-color: color-mix(in oklab, var(--page-accent) 40%, var(--page-line));
-    background: linear-gradient(145deg, color-mix(in oklab, var(--page-surface-strong) 80%, white), color-mix(in oklab, var(--page-accent-soft) 50%, white));
-    box-shadow: var(--shadow-edge);
+    background: transparent;
     color: var(--page-accent-strong);
     font-family: var(--font-display);
     font-size: 1.15rem;
@@ -238,7 +210,7 @@
   }
 
   .mobile-menu-button {
-    @apply inline-flex h-11 w-11 items-center justify-center rounded-2xl border md:hidden;
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-xl border md:hidden;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
     background: color-mix(in oklab, var(--page-surface) 88%, transparent);
     color: var(--page-ink);
@@ -255,13 +227,12 @@
   }
 
   .mobile-menu__inner a {
-    @apply rounded-2xl px-4 py-3 text-sm font-medium;
+    @apply rounded-xl px-4 py-3 text-sm font-medium;
     color: var(--page-ink);
-    background: color-mix(in oklab, var(--page-surface) 70%, transparent);
   }
 
   .section-frame {
-    padding-block: clamp(4rem, 8vw, 7rem);
+    padding-block: clamp(3.5rem, 7vw, 5.75rem);
   }
 
   .section-divider {
@@ -280,16 +251,16 @@
   }
 
   .display-title {
-    font-size: clamp(3.1rem, 8.2vw, 7rem);
+    font-size: clamp(3rem, 7vw, 6rem);
     max-width: 12ch;
   }
 
   .display-title--compact {
-    font-size: clamp(2.8rem, 7vw, 5.4rem);
+    font-size: clamp(2.6rem, 6vw, 4.8rem);
   }
 
   .section-title {
-    font-size: clamp(2.35rem, 5vw, 4.35rem);
+    font-size: clamp(2.1rem, 4.4vw, 3.8rem);
     max-width: 12ch;
   }
 
@@ -304,38 +275,38 @@
   }
 
   .label-chip {
-    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em];
-    background: color-mix(in oklab, var(--page-accent-soft) 80%, white);
+    @apply inline-flex items-center text-xs font-semibold uppercase tracking-[0.16em];
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
     color: var(--page-accent-strong);
   }
 
   .button-primary,
   .button-secondary,
   .button-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border px-5 py-3 text-sm font-semibold transition-all duration-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border px-5 py-3 text-sm font-semibold transition-colors duration-200;
   }
 
   .button-primary {
     border-color: color-mix(in oklab, var(--page-accent) 42%, transparent);
-    background: linear-gradient(135deg, color-mix(in oklab, var(--page-accent) 88%, black 8%), color-mix(in oklab, var(--page-accent-strong) 84%, black 16%));
-    box-shadow: var(--shadow-edge);
+    background: color-mix(in oklab, var(--page-accent-strong) 92%, black 8%);
     color: white;
   }
 
   .button-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-soft);
+    background: color-mix(in oklab, var(--page-accent-strong) 82%, black 18%);
   }
 
   .button-secondary {
     border-color: color-mix(in oklab, var(--page-line) 98%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 90%, transparent);
+    background: transparent;
     color: var(--page-ink);
   }
 
   .button-secondary:hover,
   .button-ghost:hover {
-    background: color-mix(in oklab, var(--page-accent-soft) 65%, white);
+    background: color-mix(in oklab, var(--page-surface) 72%, white);
   }
 
   .button-ghost {
@@ -355,21 +326,20 @@
 
   .surface-panel,
   .surface-panel-strong {
-    @apply rounded-[1.75rem] border;
+    @apply rounded-[1.1rem] border;
     border-color: color-mix(in oklab, var(--page-line) 95%, transparent);
-    box-shadow: var(--shadow-edge);
   }
 
   .surface-panel {
-    background: linear-gradient(145deg, color-mix(in oklab, var(--page-surface) 90%, white), color-mix(in oklab, var(--page-accent-soft) 24%, var(--page-surface)));
+    background: color-mix(in oklab, var(--page-surface) 90%, white);
   }
 
   .surface-panel-strong {
-    background: linear-gradient(160deg, color-mix(in oklab, var(--page-surface-strong) 85%, white), color-mix(in oklab, var(--page-accent-soft) 60%, var(--page-surface-strong)));
+    background: color-mix(in oklab, var(--page-surface) 90%, white);
   }
 
   .hero-grid {
-    @apply grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-start;
+    @apply grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-start;
   }
 
   .hero-copy {
@@ -381,7 +351,7 @@
   }
 
   .hero-panel {
-    @apply flex flex-col gap-5 p-6 md:p-8;
+    @apply flex flex-col gap-5 p-6;
   }
 
   .hero-panel__title {
@@ -415,9 +385,8 @@
   }
 
   .trust-strip {
-    @apply flex flex-col gap-4 rounded-[1.75rem] border px-5 py-5 md:flex-row md:items-center md:justify-between md:px-7;
+    @apply flex flex-col gap-4 border-y py-4 md:flex-row md:items-center md:justify-between;
     border-color: color-mix(in oklab, var(--page-line) 95%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 78%, transparent);
   }
 
   .trust-strip__label {
@@ -431,7 +400,7 @@
   }
 
   .editorial-grid {
-    @apply grid gap-8 lg:grid-cols-[0.95fr_1.05fr];
+    @apply grid gap-10 lg:grid-cols-[0.95fr_1.05fr];
   }
 
   .stack-list {
@@ -439,9 +408,8 @@
   }
 
   .service-block {
-    @apply rounded-[1.6rem] border p-6 md:p-7;
+    @apply border-t pt-5;
     border-color: color-mix(in oklab, var(--page-line) 94%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 90%, white);
   }
 
   .service-block h3 {
@@ -453,39 +421,13 @@
     color: var(--page-muted);
   }
 
-  .flow-grid {
-    @apply grid gap-4 lg:grid-cols-4;
-  }
-
-  .flow-step {
-    @apply rounded-[1.6rem] border p-5 md:p-6;
-    border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: linear-gradient(180deg, color-mix(in oklab, var(--page-surface) 90%, white), transparent);
-  }
-
-  .flow-step__number {
-    @apply mb-4 text-xs font-semibold uppercase tracking-[0.18em];
-    color: var(--page-accent-strong);
-  }
-
-  .flow-step h3 {
-    @apply mb-3 text-[1.3rem];
-  }
-
-  .flow-step p {
-    @apply text-sm leading-7 md:text-base;
-    color: var(--page-muted);
-  }
-
   .featured-study-list {
-    @apply grid gap-6;
+    @apply grid gap-8;
   }
 
   .featured-study {
-    @apply grid gap-6 rounded-[2rem] border p-6 md:p-8 lg:grid-cols-[0.8fr_1.2fr];
+    @apply grid gap-6 border-t pt-6 lg:grid-cols-[0.55fr_1.45fr];
     border-color: color-mix(in oklab, var(--page-line) 94%, transparent);
-    background: linear-gradient(155deg, color-mix(in oklab, var(--page-surface) 84%, white), color-mix(in oklab, var(--page-accent-soft) 30%, var(--page-surface)));
-    box-shadow: var(--shadow-edge);
   }
 
   .featured-study__outcome {
@@ -503,10 +445,8 @@
   }
 
   .metric-pill {
-    @apply rounded-full border px-4 py-2 text-sm font-medium;
-    border-color: color-mix(in oklab, var(--page-line) 96%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 94%, transparent);
-    color: var(--page-ink);
+    @apply text-sm;
+    color: var(--page-muted);
   }
 
   .industry-list {
@@ -514,9 +454,8 @@
   }
 
   .industry-block {
-    @apply rounded-[1.6rem] border p-5 md:p-6;
+    @apply border-t pt-5;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 92%, white);
   }
 
   .industry-block h3 {
@@ -533,9 +472,8 @@
   }
 
   .testimonial-card {
-    @apply rounded-[1.6rem] border p-6;
+    @apply border-t pt-5;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 84%, white);
   }
 
   .testimonial-card p {
@@ -553,9 +491,8 @@
   }
 
   .founder-photo {
-    @apply overflow-hidden rounded-[2rem] border;
+    @apply overflow-hidden rounded-[1.1rem] border;
     border-color: color-mix(in oklab, var(--page-line) 94%, transparent);
-    box-shadow: var(--shadow-soft);
   }
 
   .founder-photo img {
@@ -563,10 +500,9 @@
   }
 
   .founder-note {
-    @apply flex flex-col gap-4 rounded-[2rem] border p-6 md:p-8;
+    @apply flex flex-col gap-4 rounded-[1.1rem] border p-6 md:p-7;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: linear-gradient(160deg, color-mix(in oklab, var(--page-surface-strong) 88%, white), color-mix(in oklab, var(--page-accent-soft) 46%, var(--page-surface-strong)));
-    box-shadow: var(--shadow-edge);
+    background: color-mix(in oklab, var(--page-surface) 88%, white);
   }
 
   .tool-grid {
@@ -574,9 +510,9 @@
   }
 
   .tool-card {
-    @apply flex h-full flex-col gap-4 rounded-[1.75rem] border p-6 md:p-7;
+    @apply flex h-full flex-col gap-4 rounded-[1.1rem] border p-6;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 90%, white);
+    background: transparent;
   }
 
   .tool-card h3 {
@@ -589,10 +525,9 @@
   }
 
   .cta-band {
-    @apply rounded-[2rem] border p-6 md:p-8 lg:p-10;
+    @apply rounded-[1.1rem] border p-6 md:p-8;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: linear-gradient(145deg, color-mix(in oklab, var(--page-accent-soft) 80%, white), color-mix(in oklab, var(--page-surface-strong) 92%, var(--page-accent-soft)));
-    box-shadow: var(--shadow-soft);
+    background: color-mix(in oklab, var(--page-surface) 86%, white);
   }
 
   .cta-band__grid {
@@ -613,10 +548,8 @@
   }
 
   .case-card {
-    @apply grid gap-5 rounded-[1.9rem] border p-6 md:p-8 lg:grid-cols-[0.9fr_1.1fr];
+    @apply grid gap-5 border-t pt-6 lg:grid-cols-[0.48fr_1.52fr];
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 88%, white);
-    box-shadow: var(--shadow-edge);
   }
 
   .case-card__meta {
@@ -637,7 +570,7 @@
   }
 
   .case-hero {
-    @apply grid gap-8 lg:grid-cols-[1.15fr_0.85fr];
+    @apply grid gap-8;
   }
 
   .case-sidebar {
@@ -648,10 +581,13 @@
     @apply grid gap-4;
   }
 
+  .case-fact-grid {
+    @apply grid gap-3 md:grid-cols-3;
+  }
+
   .fact-item {
-    @apply rounded-[1.4rem] border px-5 py-4;
+    @apply border-t pt-3;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 90%, white);
   }
 
   .fact-item span {
@@ -673,9 +609,8 @@
   }
 
   .case-body section {
-    @apply grid gap-4 rounded-[1.7rem] border p-6 md:p-7;
+    @apply grid gap-4 border-t py-7;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 90%, white);
   }
 
   .case-body h2 {
@@ -693,41 +628,9 @@
     list-style: disc;
   }
 
-  .case-sticky {
-    @apply flex flex-col gap-4;
-  }
-
-  @media (min-width: 1024px) {
-    .case-content {
-      grid-template-columns: minmax(0, 1fr) minmax(19rem, 22rem);
-      align-items: start;
-    }
-
-    .case-sticky {
-      position: sticky;
-      top: 7.5rem;
-    }
-  }
-
   .footer-shell {
-    @apply relative overflow-hidden border-t;
+    @apply border-t;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 58%, transparent);
-  }
-
-  .footer-shell::after {
-    content: 'controlthrive';
-    position: absolute;
-    bottom: -7rem;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: var(--font-display);
-    font-size: clamp(7rem, 28vw, 18rem);
-    line-height: 1;
-    letter-spacing: -0.08em;
-    color: color-mix(in oklab, var(--page-line) 42%, transparent);
-    white-space: nowrap;
-    pointer-events: none;
   }
 
   .footer-grid {
@@ -765,27 +668,25 @@
     @apply inline-flex h-10 w-10 items-center justify-center rounded-full border;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
     color: var(--page-muted);
-    background: color-mix(in oklab, var(--page-surface) 90%, transparent);
   }
 
   .social-links a:hover {
     color: var(--page-ink);
-    background: color-mix(in oklab, var(--page-accent-soft) 55%, white);
   }
 
   .theme-toggle {
-    @apply inline-flex h-11 w-11 items-center justify-center rounded-2xl border transition-colors duration-200;
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-xl border transition-colors duration-200;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 92%, transparent);
+    background: transparent;
     color: var(--page-ink);
   }
 
   .theme-toggle:hover {
-    background: color-mix(in oklab, var(--page-accent-soft) 55%, white);
+    background: color-mix(in oklab, var(--page-surface) 72%, white);
   }
 
   .page-stack {
-    @apply grid gap-10;
+    @apply grid gap-8;
   }
 
   .micro-label {
@@ -801,10 +702,5 @@
 
   .display-title {
     max-width: 9ch;
-  }
-
-  .footer-shell::after {
-    bottom: -3.5rem;
-    font-size: 7rem;
   }
 }

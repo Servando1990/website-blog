@@ -45,43 +45,23 @@ const relatedStudies = publishedCaseStudies.filter((study) => study.slug !== cas
             <span class="eyebrow">{caseStudy.industry}</span>
             <h1 class="display-title display-title--compact">{caseStudy.title}</h1>
             <p class="lede">{caseStudy.summary}</p>
-            <div class="metric-list">
-              {caseStudy.tags.map((tag) => (
-                <span class="metric-pill">{tag}</span>
+            <div class="case-fact-grid">
+              {caseStudy.facts.map((fact) => (
+                <div class="fact-item">
+                  <span>{fact.label}</span>
+                  <strong>{fact.value}</strong>
+                </div>
               ))}
             </div>
-            <div class="metric-list">
-              {caseStudy.metrics.map((metric) => (
-                <span class="metric-pill">
-                  {metric.value} {metric.label}
-                </span>
-              ))}
-            </div>
+            <p class="supporting-copy max-w-[42rem]">
+              {caseStudy.featuredOutcome}. {caseStudy.tags.join(' / ')}.
+            </p>
+            {caseStudy.proofLink ? (
+              <a class="text-link" href={caseStudy.proofLink.href} target="_blank" rel="noopener noreferrer">
+                {caseStudy.proofLink.label}
+              </a>
+            ) : null}
           </div>
-
-          <aside class="case-sidebar">
-            <div class="surface-panel hero-panel">
-              <span class="label-chip">At a glance</span>
-              <div class="fact-list">
-                {caseStudy.facts.map((fact) => (
-                  <div class="fact-item">
-                    <span>{fact.label}</span>
-                    <strong>{fact.value}</strong>
-                  </div>
-                ))}
-              </div>
-              {caseStudy.proofLink ? (
-                <a
-                  class="button-secondary"
-                  href={caseStudy.proofLink.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {caseStudy.proofLink.label}
-                </a>
-              ) : null}
-            </div>
-          </aside>
         </div>
       </div>
     </section>
@@ -135,33 +115,29 @@ const relatedStudies = publishedCaseStudies.filter((study) => study.slug !== cas
             <p>{caseStudy.takeaway}</p>
           </section>
         </article>
+      </div>
+    </section>
 
-        <aside class="case-sticky">
-          <div class="surface-panel hero-panel">
-            <span class="label-chip">Why it matters</span>
-            <p class="hero-panel__body">
-              ControlThrive is most useful when the software has to respect business judgment,
-              operational constraints, and adoption realities at the same time.
-            </p>
-            <ul class="trust-list">
-              <li>We frame the system around how the team already makes decisions.</li>
-              <li>We keep the workflow explainable enough that people can trust it.</li>
-              <li>We stay close until the product works in the actual business context.</li>
-            </ul>
-          </div>
+    <section class="section-frame section-divider">
+      <div class="site-container">
+        <div class="cta-band">
+          <div class="cta-band__grid">
+            <div class="page-stack">
+              <span class="eyebrow">Next step</span>
+              <h2 class="section-title">Have a similar workflow in mind?</h2>
+              <p class="supporting-copy max-w-[36rem]">
+                Bring the process, bottleneck, or decision you want to improve. We can sort out
+                whether it needs a workshop, a lighter tool, or a full build.
+              </p>
+            </div>
 
-          <div class="surface-panel hero-panel">
-            <span class="label-chip">Next step</span>
-            <h2 class="hero-panel__title">Have a similar workflow in mind?</h2>
-            <p class="hero-panel__body">
-              Bring the process, bottleneck, or decision you want to improve. We can sort out
-              whether it needs a workshop, a lighter tool, or a full build.
-            </p>
-            <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-              Book a founder call
-            </a>
+            <div class="page-stack lg:items-end">
+              <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+                Book a founder call
+              </a>
+            </div>
           </div>
-        </aside>
+        </div>
       </div>
     </section>
 

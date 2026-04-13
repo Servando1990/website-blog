@@ -36,39 +36,18 @@ import { publishedCaseStudies } from '../lib/caseStudies';
             <div class="case-card__meta">
               <span class="label-chip">{study.industry}</span>
               <p class="featured-study__outcome">{study.featuredOutcome}</p>
-              <div class="metric-list">
-                {study.metrics.map((metric) => (
-                  <span class="metric-pill">
-                    {metric.value} {metric.label}
-                  </span>
-                ))}
-              </div>
             </div>
 
             <div class="case-card__content">
               <h2 class="text-[2rem] md:text-[2.55rem]">{study.title}</h2>
               <p class="case-card__summary">{study.cardSummary}</p>
 
-              <div class="grid gap-3 md:grid-cols-3">
-                {study.facts.map((fact) => (
-                  <div class="fact-item">
-                    <span>{fact.label}</span>
-                    <strong>{fact.value}</strong>
-                  </div>
-                ))}
-              </div>
-
               <div class="hero-actions">
                 <a class="button-primary" href={`/case-studies/${study.slug}`}>
                   Read the case study
                 </a>
                 {study.proofLink ? (
-                  <a
-                    class="button-secondary"
-                    href={study.proofLink.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a class="text-link" href={study.proofLink.href} target="_blank" rel="noopener noreferrer">
                     {study.proofLink.label}
                   </a>
                 ) : null}

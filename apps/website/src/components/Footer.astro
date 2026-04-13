@@ -1,5 +1,5 @@
 ---
-import { bookingUrl, navigation, partnerNetwork, serviceAreas } from '../lib/siteContent';
+import { bookingUrl, navigation, partnerNetwork } from '../lib/siteContent';
 ---
 
 <footer class="footer-shell">
@@ -21,18 +21,11 @@ import { bookingUrl, navigation, partnerNetwork, serviceAreas } from '../lib/sit
         </div>
       </div>
 
-      <div class="grid gap-8 md:grid-cols-3">
+      <div class="grid gap-8 md:grid-cols-2">
         <div class="footer-link-list">
           <span class="micro-label">Navigate</span>
           {navigation.map((item) => (
             <a href={item.href}>{item.label}</a>
-          ))}
-        </div>
-
-        <div class="footer-link-list">
-          <span class="micro-label">What We Help With</span>
-          {serviceAreas.map((service) => (
-            <span>{service.title}</span>
           ))}
         </div>
 

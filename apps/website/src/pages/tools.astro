@@ -31,19 +31,11 @@ import { bookingUrl, tools } from '../lib/siteContent';
       <div class="site-container tool-grid">
         {tools.map((tool) => (
           <article class="tool-card">
-            <span class="label-chip">Self-serve tool</span>
+            <span class="label-chip">Tool</span>
             <h2>{tool.name}</h2>
             <p>{tool.summary}</p>
-            <div class="grid gap-3">
-              <div class="fact-item">
-                <span>Best for</span>
-                <strong>{tool.audience}</strong>
-              </div>
-              <div class="fact-item">
-                <span>What you get</span>
-                <strong>{tool.outcome}</strong>
-              </div>
-            </div>
+            <p>{tool.audience}</p>
+            <p>{tool.outcome}</p>
             <div class="hero-actions">
               <a class="button-primary" href={tool.href} target="_blank" rel="noopener noreferrer">
                 {tool.ctaLabel}
