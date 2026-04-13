@@ -20,13 +20,13 @@
     --secondary-foreground: 0 0% 7%;
     --muted: 220 14% 96%;
     --muted-foreground: 220 9% 46%;
-    --accent: 95 24% 94%;
+    --accent: 220 14% 96%;
     --accent-foreground: 0 0% 7%;
     --destructive: 5 72% 52%;
     --destructive-foreground: 0 0% 100%;
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 89 31% 55%;
+    --ring: 0 0% 7%;
     --radius: 1.25rem;
 
     --page-bg: #ffffff;
@@ -36,13 +36,13 @@
     --page-ink: #111111;
     --page-muted: #6b7280;
     --page-line: #e5e7eb;
-    --page-accent: #84b067;
-    --page-accent-strong: #5f7f4b;
-    --page-accent-soft: rgba(132, 176, 103, 0.1);
-    --page-highlight: #eef5e8;
-    --button-primary-bg: #111111;
-    --button-primary-hover: #232323;
-    --button-primary-text: #ffffff;
+    --page-accent: #9ca3af;
+    --page-accent-strong: #111111;
+    --page-accent-soft: rgba(17, 17, 17, 0.06);
+    --page-highlight: rgba(17, 17, 17, 0.08);
+    --button-primary-bg: #84b067;
+    --button-primary-hover: #769e5c;
+    --button-primary-text: #111111;
     --shadow-color: rgb(0 0 0 / 0.045);
     --shadow-soft: 0 18px 40px rgba(17, 17, 17, 0.06);
     --shadow-edge: 0 10px 24px rgba(17, 17, 17, 0.04);
@@ -95,9 +95,9 @@
     --page-ink: #141414;
     --page-muted: #6f6a63;
     --page-line: #e7e2db;
-    --page-accent: #84b067;
-    --page-accent-strong: #617d50;
-    --page-accent-soft: rgba(132, 176, 103, 0.1);
+    --page-accent: #a09b94;
+    --page-accent-strong: #141414;
+    --page-accent-soft: rgba(20, 20, 20, 0.06);
   }
 
   :root[data-palette='olive'] {
@@ -110,9 +110,9 @@
     --page-ink: #151816;
     --page-muted: #687066;
     --page-line: #dfe5de;
-    --page-accent: #84b067;
-    --page-accent-strong: #58754a;
-    --page-accent-soft: rgba(132, 176, 103, 0.1);
+    --page-accent: #96a093;
+    --page-accent-strong: #151816;
+    --page-accent-soft: rgba(21, 24, 22, 0.06);
   }
 
   .dark {
@@ -128,13 +128,13 @@
     --secondary-foreground: 0 0% 96%;
     --muted: 222 18% 15%;
     --muted-foreground: 220 9% 67%;
-    --accent: 96 18% 18%;
+    --accent: 222 18% 15%;
     --accent-foreground: 0 0% 96%;
     --destructive: 6 74% 58%;
     --destructive-foreground: 0 0% 96%;
     --border: 222 17% 20%;
     --input: 222 17% 20%;
-    --ring: 89 31% 55%;
+    --ring: 0 0% 96%;
 
     --page-bg: #0f1117;
     --page-bg-strong: #151821;
@@ -143,12 +143,12 @@
     --page-ink: #f3f4f6;
     --page-muted: #9ca3af;
     --page-line: #2b303a;
-    --page-accent: #9cbc87;
-    --page-accent-strong: #d5e5c8;
-    --page-accent-soft: rgba(132, 176, 103, 0.14);
-    --page-highlight: rgba(132, 176, 103, 0.16);
-    --button-primary-bg: #f3f4f6;
-    --button-primary-hover: #ffffff;
+    --page-accent: #6b7280;
+    --page-accent-strong: #f3f4f6;
+    --page-accent-soft: rgba(243, 244, 246, 0.1);
+    --page-highlight: rgba(243, 244, 246, 0.14);
+    --button-primary-bg: #84b067;
+    --button-primary-hover: #769e5c;
     --button-primary-text: #111111;
     --shadow-soft: 0 24px 70px rgba(0, 0, 0, 0.28);
     --shadow-edge: 0 14px 40px rgba(0, 0, 0, 0.2);
@@ -192,15 +192,15 @@
   }
 
   .dark[data-palette='stone'] {
-    --page-accent: #9cbc87;
-    --page-accent-strong: #d9e5cf;
-    --page-accent-soft: rgba(132, 176, 103, 0.14);
+    --page-accent: #6f746e;
+    --page-accent-strong: #f3f4f6;
+    --page-accent-soft: rgba(243, 244, 246, 0.1);
   }
 
   .dark[data-palette='olive'] {
-    --page-accent: #9cbc87;
-    --page-accent-strong: #d7e6cb;
-    --page-accent-soft: rgba(132, 176, 103, 0.14);
+    --page-accent: #667067;
+    --page-accent-strong: #f3f4f6;
+    --page-accent-soft: rgba(243, 244, 246, 0.1);
   }
 
   * {
@@ -435,13 +435,14 @@
   }
 
   .button-primary {
-    border-color: color-mix(in oklab, var(--page-ink) 18%, var(--page-line));
+    border-color: color-mix(in oklab, var(--button-primary-bg) 70%, var(--page-line));
     background: var(--button-primary-bg);
     box-shadow: var(--elevation-1);
     color: var(--button-primary-text);
   }
 
   .button-primary:hover {
+    border-color: color-mix(in oklab, var(--button-primary-hover) 78%, var(--page-line));
     background: var(--button-primary-hover);
     box-shadow: var(--elevation-2);
     transform: translateY(-1px);
