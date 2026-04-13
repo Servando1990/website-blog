@@ -40,9 +40,10 @@
     --page-accent-strong: #111111;
     --page-accent-soft: rgba(17, 17, 17, 0.06);
     --page-highlight: rgba(17, 17, 17, 0.08);
-    --button-primary-bg: #84b067;
-    --button-primary-hover: #769e5c;
-    --button-primary-text: #111111;
+    --button-primary-bg: #111111;
+    --button-primary-hover: #84b067;
+    --button-primary-text: #ffffff;
+    --button-primary-hover-text: #111111;
     --shadow-color: rgb(0 0 0 / 0.045);
     --shadow-soft: 0 18px 40px rgba(17, 17, 17, 0.06);
     --shadow-edge: 0 10px 24px rgba(17, 17, 17, 0.04);
@@ -147,9 +148,10 @@
     --page-accent-strong: #f3f4f6;
     --page-accent-soft: rgba(243, 244, 246, 0.1);
     --page-highlight: rgba(243, 244, 246, 0.14);
-    --button-primary-bg: #84b067;
-    --button-primary-hover: #769e5c;
+    --button-primary-bg: #f3f4f6;
+    --button-primary-hover: #84b067;
     --button-primary-text: #111111;
+    --button-primary-hover-text: #111111;
     --shadow-soft: 0 24px 70px rgba(0, 0, 0, 0.28);
     --shadow-edge: 0 14px 40px rgba(0, 0, 0, 0.2);
 
@@ -441,10 +443,12 @@
     color: var(--button-primary-text);
   }
 
-  .button-primary:hover {
+  .button-primary:hover,
+  .button-primary:focus-visible {
     border-color: color-mix(in oklab, var(--button-primary-hover) 78%, var(--page-line));
     background: var(--button-primary-hover);
     box-shadow: var(--elevation-2);
+    color: var(--button-primary-hover-text);
     transform: translateY(-1px);
   }
 
