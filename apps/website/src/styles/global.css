@@ -30,28 +30,28 @@
     --radius: 1.25rem;
 
     --page-bg: #ffffff;
-    --page-bg-strong: #f9fafb;
-    --page-surface: rgba(255, 255, 255, 0.96);
+    --page-bg-strong: #ffffff;
+    --page-surface: #ffffff;
     --page-surface-strong: #ffffff;
     --page-ink: #111111;
     --page-muted: #6b7280;
     --page-line: #e5e7eb;
     --page-accent: #4f46e5;
     --page-accent-strong: #4338ca;
-    --page-accent-soft: #eef2ff;
-    --page-highlight: #c7d2fe;
-    --shadow-color: rgb(0 0 0 / 0.06);
+    --page-accent-soft: rgba(79, 70, 229, 0.08);
+    --page-highlight: #e0e7ff;
+    --shadow-color: rgb(0 0 0 / 0.045);
     --shadow-soft: 0 18px 40px rgba(17, 17, 17, 0.06);
     --shadow-edge: 0 10px 24px rgba(17, 17, 17, 0.04);
 
     --dm-hi-base: rgba(255, 255, 255, 0.02);
-    --dm-hi-mid: rgba(255, 255, 255, 0.05);
-    --dm-hi-high: rgba(255, 255, 255, 0.08);
-    --dm-hi-peak: rgba(255, 255, 255, 0.11);
+    --dm-hi-mid: rgba(255, 255, 255, 0.04);
+    --dm-hi-high: rgba(255, 255, 255, 0.06);
+    --dm-hi-peak: rgba(255, 255, 255, 0.08);
     --dm-ring-base: rgba(255, 255, 255, 0.02);
-    --dm-ring-mid: rgba(255, 255, 255, 0.04);
-    --dm-ring-high: rgba(255, 255, 255, 0.06);
-    --dm-drop: rgba(0, 0, 0, 0.18);
+    --dm-ring-mid: rgba(255, 255, 255, 0.03);
+    --dm-ring-high: rgba(255, 255, 255, 0.05);
+    --dm-drop: rgba(0, 0, 0, 0.15);
 
     --elevation-0:
       0 0 0 1px var(--shadow-color);
@@ -273,8 +273,8 @@
     top: 0;
     z-index: 50;
     border-bottom: 1px solid color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-bg) 96%, white);
-    box-shadow: var(--elevation-1);
+    background: color-mix(in oklab, var(--page-bg) 92%, white);
+    box-shadow: var(--elevation-0);
   }
 
   .site-nav {
@@ -289,7 +289,7 @@
     @apply inline-flex h-11 w-11 items-center justify-center rounded-xl border;
     border-color: color-mix(in oklab, var(--page-accent) 40%, var(--page-line));
     background: transparent;
-    box-shadow: var(--elevation-1);
+    box-shadow: var(--elevation-0);
     color: var(--page-accent-strong);
     font-family: var(--font-display);
     font-size: 1.15rem;
@@ -335,7 +335,7 @@
     @apply inline-flex h-11 w-11 items-center justify-center rounded-xl border md:hidden;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
     background: color-mix(in oklab, var(--page-surface) 88%, transparent);
-    box-shadow: var(--elevation-2);
+    box-shadow: var(--elevation-1);
     color: var(--page-ink);
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
   }
@@ -344,7 +344,7 @@
     @apply border-t md:hidden;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
     background: color-mix(in oklab, var(--page-surface) 92%, transparent);
-    box-shadow: var(--elevation-3);
+    box-shadow: var(--elevation-2);
   }
 
   .mobile-menu__inner {
@@ -365,10 +365,10 @@
   }
 
   .hero-shell {
-    @apply grid gap-8 rounded-[1.5rem] border px-6 py-8 md:px-8 md:py-10;
-    border-color: color-mix(in oklab, var(--page-line) 94%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 92%, white);
-    box-shadow: var(--elevation-4);
+    @apply grid gap-8 px-0 py-0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
   }
 
   .eyebrow {
@@ -431,20 +431,20 @@
   .button-primary {
     border-color: color-mix(in oklab, var(--page-accent) 42%, transparent);
     background: var(--page-accent);
-    box-shadow: var(--elevation-3);
+    box-shadow: var(--elevation-2);
     color: white;
   }
 
   .button-primary:hover {
     background: var(--page-accent-strong);
-    box-shadow: var(--elevation-4);
+    box-shadow: var(--elevation-3);
     transform: translateY(-1px);
   }
 
   .button-secondary {
     border-color: color-mix(in oklab, var(--page-line) 98%, transparent);
     background: transparent;
-    box-shadow: var(--elevation-1);
+    box-shadow: var(--elevation-0);
     color: var(--page-ink);
   }
 
@@ -454,7 +454,7 @@
   }
 
   .button-secondary:hover {
-    box-shadow: var(--elevation-2);
+    box-shadow: var(--elevation-1);
   }
 
   .button-ghost {
@@ -476,7 +476,7 @@
   .surface-panel-strong {
     @apply rounded-[1.1rem] border;
     border-color: color-mix(in oklab, var(--page-line) 95%, transparent);
-    box-shadow: var(--elevation-3);
+    box-shadow: var(--elevation-1);
   }
 
   .surface-panel {
@@ -583,14 +583,14 @@
   .featured-study {
     @apply grid gap-6 rounded-[1.25rem] border p-6 lg:grid-cols-[0.55fr_1.45fr] lg:p-7;
     border-color: color-mix(in oklab, var(--page-line) 94%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 92%, white);
-    box-shadow: var(--elevation-3);
+    background: var(--page-surface);
+    box-shadow: var(--elevation-1);
     transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   }
 
   .featured-study:hover {
     border-color: color-mix(in oklab, var(--page-accent) 18%, var(--page-line));
-    box-shadow: var(--elevation-4);
+    box-shadow: var(--elevation-2);
     transform: translateY(-1px);
   }
 
@@ -640,15 +640,14 @@
   .testimonial-card {
     @apply flex h-full flex-col gap-4 rounded-[1.2rem] border p-5;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 92%, white);
-    box-shadow: var(--elevation-2);
+    background: var(--page-surface);
+    box-shadow: var(--elevation-1);
     transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   }
 
   .testimonial-card:hover {
     border-color: color-mix(in oklab, var(--page-accent) 18%, var(--page-line));
-    box-shadow: var(--elevation-3);
-    transform: translateY(-1px);
+    box-shadow: var(--elevation-2);
   }
 
   .testimonial-card__quote {
@@ -678,7 +677,7 @@
   .founder-photo {
     @apply overflow-hidden rounded-[1.1rem] border;
     border-color: color-mix(in oklab, var(--page-line) 94%, transparent);
-    box-shadow: var(--elevation-4);
+    box-shadow: var(--elevation-2);
   }
 
   .founder-photo img {
@@ -688,8 +687,8 @@
   .founder-note {
     @apply flex flex-col gap-4 rounded-[1.25rem] border p-6 md:p-7;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 92%, white);
-    box-shadow: var(--elevation-4);
+    background: var(--page-surface);
+    box-shadow: var(--elevation-2);
   }
 
   .tool-grid {
@@ -699,14 +698,14 @@
   .tool-card {
     @apply flex h-full flex-col gap-4 rounded-[1.2rem] border p-5;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 92%, white);
-    box-shadow: var(--elevation-3);
+    background: var(--page-surface);
+    box-shadow: var(--elevation-1);
     transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   }
 
   .tool-card:hover {
     border-color: color-mix(in oklab, var(--page-accent) 18%, var(--page-line));
-    box-shadow: var(--elevation-4);
+    box-shadow: var(--elevation-2);
     transform: translateY(-1px);
   }
 
@@ -723,8 +722,8 @@
   .cta-band {
     @apply rounded-[1.25rem] border p-6 md:p-8;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 92%, white);
-    box-shadow: var(--elevation-3);
+    background: var(--page-surface);
+    box-shadow: var(--elevation-1);
   }
 
   .cta-band__grid {
@@ -747,14 +746,14 @@
   .case-card {
     @apply grid gap-5 rounded-[1.25rem] border p-6 lg:grid-cols-[0.48fr_1.52fr] lg:p-7;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    background: color-mix(in oklab, var(--page-surface) 92%, white);
-    box-shadow: var(--elevation-3);
+    background: var(--page-surface);
+    box-shadow: var(--elevation-1);
     transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   }
 
   .case-card:hover {
     border-color: color-mix(in oklab, var(--page-accent) 18%, var(--page-line));
-    box-shadow: var(--elevation-4);
+    box-shadow: var(--elevation-2);
     transform: translateY(-1px);
   }
 
@@ -876,13 +875,13 @@
   .social-links a {
     @apply inline-flex h-10 w-10 items-center justify-center rounded-full border;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
-    box-shadow: var(--elevation-1);
+    box-shadow: var(--elevation-0);
     color: var(--page-muted);
     transition: color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   }
 
   .social-links a:hover {
-    box-shadow: var(--elevation-2);
+    box-shadow: var(--elevation-1);
     color: var(--page-ink);
   }
 
@@ -890,14 +889,14 @@
     @apply inline-flex h-11 w-11 items-center justify-center rounded-xl border transition-colors duration-200;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
     background: transparent;
-    box-shadow: var(--elevation-2);
+    box-shadow: var(--elevation-1);
     color: var(--page-ink);
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
   }
 
   .theme-toggle:hover {
     background: color-mix(in oklab, var(--page-surface) 72%, white);
-    box-shadow: var(--elevation-3);
+    box-shadow: var(--elevation-2);
   }
 
   .shadow-elevation-0 {
