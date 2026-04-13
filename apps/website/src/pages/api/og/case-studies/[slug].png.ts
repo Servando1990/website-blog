@@ -69,7 +69,7 @@ export const GET: APIRoute = async ({ params }) => {
                             justifyContent: 'center',
                             fontSize: '26px',
                             fontWeight: '500',
-                            color: '#4F46E5',
+                            color: '#111111',
                             letterSpacing: '-0.03em',
                           },
                           children: 'CT',

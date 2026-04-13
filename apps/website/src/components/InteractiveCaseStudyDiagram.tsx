@@ -29,29 +29,29 @@ const toneStyles: Record<
   }
 > = {
   source: {
-    activeBorder: 'border-indigo-200 bg-indigo-50/80 dark:border-indigo-500/40 dark:bg-indigo-500/10',
-    activeDot: 'bg-indigo-600 dark:bg-indigo-400',
-    badge: 'bg-indigo-50 text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-200',
+    activeBorder: 'border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/70',
+    activeDot: 'bg-slate-900 dark:bg-slate-100',
+    badge: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200',
   },
   processing: {
-    activeBorder: 'border-indigo-200 bg-indigo-50/80 dark:border-indigo-500/40 dark:bg-indigo-500/10',
-    activeDot: 'bg-indigo-600 dark:bg-indigo-400',
-    badge: 'bg-indigo-50 text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-200',
+    activeBorder: 'border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/70',
+    activeDot: 'bg-slate-900 dark:bg-slate-100',
+    badge: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200',
   },
   model: {
-    activeBorder: 'border-indigo-200 bg-indigo-50/80 dark:border-indigo-500/40 dark:bg-indigo-500/10',
-    activeDot: 'bg-indigo-600 dark:bg-indigo-400',
-    badge: 'bg-indigo-50 text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-200',
+    activeBorder: 'border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/70',
+    activeDot: 'bg-slate-900 dark:bg-slate-100',
+    badge: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200',
   },
   decision: {
-    activeBorder: 'border-indigo-200 bg-indigo-50/80 dark:border-indigo-500/40 dark:bg-indigo-500/10',
-    activeDot: 'bg-indigo-600 dark:bg-indigo-400',
-    badge: 'bg-indigo-50 text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-200',
+    activeBorder: 'border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/70',
+    activeDot: 'bg-slate-900 dark:bg-slate-100',
+    badge: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200',
   },
   outcome: {
-    activeBorder: 'border-indigo-200 bg-indigo-50/80 dark:border-indigo-500/40 dark:bg-indigo-500/10',
-    activeDot: 'bg-indigo-600 dark:bg-indigo-400',
-    badge: 'bg-indigo-50 text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-200',
+    activeBorder: 'border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/70',
+    activeDot: 'bg-slate-900 dark:bg-slate-100',
+    badge: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200',
   },
 };
 
