@@ -29,29 +29,29 @@ const toneStyles: Record<
   }
 > = {
   source: {
-    activeBorder: 'border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/70',
-    activeDot: 'bg-slate-900 dark:bg-slate-100',
-    badge: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200',
+    activeBorder: 'border-[#c6d9b9] bg-[#f5faf1] dark:border-[#84b067]/35 dark:bg-[#84b067]/10',
+    activeDot: 'bg-[#84b067] dark:bg-[#9cbc87]',
+    badge: 'bg-[#f1f7ec] text-[#5f7f4b] dark:bg-[#84b067]/12 dark:text-[#d7e6cb]',
   },
   processing: {
-    activeBorder: 'border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/70',
-    activeDot: 'bg-slate-900 dark:bg-slate-100',
-    badge: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200',
+    activeBorder: 'border-[#c6d9b9] bg-[#f5faf1] dark:border-[#84b067]/35 dark:bg-[#84b067]/10',
+    activeDot: 'bg-[#84b067] dark:bg-[#9cbc87]',
+    badge: 'bg-[#f1f7ec] text-[#5f7f4b] dark:bg-[#84b067]/12 dark:text-[#d7e6cb]',
   },
   model: {
-    activeBorder: 'border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/70',
-    activeDot: 'bg-slate-900 dark:bg-slate-100',
-    badge: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200',
+    activeBorder: 'border-[#c6d9b9] bg-[#f5faf1] dark:border-[#84b067]/35 dark:bg-[#84b067]/10',
+    activeDot: 'bg-[#84b067] dark:bg-[#9cbc87]',
+    badge: 'bg-[#f1f7ec] text-[#5f7f4b] dark:bg-[#84b067]/12 dark:text-[#d7e6cb]',
   },
   decision: {
-    activeBorder: 'border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/70',
-    activeDot: 'bg-slate-900 dark:bg-slate-100',
-    badge: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200',
+    activeBorder: 'border-[#c6d9b9] bg-[#f5faf1] dark:border-[#84b067]/35 dark:bg-[#84b067]/10',
+    activeDot: 'bg-[#84b067] dark:bg-[#9cbc87]',
+    badge: 'bg-[#f1f7ec] text-[#5f7f4b] dark:bg-[#84b067]/12 dark:text-[#d7e6cb]',
   },
   outcome: {
-    activeBorder: 'border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/70',
-    activeDot: 'bg-slate-900 dark:bg-slate-100',
-    badge: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200',
+    activeBorder: 'border-[#c6d9b9] bg-[#f5faf1] dark:border-[#84b067]/35 dark:bg-[#84b067]/10',
+    activeDot: 'bg-[#84b067] dark:bg-[#9cbc87]',
+    badge: 'bg-[#f1f7ec] text-[#5f7f4b] dark:bg-[#84b067]/12 dark:text-[#d7e6cb]',
   },
 };
 
