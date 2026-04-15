@@ -499,7 +499,7 @@
   }
 
   .hero-grid {
-    @apply grid gap-8 lg:grid-cols-[minmax(0,1.12fr)_minmax(20rem,0.88fr)] lg:items-center;
+    @apply grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,1fr)] lg:items-center;
   }
 
   .hero-grid .hero-copy--wide {
@@ -539,22 +539,22 @@
     --hero-signal-color-b-rgb: 214 170 98;
     --hero-signal-color-c-rgb: 111 139 170;
     @apply relative w-full;
-    min-height: clamp(21rem, 40vw, 31rem);
+    min-height: clamp(26rem, 49vw, 38rem);
     pointer-events: none;
     isolation: isolate;
   }
 
   .hero-signal__art {
     @apply relative z-[2] flex h-full w-full flex-col justify-center;
-    min-height: clamp(21rem, 40vw, 31rem);
-    padding-block: clamp(1.25rem, 3vw, 2rem);
+    min-height: clamp(26rem, 49vw, 38rem);
+    padding-block: clamp(0.25rem, 1vw, 1rem);
     font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
     font-size: var(--hero-signal-font-size, 13px);
     letter-spacing: -0.012em;
     line-height: var(--hero-signal-line-height, 16px);
     mask-image:
-      radial-gradient(circle at center, black 0%, black 60%, transparent 88%),
-      linear-gradient(180deg, transparent 0%, black 8%, black 92%, transparent 100%);
+      radial-gradient(circle at center, black 0%, black 82%, transparent 100%),
+      linear-gradient(180deg, transparent 0%, black 2%, black 98%, transparent 100%);
   }
 
   .hero-signal__row {
@@ -565,7 +565,7 @@
 
   .hero-signal__glyph {
     display: inline-block;
-    min-width: 0.62ch;
+    min-width: 0.76ch;
     opacity: 0.88;
     transition: color 0.24s ease, opacity 0.24s ease;
     will-change: color, opacity;
@@ -595,8 +595,8 @@
     position: absolute;
     inset: auto;
     border-radius: 999px;
-    filter: blur(clamp(26px, 7vw, 72px));
-    opacity: 0.4;
+    filter: blur(clamp(34px, 9vw, 96px));
+    opacity: 0.55;
     transform-origin: center;
     will-change: transform, opacity;
   }
@@ -604,28 +604,28 @@
   .hero-signal__wash--one {
     left: 4%;
     top: 11%;
-    height: clamp(10rem, 26vw, 16rem);
-    width: clamp(10rem, 24vw, 15rem);
+    height: clamp(13rem, 31vw, 20rem);
+    width: clamp(13rem, 29vw, 19rem);
     background: radial-gradient(circle, rgb(var(--hero-signal-color-a-rgb) / 0.28) 0%, transparent 72%);
-    animation: hero-signal-drift-a 18s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    animation: hero-signal-drift-a 14s cubic-bezier(0.22, 1, 0.36, 1) infinite;
   }
 
   .hero-signal__wash--two {
     right: 6%;
     top: 8%;
-    height: clamp(9rem, 23vw, 14rem);
-    width: clamp(9rem, 22vw, 13rem);
+    height: clamp(12rem, 28vw, 18rem);
+    width: clamp(12rem, 27vw, 17rem);
     background: radial-gradient(circle, rgb(var(--hero-signal-color-b-rgb) / 0.26) 0%, transparent 72%);
-    animation: hero-signal-drift-b 22s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    animation: hero-signal-drift-b 17s cubic-bezier(0.22, 1, 0.36, 1) infinite;
   }
 
   .hero-signal__wash--three {
     bottom: 6%;
     left: 28%;
-    height: clamp(11rem, 28vw, 17rem);
-    width: clamp(11rem, 27vw, 16rem);
+    height: clamp(14rem, 33vw, 21rem);
+    width: clamp(14rem, 32vw, 20rem);
     background: radial-gradient(circle, rgb(var(--hero-signal-color-c-rgb) / 0.24) 0%, transparent 72%);
-    animation: hero-signal-drift-c 20s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    animation: hero-signal-drift-c 15s cubic-bezier(0.22, 1, 0.36, 1) infinite;
   }
 
   .dark .hero-signal {
@@ -647,7 +647,7 @@
     }
 
     50% {
-      transform: translate3d(1.6rem, -1rem, 0) scale(1.12);
+      transform: translate3d(2.3rem, -1.5rem, 0) scale(1.18);
     }
   }
 
@@ -658,7 +658,7 @@
     }
 
     50% {
-      transform: translate3d(-1.3rem, 1rem, 0) scale(1.18);
+      transform: translate3d(-2rem, 1.4rem, 0) scale(1.24);
     }
   }
 
@@ -669,7 +669,7 @@
     }
 
     50% {
-      transform: translate3d(1rem, 0.8rem, 0) scale(1.16);
+      transform: translate3d(1.8rem, 1.3rem, 0) scale(1.22);
     }
   }
 
@@ -710,11 +710,11 @@
 
   @media (max-width: 1023px) {
     .hero-signal {
-      min-height: clamp(18rem, 60vw, 24rem);
+      min-height: clamp(22rem, 76vw, 31rem);
     }
 
     .hero-signal__art {
-      min-height: clamp(18rem, 60vw, 24rem);
+      min-height: clamp(22rem, 76vw, 31rem);
     }
   }
 

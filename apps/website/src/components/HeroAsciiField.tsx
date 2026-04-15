@@ -133,13 +133,13 @@ function createFallbackRows(rowCount: number, columnCount: number): string[] {
 }
 
 function mountAsciiField(host: HTMLDivElement, options: { reducedMotion: boolean }) {
-  const width = Math.max(host.clientWidth, 320);
-  const height = Math.max(host.clientHeight, Math.min(width * 0.92, 420), 280);
-  const columns = clamp(Math.round(width / 14), 24, 34);
-  const rows = clamp(Math.round(height / 18), 15, 22);
-  const lineHeight = clamp(height / rows, 15, 20);
+  const width = Math.max(host.clientWidth, 360);
+  const height = Math.max(host.clientHeight, Math.min(width * 1.16, 540), 360);
+  const columns = clamp(Math.round(width / 21), 14, 22);
+  const rows = clamp(Math.round(height / 20), 16, 24);
+  const lineHeight = clamp(height / rows, 18, 26);
   const cellWidth = width / columns;
-  const fontSize = clamp(Math.min(cellWidth * 1.18, lineHeight * 0.94), 12, 17);
+  const fontSize = clamp(Math.min(cellWidth * 1.52, lineHeight * 1.1), 16, 25);
   const swatch = readColorSwatch(host);
 
   host.style.setProperty("--hero-signal-font-size", `${fontSize}px`);
@@ -185,60 +185,66 @@ function mountAsciiField(host: HTMLDivElement, options: { reducedMotion: boolean
     new Float32Array(fieldColumns * fieldRows),
     new Float32Array(fieldColumns * fieldRows),
   ] as const;
-  const particleCount = clamp(Math.round(columns * rows * 0.1), 30, 64);
+  const particleCount = clamp(Math.round(columns * rows * 0.24), 58, 120);
   const particles = createParticles(particleCount, columns, rows);
-  const particleStamp = createFieldStamp(1.05);
-  const colorStamp = createFieldStamp(1.3);
-  const majorAttractorStamp = createFieldStamp(2.45);
-  const minorAttractorStamp = createFieldStamp(1.75);
+  const particleStamp = createFieldStamp(1.72);
+  const colorStamp = createFieldStamp(2.18);
+  const majorAttractorStamp = createFieldStamp(3.85);
+  const minorAttractorStamp = createFieldStamp(2.8);
   const previousRows = new Array<string>(rows).fill("");
 
   const renderFrame = (timestamp: number) => {
     const attractors = [
       {
-        x: columns * 0.24 + Math.cos(timestamp * 0.00031) * columns * 0.08,
-        y: rows * 0.34 + Math.sin(timestamp * 0.00047) * rows * 0.16,
+        x: columns * 0.18 + Math.cos(timestamp * 0.00042) * columns * 0.12,
+        y: rows * 0.32 + Math.sin(timestamp * 0.00064) * rows * 0.2,
       },
       {
-        x: columns * 0.76 + Math.sin(timestamp * 0.00027 + 1.1) * columns * 0.08,
-        y: rows * 0.3 + Math.cos(timestamp * 0.00041 + 0.2) * rows * 0.14,
+        x: columns * 0.82 + Math.sin(timestamp * 0.00038 + 1.1) * columns * 0.12,
+        y: rows * 0.28 + Math.cos(timestamp * 0.00055 + 0.2) * rows * 0.18,
       },
       {
-        x: columns * 0.54 + Math.cos(timestamp * 0.00023 + Math.PI) * columns * 0.18,
-        y: rows * 0.72 + Math.sin(timestamp * 0.00038 + Math.PI * 0.35) * rows * 0.11,
+        x: columns * 0.52 + Math.cos(timestamp * 0.00034 + Math.PI) * columns * 0.24,
+        y: rows * 0.78 + Math.sin(timestamp * 0.0005 + Math.PI * 0.35) * rows * 0.15,
       },
     ] as const;
 
-    decayField(brightnessField, 0.875);
+    decayField(brightnessField, 0.9);
     for (let index = 0; index < colorFields.length; index += 1) {
-      decayField(colorFields[index], 0.885);
+      decayField(colorFields[index], 0.91);
     }
 
     for (let index = 0; index < particles.length; index += 1) {
       const particle = particles[index]!;
       const primary = attractors[particle.channel]!;
       const secondary = attractors[(particle.channel + 1) % attractors.length]!;
+      const tertiary = attractors[(particle.channel + 2) % attractors.length]!;
       const primaryDx = primary.x - particle.x;
       const primaryDy = primary.y - particle.y;
       const secondaryDx = secondary.x - particle.x;
       const secondaryDy = secondary.y - particle.y;
+      const tertiaryDx = tertiary.x - particle.x;
+      const tertiaryDy = tertiary.y - particle.y;
       const primaryDistance = Math.sqrt(primaryDx * primaryDx + primaryDy * primaryDy) + 1;
       const secondaryDistance = Math.sqrt(secondaryDx * secondaryDx + secondaryDy * secondaryDy) + 1;
+      const tertiaryDistance = Math.sqrt(tertiaryDx * tertiaryDx + tertiaryDy * tertiaryDy) + 1;
 
-      particle.vx += (primaryDx / primaryDistance) * 0.022;
-      particle.vy += (primaryDy / primaryDistance) * 0.022;
-      particle.vx += (secondaryDx / secondaryDistance) * 0.005;
-      particle.vy += (secondaryDy / secondaryDistance) * 0.005;
-      particle.vx += Math.cos(timestamp * 0.001 + particle.drift) * 0.0016;
-      particle.vy += Math.sin(timestamp * 0.0012 + particle.drift) * 0.0016;
-      particle.vx += (Math.random() - 0.5) * 0.012;
-      particle.vy += (Math.random() - 0.5) * 0.012;
-      particle.vx *= 0.968;
-      particle.vy *= 0.968;
+      particle.vx += (primaryDx / primaryDistance) * 0.03;
+      particle.vy += (primaryDy / primaryDistance) * 0.03;
+      particle.vx += (secondaryDx / secondaryDistance) * 0.012;
+      particle.vy += (secondaryDy / secondaryDistance) * 0.012;
+      particle.vx -= (tertiaryDy / tertiaryDistance) * 0.007;
+      particle.vy += (tertiaryDx / tertiaryDistance) * 0.007;
+      particle.vx += Math.cos(timestamp * 0.0016 + particle.drift) * 0.0032;
+      particle.vy += Math.sin(timestamp * 0.0018 + particle.drift) * 0.0032;
+      particle.vx += (Math.random() - 0.5) * 0.024;
+      particle.vy += (Math.random() - 0.5) * 0.024;
+      particle.vx *= 0.978;
+      particle.vy *= 0.978;
       particle.x = wrap(particle.x + particle.vx, columns);
       particle.y = wrap(particle.y + particle.vy, rows);
 
-      splatFieldStamp(brightnessField, fieldColumns, fieldRows, particle.x, particle.y, particleStamp, 0.9);
+      splatFieldStamp(brightnessField, fieldColumns, fieldRows, particle.x, particle.y, particleStamp, 1.08);
       splatFieldStamp(
         colorFields[particle.channel],
         fieldColumns,
@@ -246,15 +252,15 @@ function mountAsciiField(host: HTMLDivElement, options: { reducedMotion: boolean
         particle.x,
         particle.y,
         colorStamp,
-        0.64,
+        0.78,
       );
     }
 
     for (let index = 0; index < attractors.length; index += 1) {
       const attractor = attractors[index]!;
       const stamp = index === 2 ? majorAttractorStamp : minorAttractorStamp;
-      splatFieldStamp(brightnessField, fieldColumns, fieldRows, attractor.x, attractor.y, stamp, 0.92);
-      splatFieldStamp(colorFields[index], fieldColumns, fieldRows, attractor.x, attractor.y, stamp, 0.82);
+      splatFieldStamp(brightnessField, fieldColumns, fieldRows, attractor.x, attractor.y, stamp, 1.06);
+      splatFieldStamp(colorFields[index], fieldColumns, fieldRows, attractor.x, attractor.y, stamp, 0.92);
     }
 
     for (let row = 0; row < rows; row += 1) {
@@ -288,7 +294,7 @@ function mountAsciiField(host: HTMLDivElement, options: { reducedMotion: boolean
         }
 
         const color = mixColor(swatch, channelValues, brightness);
-        const opacity = clamp(0.18 + brightness * 1.08 + totalColor * 0.12, 0.18, 0.96);
+        const opacity = clamp(0.22 + brightness * 1.16 + totalColor * 0.18, 0.22, 0.98);
         rowMarkup += `<span class="hero-signal__glyph ${token.className}" style="color: rgb(${color[0]} ${color[1]} ${color[2]}); opacity: ${opacity.toFixed(3)}">${token.html}</span>`;
       }
 
@@ -310,7 +316,7 @@ function mountAsciiField(host: HTMLDivElement, options: { reducedMotion: boolean
 
   let animationFrame = 0;
   let lastTimestamp = 0;
-  const frameInterval = 1000 / 20;
+  const frameInterval = 1000 / 24;
 
   const animate = (timestamp: number) => {
     if (timestamp - lastTimestamp >= frameInterval) {
@@ -444,13 +450,13 @@ function measureGlyphWidth(char: string, font: string) {
 function createParticles(count: number, columns: number, rows: number): Particle[] {
   return Array.from({ length: count }, (_, index) => {
     const angle = Math.random() * Math.PI * 2;
-    const radius = Math.random() * Math.min(columns, rows) * 0.24 + Math.min(columns, rows) * 0.08;
+    const radius = Math.random() * Math.min(columns, rows) * 0.36 + Math.min(columns, rows) * 0.1;
 
     return {
       channel: index % 3,
       drift: Math.random() * Math.PI * 2,
-      vx: (Math.random() - 0.5) * 0.1,
-      vy: (Math.random() - 0.5) * 0.1,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
       x: columns / 2 + Math.cos(angle) * radius,
       y: rows / 2 + Math.sin(angle) * radius,
     };
