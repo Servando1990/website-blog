@@ -751,30 +751,19 @@
     color: var(--page-muted);
   }
 
-  .pydantic-foundation {
-    position: relative;
-    display: grid;
-    gap: clamp(1.5rem, 3vw, 2.75rem);
-    border: 1px solid color-mix(in oklab, var(--page-line) 94%, transparent);
-    border-radius: 1.5rem;
-    padding: clamp(1.5rem, 3vw, 2.4rem);
+  .pydantic-banner {
     background:
       linear-gradient(
         180deg,
-        color-mix(in oklab, var(--page-surface) 95%, white) 0%,
-        color-mix(in oklab, var(--page-bg-strong) 94%, white) 100%
+        color-mix(in oklab, var(--page-bg-strong) 92%, white) 0%,
+        color-mix(in oklab, var(--page-bg) 96%, white) 100%
       );
-    box-shadow: var(--elevation-1);
   }
 
-  .pydantic-foundation::before {
-    content: '';
-    position: absolute;
-    left: clamp(1.5rem, 3vw, 2.4rem);
-    top: 0;
-    height: 1px;
-    width: clamp(4rem, 12vw, 7rem);
-    background: color-mix(in oklab, var(--button-primary-hover) 52%, var(--page-line));
+  .pydantic-foundation {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.75rem);
+    padding: 0;
   }
 
   .pydantic-foundation__title {
