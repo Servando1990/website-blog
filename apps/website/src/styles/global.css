@@ -554,33 +554,13 @@
     @apply relative z-[2] flex h-full w-full flex-col justify-center;
     min-height: clamp(26rem, 49vw, 38rem);
     padding-block: clamp(0.25rem, 1vw, 1rem);
+    font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+    font-size: var(--hero-signal-font-size, 13px);
+    letter-spacing: -0.012em;
+    line-height: var(--hero-signal-line-height, 16px);
     mask-image:
       radial-gradient(circle at center, black 0%, black 82%, transparent 100%),
       linear-gradient(180deg, transparent 0%, black 2%, black 98%, transparent 100%);
-  }
-
-  .hero-signal__placeholder {
-    width: 100%;
-    aspect-ratio: 220 / 224;
-    border-radius: clamp(1.25rem, 3vw, 2rem);
-    background:
-      radial-gradient(circle at 32% 38%, rgb(var(--hero-signal-color-a-rgb) / 0.24) 0%, transparent 24%),
-      radial-gradient(circle at 66% 34%, rgb(var(--hero-signal-color-b-rgb) / 0.22) 0%, transparent 20%),
-      radial-gradient(circle at 52% 68%, rgb(var(--hero-signal-color-c-rgb) / 0.2) 0%, transparent 22%),
-      linear-gradient(180deg, rgb(8 11 14 / 0.72) 0%, rgb(8 11 14 / 0.24) 100%);
-    box-shadow:
-      inset 0 0 0 1px rgb(255 255 255 / 0.06),
-      inset 0 0 2.5rem rgb(0 0 0 / 0.28);
-  }
-
-  .source-canvas {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: clamp(1.25rem, 3vw, 2rem);
-    box-shadow:
-      inset 0 0 0 1px rgb(255 255 255 / 0.04),
-      0 0.5rem 2rem rgb(8 11 14 / 0.08);
   }
 
   .hero-signal__row {
