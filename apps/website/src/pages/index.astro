@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { HeroAsciiField } from '../components/HeroAsciiField';
+import PydanticFoundation from '../components/PydanticFoundation.astro';
 import {
   bookingUrl,
   founderProfile,
@@ -90,6 +91,8 @@ const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
         </div>
       </div>
     </section>
+
+    <PydanticFoundation />
 
     <section class="section-frame section-divider">
       <div class="site-container page-stack">

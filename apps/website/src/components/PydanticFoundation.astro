@@ -1,0 +1,124 @@
+---
+const stackGroups = [
+  {
+    stage: 'Build',
+    toneClass: 'pydantic-stage--build',
+    entries: [
+      {
+        name: 'Pydantic AI',
+        summary:
+          'Structured agent workflows, tool calling, and MCP-ready orchestration for production systems that need explicit state.',
+        chips: ['Agent workflows', 'Tool calling', 'MCP'],
+      },
+      {
+        name: 'Pydantic Validation',
+        summary:
+          'Typed models and runtime validation that keep source data, workflow state, and outputs legible from the start.',
+        chips: ['Data validation', 'Typed models', 'Schema contracts'],
+      },
+    ],
+  },
+  {
+    stage: 'Iterate',
+    toneClass: 'pydantic-stage--iterate',
+    entries: [
+      {
+        name: 'Pydantic Evals',
+        summary:
+          'Code-first evaluation loops that make it easier to test behavior, catch regressions, and refine the workflow.',
+        chips: ['Evals', 'Assertions', 'Code-first'],
+      },
+    ],
+  },
+  {
+    stage: 'Deploy & Monitor',
+    toneClass: 'pydantic-stage--monitor pydantic-stage--wide',
+    entries: [
+      {
+        name: 'Pydantic Logfire',
+        summary:
+          'Tracing, logs, and metrics that keep the production path observable once a real team starts using the system.',
+        chips: ['OpenTelemetry', 'Logs', 'Traces', 'Metrics'],
+      },
+    ],
+  },
+];
+---
+
+<section class="section-frame section-divider" aria-labelledby="pydantic-foundation-title">
+  <div class="site-container page-stack">
+    <div class="pydantic-foundation">
+      <div class="page-stack">
+        <span class="eyebrow">Ecosystem partner</span>
+        <h2 class="section-title pydantic-foundation__title" id="pydantic-foundation-title">
+          Pydantic is the foundation behind every ControlThrive build.
+        </h2>
+      </div>
+
+      <div class="page-stack gap-5">
+        <p class="supporting-copy max-w-[40rem]">
+          All ControlThrive software is built with the Pydantic ecosystem. It gives us an
+          end-to-end AI engineering stack for typed validation, agent workflows, evaluation, and
+          production observability, which helps judgment-heavy systems stay inspectable after
+          launch.
+        </p>
+
+        <div class="pydantic-foundation__meta">
+          <span class="micro-label">Current ecosystem partner</span>
+          <a
+            class="text-link"
+            href="https://pydantic.dev/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Explore Pydantic
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path
+                d="M4.667 11.333 11.333 4.667M6 4.667h5.333V10"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pydantic-stack">
+      <div class="pydantic-stack__header">
+        <span class="micro-label">End-to-end AI engineering stack</span>
+        <p>
+          One ecosystem from validation through production monitoring, adapted to software that has
+          to hold up under real operational judgment.
+        </p>
+      </div>
+
+      <div class="pydantic-stack__grid">
+        {stackGroups.map((group) => (
+          <article class:list={['pydantic-stage', group.toneClass]}>
+            <div class="pydantic-stage__label">{group.stage}</div>
+
+            <div class="pydantic-stage__entries">
+              {group.entries.map((entry) => (
+                <div class="pydantic-entry">
+                  <div class="page-stack gap-3">
+                    <h3>{entry.name}</h3>
+                    <p>{entry.summary}</p>
+                  </div>
+
+                  <div class="pydantic-chip-list" aria-label={`${entry.name} capabilities`}>
+                    {entry.chips.map((chip) => (
+                      <span class="pydantic-chip">{chip}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

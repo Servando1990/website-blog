@@ -163,7 +163,8 @@ export const founderProfile = {
 };
 
 export const partnerNetwork = [
-  'Outerbounds',
-  '5X',
-  'Searchplex',
+  {
+    name: 'Pydantic',
+    href: 'https://pydantic.dev/',
+  },
 ];

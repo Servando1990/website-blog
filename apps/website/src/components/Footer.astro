@@ -30,9 +30,9 @@ import { bookingUrl, navigation, partnerNetwork } from '../lib/siteContent';
         </div>
 
         <div class="footer-link-list">
-          <span class="micro-label">Built Alongside</span>
+          <span class="micro-label">Core ecosystem</span>
           {partnerNetwork.map((partner) => (
-            <span>{partner}</span>
+            <a href={partner.href} target="_blank" rel="noopener noreferrer">{partner.name}</a>
           ))}
         </div>
       </div>
