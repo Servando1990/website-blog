@@ -63,7 +63,7 @@ export const GET: APIRoute = async () => {
                             fontWeight: '500',
                             letterSpacing: '-0.03em',
                           },
-                          children: 'ControlThrive',
+                          children: 'controlthrive',
                         },
                       },
                       {

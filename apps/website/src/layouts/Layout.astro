@@ -16,7 +16,7 @@ const {
   ogImage = '/api/og/home.png',
   ogUrl = Astro.url.href,
   ogType = 'website',
-  ogSiteName = 'ControlThrive',
+  ogSiteName = 'controlthrive',
 } = Astro.props;
 
 const baseUrl = (Astro.site || Astro.url.origin).toString();
@@ -114,7 +114,7 @@ const resolvedOgImage = resolvedOgImageUrl.href;
       {JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'ProfessionalService',
-        name: 'ControlThrive',
+        name: 'controlthrive',
         founder: {
           '@type': 'Person',
           name: 'Servando Torres',

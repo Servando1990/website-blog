@@ -4,14 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a monorepo containing two Astro applications: ControlThrive's marketing website and Servando Torres's personal blog. Both apps share a unified design system and can cross-reference content while deploying to separate domains.
+This is a monorepo containing two Astro applications: controlthrive's marketing website and Servando Torres's personal blog. Both apps share a unified design system and can cross-reference content while deploying to separate domains.
 
 ## Monorepo Structure
 
 ```
 website-blog/
 ├── apps/
-│   ├── website/               # ControlThrive marketing site (controlthrive.com)
+│   ├── website/               # controlthrive marketing site (controlthrive.com)
 │   └── blog/                  # Personal blog (servando.co)
 ├── packages/
 │   └── ui/                    # Shared design system package

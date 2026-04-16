@@ -1,7 +1,7 @@
 {
   "name": "controlthrive-website",
   "version": "1.0.0",
-  "description": "ControlThrive - AI Consulting and RAG Implementation Training",
+  "description": "controlthrive - AI Consulting and RAG Implementation Training",
   "type": "module",
   "scripts": {
     "dev": "astro dev",

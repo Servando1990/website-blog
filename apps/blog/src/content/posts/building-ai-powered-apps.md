@@ -18,7 +18,7 @@ title: 'Building AI-Powered Applications: A Practical Guide'
 
 The AI revolution is here, and every developer should know how to build applications that leverage AI capabilities. This guide will walk you through the practical aspects of integrating AI into your apps.
 
-> **Looking for professional AI implementation support?** [ControlThrive offers strategic AI consulting and RAG implementation training](https://controlthrive.com) to help transform AI/ML confusion into competitive advantage.
+> **Looking for professional AI implementation support?** [controlthrive offers strategic AI consulting and RAG implementation training](https://controlthrive.com) to help transform AI/ML confusion into competitive advantage.
 
 ## The AI Application Stack
 
