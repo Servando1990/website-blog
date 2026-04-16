@@ -1,3 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <text y=".9em" font-size="90">🧠</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <style>
+    path {
+      stroke: #111827;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      path {
+        stroke: #ffffff;
+      }
+    }
+  </style>
+  <path d="M112 152V280H368" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M368 280L304 216M368 280L304 344" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
 </svg>
