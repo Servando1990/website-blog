@@ -3,35 +3,45 @@
 import { prepareWithSegments } from "@chenglou/pretext";
 import { useEffect, useRef } from "react";
 
-const GLYPH_CHARSET = " .·:•°+*oO0#";
-const GLYPH_WEIGHTS = [300, 500, 700] as const;
+const GLYPH_CHARSET =
+  " .,:;!+-=*#@%&abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+const GLYPH_WEIGHTS = [300, 500, 800] as const;
+const GLYPH_STYLES = ["normal", "italic"] as const;
 const FIELD_OVERSAMPLE = 2;
-const FALLBACK_RAMP = " .·:•°+*oO#";
-const EMPTY_GLYPH = '<span class="hero-signal__glyph is-space">&nbsp;</span>';
+const FIELD_DECAY = 0.82;
+const PRIMARY_ATTRACTOR_FORCE = 0.22;
+const SECONDARY_ATTRACTOR_FORCE = 0.05;
 const GLYPH_FONT_FAMILY =
   '"Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif';
+const PARTICLE_RADIUS = 14;
+const PRIMARY_ATTRACTOR_RADIUS = 30;
+const SECONDARY_ATTRACTOR_RADIUS = 12;
+const EMPTY_GLYPH = '<span class="hero-signal__glyph is-space">&nbsp;</span>';
+const FALLBACK_RAMP = " .,:;!+-=*#@";
 const FALLBACK_ROWS = createFallbackRows(19, 36);
+
+type FontStyleVariant = (typeof GLYPH_STYLES)[number];
 
 type PaletteEntry = {
   brightness: number;
   char: string;
+  style: FontStyleVariant;
   weight: number;
   width: number;
 };
 
 type Particle = {
-  channel: number;
-  drift: number;
-  vx: number;
-  vy: number;
   x: number;
   y: number;
+  vx: number;
+  vy: number;
 };
 
 type FieldStamp = {
   radiusX: number;
   radiusY: number;
   sizeX: number;
+  sizeY: number;
   values: Float32Array;
 };
 
@@ -39,13 +49,6 @@ type GlyphToken = {
   className: string;
   html: string;
   isSpace: boolean;
-};
-
-type RgbColor = [number, number, number];
-
-type ColorSwatch = {
-  accents: [RgbColor, RgbColor, RgbColor];
-  base: RgbColor;
 };
 
 export function HeroAsciiField() {
@@ -118,10 +121,9 @@ export function HeroAsciiField() {
 function createFallbackRows(rowCount: number, columnCount: number): string[] {
   return Array.from({ length: rowCount }, (_, row) =>
     Array.from({ length: columnCount }, (_, column) => {
-      const wave = Math.sin(row * 0.55 + column * 0.31);
-      const drift = Math.cos(column * 0.23 - row * 0.42);
-      const bloom = Math.sin(row * 0.18 - column * 0.09);
-      const brightness = (wave + drift + bloom + 3) / 6;
+      const wave = Math.sin(row * 0.46 + column * 0.3);
+      const bloom = Math.cos(column * 0.18 - row * 0.41);
+      const brightness = (wave + bloom + 2) / 4;
       const glyphIndex = Math.max(
         0,
         Math.min(FALLBACK_RAMP.length - 1, Math.round(brightness * (FALLBACK_RAMP.length - 1))),
@@ -139,8 +141,7 @@ function mountAsciiField(host: HTMLDivElement, options: { reducedMotion: boolean
   const rows = clamp(Math.round(height / 20), 16, 24);
   const lineHeight = clamp(height / rows, 18, 26);
   const cellWidth = width / columns;
-  const fontSize = clamp(Math.min(cellWidth * 1.52, lineHeight * 1.1), 16, 25);
-  const swatch = readColorSwatch(host);
+  const fontSize = clamp(Math.min(cellWidth * 1.48, lineHeight * 1.08), 16, 25);
 
   host.style.setProperty("--hero-signal-font-size", `${fontSize}px`);
   host.style.setProperty("--hero-signal-line-height", `${lineHeight}px`);
@@ -156,112 +157,122 @@ function mountAsciiField(host: HTMLDivElement, options: { reducedMotion: boolean
   });
 
   const brightnessCanvas = document.createElement("canvas");
-  brightnessCanvas.width = 32;
-  brightnessCanvas.height = 32;
+  brightnessCanvas.width = 28;
+  brightnessCanvas.height = 28;
 
   const brightnessContext = brightnessCanvas.getContext("2d", { willReadFrequently: true });
   if (brightnessContext === null) {
-    host.innerHTML = FALLBACK_ROWS.map((row) => `<div class="hero-signal__row">${row}</div>`).join(
-      "",
-    );
+    applyFallbackRows(host);
     return () => {};
   }
 
   const palette = createPalette(brightnessContext, fontSize);
   if (palette.length === 0) {
-    host.innerHTML = FALLBACK_ROWS.map((row) => `<div class="hero-signal__row">${row}</div>`).join(
-      "",
-    );
+    applyFallbackRows(host);
     return () => {};
   }
 
-  const targetCellWidth = width / columns;
-  const lookup = buildLookup(palette, targetCellWidth);
+  const lookup = buildLookup(palette, cellWidth);
   const fieldColumns = columns * FIELD_OVERSAMPLE;
   const fieldRows = rows * FIELD_OVERSAMPLE;
   const brightnessField = new Float32Array(fieldColumns * fieldRows);
-  const colorFields = [
-    new Float32Array(fieldColumns * fieldRows),
-    new Float32Array(fieldColumns * fieldRows),
-    new Float32Array(fieldColumns * fieldRows),
-  ] as const;
-  const particleCount = clamp(Math.round(columns * rows * 0.24), 58, 120);
-  const particles = createParticles(particleCount, columns, rows);
-  const particleStamp = createFieldStamp(1.72);
-  const colorStamp = createFieldStamp(2.18);
-  const majorAttractorStamp = createFieldStamp(3.85);
-  const minorAttractorStamp = createFieldStamp(2.8);
+  const simulationWidth = clamp(Math.round(width * 0.46), 180, 260);
+  const simulationHeight = Math.round(simulationWidth * (height / width));
+  const fieldScaleX = fieldColumns / simulationWidth;
+  const fieldScaleY = fieldRows / simulationHeight;
+  const particleCount = clamp(Math.round(columns * rows * 0.3), 64, 108);
+  const particles = createParticles(particleCount, simulationWidth, simulationHeight);
+  const particleFieldStamp = createFieldStamp(PARTICLE_RADIUS, fieldScaleX, fieldScaleY);
+  const primaryAttractorFieldStamp = createFieldStamp(
+    PRIMARY_ATTRACTOR_RADIUS,
+    fieldScaleX,
+    fieldScaleY,
+  );
+  const secondaryAttractorFieldStamp = createFieldStamp(
+    SECONDARY_ATTRACTOR_RADIUS,
+    fieldScaleX,
+    fieldScaleY,
+  );
   const previousRows = new Array<string>(rows).fill("");
 
   const renderFrame = (timestamp: number) => {
-    const attractors = [
-      {
-        x: columns * 0.18 + Math.cos(timestamp * 0.00042) * columns * 0.12,
-        y: rows * 0.32 + Math.sin(timestamp * 0.00064) * rows * 0.2,
-      },
-      {
-        x: columns * 0.82 + Math.sin(timestamp * 0.00038 + 1.1) * columns * 0.12,
-        y: rows * 0.28 + Math.cos(timestamp * 0.00055 + 0.2) * rows * 0.18,
-      },
-      {
-        x: columns * 0.52 + Math.cos(timestamp * 0.00034 + Math.PI) * columns * 0.24,
-        y: rows * 0.78 + Math.sin(timestamp * 0.0005 + Math.PI * 0.35) * rows * 0.15,
-      },
-    ] as const;
+    const primaryAttractorX = Math.cos(timestamp * 0.0007) * simulationWidth * 0.25 + simulationWidth / 2;
+    const primaryAttractorY =
+      Math.sin(timestamp * 0.0011) * simulationHeight * 0.3 + simulationHeight / 2;
+    const secondaryAttractorX =
+      Math.cos(timestamp * 0.0013 + Math.PI) * simulationWidth * 0.2 + simulationWidth / 2;
+    const secondaryAttractorY =
+      Math.sin(timestamp * 0.0009 + Math.PI) * simulationHeight * 0.25 + simulationHeight / 2;
 
-    decayField(brightnessField, 0.9);
-    for (let index = 0; index < colorFields.length; index += 1) {
-      decayField(colorFields[index], 0.91);
-    }
+    decayField(brightnessField, FIELD_DECAY);
 
     for (let index = 0; index < particles.length; index += 1) {
       const particle = particles[index]!;
-      const primary = attractors[particle.channel]!;
-      const secondary = attractors[(particle.channel + 1) % attractors.length]!;
-      const tertiary = attractors[(particle.channel + 2) % attractors.length]!;
-      const primaryDx = primary.x - particle.x;
-      const primaryDy = primary.y - particle.y;
-      const secondaryDx = secondary.x - particle.x;
-      const secondaryDy = secondary.y - particle.y;
-      const tertiaryDx = tertiary.x - particle.x;
-      const tertiaryDy = tertiary.y - particle.y;
-      const primaryDistance = Math.sqrt(primaryDx * primaryDx + primaryDy * primaryDy) + 1;
-      const secondaryDistance = Math.sqrt(secondaryDx * secondaryDx + secondaryDy * secondaryDy) + 1;
-      const tertiaryDistance = Math.sqrt(tertiaryDx * tertiaryDx + tertiaryDy * tertiaryDy) + 1;
+      const primaryDx = primaryAttractorX - particle.x;
+      const primaryDy = primaryAttractorY - particle.y;
+      const secondaryDx = secondaryAttractorX - particle.x;
+      const secondaryDy = secondaryAttractorY - particle.y;
+      const primaryDistanceSquared = primaryDx * primaryDx + primaryDy * primaryDy;
+      const secondaryDistanceSquared = secondaryDx * secondaryDx + secondaryDy * secondaryDy;
+      const usePrimaryAttractor = primaryDistanceSquared < secondaryDistanceSquared;
+      const dx = usePrimaryAttractor ? primaryDx : secondaryDx;
+      const dy = usePrimaryAttractor ? primaryDy : secondaryDy;
+      const distance = Math.sqrt(Math.min(primaryDistanceSquared, secondaryDistanceSquared)) + 1;
+      const force = usePrimaryAttractor ? PRIMARY_ATTRACTOR_FORCE : SECONDARY_ATTRACTOR_FORCE;
 
-      particle.vx += (primaryDx / primaryDistance) * 0.03;
-      particle.vy += (primaryDy / primaryDistance) * 0.03;
-      particle.vx += (secondaryDx / secondaryDistance) * 0.012;
-      particle.vy += (secondaryDy / secondaryDistance) * 0.012;
-      particle.vx -= (tertiaryDy / tertiaryDistance) * 0.007;
-      particle.vy += (tertiaryDx / tertiaryDistance) * 0.007;
-      particle.vx += Math.cos(timestamp * 0.0016 + particle.drift) * 0.0032;
-      particle.vy += Math.sin(timestamp * 0.0018 + particle.drift) * 0.0032;
-      particle.vx += (Math.random() - 0.5) * 0.024;
-      particle.vy += (Math.random() - 0.5) * 0.024;
-      particle.vx *= 0.978;
-      particle.vy *= 0.978;
-      particle.x = wrap(particle.x + particle.vx, columns);
-      particle.y = wrap(particle.y + particle.vy, rows);
+      particle.vx += (dx / distance) * force;
+      particle.vy += (dy / distance) * force;
+      particle.vx += (Math.random() - 0.5) * 0.25;
+      particle.vy += (Math.random() - 0.5) * 0.25;
+      particle.vx *= 0.97;
+      particle.vy *= 0.97;
+      particle.x += particle.vx;
+      particle.y += particle.vy;
 
-      splatFieldStamp(brightnessField, fieldColumns, fieldRows, particle.x, particle.y, particleStamp, 1.08);
+      if (particle.x < -PARTICLE_RADIUS) {
+        particle.x += simulationWidth + PARTICLE_RADIUS * 2;
+      } else if (particle.x > simulationWidth + PARTICLE_RADIUS) {
+        particle.x -= simulationWidth + PARTICLE_RADIUS * 2;
+      }
+
+      if (particle.y < -PARTICLE_RADIUS) {
+        particle.y += simulationHeight + PARTICLE_RADIUS * 2;
+      } else if (particle.y > simulationHeight + PARTICLE_RADIUS) {
+        particle.y -= simulationHeight + PARTICLE_RADIUS * 2;
+      }
+
       splatFieldStamp(
-        colorFields[particle.channel],
+        brightnessField,
         fieldColumns,
         fieldRows,
+        fieldScaleX,
+        fieldScaleY,
         particle.x,
         particle.y,
-        colorStamp,
-        0.78,
+        particleFieldStamp,
       );
     }
 
-    for (let index = 0; index < attractors.length; index += 1) {
-      const attractor = attractors[index]!;
-      const stamp = index === 2 ? majorAttractorStamp : minorAttractorStamp;
-      splatFieldStamp(brightnessField, fieldColumns, fieldRows, attractor.x, attractor.y, stamp, 1.06);
-      splatFieldStamp(colorFields[index], fieldColumns, fieldRows, attractor.x, attractor.y, stamp, 0.92);
-    }
+    splatFieldStamp(
+      brightnessField,
+      fieldColumns,
+      fieldRows,
+      fieldScaleX,
+      fieldScaleY,
+      primaryAttractorX,
+      primaryAttractorY,
+      primaryAttractorFieldStamp,
+    );
+    splatFieldStamp(
+      brightnessField,
+      fieldColumns,
+      fieldRows,
+      fieldScaleX,
+      fieldScaleY,
+      secondaryAttractorX,
+      secondaryAttractorY,
+      secondaryAttractorFieldStamp,
+    );
 
     for (let row = 0; row < rows; row += 1) {
       let rowMarkup = "";
@@ -276,12 +287,8 @@ function mountAsciiField(host: HTMLDivElement, options: { reducedMotion: boolean
           columnStart,
           FIELD_OVERSAMPLE,
         );
-        const channelValues = colorFields.map((field) =>
-          sampleField(field, fieldColumns, rowStart, columnStart, FIELD_OVERSAMPLE),
-        ) as [number, number, number];
-        const totalColor = channelValues[0] + channelValues[1] + channelValues[2];
 
-        if (brightness < 0.028 && totalColor < 0.04) {
+        if (brightness < 0.026) {
           rowMarkup += EMPTY_GLYPH;
           continue;
         }
@@ -293,9 +300,8 @@ function mountAsciiField(host: HTMLDivElement, options: { reducedMotion: boolean
           continue;
         }
 
-        const color = mixColor(swatch, channelValues, brightness);
-        const opacity = clamp(0.22 + brightness * 1.16 + totalColor * 0.18, 0.22, 0.98);
-        rowMarkup += `<span class="hero-signal__glyph ${token.className}" style="color: rgb(${color[0]} ${color[1]} ${color[2]}); opacity: ${opacity.toFixed(3)}">${token.html}</span>`;
+        const opacity = clamp(0.14 + brightness * 1.1, 0.14, 0.98);
+        rowMarkup += `<span class="hero-signal__glyph ${token.className}" style="opacity: ${opacity.toFixed(3)}">${token.html}</span>`;
       }
 
       if (rowMarkup !== previousRows[row]) {
@@ -336,6 +342,10 @@ function mountAsciiField(host: HTMLDivElement, options: { reducedMotion: boolean
   };
 }
 
+function applyFallbackRows(host: HTMLDivElement) {
+  host.innerHTML = FALLBACK_ROWS.map((row) => `<div class="hero-signal__row">${row}</div>`).join("");
+}
+
 function createPalette(
   brightnessContext: CanvasRenderingContext2D,
   fontSize: number,
@@ -343,39 +353,42 @@ function createPalette(
   const palette: PaletteEntry[] = [];
   const glyphSize = brightnessContext.canvas.width;
 
-  for (const weight of GLYPH_WEIGHTS) {
-    const font = `${weight} ${fontSize}px ${GLYPH_FONT_FAMILY}`;
+  for (const style of GLYPH_STYLES) {
+    for (const weight of GLYPH_WEIGHTS) {
+      const font = `${style === "italic" ? "italic " : ""}${weight} ${fontSize}px ${GLYPH_FONT_FAMILY}`;
 
-    for (const char of GLYPH_CHARSET) {
-      if (char === " ") {
-        continue;
+      for (const char of GLYPH_CHARSET) {
+        if (char === " ") {
+          continue;
+        }
+
+        const width = measureGlyphWidth(char, font);
+        if (width <= 0) {
+          continue;
+        }
+
+        brightnessContext.clearRect(0, 0, glyphSize, glyphSize);
+        brightnessContext.font = font;
+        brightnessContext.fillStyle = "#ffffff";
+        brightnessContext.textAlign = "center";
+        brightnessContext.textBaseline = "middle";
+        brightnessContext.fillText(char, glyphSize / 2, glyphSize / 2 + 1);
+
+        const pixels = brightnessContext.getImageData(0, 0, glyphSize, glyphSize).data;
+        let alphaTotal = 0;
+
+        for (let index = 3; index < pixels.length; index += 4) {
+          alphaTotal += pixels[index]!;
+        }
+
+        palette.push({
+          brightness: alphaTotal / (255 * glyphSize * glyphSize),
+          char,
+          style,
+          weight,
+          width,
+        });
       }
-
-      const width = measureGlyphWidth(char, font);
-      if (width <= 0) {
-        continue;
-      }
-
-      brightnessContext.clearRect(0, 0, glyphSize, glyphSize);
-      brightnessContext.font = font;
-      brightnessContext.fillStyle = "#ffffff";
-      brightnessContext.textAlign = "center";
-      brightnessContext.textBaseline = "middle";
-      brightnessContext.fillText(char, glyphSize / 2, glyphSize / 2 + 1);
-
-      const pixels = brightnessContext.getImageData(0, 0, glyphSize, glyphSize).data;
-      let alphaTotal = 0;
-
-      for (let index = 3; index < pixels.length; index += 4) {
-        alphaTotal += pixels[index]!;
-      }
-
-      palette.push({
-        brightness: alphaTotal / (255 * glyphSize * glyphSize),
-        char,
-        weight,
-        width,
-      });
     }
   }
 
@@ -396,9 +409,10 @@ function buildLookup(palette: PaletteEntry[], targetCellWidth: number): GlyphTok
 
     const match = findClosestPaletteEntry(palette, targetBrightness, targetCellWidth);
     const weightClass = match.weight === 300 ? "w3" : match.weight === 500 ? "w5" : "w7";
+    const styleClass = match.style === "italic" ? " is-italic" : "";
 
     return {
-      className: weightClass,
+      className: `${weightClass}${styleClass}`,
       html: escapeHtml(match.char),
       isSpace: false,
     };
@@ -424,12 +438,12 @@ function findClosestPaletteEntry(
 
   let bestScore = Number.POSITIVE_INFINITY;
   let bestEntry = palette[lowerBound]!;
-  const searchStart = Math.max(0, lowerBound - 12);
-  const searchEnd = Math.min(palette.length, lowerBound + 13);
+  const searchStart = Math.max(0, lowerBound - 15);
+  const searchEnd = Math.min(palette.length, lowerBound + 15);
 
   for (let index = searchStart; index < searchEnd; index += 1) {
     const entry = palette[index]!;
-    const brightnessError = Math.abs(entry.brightness - targetBrightness) * 2.3;
+    const brightnessError = Math.abs(entry.brightness - targetBrightness) * 2.5;
     const widthError = Math.abs(entry.width - targetCellWidth) / targetCellWidth;
     const score = brightnessError + widthError;
 
@@ -447,43 +461,37 @@ function measureGlyphWidth(char: string, font: string) {
   return prepared.widths[0] ?? 0;
 }
 
-function createParticles(count: number, columns: number, rows: number): Particle[] {
-  return Array.from({ length: count }, (_, index) => {
+function createParticles(count: number, simulationWidth: number, simulationHeight: number): Particle[] {
+  return Array.from({ length: count }, () => {
     const angle = Math.random() * Math.PI * 2;
-    const radius = Math.random() * Math.min(columns, rows) * 0.36 + Math.min(columns, rows) * 0.1;
+    const radius = Math.random() * 40 + 20;
 
     return {
-      channel: index % 3,
-      drift: Math.random() * Math.PI * 2,
-      vx: (Math.random() - 0.5) * 0.18,
-      vy: (Math.random() - 0.5) * 0.18,
-      x: columns / 2 + Math.cos(angle) * radius,
-      y: rows / 2 + Math.sin(angle) * radius,
+      x: simulationWidth / 2 + Math.cos(angle) * radius,
+      y: simulationHeight / 2 + Math.sin(angle) * radius,
+      vx: (Math.random() - 0.5) * 0.8,
+      vy: (Math.random() - 0.5) * 0.8,
     };
   });
 }
 
-function createFieldStamp(radius: number): FieldStamp {
-  const fieldRadius = radius * FIELD_OVERSAMPLE;
-  const radiusX = Math.ceil(fieldRadius);
-  const radiusY = Math.ceil(fieldRadius);
+function createFieldStamp(radiusPx: number, fieldScaleX: number, fieldScaleY: number): FieldStamp {
+  const fieldRadiusX = radiusPx * fieldScaleX;
+  const fieldRadiusY = radiusPx * fieldScaleY;
+  const radiusX = Math.ceil(fieldRadiusX);
+  const radiusY = Math.ceil(fieldRadiusY);
   const sizeX = radiusX * 2 + 1;
   const sizeY = radiusY * 2 + 1;
   const values = new Float32Array(sizeX * sizeY);
 
   for (let y = -radiusY; y <= radiusY; y += 1) {
     for (let x = -radiusX; x <= radiusX; x += 1) {
-      const normalizedDistance = Math.sqrt((x / fieldRadius) ** 2 + (y / fieldRadius) ** 2);
+      const normalizedDistance = Math.sqrt((x / fieldRadiusX) ** 2 + (y / fieldRadiusY) ** 2);
       values[(y + radiusY) * sizeX + x + radiusX] = radialAlpha(normalizedDistance);
     }
   }
 
-  return {
-    radiusX,
-    radiusY,
-    sizeX,
-    values,
-  };
+  return { radiusX, radiusY, sizeX, sizeY, values };
 }
 
 function radialAlpha(distance: number) {
@@ -491,24 +499,25 @@ function radialAlpha(distance: number) {
     return 0;
   }
 
-  if (distance <= 0.42) {
-    return 0.48 + (0.18 - 0.48) * (distance / 0.42);
+  if (distance <= 0.35) {
+    return 0.45 + (0.15 - 0.45) * (distance / 0.35);
   }
 
-  return 0.18 * (1 - (distance - 0.42) / 0.58);
+  return 0.15 * (1 - (distance - 0.35) / 0.65);
 }
 
 function splatFieldStamp(
   targetField: Float32Array,
   fieldColumns: number,
   fieldRows: number,
+  fieldScaleX: number,
+  fieldScaleY: number,
   centerX: number,
   centerY: number,
   stamp: FieldStamp,
-  scale: number,
 ) {
-  const gridCenterX = Math.round(centerX * FIELD_OVERSAMPLE);
-  const gridCenterY = Math.round(centerY * FIELD_OVERSAMPLE);
+  const gridCenterX = Math.round(centerX * fieldScaleX);
+  const gridCenterY = Math.round(centerY * fieldScaleY);
 
   for (let y = -stamp.radiusY; y <= stamp.radiusY; y += 1) {
     const gridY = gridCenterY + y;
@@ -531,7 +540,7 @@ function splatFieldStamp(
       }
 
       const fieldIndex = fieldRowOffset + gridX;
-      targetField[fieldIndex] = Math.min(1, targetField[fieldIndex]! + stampValue * scale);
+      targetField[fieldIndex] = Math.min(1, targetField[fieldIndex]! + stampValue);
     }
   }
 }
@@ -553,59 +562,6 @@ function sampleField(
   }
 
   return total / (oversample * oversample);
-}
-
-function mixColor(
-  swatch: ColorSwatch,
-  channelValues: [number, number, number],
-  brightness: number,
-): RgbColor {
-  const channelTotal = channelValues[0] + channelValues[1] + channelValues[2];
-  if (channelTotal <= 0.0001) {
-    return swatch.base;
-  }
-
-  const accent = [0, 0, 0] as RgbColor;
-  for (let index = 0; index < swatch.accents.length; index += 1) {
-    const weight = channelValues[index] / channelTotal;
-    accent[0] += swatch.accents[index]![0] * weight;
-    accent[1] += swatch.accents[index]![1] * weight;
-    accent[2] += swatch.accents[index]![2] * weight;
-  }
-
-  const tintStrength = clamp(0.22 + brightness * 0.88 + channelTotal * 0.08, 0.22, 0.92);
-  return [
-    Math.round(swatch.base[0] * (1 - tintStrength) + accent[0] * tintStrength),
-    Math.round(swatch.base[1] * (1 - tintStrength) + accent[1] * tintStrength),
-    Math.round(swatch.base[2] * (1 - tintStrength) + accent[2] * tintStrength),
-  ];
-}
-
-function readColorSwatch(host: HTMLDivElement): ColorSwatch {
-  const styles = getComputedStyle(host);
-
-  return {
-    accents: [
-      parseRgbVariable(styles.getPropertyValue("--hero-signal-color-a-rgb"), [124, 147, 116]),
-      parseRgbVariable(styles.getPropertyValue("--hero-signal-color-b-rgb"), [214, 167, 94]),
-      parseRgbVariable(styles.getPropertyValue("--hero-signal-color-c-rgb"), [112, 140, 171]),
-    ],
-    base: parseRgbVariable(styles.getPropertyValue("--hero-signal-base-rgb"), [34, 38, 44]),
-  };
-}
-
-function parseRgbVariable(value: string, fallback: RgbColor): RgbColor {
-  const parts = value
-    .trim()
-    .split(/\s+/)
-    .map((segment) => Number.parseInt(segment, 10))
-    .filter((segment) => Number.isFinite(segment));
-
-  if (parts.length !== 3) {
-    return fallback;
-  }
-
-  return [parts[0]!, parts[1]!, parts[2]!];
 }
 
 function decayField(field: Float32Array, amount: number) {
@@ -636,16 +592,4 @@ function escapeHtml(value: string) {
 
 function clamp(value: number, minimum: number, maximum: number) {
   return Math.max(minimum, Math.min(maximum, value));
-}
-
-function wrap(value: number, length: number) {
-  if (value < 0) {
-    return value + length;
-  }
-
-  if (value >= length) {
-    return value - length;
-  }
-
-  return value;
 }
