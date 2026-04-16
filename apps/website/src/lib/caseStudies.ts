@@ -15,6 +15,12 @@ export interface CaseStudyLink {
   href: string;
 }
 
+export interface CaseStudyHeroImage {
+  src: string;
+  alt: string;
+  caption: string;
+}
+
 export interface CaseStudy {
   slug: string;
   title: string;
@@ -35,6 +41,7 @@ export interface CaseStudy {
     subtitle: string;
     steps: DiagramStep[];
   };
+  heroImage?: CaseStudyHeroImage;
   proofLink?: CaseStudyLink;
   isPublished: boolean;
 }
@@ -52,8 +59,8 @@ export const caseStudies: CaseStudy[] = [
     tags: ['Workflow design', 'CRM intelligence', 'LLM reasoning'],
     metrics: [
       { value: 'One line', label: 'per target firm in the final shortlist' },
-      { value: 'Shared run', label: 'review workspace, CSV, PDF, and Clay handoff' },
-      { value: 'Human review', label: 'kept in the loop before outreach' },
+      { value: 'One run', label: 'keeps review, CSV, PDF, and Clay handoff aligned' },
+      { value: 'Human review', label: 'stays in the loop before outreach starts' },
     ],
     facts: [
       { label: 'Business problem', value: 'Slow, high-context investor selection' },
@@ -134,6 +141,12 @@ export const caseStudies: CaseStudy[] = [
           metric: 'Review, CSV, PDF, and Clay handoff',
         },
       ],
+    },
+    heroImage: {
+      src: '/case-studies/investor-matching-capital-partners.png',
+      alt: 'Capital Partners and ControlThrive investor-matching case study visual',
+      caption:
+        'ControlThrive x Capital Partners. A founder-led investor matching workflow designed to turn high-context deal materials into a reviewable shortlist.',
     },
     isPublished: true,
   },
