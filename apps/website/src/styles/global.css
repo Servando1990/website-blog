@@ -505,7 +505,7 @@
   }
 
   .hero-grid {
-    @apply grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,1fr)] lg:items-center;
+    @apply grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(18rem,0.82fr)] lg:items-center;
   }
 
   .hero-grid .hero-copy--wide {
@@ -540,19 +540,23 @@
   }
 
   .hero-signal {
+    --hero-signal-height: clamp(21rem, 40vw, 31rem);
+    --hero-signal-width: clamp(18rem, 31vw, 28rem);
     --hero-signal-base-rgb: 33 38 44;
     --hero-signal-color-a-rgb: 126 150 118;
     --hero-signal-color-b-rgb: 214 170 98;
     --hero-signal-color-c-rgb: 111 139 170;
-    @apply relative w-full;
-    min-height: clamp(26rem, 49vw, 38rem);
+    @apply relative;
+    width: min(100%, var(--hero-signal-width));
+    min-height: var(--hero-signal-height);
     pointer-events: none;
     isolation: isolate;
+    justify-self: center;
   }
 
   .hero-signal__art {
     @apply relative z-[2] flex h-full w-full flex-col justify-center;
-    min-height: clamp(26rem, 49vw, 38rem);
+    min-height: var(--hero-signal-height);
     padding-block: clamp(0.25rem, 1vw, 1rem);
     font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
     font-size: var(--hero-signal-font-size, 13px);
@@ -601,7 +605,7 @@
     position: absolute;
     inset: auto;
     border-radius: 999px;
-    filter: blur(clamp(34px, 9vw, 96px));
+    filter: blur(clamp(28px, 7vw, 80px));
     opacity: 0.55;
     transform-origin: center;
     will-change: transform, opacity;
@@ -610,8 +614,8 @@
   .hero-signal__wash--one {
     left: 4%;
     top: 11%;
-    height: clamp(13rem, 31vw, 20rem);
-    width: clamp(13rem, 29vw, 19rem);
+    height: clamp(11rem, 25vw, 17rem);
+    width: clamp(11rem, 24vw, 16rem);
     background: radial-gradient(circle, rgb(var(--hero-signal-color-a-rgb) / 0.28) 0%, transparent 72%);
     animation: hero-signal-drift-a 14s cubic-bezier(0.22, 1, 0.36, 1) infinite;
   }
@@ -619,8 +623,8 @@
   .hero-signal__wash--two {
     right: 6%;
     top: 8%;
-    height: clamp(12rem, 28vw, 18rem);
-    width: clamp(12rem, 27vw, 17rem);
+    height: clamp(10rem, 23vw, 16rem);
+    width: clamp(10rem, 22vw, 15rem);
     background: radial-gradient(circle, rgb(var(--hero-signal-color-b-rgb) / 0.26) 0%, transparent 72%);
     animation: hero-signal-drift-b 17s cubic-bezier(0.22, 1, 0.36, 1) infinite;
   }
@@ -628,8 +632,8 @@
   .hero-signal__wash--three {
     bottom: 6%;
     left: 28%;
-    height: clamp(14rem, 33vw, 21rem);
-    width: clamp(14rem, 32vw, 20rem);
+    height: clamp(11.5rem, 27vw, 18rem);
+    width: clamp(11.5rem, 26vw, 17rem);
     background: radial-gradient(circle, rgb(var(--hero-signal-color-c-rgb) / 0.24) 0%, transparent 72%);
     animation: hero-signal-drift-c 15s cubic-bezier(0.22, 1, 0.36, 1) infinite;
   }
@@ -714,13 +718,20 @@
     color: var(--page-ink);
   }
 
+  @media (min-width: 1024px) {
+    .hero-signal {
+      justify-self: end;
+    }
+  }
+
   @media (max-width: 1023px) {
     .hero-signal {
-      min-height: clamp(22rem, 76vw, 31rem);
+      --hero-signal-height: clamp(18.5rem, 68vw, 25rem);
+      --hero-signal-width: min(100%, 26rem);
     }
 
     .hero-signal__art {
-      min-height: clamp(22rem, 76vw, 31rem);
+      min-height: var(--hero-signal-height);
     }
   }
 

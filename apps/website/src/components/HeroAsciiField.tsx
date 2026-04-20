@@ -10,7 +10,7 @@ const FALLBACK_RAMP = " .·:•°+*oO#";
 const EMPTY_GLYPH = '<span class="hero-signal__glyph is-space">&nbsp;</span>';
 const GLYPH_FONT_FAMILY =
   '"Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif';
-const FALLBACK_ROWS = createFallbackRows(19, 36);
+const FALLBACK_ROWS = createFallbackRows(17, 32);
 
 type PaletteEntry = {
   brightness: number;
@@ -133,13 +133,13 @@ function createFallbackRows(rowCount: number, columnCount: number): string[] {
 }
 
 function mountAsciiField(host: HTMLDivElement, options: { reducedMotion: boolean }) {
-  const width = Math.max(host.clientWidth, 360);
-  const height = Math.max(host.clientHeight, Math.min(width * 1.16, 540), 360);
-  const columns = clamp(Math.round(width / 21), 14, 22);
-  const rows = clamp(Math.round(height / 20), 16, 24);
-  const lineHeight = clamp(height / rows, 18, 26);
+  const width = Math.max(host.clientWidth, 320);
+  const height = Math.max(host.clientHeight, Math.min(width * 1.08, 460), 320);
+  const columns = clamp(Math.round(width / 22), 13, 20);
+  const rows = clamp(Math.round(height / 21), 15, 22);
+  const lineHeight = clamp(height / rows, 17, 24);
   const cellWidth = width / columns;
-  const fontSize = clamp(Math.min(cellWidth * 1.52, lineHeight * 1.1), 16, 25);
+  const fontSize = clamp(Math.min(cellWidth * 1.46, lineHeight * 1.05), 15, 23);
   const swatch = readColorSwatch(host);
 
   host.style.setProperty("--hero-signal-font-size", `${fontSize}px`);
