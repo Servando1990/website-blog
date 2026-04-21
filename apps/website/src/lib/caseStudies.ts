@@ -18,7 +18,7 @@ export interface CaseStudyLink {
 export interface CaseStudyHeroImage {
   src: string;
   alt: string;
-  caption: string;
+  caption?: string;
 }
 
 export interface CaseStudy {
@@ -78,8 +78,8 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     challenge: [
-      'MVV\'s work was never just about finding similar investors. For each deal, the team had to reason through investor type, deal structure, check-size fit, geography, prior relationship strength, pass reasons, and whether the outreach belonged under the broker-dealer or ERA/SPV track. Most of that logic lived in Misha\'s head, scattered HubSpot notes, and fast-moving Slack decisions.',
-      'That made the real bottleneck operational, not just analytical. The system had to filter out structurally wrong investors, surface the right contact at each firm, preserve human review before outreach, and stay aligned with campaign realities like Clay handoff, CRM hygiene, and compliance-sensitive messaging.',
+      'Investor targeting was never just about finding similar names. For each deal, the team had to weigh mandate fit, deal structure, check-size logic, geography, relationship context, and historical notes before deciding who truly belonged on the shortlist.',
+      'The bottleneck was operational as much as analytical. The system needed to rule out poor-fit targets early, surface the right contact at each firm, keep human review in the loop, and support a clean handoff into downstream outreach workflows.',
     ],
     design: [
       'We built Atlas as an internal operating layer for investor matching and outreach preparation. It accepts deal materials or pasted context, applies hard exclusions first, resolves firms to a single champion contact, scores fit across explicit weighted criteria, and uses LLM reasoning over firm-wide notes to explain why a candidate belongs on the shortlist.',
@@ -156,8 +156,6 @@ export const caseStudies: CaseStudy[] = [
     heroImage: {
       src: '/case-studies/investor-matching-capital-partners.png',
       alt: 'MVV Capital Partners and ControlThrive Atlas case study visual',
-      caption:
-        'ControlThrive x MVV Capital Partners. Atlas evolved from a matching prototype into an internal workflow for investor targeting, shortlist review, and outreach preparation.',
     },
     isPublished: true,
   },

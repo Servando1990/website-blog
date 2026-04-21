@@ -90,10 +90,12 @@ const relatedStudies = publishedCaseStudies.filter((study) => study.slug !== cas
               <div class="case-visual__frame">
                 <img src={caseStudy.heroImage.src} alt={caseStudy.heroImage.alt} loading="eager" />
               </div>
-              <figcaption class="case-visual__caption">
-                <span class="case-visual__caption-label">Case study visual</span>
-                <span>{caseStudy.heroImage.caption}</span>
-              </figcaption>
+              {caseStudy.heroImage.caption ? (
+                <figcaption class="case-visual__caption">
+                  <span class="case-visual__caption-label">Case study visual</span>
+                  <span>{caseStudy.heroImage.caption}</span>
+                </figcaption>
+              ) : null}
             </figure>
           ) : null}
         </div>
