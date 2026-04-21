@@ -54,10 +54,10 @@ export const caseStudies: CaseStudy[] = [
     summary:
       'What started as an investor-matching engine became Atlas: a workflow for turning deal materials, CRM history, and private-markets judgment into ranked shortlists and outreach-ready handoff.',
     cardSummary:
-      'A founder-led build that helped MVV move from tacit deal knowledge and fragmented CRM context to a repeatable investor targeting and review workflow.',
+      'A founder-led build that helped MVV move from fragmented CRM context and tacit deal knowledge to a production AI workflow for investor search, review, and handoff.',
     featuredOutcome:
       'A proprietary workflow that moved from scoring experiments to campaign-ready investor shortlists',
-    tags: ['Private markets', 'CRM intelligence', 'Compliance-aware workflow'],
+    tags: ['Private markets', 'LLM systems', 'Agentic workflows'],
     metrics: [
       { value: '10 alpha releases', label: 'shipped in 46 days as campaign pressure increased' },
       { value: '+12 deals', label: 'were active in the operating window' },
@@ -69,11 +69,11 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         label: 'Delivery shape',
-        value: 'Atlas workflow spanning matching, review, exports, and campaign handoff',
+        value: 'Production AI architecture spanning search, reasoning, review, and handoff',
       },
       {
         label: 'Why it worked',
-        value: 'The system encoded real private-capital rules instead of generic lead scoring',
+        value: 'Hybrid rules and LLM reasoning made the shortlist more coherent and defensible',
       },
     ],
     challenge: [
@@ -81,14 +81,14 @@ export const caseStudies: CaseStudy[] = [
       'The bottleneck was operational as much as analytical. The system needed to rule out poor-fit targets early, surface the right contact at each firm, keep human review in the loop, and support a clean handoff into downstream outreach workflows.',
     ],
     design: [
-      'We built Atlas as an internal operating layer for investor matching and outreach preparation. It accepts deal materials or pasted context, applies hard exclusions first, resolves firms to a single champion contact, scores fit across explicit weighted criteria, and uses LLM reasoning over firm-wide notes to explain why a candidate belongs on the shortlist.',
-      'Over time, Atlas absorbed the business knowledge learned in execution: co-invest versus direct distinctions, investor-lead versus active-investor rules, family office / RIA / fund-of-funds / HNWI targeting, deal-type exclusions, and the difference between a warm relationship and a name that merely exists in the CRM. By April, the workflow included UI-based search, history, owner filtering, PDF and Excel exports, and one-at-a-time Clay delivery for safer downstream use.',
+      'We built Atlas as a production AI architecture for investor discovery and outreach preparation. The system combined document intake, structured search setup, deterministic scoring, and LLM-based reasoning over CRM context so each shortlist could be both ranked and explained.',
+      'As the platform matured, it evolved from a scoring prototype into a broader agentic workflow. Shared internal contracts aligned search intent across filtering, ranking, and explanation, while the same run moved through review, exports, and downstream campaign tooling with stronger consistency.',
     ],
     implementationHighlights: [
-      'Hard exclusions ran before scoring, so off-mandate investors like VCs, PE firms, or already-active conversations could be removed outright instead of showing up as misleading low-ranked suggestions.',
-      'Champion-contact selection and firm-level notes aggregation pulled signal from across the firm, which fixed a major early failure mode where the wrong person or incomplete notes distorted the recommendation.',
-      'Behavioral and relationship logic became first-class product rules: a contact only counted as an Active Investor after real two-way dialogue, repeated non-response became a routing signal, and conflicting notes were surfaced rather than buried.',
-      'The product shipped in tight feedback loops with the operating team, reaching 10 alpha releases between March 3 and April 17 while adding auth, scoring controls, large-search reliability, owner filtering, export flows, and hardened runtime secrets under live campaign pressure.',
+      'The architecture separated hard business constraints from LLM judgment, which made the system easier to trust, debug, and improve under real operator feedback.',
+      'Search intent became a shared internal contract across extraction, filtering, ranking, and rationale generation, reducing the drift that often shows up in AI workflows when different stages interpret the same request differently.',
+      'LLMs were used where they added leverage, especially in extraction and CRM reasoning, while deterministic scoring, typed contracts, and evaluation gates kept the shortlist explainable and production-safe.',
+      'The production path combined a serverless UI, backend-for-frontend routes, orchestration flows, document storage, and benchmarking/observability loops, which gave the team a more durable AI product than a prompt-only prototype.',
     ],
     result: [
       'Atlas helped MVV move from ad hoc targeting toward a repeatable system for live deal execution. The team could intake a deal, review a firm-level shortlist with reasoning, export the result, and hand approved targets into campaign workflows without rebuilding context from scratch every time.',
@@ -98,57 +98,57 @@ export const caseStudies: CaseStudy[] = [
       'In private-capital workflows, the hard part is not generating names. It is encoding who actually belongs on the list, why they fit this structure, and how outreach should happen next. The strongest AI systems make that operator judgment reusable.',
     diagram: {
       title: 'Atlas Investor Targeting Workflow',
-      subtitle: 'How deal context, private-markets rules, and CRM history became one reviewable operating flow.',
+      subtitle: 'How search intent, LLM reasoning, and production architecture became one reviewable workflow.',
       steps: [
         {
           id: 'deal-intake',
-          title: 'Deal intake',
-          summary: 'Deal memos or pasted context start the run with explicit search instructions.',
+          title: 'Multi-modal intake',
+          summary: 'Deal materials and search instructions start the run with structured context.',
           detail:
-            'Operators could work from the materials they already had, then add the nuances that mattered for the specific deal structure and target profile.',
+            'The system accepted different input formats so operators could start from existing materials without changing how they worked.',
           tag: 'Input Layer',
           tone: 'source',
           metric: 'PDF or pasted deal brief',
         },
         {
           id: 'structural-filters',
-          title: 'Structural filters',
-          summary: 'Deal-type, lifecycle, and exclusion rules remove the wrong investor categories first.',
+          title: 'Intent contract',
+          summary: 'The search is resolved into a shared internal contract before ranking begins.',
           detail:
-            'Co-invest versus direct logic, exclusions, and CRM state rules kept clearly invalid targets out before any ranking began.',
+            'This contract kept filtering, scoring, and explanation aligned so the shortlist reflected the search more consistently end to end.',
           tag: 'Eligibility',
           tone: 'processing',
-          metric: 'Rule-first filtering',
+          metric: 'Shared search contract',
         },
         {
           id: 'relationship-resolution',
-          title: 'Firm + relationship resolution',
-          summary: 'One champion contact is selected while notes from the whole firm stay in scope.',
+          title: 'Context layer',
+          summary: 'CRM signals, notes, and historical context are consolidated into one reasoning surface.',
           detail:
-            'Firm-level de-duplication and notes aggregation prevented arbitrary contacts from distorting the shortlist and preserved historical relationship memory.',
+            'The platform unified structured CRM data with unstructured notes so LLM reasoning could operate on richer context than a flat contact list.',
           tag: 'Resolution',
           tone: 'processing',
-          metric: 'One line per firm',
+          metric: 'Unified CRM context',
         },
         {
           id: 'fit-scoring',
-          title: 'Explainable fit scoring',
-          summary: 'Remaining firms are ranked on mandate fit, check-size logic, geography, and relationship signals.',
+          title: 'Hybrid ranking engine',
+          summary: 'Deterministic scoring and LLM reasoning work together to rank and explain the shortlist.',
           detail:
-            'Weighted scoring made results inspectable and easy to tune as the team learned more about how different investor types behave.',
+            'The deterministic layer preserved transparency while LLMs added nuance, giving the team both controllability and better narrative reasoning.',
           tag: 'Scoring',
           tone: 'model',
-          metric: 'Weighted fit model',
+          metric: 'Rules + LLMs',
         },
         {
           id: 'review-handoff',
-          title: 'Review and handoff',
-          summary: 'Notes reasoning, exports, and Clay delivery keep the shortlist ready for action.',
+          title: 'Review and outputs',
+          summary: 'The same run supports review, exports, and downstream activation.',
           detail:
-            'The same run could produce review-ready explanations, PDF and Excel outputs, and a safer downstream handoff into campaign operations.',
+            'That kept the product useful beyond ranking alone, turning search runs into assets the team could review, share, and operationalize.',
           tag: 'Outcome',
           tone: 'outcome',
-          metric: 'UI, PDF, Excel, and Clay',
+          metric: 'Review, exports, and handoff',
         },
       ],
     },
