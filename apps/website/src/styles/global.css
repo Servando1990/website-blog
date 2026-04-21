@@ -1043,6 +1043,29 @@
     gap: clamp(1.5rem, 3vw, 2.3rem);
   }
 
+  .case-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .case-readtime {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.38rem 0.72rem;
+    border: 1px solid color-mix(in oklab, var(--page-line) 94%, transparent);
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--page-bg-strong) 88%, transparent);
+    box-shadow: var(--elevation-0);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    color: var(--page-accent-strong);
+  }
+
   .case-hero__lead-grid {
     display: grid;
     gap: clamp(1.4rem, 3vw, 2rem);

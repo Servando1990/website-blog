@@ -19,6 +19,28 @@ if (!caseStudy || !caseStudy.isPublished) {
   throw new Error(`Unknown published case study: ${slug}`);
 }
 
+function countWords(text: string) {
+  return text.trim().split(/\s+/).filter(Boolean).length;
+}
+
+const readTimeSource = [
+  caseStudy.title,
+  caseStudy.summary,
+  caseStudy.featuredOutcome,
+  ...caseStudy.challenge,
+  ...caseStudy.design,
+  ...caseStudy.implementationHighlights,
+  ...caseStudy.result,
+  caseStudy.takeaway,
+  ...caseStudy.facts.flatMap((fact) => [fact.label, fact.value]),
+  ...caseStudy.metrics.flatMap((metric) => [metric.value, metric.label]),
+  caseStudy.diagram.title,
+  caseStudy.diagram.subtitle,
+  ...caseStudy.diagram.steps.flatMap((step) => [step.title, step.summary, step.detail, step.metric]),
+].join(' ');
+
+const readTimeMinutes = Math.max(1, Math.ceil(countWords(readTimeSource) / 220));
+
 const relatedStudies = publishedCaseStudies.filter((study) => study.slug !== caseStudy.slug).slice(0, 2);
 ---
 
@@ -43,7 +65,10 @@ const relatedStudies = publishedCaseStudies.filter((study) => study.slug !== cas
         <div class="case-hero">
           <div class="case-hero__intro">
             <div class="page-stack">
-              <span class="eyebrow">{caseStudy.industry}</span>
+              <div class="case-hero__meta">
+                <span class="eyebrow">{caseStudy.industry}</span>
+                <span class="case-readtime">{readTimeMinutes} min read</span>
+              </div>
               <h1 class="display-title display-title--compact">{caseStudy.title}</h1>
             </div>
 
