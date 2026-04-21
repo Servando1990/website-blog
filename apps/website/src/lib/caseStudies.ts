@@ -92,7 +92,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     result: [
       'Atlas helped MVV move from ad hoc targeting toward a repeatable system for live deal execution. The team could intake a deal, review a firm-level shortlist with reasoning, export the result, and hand approved targets into campaign workflows without rebuilding context from scratch every time.',
-      'The business value went beyond ranking accuracy. The project turned tacit knowledge about investor types, co-investment structures, outreach sequencing, compliance boundaries, and CRM governance into reusable operating logic. That made the system more credible internally and more useful in client-facing conversations, while the surrounding process supported active work across 12 deals and the AiOla campaign logged multiple positive replies within days.',
+      'The business value went beyond ranking accuracy. The project turned tacit knowledge about investor types, deal structures, outreach sequencing, and CRM governance into reusable operating logic. That made the system more credible internally and more useful in client-facing conversations.',
     ],
     takeaway:
       'In private-capital workflows, the hard part is not generating names. It is encoding who actually belongs on the list, why they fit this structure, and how outreach should happen next. The strongest AI systems make that operator judgment reusable.',
