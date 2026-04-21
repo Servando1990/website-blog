@@ -86,9 +86,9 @@ export const caseStudies: CaseStudy[] = [
     ],
     implementationHighlights: [
       'The architecture separated hard business constraints from LLM judgment, which made the system easier to trust, debug, and improve under real operator feedback.',
-      'Search intent became a shared internal contract across extraction, filtering, ranking, and rationale generation, reducing the drift that often shows up in AI workflows when different stages interpret the same request differently.',
-      'LLMs were used where they added leverage, especially in extraction and CRM reasoning, while deterministic scoring, typed contracts, and evaluation gates kept the shortlist explainable and production-safe.',
-      'The production path combined a serverless UI, backend-for-frontend routes, orchestration flows, document storage, and benchmarking/observability loops, which gave the team a more durable AI product than a prompt-only prototype.',
+      'The system kept one consistent interpretation of the search from intake through ranking and explanation, which made results feel more coherent.',
+      'AI was used where it added the most leverage, especially in extracting deal context and interpreting CRM history, while the ranking stayed grounded in clear logic.',
+      'Atlas evolved into real production software the team could review, export, and use in live execution, rather than a one-off AI prototype.',
     ],
     result: [
       'Atlas helped MVV move from ad hoc targeting toward a repeatable system for live deal execution. The team could intake a deal, review a firm-level shortlist with reasoning, export the result, and hand approved targets into campaign workflows without rebuilding context from scratch every time.',
