@@ -61,7 +61,6 @@ export const caseStudies: CaseStudy[] = [
     metrics: [
       { value: '10 alpha releases', label: 'shipped in 46 days as campaign pressure increased' },
       { value: '12 deals', label: 'were active in the operating window captured in April' },
-      { value: '6+ positive replies', label: 'logged in the first AiOla response wave' },
     ],
     facts: [
       {
