@@ -49,12 +49,12 @@ export interface CaseStudy {
 export const caseStudies: CaseStudy[] = [
   {
     slug: 'ai-investor-matching-platform-capital-advisory',
-    title: 'How MVV Capital Partners operationalized investor targeting with Atlas',
+    title: 'How a private capital advisory firm operationalized investor targeting',
     industry: 'Private Capital Advisory',
     summary:
-      'What started as an investor-matching engine became Atlas: a workflow for turning deal materials, CRM history, and private-markets judgment into ranked shortlists and outreach-ready handoff.',
+      'What started as an investor-matching engine became a workflow for turning deal materials, CRM history, and private-markets judgment into ranked shortlists and outreach-ready handoff.',
     cardSummary:
-      'A founder-led build that helped MVV move from fragmented CRM context and tacit deal knowledge to a production AI workflow for investor search, review, and handoff.',
+      'A founder-led build that helped a private capital advisory team move from fragmented CRM context and tacit deal knowledge to a production AI workflow for investor search, review, and handoff.',
     featuredOutcome:
       'A proprietary workflow that moved from scoring experiments to campaign-ready investor shortlists',
     tags: ['Private markets', 'LLM systems', 'Agentic workflows'],
@@ -81,23 +81,23 @@ export const caseStudies: CaseStudy[] = [
       'The bottleneck was operational as much as analytical. The system needed to rule out poor-fit targets early, surface the right contact at each firm, keep human review in the loop, and support a clean handoff into downstream outreach workflows.',
     ],
     design: [
-      'We built Atlas as a production AI architecture for investor discovery and outreach preparation. The system combined document intake, structured search setup, deterministic scoring, and LLM-based reasoning over CRM context so each shortlist could be both ranked and explained.',
+      'We built a production AI architecture for investor discovery and outreach preparation. The system combined document intake, structured search setup, deterministic scoring, and LLM-based reasoning over CRM context so each shortlist could be both ranked and explained.',
       'As the platform matured, it evolved from a scoring prototype into a broader agentic workflow. Shared internal contracts aligned search intent across filtering, ranking, and explanation, while the same run moved through review, exports, and downstream campaign tooling with stronger consistency.',
     ],
     implementationHighlights: [
       'The architecture separated hard business constraints from LLM judgment, which made the system easier to trust, debug, and improve under real operator feedback.',
       'The system kept one consistent interpretation of the search from intake through ranking and explanation, which made results feel more coherent.',
       'AI was used where it added the most leverage, especially in extracting deal context and interpreting CRM history, while the ranking stayed grounded in clear logic.',
-      'Atlas evolved into real production software the team could review, export, and use in live execution, rather than a one-off AI prototype.',
+      'The workflow evolved into real production software the team could review, export, and use in live execution, rather than a one-off AI prototype.',
     ],
     result: [
-      'Atlas helped MVV move from ad hoc targeting toward a repeatable system for live deal execution. The team could intake a deal, review a firm-level shortlist with reasoning, export the result, and hand approved targets into campaign workflows without rebuilding context from scratch every time.',
+      'The workflow helped the firm move from ad hoc targeting toward a repeatable system for live deal execution. The team could intake a deal, review a firm-level shortlist with reasoning, export the result, and hand approved targets into campaign workflows without rebuilding context from scratch every time.',
       'The business value went beyond ranking accuracy. The project turned tacit knowledge about investor types, deal structures, outreach sequencing, and CRM governance into reusable operating logic. That made the system more credible internally and more useful in client-facing conversations.',
     ],
     takeaway:
       'In private-capital workflows, the hard part is not generating names. It is encoding who actually belongs on the list, why they fit this structure, and how outreach should happen next. The strongest AI systems make that operator judgment reusable.',
     diagram: {
-      title: 'Atlas Investor Targeting Workflow',
+      title: 'Investor Targeting Workflow',
       subtitle: 'How search intent, LLM reasoning, and production architecture became one reviewable workflow.',
       steps: [
         {
@@ -151,10 +151,6 @@ export const caseStudies: CaseStudy[] = [
           metric: 'Review, exports, and handoff',
         },
       ],
-    },
-    heroImage: {
-      src: '/case-studies/investor-matching-capital-partners.png',
-      alt: 'MVV Capital Partners and ControlThrive Atlas case study visual',
     },
     isPublished: true,
   },
