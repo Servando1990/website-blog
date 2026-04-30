@@ -155,7 +155,6 @@ export const trustPrinciples = [
 ];
 
 export const founderProfile = {
-  title: 'I work best as a true partner, not another vendor.',
   paragraphs: [
     'My approach is built on high agency, deep ownership, and a bias toward tangible outcomes. If I take responsibility for something, I stay with it until there is a real result: something shipped, improved, clarified, automated, or made useful. I do not believe in vague promises or work that sounds impressive but never becomes value someone can actually feel.',
     'The business comes first. Tools, frameworks, and platforms are secondary. What matters is understanding the business context deeply enough that I can operate almost like an extension of the team: absorbing the domain knowledge, translating it into systems, and coming back with concrete progress.',
