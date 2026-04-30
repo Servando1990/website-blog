@@ -20,8 +20,8 @@ const testimonials = [
   {
     text: "Servando has a great knack for data science, and building ML systems that stand up in real-world environments. We worked on recommendation systems together.",
     authorName: "Ed Mattia",
-    position: "AI Engineer",
-    companyName: "Outerbounds"
+    position: "Head of AI",
+    companyName: "Outerbounds (acq. by Anaconda)"
   }
 ];
 
