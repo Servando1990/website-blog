@@ -155,11 +155,11 @@ export const trustPrinciples = [
 ];
 
 export const founderProfile = {
-  title: 'A founder-led partner for private capital workflows.',
+  title: 'A high-agency partner who stays close to the business.',
   summary:
-    'You work directly with Servando Torres from the first conversation through delivery. The goal is straightforward: make the workflow clear, build the right system, and keep the team confident through rollout.',
+    'You work directly with Servando Torres from the first conversation through delivery. If a workflow becomes my responsibility, I stay with it until there is a tangible result: something shipped, clarified, automated, or made useful enough for the team to feel the value.',
   note:
-    'Most clients do not need more jargon. They need a technical partner who can understand judgment-heavy work, explain tradeoffs clearly, and stay close enough to make the system stick.',
+    'The business context comes first. Tools are only useful when they preserve the judgment, decisions, and operating knowledge behind the work. The best partnerships align on the goal, keep the path flexible, and turn every useful artifact into context the product can learn from.',
 };
 
 export const partnerNetwork = [
