@@ -168,8 +168,9 @@ const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
         <div class="founder-note">
           <span class="eyebrow">Who you work with</span>
           <h2 class="section-title">{founderProfile.title}</h2>
-          <p class="supporting-copy">{founderProfile.summary}</p>
-          <p class="supporting-copy">{founderProfile.note}</p>
+          {founderProfile.paragraphs.map((paragraph) => (
+            <p class="supporting-copy">{paragraph}</p>
+          ))}
           <div class="hero-actions">
             <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
               Talk to Servando
