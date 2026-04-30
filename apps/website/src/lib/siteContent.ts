@@ -155,11 +155,11 @@ export const trustPrinciples = [
 ];
 
 export const founderProfile = {
-  title: 'A high-agency partner who stays close to the business.',
+  title: 'I work best as a true partner, not another vendor.',
   summary:
-    'You work directly with Servando Torres from the first conversation through delivery. If a workflow becomes my responsibility, I stay with it until there is a tangible result: something shipped, clarified, automated, or made useful enough for the team to feel the value.',
+    'I stay close to the business, the people who hold the context, and the decisions the software is meant to support. Tools matter only when they help turn that knowledge into something useful.',
   note:
-    'The business context comes first. Tools are only useful when they preserve the judgment, decisions, and operating knowledge behind the work. The best partnerships align on the goal, keep the path flexible, and turn every useful artifact into context the product can learn from.',
+    'If I take ownership of a workflow, I stay with it until there is something real to show: a clearer decision, a working product, an automated process, or a better operating rhythm. We align on the goal, keep the path flexible, and build from the context the company already creates every day.',
 };
 
 export const partnerNetwork = [
