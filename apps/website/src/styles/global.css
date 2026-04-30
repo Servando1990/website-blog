@@ -768,72 +768,6 @@
     color: var(--page-muted);
   }
 
-  .pydantic-banner {
-    background:
-      linear-gradient(
-        180deg,
-        color-mix(in oklab, var(--page-bg-strong) 92%, white) 0%,
-        color-mix(in oklab, var(--page-bg) 96%, white) 100%
-      );
-  }
-
-  .pydantic-foundation {
-    display: grid;
-    gap: clamp(1.5rem, 3vw, 2.75rem);
-    padding: 0;
-  }
-
-  .pydantic-foundation__title {
-    max-width: 11ch;
-  }
-
-  .pydantic-foundation__body {
-    display: grid;
-    gap: 1.1rem;
-    align-content: end;
-  }
-
-  .pydantic-foundation__logo {
-    width: min(100%, clamp(13rem, 28vw, 18rem));
-    color: var(--page-ink);
-  }
-
-  .pydantic-foundation__logo svg {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .pydantic-foundation__statement {
-    margin: 0;
-    max-width: 28rem;
-    font-size: clamp(1.05rem, 1.7vw, 1.22rem);
-    line-height: 1.55;
-    color: var(--page-ink);
-  }
-
-  .pydantic-foundation__rail {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.65rem;
-  }
-
-  .pydantic-foundation__item {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.55rem 0.85rem;
-    border: 1px solid color-mix(in oklab, var(--page-line) 96%, transparent);
-    border-radius: 999px;
-    background: color-mix(in oklab, var(--page-bg) 84%, transparent);
-    box-shadow: var(--elevation-0);
-    color: var(--page-ink);
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    line-height: 1;
-  }
-
   .featured-study-list {
     @apply grid gap-8;
   }
@@ -1310,13 +1244,6 @@
   .micro-label {
     @apply text-xs font-medium uppercase tracking-[0.12em];
     color: var(--page-muted);
-  }
-}
-
-@media (min-width: 900px) {
-  .pydantic-foundation {
-    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.92fr);
-    align-items: end;
   }
 }
 

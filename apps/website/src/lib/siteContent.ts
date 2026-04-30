@@ -163,10 +163,3 @@ export const founderProfile = {
     'I am most interested in long-term partnerships where we are genuinely on the same side: thinking clearly, moving fast, and building something that keeps getting better.',
   ],
 };
-
-export const partnerNetwork = [
-  {
-    name: 'Pydantic',
-    href: 'https://pydantic.dev/',
-  },
-];
