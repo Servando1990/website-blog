@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an Astro-based website for ControlThrive - an AI/ML consulting business founded by Servando Torres. The project has been modernized from vanilla HTML/JS to use Astro with Tailwind CSS and shadcn/ui components.
+This is an Astro-based website for controlthrive - an AI/ML consulting business founded by Servando Torres. The project has been modernized from vanilla HTML/JS to use Astro with Tailwind CSS and shadcn/ui components.
 
 - **Main website** (Astro) - Modern marketing site with services, testimonials, and contact information
 - **Coming soon page** (`coming-soon.html`) - Legacy simple landing page with embedded calendar booking

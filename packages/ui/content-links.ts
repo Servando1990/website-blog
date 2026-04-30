@@ -36,7 +36,7 @@ export const blogPosts: Record<string, ContentReference> = {
 // Website pages that can be referenced in blog posts
 export const websitePages: Record<string, ContentReference> = {
   'home': {
-    title: 'ControlThrive - AI Consulting Services',
+    title: 'controlthrive - AI Consulting Services',
     url: 'https://controlthrive.com',
     description: 'Transform AI/ML confusion into competitive advantage with strategic consulting and RAG implementation training.',
     type: 'website-page',

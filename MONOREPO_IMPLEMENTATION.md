@@ -20,7 +20,7 @@ website-blog/
 ├── DEPLOYMENT.md               # Deployment guide for both apps
 ├── MONOREPO_IMPLEMENTATION.md  # This document
 ├── apps/
-│   ├── website/               # ControlThrive marketing site (controlthrive.com)
+│   ├── website/               # controlthrive marketing site (controlthrive.com)
 │   │   ├── src/components/    # All existing components preserved
 │   │   ├── vercel.json        # Updated for monorepo builds
 │   │   └── package.json       # Updated with shared UI dependency
@@ -104,7 +104,7 @@ website-blog/
 
 ### **Blog → Website Integration**:
 - Added professional services callout in AI guide blog post
-- Direct link to ControlThrive consulting services
+- Direct link to controlthrive consulting services
 - Maintains separate domains while cross-promoting
 
 ### **Shared Utilities**:

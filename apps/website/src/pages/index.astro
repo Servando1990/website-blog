@@ -1,128 +1,233 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import TrustedBy from '../components/TrustedBy.astro';
-import SocialProof from '../components/SocialProof';
-import Solutions from '../components/Solutions-Option3.astro';
-import Industries from '../components/Industries.astro';
-import TestimonialSquares from '../components/TestimonialSquares';
-import Partners from '../components/Partners-Option3.astro';
-import ProfileSection from '../components/ProfileSection.astro';
 import Footer from '../components/Footer.astro';
+import { HeroAsciiField } from '../components/HeroAsciiField';
+import {
+  bookingUrl,
+  founderProfile,
+  serviceAreas,
+  testimonials,
+  trustPrinciples,
+  trustedCompanies,
+} from '../lib/siteContent';
+import { publishedCaseStudies } from '../lib/caseStudies';
+
+const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
 ---
 
 <Layout
-  title="controlthrive - Strategic AI Solutions"
-  description="AI partners that understand, ship, and stay."
-  ogImage="https://www.controlthrive.com/api/og/home.png"
+  title="controlthrive | Software Partner for Private Capital Teams"
+  description="Founder-led software partner for private capital teams that need clearer investor workflows, portfolio monitoring, and internal systems that hold up in practice."
+  ogImage="/api/og/home.png"
 >
   <Header />
-  
-  <main class="home-visual visual-2-home">
-    <Hero />
-    <SocialProof client:load />
-    <TrustedBy />
-    <Solutions />
-    <Industries />
-    <TestimonialSquares client:load />
-    <ProfileSection />
-    <Partners />
+
+  <main class="site-main">
+    <section class="section-frame">
+      <div class="site-container">
+        <div class="hero-shell page-stack">
+          <div class="hero-grid">
+            <div class="hero-copy hero-copy--wide">
+              <span class="eyebrow">Founder-led software partner for private capital</span>
+              <h1 class="display-title">
+                We partner with private capital teams to turn their context into production AI
+              </h1>
+              <p class="lede">
+                From investor targeting and portfolio monitoring to internal research workflows,
+                controlthrive helps firms turn high-context processes into systems people can
+                actually use and trust.
+              </p>
+              <div class="hero-actions">
+                <a
+                  class="button-primary"
+                  href={bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Book a founder call
+                </a>
+                <a class="button-secondary" href="/case-studies">
+                  See private capital work
+                </a>
+              </div>
+            </div>
+
+            <HeroAsciiField client:load />
+          </div>
+
+          <div class="trust-strip">
+            <span class="trust-strip__label">Experience across finance, advisory, and operating teams</span>
+            <div class="trust-strip__list">
+              {trustedCompanies.map((company) => (
+                <span>{company}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container editorial-grid">
+        <div class="page-stack">
+          <span class="eyebrow">Where we usually help</span>
+          <h2 class="section-title">A narrower wedge, built for real workflows.</h2>
+          <p class="supporting-copy max-w-[34rem]">
+            The work is most effective when the team already knows the process matters, but needs a
+            partner who can make the software path concrete without flattening the business logic.
+          </p>
+        </div>
+
+        <div class="stack-list">
+          {serviceAreas.map((service) => (
+            <article class="service-block">
+              <h3>{service.title}</h3>
+              <p>{service.summary}</p>
+              <p class="mt-3">{service.detail}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+    <section class="section-frame section-divider">
+      <div class="site-container page-stack">
+        <div class="page-intro">
+          <span class="eyebrow">Selected work</span>
+          <h2 class="section-title">Private capital workflows, made operational.</h2>
+          <p class="supporting-copy max-w-[40rem]">
+            These are the kinds of systems we build when investor teams, research groups, and
+            advisory operators need software that respects source material and still moves quickly.
+          </p>
+        </div>
+
+        <div class="featured-study-list">
+          {featuredCaseStudies.map((study) => (
+            <article class="featured-study">
+              <div class="page-stack gap-4">
+                <span class="label-chip">{study.industry}</span>
+                <p class="featured-study__outcome">{study.featuredOutcome}</p>
+              </div>
+
+              <div class="page-stack gap-5">
+                <h3 class="text-[2rem] md:text-[2.5rem]">{study.title}</h3>
+                <p class="featured-study__summary">{study.cardSummary}</p>
+                <div class="hero-actions">
+                  <a class="button-primary" href={`/case-studies/${study.slug}`}>
+                    Read the case study
+                  </a>
+                  <a class="button-ghost" href="/case-studies">
+                    View all work
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container editorial-grid">
+        <div class="page-stack">
+          <span class="eyebrow">Client perspective</span>
+          <h2 class="section-title">Built for teams that want a partner, not a pitch.</h2>
+          <p class="supporting-copy max-w-[36rem]">
+            The work tends to land best when the team needs a clear technical counterpart who can
+            stay close to the workflow, explain tradeoffs plainly, and ship something people
+            actually trust.
+          </p>
+        </div>
+
+        <div class="testimonial-grid">
+          {testimonials.map((testimonial) => (
+            <article class="testimonial-card">
+              <p class="testimonial-card__quote">“{testimonial.quote}”</p>
+              <div class="testimonial-card__meta">
+                <strong>{testimonial.name}</strong>
+                <span>
+                  {testimonial.role}, {testimonial.company}
+                </span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container founder-grid">
+        <div class="founder-photo">
+          <img src="/profile-pic.jpg" alt="Portrait of Servando Torres, founder of controlthrive" />
+        </div>
+
+        <div class="founder-note">
+          {founderProfile.paragraphs.map((paragraph) => (
+            <p class="supporting-copy">{paragraph}</p>
+          ))}
+          <div class="hero-actions">
+            <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+              Talk to Servando
+            </a>
+            <a class="button-secondary" href="/case-studies">
+              Explore the work
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container editorial-grid">
+        <div class="page-stack">
+          <span class="eyebrow">Built for trust</span>
+          <h2 class="section-title">A quieter way to make software decisions feel safer.</h2>
+          <p class="supporting-copy max-w-[36rem]">
+            The point is to help a team move with more confidence, not to hide the process behind
+            a louder interface or a vague promise about AI.
+          </p>
+        </div>
+
+        <div class="stack-list">
+          {trustPrinciples.map((principle) => (
+            <article class="service-block">
+              <h3>{principle.title}</h3>
+              <p>{principle.summary}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame section-divider">
+      <div class="site-container">
+        <div class="cta-band">
+          <div class="cta-band__grid">
+            <div class="page-stack">
+              <span class="eyebrow">Next step</span>
+              <h2 class="section-title">
+                If the workflow matters, the software path should feel clear.
+              </h2>
+              <p class="supporting-copy max-w-[36rem]">
+                Bring the investor coverage, monitoring, or internal workflow you are trying to
+                improve. We can sort out what deserves a product, what needs a lighter layer, and
+                how to move without adding more noise.
+              </p>
+            </div>
+
+            <div class="page-stack lg:items-end">
+              <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+                Book a founder call
+              </a>
+              <a class="button-secondary" href="mailto:servando@controlthrive.com">
+                Email controlthrive
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
-  
+
   <Footer />
 </Layout>
-
-<style is:global>
-  .visual-2-home {
-    background-color: hsl(var(--background));
-  }
-
-  .visual-2-home h1,
-  .visual-2-home h2,
-  .visual-2-home h3 {
-    font-family: var(--font-serif), ui-serif, Georgia, serif !important;
-    letter-spacing: -0.01em;
-  }
-
-  .visual-2-home section {
-    position: relative;
-  }
-
-  .visual-2-home section::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: min(86rem, 94vw);
-    transform: translateX(-50%);
-    border-top: 1px solid rgba(161, 161, 170, 0.22);
-    pointer-events: none;
-  }
-
-  .dark .visual-2-home section::before {
-    border-top-color: rgba(113, 113, 122, 0.35);
-  }
-
-  .visual-2-home #home .mx-auto {
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  .visual-2-home #social-proof .rounded-2xl,
-  .visual-2-home #trusted-by .rounded-2xl {
-    background: transparent !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  .visual-2-home #social-proof .rounded-xl,
-  .visual-2-home #solutions .group,
-  .visual-2-home #industries .group,
-  .visual-2-home #trusted-by .group,
-  .visual-2-home #testimonial-squares .grid > div,
-  .visual-2-home #profile-section .relative {
-    background: transparent !important;
-    border: 0 !important;
-    border-bottom: 1px solid rgba(161, 161, 170, 0.35) !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
-  }
-
-  .dark .visual-2-home #social-proof .rounded-xl,
-  .dark .visual-2-home #solutions .group,
-  .dark .visual-2-home #industries .group,
-  .dark .visual-2-home #trusted-by .group,
-  .dark .visual-2-home #testimonial-squares .grid > div,
-  .dark .visual-2-home #profile-section .relative {
-    border-bottom-color: rgba(82, 82, 91, 0.75) !important;
-  }
-
-  .visual-2-home #industries .group:hover,
-  .visual-2-home #solutions .group:hover,
-  .visual-2-home #testimonial-squares .grid > div:hover,
-  .visual-2-home #trusted-by .group:hover {
-    transform: none !important;
-    background: transparent !important;
-  }
-
-  .visual-2-home #home .pointer-events-none {
-    display: none !important;
-  }
-
-  .visual-2-home #home .inline-flex.rounded-full,
-  .visual-2-home #home .h-11 {
-    border-radius: 0 !important;
-  }
-</style>

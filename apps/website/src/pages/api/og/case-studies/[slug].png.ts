@@ -1,20 +1,11 @@
 import type { APIRoute } from 'astro';
 import { ImageResponse } from '@vercel/og';
-import { caseStudies, getCaseStudyBySlug } from '../../../../lib/caseStudies';
-
-const logoSvg = `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
-  <path d="M44 184V270H420" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M420 270L344 224M420 270L344 316" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-`;
-
-const logoDataUri = `data:image/svg+xml;base64,${Buffer.from(logoSvg).toString('base64')}`;
+import { getCaseStudyBySlug, publishedCaseStudies } from '../../../../lib/caseStudies';
 
 function getTitleFontSize(title: string): number {
-  if (title.length > 54) return 62;
-  if (title.length > 42) return 70;
-  return 78;
+  if (title.length > 54) return 54;
+  if (title.length > 42) return 62;
+  return 68;
 }
 
 export const GET: APIRoute = async ({ params }) => {
@@ -25,7 +16,7 @@ export const GET: APIRoute = async ({ params }) => {
   }
 
   const caseStudy = getCaseStudyBySlug(slug);
-  if (!caseStudy) {
+  if (!caseStudy || !caseStudy.isPublished) {
     return new Response('Case study not found', { status: 404 });
   }
 
@@ -41,70 +32,12 @@ export const GET: APIRoute = async ({ params }) => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: '#000000',
-          color: '#FFFFFF',
+          background: '#ffffff',
+          color: '#111111',
           padding: '54px 64px',
-          fontFamily: '"Geist", "Inter", "Segoe UI", sans-serif',
-          position: 'relative',
+          fontFamily: '"Inter", "Segoe UI", sans-serif',
         },
         children: [
-          {
-            type: 'div',
-            props: {
-              style: {
-                display: 'flex',
-                alignItems: 'center',
-                gap: '22px',
-              },
-              children: [
-                {
-                  type: 'img',
-                  props: {
-                    src: logoDataUri,
-                    width: 86,
-                    height: 86,
-                  },
-                },
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontSize: '30px',
-                      fontWeight: '700',
-                      letterSpacing: '0.16em',
-                    },
-                    children: 'CONTROLTHRIVE',
-                  },
-                },
-              ],
-            },
-          },
-          {
-            type: 'div',
-            props: {
-              style: {
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '20px',
-                maxWidth: '1000px',
-              },
-              children: [
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontSize: `${titleFontSize}px`,
-                      lineHeight: '1.05',
-                      fontWeight: '800',
-                      letterSpacing: '-0.03em',
-                      textTransform: 'uppercase',
-                    },
-                    children: caseStudy.title,
-                  },
-                },
-              ],
-            },
-          },
           {
             type: 'div',
             props: {
@@ -118,34 +51,160 @@ export const GET: APIRoute = async ({ params }) => {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '24px',
-                      fontWeight: '600',
-                      opacity: '0.98',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '16px',
+                    },
+                    children: [
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            width: '60px',
+                            height: '60px',
+                            borderRadius: '16px',
+                            border: '1px solid #E5E7EB',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '26px',
+                            fontWeight: '500',
+                            color: '#84B067',
+                            letterSpacing: '-0.03em',
+                          },
+                          children: 'CT',
+                        },
+                      },
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '4px',
+                          },
+                          children: [
+                            {
+                              type: 'div',
+                              props: {
+                                style: {
+                                  fontSize: '30px',
+                                  fontWeight: '500',
+                                  letterSpacing: '-0.03em',
+                                },
+                                children: 'controlthrive',
+                              },
+                            },
+                            {
+                              type: 'div',
+                              props: {
+                                style: {
+                                  fontSize: '18px',
+                                  color: '#6B7280',
+                                },
+                                children: caseStudy.industry,
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      padding: '10px 18px',
+                      borderRadius: '999px',
+                      border: '1px solid #E5E7EB',
+                      color: '#6B7280',
+                      fontSize: '18px',
+                      fontWeight: '500',
+                      textTransform: 'uppercase',
                       letterSpacing: '0.1em',
                     },
-                    children: 'CASE STUDY',
+                    children: 'Case Study',
                   },
                 },
+              ],
+            },
+          },
+          {
+            type: 'div',
+            props: {
+              style: {
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '24px',
+                maxWidth: '1000px',
+              },
+              children: [
                 {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '22px',
-                      fontWeight: '600',
-                      padding: '10px 18px',
-                      borderRadius: '9999px',
-                      border: '1px solid rgba(255, 255, 255, 0.45)',
-                      background: 'rgba(255, 255, 255, 0.1)',
+                      fontSize: `${titleFontSize}px`,
+                      lineHeight: '1.04',
+                      letterSpacing: '-0.04em',
+                      fontWeight: '500',
                     },
-                    children: caseStudy.industry,
+                    children: caseStudy.title,
                   },
                 },
                 {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '22px',
-                      opacity: '0.84',
+                      fontSize: '28px',
+                      lineHeight: '1.55',
+                      color: '#6B7280',
+                      maxWidth: '930px',
+                    },
+                    children: caseStudy.summary,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            type: 'div',
+            props: {
+              style: {
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '18px',
+              },
+              children: [
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      display: 'flex',
+                      gap: '12px',
+                      flexWrap: 'wrap',
+                    },
+                    children: caseStudy.tags.slice(0, 3).map((tag) => ({
+                      type: 'div',
+                      props: {
+                        style: {
+                          fontSize: '18px',
+                          color: '#6B7280',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.1em',
+                        },
+                        children: tag,
+                      },
+                    })),
+                  },
+                },
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      fontSize: '20px',
+                      color: '#6B7280',
                     },
                     children: 'controlthrive.com',
                   },
@@ -164,7 +223,7 @@ export const GET: APIRoute = async ({ params }) => {
 };
 
 export async function getStaticPaths() {
-  return caseStudies.map((caseStudy) => ({
+  return publishedCaseStudies.map((caseStudy) => ({
     params: { slug: caseStudy.slug },
   }));
 }

@@ -1,7 +1,7 @@
 {
   "name": "website-blog-monorepo",
   "version": "1.0.0",
-  "description": "ControlThrive website and blog monorepo with shared design system",
+  "description": "controlthrive website and blog monorepo with shared design system",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -30,5 +30,8 @@
   "devDependencies": {
     "@types/node": "^20.10.0",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@chenglou/pretext": "^0.0.5"
   }
 }
