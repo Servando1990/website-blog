@@ -163,10 +163,10 @@ export const trustPrinciples = [
 
 export const founderProfile = {
   paragraphs: [
-    'My approach is built on high agency, deep ownership, and a bias toward tangible outcomes. If I take responsibility for something, I stay with it until there is a real result: something shipped, improved, clarified, automated, or made useful. I do not believe in vague promises or work that sounds impressive but never becomes value someone can actually feel.',
-    'The business comes first. Tools, frameworks, and platforms are secondary. What matters is understanding the business context deeply enough that I can operate almost like an extension of the team: absorbing the domain knowledge, translating it into systems, and coming back with concrete progress.',
-    'I believe the best companies are becoming living knowledge systems. Every conversation, transcript, Slack message, decision, and customer interaction becomes part of the shared context that can help the product improve. My job is to help capture that context and turn it into useful artifacts, workflows, and products that compound over time.',
-    'The goal matters more than the plan. Building has become faster, more fluid, and more dynamic, so alignment is everything. Once we are clear on where we are going, the path can adapt quickly.',
-    'I am most interested in long-term partnerships where we are genuinely on the same side: thinking clearly, moving fast, and building something that keeps getting better.',
+    'My approach is built on high agency, deep ownership, and a bias toward tangible outcomes. Responsibility means staying with the work until there is a real result: something shipped, improved, clarified, automated, or made useful. I do not believe in vague promises or work that sounds impressive but never becomes value someone can actually feel.',
+    'The business comes first. Tools are secondary. What matters is understanding the business context deeply enough to operate almost like an extension of the team: absorbing the domain knowledge, translating it into systems, and sharing progress repeatedly.',
+    'The best companies are becoming living knowledge bases. Every conversation, transcript, Slack message, decision, and customer interaction becomes part of the shared context that can help the product improve. My job is to capture that context and turn it into useful artifacts, workflows, and products that compound over time.',
+    'The goal matters more than the plan. Building has become faster, more fluid, and more dynamic, so alignment is everything. Once the destination is clear, the path can adapt quickly.',
+    'The strongest partnerships are long-term ones where both sides are genuinely on the same side: thinking clearly, moving fast, and building something that keeps getting better.',
   ],
 };
