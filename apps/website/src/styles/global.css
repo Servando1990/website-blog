@@ -826,15 +826,23 @@
   }
 
   .testimonial-grid {
-    @apply grid gap-6 md:grid-cols-2;
+    @apply grid gap-4;
   }
 
   .testimonial-card {
-    @apply flex h-full flex-col gap-4 rounded-[1.2rem] border p-5;
+    @apply grid gap-5 rounded-[1.2rem] border p-5 md:p-6;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
     background: var(--page-surface);
     box-shadow: var(--elevation-1);
     transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  @media (min-width: 768px) {
+    .testimonial-card {
+      grid-template-columns: minmax(0, 1fr) minmax(13rem, 16rem);
+      column-gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: stretch;
+    }
   }
 
   .testimonial-card:hover {
@@ -843,13 +851,21 @@
   }
 
   .testimonial-card__quote {
-    @apply text-base;
-    line-height: 1.65;
+    @apply max-w-[74ch] text-base;
+    line-height: 1.7;
     color: var(--page-ink);
   }
 
   .testimonial-card__meta {
-    @apply mt-auto flex flex-col gap-1;
+    @apply flex flex-col gap-1;
+  }
+
+  @media (min-width: 768px) {
+    .testimonial-card__meta {
+      justify-content: end;
+      border-left: 1px solid color-mix(in oklab, var(--page-line) 88%, transparent);
+      padding-left: clamp(1rem, 2vw, 1.5rem);
+    }
   }
 
   .testimonial-card__meta strong {

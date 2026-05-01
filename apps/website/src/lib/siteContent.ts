@@ -115,21 +115,21 @@ export const testimonials = [
   },
   {
     quote:
-      'Servando helped our team at Orange turn complex data into business insight that directly shaped better decisions and improved how we operated.',
+      'Servando helped our team at Orange transform complex datasets into actionable business insights that directly informed our strategic decisions and enhanced operational efficiency. His proactive approach to identifying improvement areas and implementing AI solutions consistently delivered measurable value to stakeholders.',
     name: 'Pedro San Inocencio',
     role: 'Director',
     company: 'Orange',
   },
   {
     quote:
-      'Servando built the AI matching workflow that became core to our process. It reduced duplicates by more than 70% and removed a meaningful amount of manual effort.',
+      'Servando developed from scratch a  AI-matching solution that formed the core of our data processing capabilities, demonstrating strong technical skills and a structured approach that directly contributed to project success. The solutions lead to 70%+ reduction in duplicates and +1 FTE worth of manual effort eliminated.',
     name: 'Kamil Kapturkiewicz',
     role: 'Founder',
     company: 'Databris',
   },
   {
     quote:
-      'Servando helped improve our lending algorithms and identify high-impact issues in our fraud system. His work delivered results that made a real difference to our business outcomes.',
+      'Servando helped improved our lending algorithms and helped us find high impact issues in our fraud system. His contributions delivered high-impact results that made a real difference to our business outcomes.',
     name: 'Francisco Llaneza',
     role: 'Principal Data Scientist',
     company: 'Fintonic',
