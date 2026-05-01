@@ -825,23 +825,34 @@
     color: var(--page-muted);
   }
 
+  .testimonial-section {
+    @apply grid gap-8;
+  }
+
+  .testimonial-section .section-title {
+    max-width: 16ch;
+  }
+
   .testimonial-grid {
-    @apply grid gap-4;
+    @apply flex gap-4 overflow-x-auto pb-3;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--page-accent) 35%, transparent) transparent;
   }
 
   .testimonial-card {
-    @apply grid gap-5 rounded-[1.2rem] border p-5 md:p-6;
+    @apply flex flex-col gap-5 rounded-[1.2rem] border p-5 md:p-6;
+    flex: 0 0 min(34rem, calc(100vw - 3rem));
+    scroll-snap-align: start;
     border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
     background: var(--page-surface);
     box-shadow: var(--elevation-1);
     transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .testimonial-card {
-      grid-template-columns: minmax(10.5rem, 14rem) minmax(0, 1fr);
-      column-gap: clamp(1.25rem, 3vw, 2.25rem);
-      align-items: start;
+      flex-basis: clamp(30rem, 43vw, 36rem);
     }
   }
 
@@ -851,30 +862,14 @@
   }
 
   .testimonial-card__quote {
-    @apply max-w-none text-base;
-    line-height: 1.62;
+    @apply max-w-none text-sm md:text-base;
+    line-height: 1.58;
     color: var(--page-ink);
   }
 
-  @media (min-width: 768px) {
-    .testimonial-card__quote {
-      grid-column: 2;
-      grid-row: 1;
-    }
-  }
-
   .testimonial-card__meta {
-    @apply flex flex-col gap-1;
-  }
-
-  @media (min-width: 768px) {
-    .testimonial-card__meta {
-      grid-column: 1;
-      grid-row: 1;
-      align-self: start;
-      border-right: 1px solid color-mix(in oklab, var(--page-line) 88%, transparent);
-      padding-right: clamp(1rem, 2vw, 1.5rem);
-    }
+    @apply mt-auto flex flex-col gap-1 border-t pt-4;
+    border-color: color-mix(in oklab, var(--page-line) 88%, transparent);
   }
 
   .testimonial-card__meta strong {
