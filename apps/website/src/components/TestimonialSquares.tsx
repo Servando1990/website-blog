@@ -1,5 +1,11 @@
 const testimonials = [
   {
+    text: "Servando is unusually strong at operating in ambiguity. He can take raw, unfiltered business context, understand the underlying need, and move into execution fast without needing a lot of process, templates, or back-and-forth clarification. What makes him especially valuable is that he combines high agency, real business understanding, and strong AI engineering capability. He quickly grasped the complexity of MVV's business and delivered not only software that addressed it, but also a true 1:1 partnership and technical guidance across every stage of development.",
+    authorName: "Misha Vasilchikov",
+    position: "Managing Partner",
+    companyName: "MVV Capital Partners"
+  },
+  {
     text: "Servando helped our team at Orange transform complex datasets into actionable business insights that directly informed our strategic decisions and enhanced operational efficiency. His proactive approach to identifying improvement areas and implementing AI solutions consistently delivered measurable value to stakeholders.",
     authorName: "Pedro San Inocencio",
     position: "Director",
