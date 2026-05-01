@@ -115,6 +115,13 @@ export const testimonials = [
   },
   {
     quote:
+      'Servando has a great knack for data science and for building ML systems that stand up in real-world environments. We worked on recommendation systems together.',
+    name: 'Ed Mattia',
+    role: 'Head of AI',
+    company: 'Outerbounds (acq. by Anaconda)',
+  },
+  {
+    quote:
       'Servando helped our team at Orange transform complex datasets into actionable business insights that directly informed our strategic decisions and enhanced operational efficiency. His proactive approach to identifying improvement areas and implementing AI solutions consistently delivered measurable value to stakeholders.',
     name: 'Pedro San Inocencio',
     role: 'Director',
@@ -133,13 +140,6 @@ export const testimonials = [
     name: 'Francisco Llaneza',
     role: 'Principal Data Scientist',
     company: 'Fintonic',
-  },
-  {
-    quote:
-      'Servando has a great knack for data science and for building ML systems that stand up in real-world environments. We worked on recommendation systems together.',
-    name: 'Ed Mattia',
-    role: 'Head of AI',
-    company: 'Outerbounds (acq. by Anaconda)',
   },
 ];
 
