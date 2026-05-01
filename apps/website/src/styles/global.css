@@ -839,9 +839,9 @@
 
   @media (min-width: 768px) {
     .testimonial-card {
-      grid-template-columns: minmax(0, 1fr) minmax(13rem, 16rem);
-      column-gap: clamp(1.5rem, 4vw, 3rem);
-      align-items: stretch;
+      grid-template-columns: minmax(10.5rem, 14rem) minmax(0, 1fr);
+      column-gap: clamp(1.25rem, 3vw, 2.25rem);
+      align-items: start;
     }
   }
 
@@ -851,9 +851,16 @@
   }
 
   .testimonial-card__quote {
-    @apply max-w-[74ch] text-base;
-    line-height: 1.7;
+    @apply max-w-none text-base;
+    line-height: 1.62;
     color: var(--page-ink);
+  }
+
+  @media (min-width: 768px) {
+    .testimonial-card__quote {
+      grid-column: 2;
+      grid-row: 1;
+    }
   }
 
   .testimonial-card__meta {
@@ -862,9 +869,11 @@
 
   @media (min-width: 768px) {
     .testimonial-card__meta {
-      justify-content: end;
-      border-left: 1px solid color-mix(in oklab, var(--page-line) 88%, transparent);
-      padding-left: clamp(1rem, 2vw, 1.5rem);
+      grid-column: 1;
+      grid-row: 1;
+      align-self: start;
+      border-right: 1px solid color-mix(in oklab, var(--page-line) 88%, transparent);
+      padding-right: clamp(1rem, 2vw, 1.5rem);
     }
   }
 
