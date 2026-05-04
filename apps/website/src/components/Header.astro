@@ -14,34 +14,43 @@ function isActive(href: string) {
 ---
 
 <header class="site-header">
-  <div class="site-container">
-    <nav class="site-nav" aria-label="Primary">
-      <a class="brand-mark" href="/">
-        <img
-          class="brand-mark__logo invert dark:invert-0"
-          src="/controlthrive-logo.svg"
-          alt="controlthrive logo"
-          width="48"
-          height="48"
-        />
-        <span class="brand-mark__copy">
-          <span class="brand-mark__title">controlthrive</span>
-          <span class="brand-mark__detail">Founder-led software partner for private capital</span>
-        </span>
+  <nav class="site-nav" aria-label="Primary">
+    <a class="brand-mark" href="/">
+      <span class="brand-mark__word">CONTROL<br />THRIVE</span>
+      <span class="brand-mark__detail">Software partner for private capital</span>
+    </a>
+
+    <div class="nav-cell nav-cell--docs">
+      <a class="nav-link" href="/case-studies" aria-current={isActive('/case-studies') ? 'page' : undefined}>
+        Case Studies
       </a>
+    </div>
 
+    <div class="nav-cell nav-cell--portal">
+      <a class="nav-link" href="/tools" aria-current={isActive('/tools') ? 'page' : undefined}>
+        Tools
+      </a>
+    </div>
+
+    <div class="nav-cell nav-cell--socials">
+      <span>Socials</span>
+      <div class="social-links social-links--nav">
+        <a href="https://x.com/servandotorres" target="_blank" rel="noopener noreferrer" aria-label="Visit controlthrive on X">
+          X
+        </a>
+        <a href="https://github.com/servandotg" target="_blank" rel="noopener noreferrer" aria-label="Visit controlthrive on GitHub">
+          GH
+        </a>
+      </div>
+    </div>
+
+    <div class="nav-cell nav-cell--theme">
+      <span>Theme</span>
       <div class="nav-actions">
-        <div class="nav-links">
-          {navigation.map((item) => (
-            <a class="nav-link" href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
-              {item.label}
-            </a>
-          ))}
-          <a class="button-secondary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-            Book a founder call
-          </a>
-        </div>
-
+        <a class="button-secondary nav-cta" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+          Call
+        </a>
+        <ThemeToggle client:load />
         <button
           id="mobile-menu-button"
           class="mobile-menu-button"
@@ -54,14 +63,12 @@ function isActive(href: string) {
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h16"></path>
           </svg>
         </button>
-
-        <ThemeToggle client:load />
       </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
 
   <div id="mobile-menu" class="mobile-menu hidden">
-    <div class="site-container mobile-menu__inner">
+    <div class="mobile-menu__inner">
       {navigation.map((item) => (
         <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
           {item.label}

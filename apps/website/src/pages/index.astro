@@ -9,7 +9,6 @@ import {
   serviceAreas,
   testimonials,
   trustPrinciples,
-  trustedCompanies,
 } from '../lib/siteContent';
 import { publishedCaseStudies } from '../lib/caseStudies';
 
@@ -23,208 +22,150 @@ const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
 >
   <Header />
 
-  <main class="site-main">
-    <section class="section-frame">
-      <div class="site-container">
-        <div class="hero-shell page-stack">
-          <div class="hero-grid">
-            <div class="hero-copy hero-copy--wide">
-              <span class="eyebrow">Founder-led software partner for private capital</span>
-              <h1 class="display-title">
-                We partner with private capital teams to turn their context into production AI
-              </h1>
-              <p class="lede">
-                From investor targeting and portfolio monitoring to internal research workflows,
-                controlthrive helps firms turn high-context processes into systems people can
-                actually use and trust.
-              </p>
-              <div class="hero-actions">
-                <a
-                  class="button-primary"
-                  href={bookingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Book a founder call
-                </a>
-                <a class="button-secondary" href="/case-studies">
-                  See private capital work
-                </a>
-              </div>
-            </div>
+  <main class="site-main hermes-page">
+    <section class="hermes-hero">
+      <div class="hermes-noise" aria-hidden="true"></div>
+      <div class="hermes-float hermes-float--one" aria-hidden="true"></div>
+      <div class="hermes-float hermes-float--two" aria-hidden="true"></div>
 
-            <HeroAsciiField client:load />
+      <div class="hermes-hero__inner">
+        <span class="hermes-eyebrow">Founder-led • private capital systems</span>
+        <h1 class="hermes-title">CONTROL THRIVE</h1>
+        <p class="hermes-kicker">
+          Production AI workflows for investor coverage, portfolio monitoring, and internal
+          operating systems that learn with the team.
+        </p>
+
+        <div class="hermes-command-list" aria-label="Engagement flow">
+          <div class="hermes-command">
+            <div class="hermes-command__meta">
+              <span>1. Scope</span>
+              <a href={bookingUrl} target="_blank" rel="noopener noreferrer">Open</a>
+            </div>
+            <code>book founder call --workflow "private capital"</code>
           </div>
-
-          <div class="trust-strip">
-            <span class="trust-strip__label">Experience across finance, advisory, and operating teams</span>
-            <div class="trust-strip__list">
-              {trustedCompanies.map((company) => (
-                <span>{company}</span>
-              ))}
+          <div class="hermes-command">
+            <div class="hermes-command__meta">
+              <span>2. Build</span>
+              <a href="/case-studies">View</a>
             </div>
+            <code>ship evidence-linked system --with adoption</code>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section-frame section-divider">
-      <div class="site-container editorial-grid">
-        <div class="page-stack">
-          <span class="eyebrow">Where we usually help</span>
-          <h2 class="section-title">A narrower wedge, built for real workflows.</h2>
-          <p class="supporting-copy max-w-[34rem]">
-            The work is most effective when the team already knows the process matters, but needs a
-            partner who can make the software path concrete without flattening the business logic.
-          </p>
-        </div>
-
-        <div class="stack-list">
-          {serviceAreas.map((service) => (
-            <article class="service-block">
-              <h3>{service.title}</h3>
-              <p>{service.summary}</p>
-              <p class="mt-3">{service.detail}</p>
-            </article>
-          ))}
-        </div>
+    <section class="hermes-action">
+      <div class="hermes-section-title">
+        <span>See It In Action</span>
       </div>
-    </section>
-    <section class="section-frame section-divider">
-      <div class="site-container page-stack">
-        <div class="page-intro">
-          <span class="eyebrow">Selected work</span>
-          <h2 class="section-title">Private capital workflows, made operational.</h2>
-          <p class="supporting-copy max-w-[40rem]">
-            These are the kinds of systems we build when investor teams, research groups, and
-            advisory operators need software that respects source material and still moves quickly.
-          </p>
-        </div>
 
-        <div class="featured-study-list">
-          {featuredCaseStudies.map((study) => (
-            <article class="featured-study">
-              <div class="page-stack gap-4">
-                <span class="label-chip">{study.industry}</span>
-                <p class="featured-study__outcome">{study.featuredOutcome}</p>
-              </div>
-
-              <div class="page-stack gap-5">
-                <h3 class="text-[2rem] md:text-[2.5rem]">{study.title}</h3>
-                <p class="featured-study__summary">{study.cardSummary}</p>
-                <div class="hero-actions">
-                  <a class="button-primary" href={`/case-studies/${study.slug}`}>
-                    Read the case study
-                  </a>
-                  <a class="button-ghost" href="/case-studies">
-                    View all work
-                  </a>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="section-frame section-divider">
-      <div class="site-container testimonial-section">
-        <div class="page-stack">
-          <span class="eyebrow">Client perspective</span>
-          <h2 class="section-title">Built for teams that want a partner, not a pitch.</h2>
-          <p class="supporting-copy max-w-[36rem]">
-            The work tends to land best when the team needs a clear technical counterpart who can
-            stay close to the workflow, explain tradeoffs plainly, and ship something people
-            actually trust.
-          </p>
-        </div>
-
-        <div class="testimonial-grid">
-          {testimonials.map((testimonial) => (
-            <article class="testimonial-card">
-              <p class="testimonial-card__quote">“{testimonial.quote}”</p>
-              <div class="testimonial-card__meta">
-                <strong>{testimonial.name}</strong>
-                <span>
-                  {testimonial.role}, {testimonial.company}
-                </span>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="section-frame section-divider">
-      <div class="site-container founder-grid">
-        <div class="founder-photo">
-          <img src="/profile-pic.jpg" alt="Portrait of Servando Torres, founder of controlthrive" />
-        </div>
-
-        <div class="founder-note">
-          {founderProfile.paragraphs.map((paragraph) => (
-            <p class="supporting-copy">{paragraph}</p>
-          ))}
-          <div class="hero-actions">
-            <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-              Talk to Servando
-            </a>
-            <a class="button-secondary" href="/case-studies">
-              Explore the work
-            </a>
+      <div class="hermes-action__grid">
+        <div class="hermes-terminal" aria-label="Simulated terminal workflow">
+          <div class="hermes-terminal__bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <strong>controlthrive</strong>
+          </div>
+          <div class="hermes-terminal__body">
+            <p><span>›</span> Review investor coverage gaps for MVV Capital</p>
+            <p><span>›</span> Attach source evidence and rank next outreach</p>
+            <p><span>›</span> Generate operator-ready workflow brief<span class="terminal-caret"></span></p>
           </div>
         </div>
+
+        <div class="hermes-engraving">
+          <HeroAsciiField client:load />
+          <span>CONTROLTHRIVE</span>
+        </div>
       </div>
     </section>
 
-    <section class="section-frame section-divider">
-      <div class="site-container editorial-grid">
-        <div class="page-stack">
-          <span class="eyebrow">Built for trust</span>
-          <h2 class="section-title">A quieter way to make software decisions feel safer.</h2>
-          <p class="supporting-copy max-w-[36rem]">
-            The point is to help a team move with more confidence, not to hide the process behind
-            a louder interface or a vague promise about AI.
-          </p>
-        </div>
+    <section class="hermes-feature-grid">
+      <div class="hermes-section-title">
+        <span>Features</span>
+      </div>
 
-        <div class="stack-list">
-          {trustPrinciples.map((principle) => (
-            <article class="service-block">
-              <h3>{principle.title}</h3>
-              <p>{principle.summary}</p>
-            </article>
+      <div class="hermes-feature-grid__inner">
+        {serviceAreas.map((service) => (
+          <article class="hermes-feature">
+            <span>{service.title}</span>
+            <p>{service.summary}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="hermes-split-section">
+      <div class="hermes-section-title">
+        <span>Selected Work</span>
+      </div>
+
+      <div class="hermes-study-list">
+        {featuredCaseStudies.map((study) => (
+          <article class="hermes-study">
+            <div>
+              <span>{study.industry}</span>
+              <h2>{study.title}</h2>
+            </div>
+            <p>{study.cardSummary}</p>
+            <a href={`/case-studies/${study.slug}`}>Read case study</a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="hermes-split-section hermes-split-section--two">
+      <div class="hermes-panel">
+        <span class="hermes-eyebrow">Client Perspective</span>
+        <h2>Built for teams that want a partner, not a pitch.</h2>
+        <div class="hermes-quotes">
+          {testimonials.slice(0, 2).map((testimonial) => (
+            <blockquote>
+              <p>“{testimonial.quote}”</p>
+              <cite>{testimonial.name} • {testimonial.company}</cite>
+            </blockquote>
           ))}
         </div>
       </div>
+
+      <div class="hermes-panel hermes-panel--image">
+        <img src="/profile-pic.jpg" alt="Portrait of Servando Torres, founder of controlthrive" />
+        <div>
+          <span class="hermes-eyebrow">Founder-led</span>
+          <p>{founderProfile.paragraphs[0]}</p>
+        </div>
+      </div>
     </section>
 
-    <section class="section-frame section-divider">
-      <div class="site-container">
-        <div class="cta-band">
-          <div class="cta-band__grid">
-            <div class="page-stack">
-              <span class="eyebrow">Next step</span>
-              <h2 class="section-title">
-                If the workflow matters, the software path should feel clear.
-              </h2>
-              <p class="supporting-copy max-w-[36rem]">
-                Bring the investor coverage, monitoring, or internal workflow you are trying to
-                improve. We can sort out what deserves a product, what needs a lighter layer, and
-                how to move without adding more noise.
-              </p>
-            </div>
+    <section class="hermes-feature-grid">
+      <div class="hermes-section-title">
+        <span>Built For Trust</span>
+      </div>
 
-            <div class="page-stack lg:items-end">
-              <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-                Book a founder call
-              </a>
-              <a class="button-secondary" href="mailto:servando@controlthrive.com">
-                Email controlthrive
-              </a>
-            </div>
-          </div>
-        </div>
+      <div class="hermes-feature-grid__inner">
+        {trustPrinciples.map((principle) => (
+          <article class="hermes-feature">
+            <span>{principle.title}</span>
+            <p>{principle.summary}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="hermes-cta">
+      <div>
+        <span class="hermes-eyebrow">Next Step</span>
+        <h2>If the workflow matters, the software path should feel clear.</h2>
+      </div>
+      <div class="hermes-cta__actions">
+        <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+          Book a founder call
+        </a>
+        <a class="button-secondary" href="mailto:servando@controlthrive.com">
+          Email controlthrive
+        </a>
       </div>
     </section>
   </main>
