@@ -1304,67 +1304,63 @@
 
 @layer base {
   :root {
-    --font-body: 'Libre Baskerville', Georgia, serif;
-    --font-display: 'Cinzel', 'Times New Roman', serif;
-    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-display: 'Inter', system-ui, sans-serif;
+    --font-mono: ui-monospace, 'SFMono-Regular', monospace;
 
-    --page-bg: #fbfdff;
-    --page-bg-strong: #eef5ff;
-    --page-surface: rgba(255, 255, 255, 0.72);
+    --page-bg: #ffffff;
+    --page-bg-strong: #ffffff;
+    --page-surface: rgba(255, 255, 255, 0.92);
     --page-surface-strong: #ffffff;
-    --page-ink: #075ed0;
-    --page-muted: #6893d8;
-    --page-line: rgba(7, 94, 208, 0.22);
-    --page-accent: #6c95db;
-    --page-accent-strong: #075ed0;
-    --page-accent-soft: rgba(7, 94, 208, 0.08);
-    --page-highlight: rgba(7, 94, 208, 0.16);
-    --button-primary-bg: #075ed0;
-    --button-primary-hover: #123f83;
+    --page-ink: #111111;
+    --page-muted: #6b7280;
+    --page-line: #e5e7eb;
+    --page-accent: #9ca3af;
+    --page-accent-strong: #111111;
+    --page-accent-soft: rgba(17, 17, 17, 0.06);
+    --page-highlight: rgba(17, 17, 17, 0.08);
+    --button-primary-bg: #111111;
+    --button-primary-hover: #84b067;
     --button-primary-text: #ffffff;
-    --button-primary-hover-text: #ffffff;
+    --button-primary-hover-text: #111111;
   }
 
   .dark {
-    --page-bg: #102724;
-    --page-bg-strong: #0b1c1a;
-    --page-surface: rgba(11, 28, 26, 0.72);
-    --page-surface-strong: #102724;
-    --page-ink: #f5ecd8;
-    --page-muted: #c7bfae;
-    --page-line: rgba(245, 236, 216, 0.2);
-    --page-accent: #d7c99f;
-    --page-accent-strong: #f5ecd8;
-    --page-accent-soft: rgba(245, 236, 216, 0.1);
-    --page-highlight: rgba(245, 236, 216, 0.18);
-    --button-primary-bg: #f5ecd8;
-    --button-primary-hover: #d7c99f;
-    --button-primary-text: #102724;
-    --button-primary-hover-text: #102724;
+    --page-bg: #0f1117;
+    --page-bg-strong: #151821;
+    --page-surface: rgba(17, 24, 39, 0.78);
+    --page-surface-strong: #161b22;
+    --page-ink: #f3f4f6;
+    --page-muted: #9ca3af;
+    --page-line: #2b303a;
+    --page-accent: #6b7280;
+    --page-accent-strong: #f3f4f6;
+    --page-accent-soft: rgba(243, 244, 246, 0.1);
+    --page-highlight: rgba(243, 244, 246, 0.14);
+    --button-primary-bg: #f3f4f6;
+    --button-primary-hover: #84b067;
+    --button-primary-text: #111111;
+    --button-primary-hover-text: #111111;
   }
 
   html {
-    letter-spacing: 0;
+    letter-spacing: -0.01em;
   }
 
   body {
     overflow-x: hidden;
-    background:
-      radial-gradient(circle at 16% 12%, color-mix(in oklab, var(--page-bg-strong) 50%, transparent) 0 24rem, transparent 36rem),
-      linear-gradient(180deg, var(--page-bg) 0%, color-mix(in oklab, var(--page-bg) 82%, #dce8f8) 100%);
+    background: color-mix(in oklab, var(--page-bg) 96%, white);
   }
 
   .dark body {
-    background:
-      radial-gradient(circle at 25% 18%, rgba(64, 91, 73, 0.32) 0 21rem, transparent 36rem),
-      linear-gradient(180deg, var(--page-bg-strong) 0%, var(--page-bg) 100%);
+    background: var(--page-bg);
   }
 
   h1,
   h2,
   h3,
   h4 {
-    letter-spacing: 0;
+    letter-spacing: -0.03em;
   }
 }
 
@@ -1410,9 +1406,10 @@
 
   .brand-mark__word {
     font-family: var(--font-display);
-    font-size: clamp(1.7rem, 3.6vw, 3rem);
-    font-weight: 800;
-    line-height: 0.9;
+    font-size: clamp(1.3rem, 2.8vw, 2.4rem);
+    font-weight: 500;
+    letter-spacing: -0.06em;
+    line-height: 0.92;
     color: var(--page-ink);
   }
 
@@ -1421,6 +1418,7 @@
     font-family: var(--font-mono);
     font-size: 0.66rem;
     line-height: 1.35;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
     color: var(--page-muted);
   }
@@ -1432,8 +1430,8 @@
     gap: 1rem;
     font-family: var(--font-display);
     font-size: clamp(0.82rem, 1vw, 1rem);
-    font-weight: 700;
-    letter-spacing: 0.2em;
+    font-weight: 500;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--page-muted);
   }
@@ -1445,7 +1443,7 @@
   .nav-link {
     font-family: var(--font-display);
     font-size: inherit;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: inherit;
     color: var(--page-muted);
   }
@@ -1512,41 +1510,28 @@
   }
 
   .theme-toggle {
-    position: relative;
-    width: 3rem;
-    height: 1.35rem;
-    border-radius: 999px;
-    border-color: var(--page-ink);
-    background: color-mix(in oklab, var(--page-bg) 86%, white);
-    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--page-ink) 20%, transparent);
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.75rem;
+    border-color: color-mix(in oklab, var(--page-line) 92%, transparent);
+    background: transparent;
+    box-shadow: var(--elevation-1);
     color: var(--page-ink);
   }
 
   .theme-toggle svg {
-    position: absolute;
-    right: 0.18rem;
-    width: 0.92rem;
-    height: 0.92rem;
-    padding: 0.1rem;
-    border-radius: 999px;
-    background: #f3d59a;
-    color: var(--page-ink);
-    transition: transform 0.2s ease;
-  }
-
-  .dark .theme-toggle {
-    background: color-mix(in oklab, var(--page-bg-strong) 92%, black);
-  }
-
-  .dark .theme-toggle svg {
-    transform: translateX(-1.55rem);
-    background: var(--page-ink);
-    color: var(--page-bg);
+    position: static;
+    width: 1rem;
+    height: 1rem;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: currentColor;
   }
 
   .theme-toggle:hover {
-    background: color-mix(in oklab, var(--page-bg) 84%, white);
-    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--page-ink) 32%, transparent);
+    background: color-mix(in oklab, var(--page-surface) 72%, white);
+    box-shadow: var(--elevation-2);
   }
 
   .hermes-page {
@@ -1572,8 +1557,8 @@
     z-index: -2;
     opacity: 0.5;
     background:
-      radial-gradient(circle at 50% 16%, color-mix(in oklab, var(--page-accent) 16%, transparent) 0 1px, transparent 1px),
-      repeating-linear-gradient(0deg, color-mix(in oklab, var(--page-ink) 8%, transparent) 0 1px, transparent 1px 4px);
+      radial-gradient(circle at 50% 16%, color-mix(in oklab, var(--page-accent) 10%, transparent) 0 1px, transparent 1px),
+      repeating-linear-gradient(0deg, color-mix(in oklab, var(--page-ink) 4%, transparent) 0 1px, transparent 1px 4px);
     background-size: 3px 3px, 100% 5px;
     mix-blend-mode: multiply;
   }
@@ -1599,14 +1584,14 @@
     position: absolute;
     width: 1.8rem;
     height: 1.8rem;
-    background: #b9dedb;
-    opacity: 0.38;
+    background: var(--page-accent-soft);
+    opacity: 0.72;
     animation: hermes-float 8s ease-in-out infinite;
   }
 
   .dark .hermes-float {
-    background: #3a201b;
-    opacity: 0.42;
+    background: var(--page-accent-soft);
+    opacity: 0.52;
   }
 
   .hermes-float--one {
@@ -1633,9 +1618,9 @@
   .hermes-eyebrow {
     max-width: 100%;
     font-family: var(--font-display);
-    font-size: clamp(0.82rem, 1.2vw, 1.05rem);
-    font-weight: 700;
-    letter-spacing: 0.22em;
+    font-size: clamp(0.76rem, 1vw, 0.9rem);
+    font-weight: 500;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     overflow-wrap: anywhere;
     color: var(--page-muted);
@@ -1644,9 +1629,10 @@
   .hermes-title {
     max-width: min(100%, 14ch);
     font-family: var(--font-display);
-    font-size: clamp(3rem, 7vw, 5.8rem);
-    font-weight: 800;
-    line-height: 0.9;
+    font-size: clamp(3rem, 7vw, 5.4rem);
+    font-weight: 500;
+    letter-spacing: -0.07em;
+    line-height: 0.95;
     text-transform: uppercase;
     color: var(--page-ink);
   }
@@ -1678,7 +1664,7 @@
     justify-content: space-between;
     font-family: var(--font-display);
     font-size: 0.88rem;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--page-muted);
   }
@@ -1710,8 +1696,8 @@
   .hermes-section-title span {
     font-family: var(--font-display);
     font-size: clamp(1.2rem, 2vw, 1.75rem);
-    font-weight: 800;
-    letter-spacing: 0.18em;
+    font-weight: 500;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--page-ink);
   }
@@ -1765,7 +1751,7 @@
 
   .hermes-terminal__body span {
     margin-right: 0.5rem;
-    font-weight: 700;
+    font-weight: 500;
   }
 
   .terminal-caret {
@@ -1802,8 +1788,8 @@
     bottom: clamp(1rem, 2vw, 1.5rem);
     font-family: var(--font-display);
     font-size: clamp(0.8rem, 1.6vw, 1.1rem);
-    font-weight: 800;
-    letter-spacing: 0.28em;
+    font-weight: 500;
+    letter-spacing: 0.08em;
     color: var(--page-ink);
   }
 
@@ -1829,8 +1815,8 @@
   .hermes-study span {
     font-family: var(--font-display);
     font-size: clamp(1rem, 1.6vw, 1.35rem);
-    font-weight: 800;
-    letter-spacing: 0.12em;
+    font-weight: 500;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
     color: var(--page-ink);
   }
@@ -1962,10 +1948,10 @@
   .button-primary,
   .button-secondary,
   .button-ghost {
-    border-radius: 0;
-    font-family: var(--font-mono);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    letter-spacing: 0;
+    text-transform: none;
   }
 
   .footer-shell {
