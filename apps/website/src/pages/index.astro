@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { HeroAsciiField } from '../components/HeroAsciiField';
+import { HeroTrajectoryField } from '../components/HeroTrajectoryField';
 import {
   bookingUrl,
   founderProfile,
@@ -27,6 +28,7 @@ const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
       <div class="hermes-noise" aria-hidden="true"></div>
       <div class="hermes-float hermes-float--one" aria-hidden="true"></div>
       <div class="hermes-float hermes-float--two" aria-hidden="true"></div>
+      <HeroTrajectoryField client:load />
 
       <div class="hermes-hero__inner">
         <span class="hermes-eyebrow">Founder-led • private capital systems</span>
