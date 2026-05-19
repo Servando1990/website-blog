@@ -120,11 +120,14 @@ const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
 
     <section class="hermes-split-section hermes-split-section--two">
       <div class="hermes-panel">
-        <span class="hermes-eyebrow">Founder Approach</span>
-        <h2>High agency, deep ownership, tangible outcomes.</h2>
-        <div class="hermes-founder-copy">
-          {founderProfile.paragraphs.map((paragraph) => (
-            <p>{paragraph}</p>
+        <span class="hermes-eyebrow">Client Perspective</span>
+        <h2>Built for teams that want a partner, not a pitch.</h2>
+        <div class="hermes-quotes">
+          {testimonials.slice(0, 2).map((testimonial) => (
+            <blockquote>
+              <p>“{testimonial.quote}”</p>
+              <cite>{testimonial.name} • {testimonial.company}</cite>
+            </blockquote>
           ))}
         </div>
       </div>
@@ -133,26 +136,8 @@ const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
         <img src="/profile-pic.jpg" alt="Portrait of Servando Torres, founder of controlthrive" />
         <div>
           <span class="hermes-eyebrow">Founder-led</span>
-          <p>One partner staying close to the commercial context, the system design, and the delivery path.</p>
+          <p>{founderProfile.paragraphs[0]}</p>
         </div>
-      </div>
-    </section>
-
-    <section class="hermes-testimonials">
-      <div class="hermes-section-title">
-        <span>Client Perspective</span>
-      </div>
-
-      <div class="hermes-testimonial-grid">
-        {testimonials.map((testimonial) => (
-          <blockquote class="hermes-testimonial">
-            <p>“{testimonial.quote}”</p>
-            <cite>
-              <strong>{testimonial.name}</strong>
-              <span>{testimonial.role} • {testimonial.company}</span>
-            </cite>
-          </blockquote>
-        ))}
       </div>
     </section>
 

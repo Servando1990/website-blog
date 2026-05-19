@@ -122,38 +122,24 @@ export const testimonials = [
   },
   {
     quote:
-      'Servando worked with us as a Data Engineer and was responsible for building a fuzzy matching solution. He demonstrated strong technical skills and a structured approach to problem-solving. His contributions were valuable to the project, particularly in implementing the core matching logic effectively.',
+      'Servando helped our team at Orange transform complex datasets into actionable business insights that directly informed our strategic decisions and enhanced operational efficiency. His proactive approach to identifying improvement areas and implementing AI solutions consistently delivered measurable value to stakeholders.',
+    name: 'Pedro San Inocencio',
+    role: 'Director',
+    company: 'Orange',
+  },
+  {
+    quote:
+      'Servando developed from scratch a  AI-matching solution that formed the core of our data processing capabilities, demonstrating strong technical skills and a structured approach that directly contributed to project success. The solutions lead to 70%+ reduction in duplicates and +1 FTE worth of manual effort eliminated.',
     name: 'Kamil Kapturkiewicz',
-    role: 'Data Solutions Lead',
+    role: 'Founder',
     company: 'Databris',
   },
   {
     quote:
-      'On a technical level, he has an uncommon passion for Machine Learning. This means that he is always looking for in-depth training in the subject. He has great knowledge in Data Science techniques and is able to land them in concrete use cases. In addition, he is a great advocate of good programming practices and OpenSource technologies.',
-    name: 'Antonio Rubio',
-    role: 'Big Data Cloud Architect',
-    company: 'BBVA Technology',
-  },
-  {
-    quote:
-      'Servando, you are a shining example of determination and resilience, and I have no doubt that you will continue to achieve great things in the future and as I mentioned - I see you in Strategic Advisory for sure!',
-    name: 'Ajla Licina',
-    role: 'Co-Founder & Chief Business Development Officer',
-    company: 'Aisthesis',
-  },
-  {
-    quote:
-      "I'm a Senior Data Scientist at a Fintech start-up, working on data-driven financial solutions and insights. Your service was incredibly valuable, helping solve complex problems efficiently and driving innovation. Your expertise in analytics, problem-solving, and adaptability stands out, along with your ability to collaborate effectively and deliver high-impact solutions. Your dedication and strategic mindset made a real difference in our work!",
+      'Servando helped improved our lending algorithms and helped us find high impact issues in our fraud system. His contributions delivered high-impact results that made a real difference to our business outcomes.',
     name: 'Francisco Llaneza',
-    role: 'Lead Data Scientist',
+    role: 'Principal Data Scientist',
     company: 'Fintonic',
-  },
-  {
-    quote:
-      'Servando worked as a Business Intelligence Analyst on my team at Orange. During this time, he demonstrated exceptional analytical skills and a proactive attitude that greatly contributed to the success of our projects. Servando consistently displayed an impressive ability to analyze complex data sets and provide actionable insights that informed our business strategies. He excelled in using various BI tools and technologies, showing a deep understanding of the industry and staying up-to-date with the latest trends and advancements. One of the standout qualities of Servando is his proactive approach to problem-solving. He often went above and beyond to identify areas for improvement and implement solutions that enhanced our operational efficiency. His dedication to excellence and attention to detail were evident in every task he undertook. Furthermore, he was an invaluable team player, always willing to collaborate and share knowledge with colleagues. He demonstrated strong communication skills and was adept at presenting complex findings in a clear and concise manner, making it easier for stakeholders to make informed decisions. In summary, I wholeheartedly recommend engaging him for consulting services that requires expertise in business intelligence, IA and data analysis. He would be a tremendous asset to any organization, and I have no doubt that he will continue to excel and make significant contributions in his future endeavors.',
-    name: 'Pedro San Inocencio',
-    role: 'Business Intelligence Manager',
-    company: 'Orange',
   },
 ];
 

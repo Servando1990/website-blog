@@ -1778,7 +1778,6 @@
   .hermes-action,
   .hermes-feature-grid,
   .hermes-split-section,
-  .hermes-testimonials,
   .hermes-cta {
     border-bottom: 1px solid var(--page-line);
   }
@@ -1916,8 +1915,6 @@
   .hermes-feature p,
   .hermes-study p,
   .hermes-panel p,
-  .hermes-founder-copy p,
-  .hermes-testimonial p,
   .hermes-quotes p {
     line-height: 1.75;
     color: var(--page-muted);
@@ -1997,12 +1994,6 @@
     border-right: 0;
   }
 
-  .hermes-founder-copy {
-    display: grid;
-    gap: 1rem;
-    max-width: 48rem;
-  }
-
   .hermes-quotes {
     display: grid;
     gap: 1rem;
@@ -2028,46 +2019,6 @@
     font-style: normal;
     text-transform: uppercase;
     color: var(--page-ink);
-  }
-
-  .hermes-testimonial-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1px;
-    background: var(--page-line);
-  }
-
-  .hermes-testimonial {
-    display: grid;
-    align-content: start;
-    gap: 1.25rem;
-    min-height: 22rem;
-    background: color-mix(in oklab, var(--page-bg) 94%, transparent);
-    padding: clamp(1.25rem, 2.4vw, 2rem);
-  }
-
-  .hermes-testimonial cite {
-    display: grid;
-    gap: 0.35rem;
-    margin-top: auto;
-    border-top: 1px solid var(--page-line);
-    padding-top: 1rem;
-    font-style: normal;
-  }
-
-  .hermes-testimonial strong {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--page-ink);
-  }
-
-  .hermes-testimonial span {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    line-height: 1.45;
-    text-transform: uppercase;
-    color: var(--page-muted);
   }
 
   .hermes-panel--image {
@@ -2232,8 +2183,7 @@
 
     .hermes-action__grid,
     .hermes-split-section--two,
-    .hermes-feature-grid__inner,
-    .hermes-testimonial-grid {
+    .hermes-feature-grid__inner {
       grid-template-columns: 1fr;
     }
 
