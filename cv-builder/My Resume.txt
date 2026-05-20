@@ -1,0 +1,199 @@
+Servando Torres
+
+
+servando@controlthrive.com
+656185710
+http://www.controlthrive.com
+
+
+
+------------------------
+AI Engineer 8+ years of experience.
+
+
+------------------------
+ML leader with 8+ years building end-to-end AI solutions. Expert in full-stack implementation. Proven track record leading teams and driving business impact through ML initiatives at top consulting firms, combining technical expertise with stakeholder management.
+
+
+WORK EXPERIENCE
+------------------------
+Principal AI Engineer
+controlthrive
+01/2024 - Present
+Logros/Funciones
+- Architected and deployed end-to-end MLOps pipeline using Metaflow on GCP, reducing infrastructure overhead by 67% while scaling AI pricing optimization. 
+- Developed an LLM-based solution to find optimal pairs between different product offerings (both text and image) for a SaaS client 
+- Built a neural account matching system for wholesale client using NLP/fuzzy matching,  for a Manufacturing client 
+- Optimized NLP based pipelines in Databricks on Azure 
+- Developed and lead a RAG chatbot application using Metaflow, Open AI, FastAPI for backend and javascript for front 
+- Backend engineering & maintenance for an autonomous vehicle deep learning system client 
+- End-to-end product fetching 500k earnings calls and performing LLM-based operations for a financial research client 
+
+
+
+Senior Machine Learning Engineer | Lending
+Fintonic
+10/2022 - 02/2023
+Barcelona, Spain
+Tasks/Achievments
+- Optimized lending ML system implementation using Kubernetes/AWS,  and XGboost collaborating with Product, UX, and Risk teams to improve approval and fraud rates.. 
+- Streamlined data pipelines using FastAPI / MongoDB, establishing efficient model deployment with Kubernetes and SageMaker. 
+
+
+
+Customer-Facing Data Scientist
+KPMG
+06/2022 - 10/2022
+Barcelona, Spain
+Tasks/Achievments
+- Developed forecasting model to predict cash flow for a oil & gas client 
+- Led projects as a Customer-Facing Data Scientist 
+- Led development of Azure-based recommender system for pharmaceutical company 
+
+
+
+Senior Data Scientist | Product
+Minsait
+01/2020 - 06/2022
+Madrid, Spain
+Tasks/Achievements
+- Presented data strategy reports  to several audiences including C-level executives 
+- Developed Computer vision projects based on image segmentation with satellite data 
+
+
+
+Data Scientist | Consulting
+PwC
+11/2018 - 01/2020
+Logros/Funciones
+
+
+
+Data Analyst
+Orange
+10/2017 - 11/2018
+Logros/Funciones
+
+
+
+
+
+
+eDUCATION
+------------------------
+Programa de estudios
+Institución/lugar de enseñanza
+Cursos
+
+
+
+
+
+tech stack &amp; Use-cases
+------------------------
+-Financial Research
+-Python
+-MLOPS
+-Private Equity
+-Kubernetes
+-Typescript
+-LLMs
+-FastAPI
+-Fraud
+-Pydantic AI
+-Metaflow
+-Modal
+-GCP
+-React
+-Recsys
+-Azure
+-AWS
+-Databricks
+-Pytorch
+-Xgboost
+-HuggingFace
+-Mlflow
+-Forecasting
+-Matching
+-Segmentation
+-Price Optimization
+-PySpark
+-Docker
+-SQL
+-No-SQL
+
+
+
+Internships
+------------------------
+BBVA | Credit Risk Analyst
+01/2017 - 07/2017
+- Report recurrent analytics to senior management. 
+- Tech Stack: Python, SAS, SQL. 
+
+
+Inycom | Business Intelligence Consultant
+06/2016 - 10/2016
+- ERP sotfware implementation. 
+- SQL, ERP Epicor, Python. 
+
+
+Research Associate | Next IBS
+10/2015 - 06/2016
+- Research and content creation for masters and advance degrees 
+
+
+
+
+
+Case studies | Open source
+------------------------
+Earnings call dashboard
+https://www.controlthrive.com/case-studies/earnings-dashboard-finance-research
+
+
+Price Optimization for Relu
+https://outerbounds.com/case-studies/accelerating-ai-driven-pricing-strategies-with-outerbounds
+
+
+ML in Retail - Interview with 5x
+https://youtu.be/SpKohtrLzMI?si=0DZIX2mD8DjWJIbO
+
+
+Recsys with Metaflow
+https://github.com/outerbounds/recsys-metaflow
+
+
+Full Stack Machine Learning Metaflow
+04/2024 - 04/2024
+
+
+Full Stack Deep Learning 2022
+08/2022 - 09/2022
+Tech stack (PyTorch Lightning, Transformers, Weight & Biases, Github Actions, Docker, AWS Lambda, Gradio, Gantry )
+
+
+Master's Degree in Data Science
+01/2015 - 01/2016
+Universidad de Zaragoza
+
+
+
+
+
+LANGUAGES
+------------------------
+-English- (100/100)
+-Spanish- (100/100)
+-Portuguese- (80/100)
+
+
+
+INTERESTS
+------------------------
+-Finance
+-Investing
+-Customer Facing Data Science
+
+
+
