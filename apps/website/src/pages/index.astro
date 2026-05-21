@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { HeroAsciiField } from '../components/HeroAsciiField';
 import { HeroTrajectoryField } from '../components/HeroTrajectoryField';
 import {
   bookingUrl,
@@ -29,8 +30,6 @@ const privateCapitalAgentRows = [
   { step: 12, workflow: 'Support close', agent: 'Track final diligence, legal items, approvals, and follow-ups.', phase: 'Decision' },
   { step: 13, workflow: 'Monitor, pass, or nurture', agent: 'Capture pass rationale, set reminders, and suggest better-fit future paths.', phase: 'Memory' },
 ];
-
-const privateCapitalAgentPhases = ['Setup', 'Search', 'Review', 'Decision', 'Memory'];
 ---
 
 <Layout
@@ -78,75 +77,39 @@ const privateCapitalAgentPhases = ['Setup', 'Search', 'Review', 'Decision', 'Mem
         <span>See It In Action</span>
       </div>
 
-      <div class="hermes-agent-map" aria-labelledby="agent-workflow-title">
-        <div class="hermes-agent-map__intro">
-          <div>
-            <span class="hermes-eyebrow">Private capital</span>
-            <h2 id="agent-workflow-title">What agents can do across the workflow</h2>
+      <div class="hermes-action__grid">
+        <div class="hermes-terminal hermes-terminal--agent" aria-label="Private capital agent terminal workflow">
+          <div class="hermes-terminal__bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <strong>private-capital-agent</strong>
           </div>
-          <p>
-            The useful version of automation is not autonomous dealmaking. It is tighter handoffs,
-            cleaner memory, and faster synthesis around the people making the call.
-          </p>
+          <div class="hermes-terminal__body hermes-agent-cli">
+            <p class="hermes-agent-cli__prompt">
+              <span>›</span> run workflow --domain private-capital --from mandate --to loi
+            </p>
 
-          <div class="hermes-agent-map__stats" aria-label="Workflow summary">
-            <div>
-              <strong>{privateCapitalAgentRows.length}</strong>
-              <span>workflow steps</span>
+            <div class="hermes-agent-cli__stream" aria-label="Agent workflow log">
+              {privateCapitalAgentRows.map((row) => (
+                <div class="hermes-agent-cli__line" data-phase={row.phase} style={`--line-index: ${row.step - 1}`}>
+                  <span class="hermes-agent-cli__step">{String(row.step).padStart(2, '0')}</span>
+                  <span class="hermes-agent-cli__phase">{row.phase}</span>
+                  <span class="hermes-agent-cli__workflow">{row.workflow}</span>
+                  <span class="hermes-agent-cli__agent">{row.agent}</span>
+                </div>
+              ))}
             </div>
-            <div>
-              <strong>{privateCapitalAgentPhases.length}</strong>
-              <span>operating phases</span>
-            </div>
-          </div>
 
-          <div class="hermes-agent-phases" aria-label="Workflow phases">
-            {privateCapitalAgentPhases.map((phase) => (
-              <span data-phase={phase}>
-                <i aria-hidden="true"></i>
-                {phase}
-              </span>
-            ))}
+            <p class="hermes-agent-cli__prompt hermes-agent-cli__prompt--final">
+              <span>›</span> handoff ready --human_decision=true<span class="terminal-caret"></span>
+            </p>
           </div>
         </div>
 
-        <div class="hermes-agent-table-shell">
-          <div class="hermes-agent-table-wrap" role="region" aria-label="Private capital agent workflow table" tabindex="0">
-            <table class="hermes-agent-table">
-              <caption>Agent workflow map from mandate to LOI</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Step</th>
-                  <th scope="col">Workflow</th>
-                  <th scope="col">What an agent can do</th>
-                  <th scope="col">Phase</th>
-                </tr>
-              </thead>
-              <tbody>
-                {privateCapitalAgentRows.map((row) => (
-                  <tr data-phase={row.phase}>
-                    <td class="hermes-agent-table__step" data-label="Step">
-                      <span>{row.step}</span>
-                    </td>
-                    <td class="hermes-agent-table__workflow" data-label="Workflow">
-                      {row.workflow}
-                    </td>
-                    <td class="hermes-agent-table__agent" data-label="What an agent can do">
-                      <span aria-hidden="true"></span>
-                      {row.agent}
-                    </td>
-                    <td class="hermes-agent-table__phase" data-label="Phase">
-                      <span>{row.phase}</span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          <p class="hermes-agent-table-note">
-            Less wasted motion between mandate and LOI.
-          </p>
+        <div class="hermes-engraving">
+          <HeroAsciiField client:load />
+          <span>MANDATE -> LOI</span>
         </div>
       </div>
     </section>

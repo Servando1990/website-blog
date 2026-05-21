@@ -1784,272 +1784,31 @@
 
   .hermes-action__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(18rem, 1fr);
+    grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 0.65fr);
   }
 
-  .hermes-agent-map {
-    display: grid;
-    grid-template-columns: minmax(17rem, 0.58fr) minmax(0, 1.42fr);
-    background: color-mix(in oklab, var(--page-bg) 94%, transparent);
-  }
-
-  .hermes-agent-map__intro {
-    display: grid;
-    align-content: start;
-    gap: 1.35rem;
-    border-right: 1px solid var(--page-line);
-    padding: clamp(1.4rem, 3vw, 2.35rem);
-  }
-
-  .hermes-agent-map__intro h2 {
-    margin-top: 0.75rem;
-    max-width: 13ch;
-    font-size: 2.35rem;
-    line-height: 1;
-    letter-spacing: 0;
-    text-transform: uppercase;
-  }
-
-  .hermes-agent-map__intro p {
-    max-width: 33rem;
-    color: var(--page-muted);
-    font-size: 1rem;
-    line-height: 1.75;
-  }
-
-  .hermes-agent-map__stats {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-block: 1px solid var(--page-line);
-  }
-
-  .hermes-agent-map__stats div {
-    display: grid;
-    gap: 0.2rem;
-    padding: 0.95rem 0.85rem 0.95rem 0;
-  }
-
-  .hermes-agent-map__stats div + div {
-    border-left: 1px solid var(--page-line);
-    padding-left: 0.85rem;
-  }
-
-  .hermes-agent-map__stats strong {
-    font-family: var(--font-display);
-    font-size: 2rem;
-    font-weight: 500;
-    line-height: 0.95;
-    color: var(--page-ink);
-  }
-
-  .hermes-agent-map__stats span {
-    color: var(--page-muted);
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    line-height: 1.45;
-    text-transform: uppercase;
-  }
-
-  .hermes-agent-phases {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .hermes-agent-phases span,
-  .hermes-agent-table tbody tr {
+  .hermes-agent-cli__line {
     --phase-color: #657386;
   }
 
-  .hermes-agent-phases span[data-phase='Setup'],
-  .hermes-agent-table tbody tr[data-phase='Setup'] {
+  .hermes-agent-cli__line[data-phase='Setup'] {
     --phase-color: #536e9b;
   }
 
-  .hermes-agent-phases span[data-phase='Search'],
-  .hermes-agent-table tbody tr[data-phase='Search'] {
+  .hermes-agent-cli__line[data-phase='Search'] {
     --phase-color: #80689a;
   }
 
-  .hermes-agent-phases span[data-phase='Review'],
-  .hermes-agent-table tbody tr[data-phase='Review'] {
+  .hermes-agent-cli__line[data-phase='Review'] {
     --phase-color: #5f8062;
   }
 
-  .hermes-agent-phases span[data-phase='Decision'],
-  .hermes-agent-table tbody tr[data-phase='Decision'] {
+  .hermes-agent-cli__line[data-phase='Decision'] {
     --phase-color: #9a714f;
   }
 
-  .hermes-agent-phases span[data-phase='Memory'],
-  .hermes-agent-table tbody tr[data-phase='Memory'] {
+  .hermes-agent-cli__line[data-phase='Memory'] {
     --phase-color: #5f6993;
-  }
-
-  .hermes-agent-phases span {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    border: 1px solid color-mix(in oklab, var(--phase-color) 34%, var(--page-line));
-    background: color-mix(in oklab, var(--phase-color) 9%, var(--page-bg));
-    padding: 0.42rem 0.62rem;
-    color: color-mix(in oklab, var(--phase-color) 76%, var(--page-ink));
-    font-size: 0.78rem;
-    font-weight: 500;
-    line-height: 1;
-  }
-
-  .dark .hermes-agent-phases span {
-    background: color-mix(in oklab, var(--phase-color) 22%, transparent);
-    color: color-mix(in oklab, var(--phase-color) 28%, var(--page-ink));
-  }
-
-  .hermes-agent-phases i {
-    width: 0.42rem;
-    height: 0.42rem;
-    flex: 0 0 auto;
-    border-radius: 999px;
-    background: var(--phase-color);
-  }
-
-  .hermes-agent-table-shell {
-    min-width: 0;
-    padding: clamp(1rem, 2vw, 1.5rem);
-  }
-
-  .hermes-agent-table-wrap {
-    overflow-x: auto;
-    border: 1px solid var(--page-line);
-    background: color-mix(in oklab, var(--page-bg) 90%, transparent);
-    box-shadow: var(--elevation-1);
-    scrollbar-width: thin;
-    scrollbar-color: color-mix(in oklab, var(--page-accent) 35%, transparent) transparent;
-  }
-
-  .hermes-agent-table {
-    width: 100%;
-    min-width: 760px;
-    border-collapse: separate;
-    border-spacing: 0;
-    color: var(--page-ink);
-  }
-
-  .hermes-agent-table caption {
-    border-bottom: 1px solid var(--page-line);
-    background: color-mix(in oklab, var(--page-bg-strong) 78%, transparent);
-    padding: 0.85rem 1rem;
-    color: var(--page-muted);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    line-height: 1.4;
-    text-align: left;
-    text-transform: uppercase;
-  }
-
-  .hermes-agent-table th {
-    border-bottom: 1px solid var(--page-line);
-    background: color-mix(in oklab, var(--page-bg) 86%, transparent);
-    padding: 0.82rem 0.85rem;
-    color: var(--page-muted);
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 500;
-    line-height: 1.35;
-    text-align: left;
-    text-transform: uppercase;
-  }
-
-  .hermes-agent-table th:first-child {
-    width: 4.8rem;
-  }
-
-  .hermes-agent-table th:nth-child(2) {
-    width: 14rem;
-  }
-
-  .hermes-agent-table th:last-child {
-    width: 7.25rem;
-  }
-
-  .hermes-agent-table td {
-    border-bottom: 1px solid color-mix(in oklab, var(--page-line) 72%, transparent);
-    padding: 0.88rem 0.85rem;
-    vertical-align: top;
-  }
-
-  .hermes-agent-table tbody tr:last-child td {
-    border-bottom: 0;
-  }
-
-  .hermes-agent-table tbody tr td:first-child {
-    border-left: 3px solid var(--phase-color);
-  }
-
-  .hermes-agent-table__step span {
-    display: inline-grid;
-    width: 2rem;
-    height: 2rem;
-    place-items: center;
-    border: 1px solid color-mix(in oklab, var(--phase-color) 38%, var(--page-line));
-    background: color-mix(in oklab, var(--phase-color) 12%, var(--page-bg));
-    color: color-mix(in oklab, var(--phase-color) 70%, var(--page-ink));
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    font-weight: 600;
-    line-height: 1;
-  }
-
-  .dark .hermes-agent-table__step span {
-    background: color-mix(in oklab, var(--phase-color) 18%, transparent);
-    color: color-mix(in oklab, var(--phase-color) 25%, var(--page-ink));
-  }
-
-  .hermes-agent-table__workflow {
-    font-size: 0.95rem;
-    font-weight: 500;
-    line-height: 1.45;
-  }
-
-  .hermes-agent-table__agent {
-    color: var(--page-muted);
-    font-size: 0.95rem;
-    line-height: 1.55;
-  }
-
-  .hermes-agent-table__agent span {
-    display: inline-block;
-    width: 0.45rem;
-    height: 0.45rem;
-    margin-right: 0.48rem;
-    border-radius: 999px;
-    background: var(--phase-color);
-    vertical-align: 0.08em;
-  }
-
-  .hermes-agent-table__phase span {
-    display: inline-flex;
-    border: 1px solid color-mix(in oklab, var(--phase-color) 36%, var(--page-line));
-    background: color-mix(in oklab, var(--phase-color) 9%, var(--page-bg));
-    padding: 0.34rem 0.5rem;
-    color: color-mix(in oklab, var(--phase-color) 72%, var(--page-ink));
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    line-height: 1;
-  }
-
-  .dark .hermes-agent-table__phase span {
-    background: color-mix(in oklab, var(--phase-color) 18%, transparent);
-    color: color-mix(in oklab, var(--phase-color) 24%, var(--page-ink));
-  }
-
-  .hermes-agent-table-note {
-    border: 1px solid var(--page-line);
-    border-top: 0;
-    background: color-mix(in oklab, var(--page-bg-strong) 82%, transparent);
-    padding: 0.8rem 1rem;
-    color: var(--page-muted);
-    font-size: 0.92rem;
-    line-height: 1.55;
   }
 
   .hermes-terminal {
@@ -2059,6 +1818,11 @@
     border: clamp(2px, 0.25vw, 4px) double var(--page-ink);
     background: color-mix(in oklab, var(--page-bg) 78%, transparent);
     overflow: hidden;
+  }
+
+  .hermes-terminal--agent {
+    height: clamp(25.5rem, 36.5vw, 32rem);
+    min-height: 0;
   }
 
   .hermes-terminal::after {
@@ -2107,6 +1871,93 @@
     font-weight: 500;
   }
 
+  .hermes-agent-cli {
+    gap: 0.6rem;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    height: calc(100% - 2.1rem);
+    padding: clamp(0.85rem, 1.4vw, 1.1rem);
+    font-size: clamp(0.62rem, 0.74vw, 0.7rem);
+    line-height: 1.2;
+  }
+
+  .hermes-agent-cli span {
+    margin-right: 0;
+  }
+
+  .hermes-agent-cli__prompt {
+    overflow-x: auto;
+    color: var(--page-ink);
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+
+  .hermes-agent-cli__prompt > span:not(.terminal-caret) {
+    margin-right: 0.5rem;
+    color: color-mix(in oklab, var(--page-accent-strong) 72%, var(--page-muted));
+  }
+
+  .hermes-agent-cli__prompt--final {
+    border-top: 1px solid var(--page-line);
+    padding-top: 0.2rem;
+    color: color-mix(in oklab, var(--page-accent-strong) 84%, var(--page-muted));
+  }
+
+  .hermes-agent-cli__stream {
+    display: grid;
+    gap: 0.16rem;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 0.2rem;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--page-accent) 35%, transparent) transparent;
+  }
+
+  .hermes-agent-cli__line {
+    display: grid;
+    grid-template-columns: 2rem 4.25rem minmax(7.5rem, 0.75fr) minmax(12rem, 1.25fr);
+    align-items: baseline;
+    gap: 0.5rem;
+    min-width: 0;
+    border-left: 2px solid var(--phase-color);
+    border-top: 1px solid color-mix(in oklab, var(--page-line) 72%, transparent);
+    background: color-mix(in oklab, var(--page-bg) 82%, transparent);
+    padding: 0.22rem 0.4rem;
+    animation: hermes-log-enter 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(0.08s + (var(--line-index) * 0.055s));
+  }
+
+  .hermes-agent-cli__step {
+    color: color-mix(in oklab, var(--phase-color) 74%, var(--page-ink));
+  }
+
+  .hermes-agent-cli__phase {
+    width: fit-content;
+    border: 1px solid color-mix(in oklab, var(--phase-color) 34%, var(--page-line));
+    background: color-mix(in oklab, var(--phase-color) 10%, transparent);
+    padding: 0.12rem 0.3rem;
+    color: color-mix(in oklab, var(--phase-color) 70%, var(--page-ink));
+    font-size: 0.62rem;
+    line-height: 1;
+    text-transform: lowercase;
+  }
+
+  .hermes-agent-cli__workflow {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--page-ink);
+    font-weight: 500;
+  }
+
+  .hermes-agent-cli__agent {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--page-muted);
+  }
+
   .terminal-caret {
     display: inline-block;
     width: 0.5rem;
@@ -2119,7 +1970,7 @@
 
   .hermes-engraving {
     position: relative;
-    min-height: clamp(23rem, 42vw, 36rem);
+    min-height: clamp(25.5rem, 36.5vw, 32rem);
     overflow: hidden;
     border-left: 1px solid var(--page-line);
     background:
@@ -2129,8 +1980,8 @@
 
   .hermes-engraving .hero-signal {
     width: 100%;
-    min-height: clamp(23rem, 42vw, 36rem);
-    --hero-signal-height: clamp(23rem, 42vw, 36rem);
+    min-height: clamp(25.5rem, 36.5vw, 32rem);
+    --hero-signal-height: clamp(25.5rem, 36.5vw, 32rem);
     --hero-signal-width: 100%;
     opacity: 0.8;
   }
@@ -2474,6 +2325,18 @@
     }
   }
 
+  @keyframes hermes-log-enter {
+    from {
+      opacity: 0;
+      transform: translate3d(-0.6rem, 0, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
   @keyframes hermes-testimonial-enter {
     to {
       opacity: 1;
@@ -2502,6 +2365,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .hermes-float,
+    .hermes-agent-cli__line,
     .terminal-caret,
     .hermes-terminal::after,
     .hermes-hero__inner > *,
@@ -2553,7 +2417,6 @@
     }
 
     .hermes-action__grid,
-    .hermes-agent-map,
     .hermes-split-section--two,
     .hermes-feature-grid__inner,
     .hermes-testimonial-section {
@@ -2597,76 +2460,30 @@
       align-items: start;
       flex-direction: column;
     }
-
-    .hermes-agent-map__intro {
-      border-right: 0;
-      border-bottom: 1px solid var(--page-line);
-    }
-
-    .hermes-agent-map__intro h2 {
-      max-width: 18ch;
-    }
   }
 
   @media (max-width: 720px) {
-    .hermes-agent-table {
-      display: block;
-      min-width: 0;
+    .hermes-agent-cli__line {
+      grid-template-columns: 2rem 4.45rem minmax(0, 1fr);
+      gap: 0.48rem;
     }
 
-    .hermes-agent-table caption,
-    .hermes-agent-table tbody,
-    .hermes-agent-table tr,
-    .hermes-agent-table td {
-      display: block;
+    .hermes-agent-cli__workflow,
+    .hermes-agent-cli__agent {
+      grid-column: 3;
+      overflow: visible;
+      text-overflow: clip;
+      white-space: normal;
     }
 
-    .hermes-agent-table thead {
-      display: none;
+    .hermes-terminal--agent {
+      min-height: 0;
     }
 
-    .hermes-agent-table tbody {
-      display: grid;
-      gap: 0.75rem;
-      padding: 0.85rem;
-    }
-
-    .hermes-agent-table tbody tr {
-      display: grid;
-      gap: 0.68rem;
-      border: 1px solid color-mix(in oklab, var(--phase-color) 28%, var(--page-line));
-      border-left: 3px solid var(--phase-color);
-      background: color-mix(in oklab, var(--page-bg) 90%, transparent);
-      padding: 0.9rem;
-    }
-
-    .hermes-agent-table td,
-    .hermes-agent-table tbody tr:last-child td {
-      border-bottom: 0;
-      padding: 0;
-    }
-
-    .hermes-agent-table tbody tr td:first-child {
-      border-left: 0;
-    }
-
-    .hermes-agent-table td::before {
-      content: attr(data-label);
-      display: block;
-      margin-bottom: 0.2rem;
-      color: var(--page-muted);
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      line-height: 1.3;
-      text-transform: uppercase;
-    }
-
-    .hermes-agent-table__step::before {
-      display: none;
-    }
-
-    .hermes-agent-table__phase span {
-      width: fit-content;
+    .hermes-engraving,
+    .hermes-engraving .hero-signal {
+      min-height: 20rem;
+      --hero-signal-height: 20rem;
     }
   }
 
@@ -2725,18 +2542,18 @@
       overflow-wrap: anywhere;
     }
 
-    .hermes-agent-map__intro h2 {
-      font-size: 1.9rem;
+    .hermes-terminal {
+      margin: 1rem;
     }
 
-    .hermes-agent-map__stats {
-      grid-template-columns: 1fr;
+    .hermes-agent-cli__line {
+      grid-template-columns: 1.9rem minmax(4.2rem, auto) minmax(0, 1fr);
+      padding: 0.4rem;
     }
 
-    .hermes-agent-map__stats div + div {
-      border-left: 0;
-      border-top: 1px solid var(--page-line);
-      padding-left: 0;
+    .hermes-agent-cli__workflow,
+    .hermes-agent-cli__agent {
+      grid-column: 1 / -1;
     }
   }
 }
