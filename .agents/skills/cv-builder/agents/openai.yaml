@@ -1,4 +1,0 @@
-interface:
-  display_name: "CV Builder"
-  short_description: "Tailor one-page CVs from project evidence"
-  default_prompt: "Use $cv-builder to tailor a one-page CV to this job description using the strongest evidence from my projects and case studies."
