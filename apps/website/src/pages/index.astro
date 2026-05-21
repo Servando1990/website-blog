@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { HeroAsciiField } from '../components/HeroAsciiField';
 import { HeroTrajectoryField } from '../components/HeroTrajectoryField';
 import {
   bookingUrl,
@@ -14,6 +13,24 @@ import {
 import { publishedCaseStudies } from '../lib/caseStudies';
 
 const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
+
+const privateCapitalAgentRows = [
+  { step: 1, workflow: 'Define the mandate', agent: 'Structure the deal into a clear opportunity profile.', phase: 'Setup' },
+  { step: 2, workflow: 'Package the opportunity', agent: 'Extract, normalize, and flag gaps in deal materials.', phase: 'Setup' },
+  { step: 3, workflow: 'Define the investor profile / thesis', agent: 'Turn the mandate into investor-fit criteria, exclusions, and thesis nuance.', phase: 'Setup' },
+  { step: 4, workflow: 'Search the investor universe', agent: 'Find likely-fit investors across CRM memory and external sources.', phase: 'Search' },
+  { step: 5, workflow: 'Prioritize matches', agent: 'Rank investors by fit and explain the rationale, signals, risks, and constraints.', phase: 'Search' },
+  { step: 6, workflow: 'Prepare outreach / handoff', agent: 'Preserve deal and relationship context for outreach, export, sequence, or review handoff.', phase: 'Search' },
+  { step: 7, workflow: 'Support investor triage', agent: "Screen the deal against the investor's thesis and route the next action.", phase: 'Review' },
+  { step: 8, workflow: 'Verify company data', agent: 'Pre-fill intake, flag gaps or inconsistencies, and ask the company to confirm.', phase: 'Review' },
+  { step: 9, workflow: 'Prepare diligence', agent: 'Create memo-ready analysis, scorecards, risk flags, and follow-up questions.', phase: 'Review' },
+  { step: 10, workflow: 'Analyze structure', agent: 'Compare deal structures, constraints, and return implications using deterministic math.', phase: 'Decision' },
+  { step: 11, workflow: 'Move toward LOI / term sheet', agent: 'Summarize open issues, term-sheet readiness, and decision points.', phase: 'Decision' },
+  { step: 12, workflow: 'Support close', agent: 'Track final diligence, legal items, approvals, and follow-ups.', phase: 'Decision' },
+  { step: 13, workflow: 'Monitor, pass, or nurture', agent: 'Capture pass rationale, set reminders, and suggest better-fit future paths.', phase: 'Memory' },
+];
+
+const privateCapitalAgentPhases = ['Setup', 'Search', 'Review', 'Decision', 'Memory'];
 ---
 
 <Layout
@@ -61,24 +78,75 @@ const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
         <span>See It In Action</span>
       </div>
 
-      <div class="hermes-action__grid">
-        <div class="hermes-terminal" aria-label="Simulated terminal workflow">
-          <div class="hermes-terminal__bar">
-            <span></span>
-            <span></span>
-            <span></span>
-            <strong>controlthrive</strong>
+      <div class="hermes-agent-map" aria-labelledby="agent-workflow-title">
+        <div class="hermes-agent-map__intro">
+          <div>
+            <span class="hermes-eyebrow">Private capital</span>
+            <h2 id="agent-workflow-title">What agents can do across the workflow</h2>
           </div>
-          <div class="hermes-terminal__body">
-            <p><span>›</span> Review investor coverage gaps for MVV Capital</p>
-            <p><span>›</span> Attach source evidence and rank next outreach</p>
-            <p><span>›</span> Generate operator-ready workflow brief<span class="terminal-caret"></span></p>
+          <p>
+            The useful version of automation is not autonomous dealmaking. It is tighter handoffs,
+            cleaner memory, and faster synthesis around the people making the call.
+          </p>
+
+          <div class="hermes-agent-map__stats" aria-label="Workflow summary">
+            <div>
+              <strong>{privateCapitalAgentRows.length}</strong>
+              <span>workflow steps</span>
+            </div>
+            <div>
+              <strong>{privateCapitalAgentPhases.length}</strong>
+              <span>operating phases</span>
+            </div>
+          </div>
+
+          <div class="hermes-agent-phases" aria-label="Workflow phases">
+            {privateCapitalAgentPhases.map((phase) => (
+              <span data-phase={phase}>
+                <i aria-hidden="true"></i>
+                {phase}
+              </span>
+            ))}
           </div>
         </div>
 
-        <div class="hermes-engraving">
-          <HeroAsciiField client:load />
-          <span>CONTROLTHRIVE</span>
+        <div class="hermes-agent-table-shell">
+          <div class="hermes-agent-table-wrap" role="region" aria-label="Private capital agent workflow table" tabindex="0">
+            <table class="hermes-agent-table">
+              <caption>Agent workflow map from mandate to LOI</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Step</th>
+                  <th scope="col">Workflow</th>
+                  <th scope="col">What an agent can do</th>
+                  <th scope="col">Phase</th>
+                </tr>
+              </thead>
+              <tbody>
+                {privateCapitalAgentRows.map((row) => (
+                  <tr data-phase={row.phase}>
+                    <td class="hermes-agent-table__step" data-label="Step">
+                      <span>{row.step}</span>
+                    </td>
+                    <td class="hermes-agent-table__workflow" data-label="Workflow">
+                      {row.workflow}
+                    </td>
+                    <td class="hermes-agent-table__agent" data-label="What an agent can do">
+                      <span aria-hidden="true"></span>
+                      {row.agent}
+                    </td>
+                    <td class="hermes-agent-table__phase" data-label="Phase">
+                      <span>{row.phase}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p class="hermes-agent-table-note">
+            Less wasted motion between mandate and LOI.
+          </p>
         </div>
       </div>
     </section>
