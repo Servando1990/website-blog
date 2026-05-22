@@ -85,14 +85,14 @@ export function HeroTrajectoryField() {
       const isDark = document.documentElement.classList.contains("dark");
       const palette = isDark
         ? {
-            line: "rgba(243, 244, 246, 0.16)",
-            quietLine: "rgba(243, 244, 246, 0.07)",
-            node: "rgba(243, 244, 246, 0.72)",
+            line: "rgba(184, 215, 158, 0.24)",
+            quietLine: "rgba(214, 170, 98, 0.1)",
+            node: "rgba(244, 240, 230, 0.72)",
           }
         : {
-            line: "rgba(17, 17, 17, 0.14)",
-            quietLine: "rgba(17, 17, 17, 0.055)",
-            node: "rgba(17, 17, 17, 0.54)",
+            line: "rgba(49, 92, 45, 0.18)",
+            quietLine: "rgba(214, 170, 98, 0.12)",
+            node: "rgba(23, 32, 20, 0.56)",
           };
 
       pointer.x += (pointer.targetX - pointer.x) * 0.035;
@@ -189,9 +189,9 @@ function createTracks(width: number, height: number): Track[] {
 function createNodes(): Node[] {
   const colors = [
     "rgba(132, 176, 103, 0.86)",
-    "rgba(224, 129, 62, 0.9)",
-    "rgba(151, 176, 210, 0.8)",
-    "rgba(243, 244, 246, 0.75)",
+    "rgba(214, 170, 98, 0.9)",
+    "rgba(142, 169, 200, 0.82)",
+    "rgba(217, 130, 79, 0.78)",
   ];
 
   return Array.from({ length: NODE_COUNT }, (_, index) => ({
