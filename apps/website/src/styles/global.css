@@ -1787,27 +1787,27 @@
     grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 0.65fr);
   }
 
-  .hermes-agent-cli__line {
+  .hermes-agent-turn {
     --phase-color: #657386;
   }
 
-  .hermes-agent-cli__line[data-phase='Setup'] {
+  .hermes-agent-turn[data-phase='Setup'] {
     --phase-color: #536e9b;
   }
 
-  .hermes-agent-cli__line[data-phase='Search'] {
+  .hermes-agent-turn[data-phase='Search'] {
     --phase-color: #80689a;
   }
 
-  .hermes-agent-cli__line[data-phase='Review'] {
+  .hermes-agent-turn[data-phase='Review'] {
     --phase-color: #5f8062;
   }
 
-  .hermes-agent-cli__line[data-phase='Decision'] {
+  .hermes-agent-turn[data-phase='Decision'] {
     --phase-color: #9a714f;
   }
 
-  .hermes-agent-cli__line[data-phase='Memory'] {
+  .hermes-agent-turn[data-phase='Memory'] {
     --phase-color: #5f6993;
   }
 
@@ -1904,7 +1904,7 @@
 
   .hermes-agent-cli__stream {
     display: grid;
-    gap: 0.16rem;
+    gap: 0.14rem;
     min-height: 0;
     overflow-y: auto;
     padding-right: 0.2rem;
@@ -1912,50 +1912,75 @@
     scrollbar-color: color-mix(in oklab, var(--page-accent) 35%, transparent) transparent;
   }
 
-  .hermes-agent-cli__line {
+  .hermes-agent-turn {
     display: grid;
-    grid-template-columns: 2rem 4.25rem minmax(7.5rem, 0.75fr) minmax(12rem, 1.25fr);
+    grid-template-columns: 3rem 5.45rem minmax(7.1rem, 0.78fr) 2.75rem minmax(11.5rem, 1.22fr);
     align-items: baseline;
-    gap: 0.5rem;
+    gap: 0.42rem;
     min-width: 0;
     border-left: 2px solid var(--phase-color);
     border-top: 1px solid color-mix(in oklab, var(--page-line) 72%, transparent);
     background: color-mix(in oklab, var(--page-bg) 82%, transparent);
-    padding: 0.22rem 0.4rem;
-    animation: hermes-log-enter 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-delay: calc(0.08s + (var(--line-index) * 0.055s));
+    padding: 0.22rem 0.42rem;
   }
 
-  .hermes-agent-cli__step {
-    color: color-mix(in oklab, var(--phase-color) 74%, var(--page-ink));
+  .hermes-action--ready .hermes-agent-turn,
+  .hermes-action--ready .hermes-agent-turn__role--agent,
+  .hermes-action--ready .hermes-agent-turn__response {
+    opacity: 0;
+    transform: translate3d(-0.45rem, 0, 0);
   }
 
-  .hermes-agent-cli__phase {
-    width: fit-content;
-    border: 1px solid color-mix(in oklab, var(--phase-color) 34%, var(--page-line));
-    background: color-mix(in oklab, var(--phase-color) 10%, transparent);
-    padding: 0.12rem 0.3rem;
-    color: color-mix(in oklab, var(--phase-color) 70%, var(--page-ink));
-    font-size: 0.62rem;
+  .hermes-action--live .hermes-agent-turn {
+    animation: hermes-log-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(0.06s + (var(--turn-index) * 0.095s));
+  }
+
+  .hermes-action--live .hermes-agent-turn__role--agent,
+  .hermes-action--live .hermes-agent-turn__response {
+    animation: hermes-agent-reply-enter 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(0.18s + (var(--turn-index) * 0.095s));
+  }
+
+  .hermes-agent-turn__role {
+    color: color-mix(in oklab, var(--phase-color) 64%, var(--page-muted));
+    font-size: 0.56rem;
+    letter-spacing: 0.05em;
     line-height: 1;
     text-transform: lowercase;
   }
 
-  .hermes-agent-cli__workflow {
+  .hermes-agent-turn__role--agent {
+    color: color-mix(in oklab, var(--phase-color) 76%, var(--page-ink));
+  }
+
+  .hermes-agent-turn__instruction,
+  .hermes-agent-turn__response {
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .hermes-agent-turn__instruction {
     color: var(--page-ink);
     font-weight: 500;
   }
 
-  .hermes-agent-cli__agent {
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  .hermes-agent-turn__response {
     color: var(--page-muted);
+  }
+
+  .hermes-agent-turn__meta {
+    display: inline-flex;
+    border: 1px solid color-mix(in oklab, var(--phase-color) 34%, var(--page-line));
+    background: color-mix(in oklab, var(--phase-color) 10%, transparent);
+    padding: 0.08rem 0.28rem;
+    color: color-mix(in oklab, var(--phase-color) 70%, var(--page-ink));
+    font-size: 0.56rem;
+    line-height: 1;
+    white-space: nowrap;
+    text-transform: lowercase;
   }
 
   .terminal-caret {
@@ -2337,6 +2362,18 @@
     }
   }
 
+  @keyframes hermes-agent-reply-enter {
+    from {
+      opacity: 0;
+      transform: translate3d(0.35rem, 0, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
   @keyframes hermes-testimonial-enter {
     to {
       opacity: 1;
@@ -2365,7 +2402,9 @@
 
   @media (prefers-reduced-motion: reduce) {
     .hermes-float,
-    .hermes-agent-cli__line,
+    .hermes-agent-turn,
+    .hermes-agent-turn__role--agent,
+    .hermes-agent-turn__response,
     .terminal-caret,
     .hermes-terminal::after,
     .hermes-hero__inner > *,
@@ -2463,14 +2502,22 @@
   }
 
   @media (max-width: 720px) {
-    .hermes-agent-cli__line {
-      grid-template-columns: 2rem 4.45rem minmax(0, 1fr);
-      gap: 0.48rem;
+    .hermes-agent-turn {
+      grid-template-columns: 2.75rem 5.25rem minmax(0, 1fr);
+      gap: 0.35rem;
+      padding: 0.24rem 0.38rem;
     }
 
-    .hermes-agent-cli__workflow,
-    .hermes-agent-cli__agent {
+    .hermes-agent-turn__role--agent {
+      grid-column: 1;
+    }
+
+    .hermes-agent-turn__response {
       grid-column: 3;
+    }
+
+    .hermes-agent-turn__instruction,
+    .hermes-agent-turn__response {
       overflow: visible;
       text-overflow: clip;
       white-space: normal;
@@ -2546,14 +2593,18 @@
       margin: 1rem;
     }
 
-    .hermes-agent-cli__line {
-      grid-template-columns: 1.9rem minmax(4.2rem, auto) minmax(0, 1fr);
-      padding: 0.4rem;
+    .hermes-agent-turn {
+      grid-template-columns: 2.65rem minmax(0, 1fr);
     }
 
-    .hermes-agent-cli__workflow,
-    .hermes-agent-cli__agent {
-      grid-column: 1 / -1;
+    .hermes-agent-turn__meta,
+    .hermes-agent-turn__instruction,
+    .hermes-agent-turn__response {
+      grid-column: 2;
+    }
+
+    .hermes-agent-turn__role--agent {
+      grid-column: 1;
     }
   }
 }

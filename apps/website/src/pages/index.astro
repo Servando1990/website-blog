@@ -72,32 +72,33 @@ const privateCapitalAgentRows = [
       </div>
     </section>
 
-    <section class="hermes-action">
+    <section class="hermes-action" data-agent-action>
       <div class="hermes-section-title">
         <span>See It In Action</span>
       </div>
 
       <div class="hermes-action__grid">
-        <div class="hermes-terminal hermes-terminal--agent" aria-label="Private capital agent terminal workflow">
+        <div class="hermes-terminal hermes-terminal--agent" aria-label="Human and agent private capital workflow exchange">
           <div class="hermes-terminal__bar">
             <span></span>
             <span></span>
             <span></span>
-            <strong>private-capital-agent</strong>
+            <strong>human-agent-run</strong>
           </div>
           <div class="hermes-terminal__body hermes-agent-cli">
             <p class="hermes-agent-cli__prompt">
-              <span>›</span> run workflow --domain private-capital --from mandate --to loi
+              <span>›</span> replay --human-sets-step --agent-responds --speed fast
             </p>
 
-            <div class="hermes-agent-cli__stream" aria-label="Agent workflow log">
+            <div class="hermes-agent-cli__stream" aria-label="Human instruction and agent response log">
               {privateCapitalAgentRows.map((row) => (
-                <div class="hermes-agent-cli__line" data-phase={row.phase} style={`--line-index: ${row.step - 1}`}>
-                  <span class="hermes-agent-cli__step">{String(row.step).padStart(2, '0')}</span>
-                  <span class="hermes-agent-cli__phase">{row.phase}</span>
-                  <span class="hermes-agent-cli__workflow">{row.workflow}</span>
-                  <span class="hermes-agent-cli__agent">{row.agent}</span>
-                </div>
+                <article class="hermes-agent-turn" data-phase={row.phase} style={`--turn-index: ${row.step - 1}`}>
+                  <span class="hermes-agent-turn__role">human</span>
+                  <span class="hermes-agent-turn__meta">{String(row.step).padStart(2, '0')} / {row.phase}</span>
+                  <span class="hermes-agent-turn__instruction">{row.workflow}</span>
+                  <span class="hermes-agent-turn__role hermes-agent-turn__role--agent">agent</span>
+                  <span class="hermes-agent-turn__response">{row.agent}</span>
+                </article>
               ))}
             </div>
 
@@ -113,6 +114,37 @@ const privateCapitalAgentRows = [
         </div>
       </div>
     </section>
+
+    <script is:inline>
+      (() => {
+        const action = document.querySelector('[data-agent-action]');
+
+        if (!action) {
+          return;
+        }
+
+        action.classList.add('hermes-action--ready');
+
+        const activate = () => action.classList.add('hermes-action--live');
+
+        if (!('IntersectionObserver' in window)) {
+          activate();
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            if (entry?.isIntersecting) {
+              activate();
+              observer.disconnect();
+            }
+          },
+          { rootMargin: '-12% 0px -18%', threshold: 0.18 },
+        );
+
+        observer.observe(action);
+      })();
+    </script>
 
     <section class="hermes-feature-grid">
       <div class="hermes-section-title">
