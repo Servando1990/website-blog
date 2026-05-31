@@ -1004,6 +1004,177 @@
     color: var(--page-muted);
   }
 
+  .blog-main {
+    background-color: var(--page-bg);
+  }
+
+  .blog-hero-frame {
+    padding-top: clamp(3.5rem, 6vw, 5.8rem);
+  }
+
+  .blog-shell {
+    width: min(980px, calc(100% - 2rem));
+  }
+
+  .blog-kicker {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.7rem 1rem;
+    margin-bottom: clamp(1.8rem, 4vw, 3.4rem);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--page-muted);
+  }
+
+  .blog-kicker > * + *::before {
+    content: '/';
+    margin-right: 1rem;
+    color: color-mix(in oklab, var(--page-muted) 70%, transparent);
+  }
+
+  .blog-prose {
+    max-width: 47rem;
+    color: var(--page-ink);
+  }
+
+  .blog-prose > * {
+    margin-top: 0;
+  }
+
+  .blog-prose h1 {
+    max-width: 13ch;
+    margin-bottom: clamp(0.8rem, 1.8vw, 1.25rem);
+    font-size: clamp(3rem, 6.4vw, 5.8rem);
+    line-height: 0.94;
+    letter-spacing: -0.07em;
+  }
+
+  .blog-prose .blog-subtitle {
+    max-width: 22ch;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.55rem, 3.2vw, 2.85rem);
+    line-height: 1.05;
+    letter-spacing: -0.05em;
+    color: color-mix(in oklab, var(--page-ink) 72%, var(--page-muted));
+  }
+
+  .blog-lead-image {
+    width: min(66rem, calc(100vw - 2rem));
+    margin: 0 0 clamp(2rem, 5vw, 4rem);
+    border-top: 1px solid color-mix(in oklab, var(--page-line) 82%, transparent);
+    border-bottom: 1px solid color-mix(in oklab, var(--page-line) 82%, transparent);
+    overflow: hidden;
+    background: color-mix(in oklab, var(--page-bg-strong) 84%, transparent);
+  }
+
+  .blog-lead-image img {
+    width: 100%;
+    aspect-ratio: 3 / 1.45;
+    object-fit: cover;
+    object-position: center 36%;
+    filter: saturate(0.9) contrast(0.92) brightness(0.86);
+  }
+
+  .blog-prose h2 {
+    max-width: 15ch;
+    margin-top: clamp(4.4rem, 8vw, 7rem);
+    margin-bottom: 1.15rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid color-mix(in oklab, var(--page-line) 78%, transparent);
+    font-size: clamp(1.7rem, 4vw, 2.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.05em;
+  }
+
+  .blog-prose p,
+  .blog-prose li {
+    font-size: clamp(1.02rem, 1.2vw, 1.14rem);
+    line-height: 1.82;
+    color: color-mix(in oklab, var(--page-muted) 92%, var(--page-ink));
+  }
+
+  .blog-prose h1 + p:not(.blog-subtitle),
+  .blog-prose h1 + .blog-subtitle + .blog-lead-image + p,
+  .blog-prose h1 + .blog-lead-image + p {
+    font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+    line-height: 1.62;
+    color: color-mix(in oklab, var(--page-ink) 74%, var(--page-muted));
+  }
+
+  .blog-prose p + p,
+  .blog-prose p + ul,
+  .blog-prose p + ol,
+  .blog-prose ul + p,
+  .blog-prose ol + p,
+  .blog-prose blockquote + p,
+  .blog-prose table + p {
+    margin-top: 1.45rem;
+  }
+
+  .blog-prose ul,
+  .blog-prose ol {
+    display: grid;
+    gap: 0.55rem;
+    margin: 1.45rem 0 0;
+    padding-left: 1.15rem;
+  }
+
+  .blog-prose li::marker {
+    color: var(--page-accent-strong);
+  }
+
+  .blog-prose blockquote {
+    margin: clamp(2rem, 4vw, 3rem) 0;
+    padding-left: clamp(1rem, 2vw, 1.5rem);
+    border-left: 1px solid var(--page-accent-strong);
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.5vw, 2rem);
+    line-height: 1.25;
+    letter-spacing: -0.04em;
+    color: var(--page-ink);
+  }
+
+  .blog-prose blockquote p {
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+  }
+
+  .blog-prose table {
+    display: block;
+    width: min(100%, 56rem);
+    margin: clamp(1.8rem, 4vw, 3rem) 0;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 0.94rem;
+  }
+
+  .blog-prose th,
+  .blog-prose td {
+    min-width: 14rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--page-line) 78%, transparent);
+    padding: 0.9rem 1rem 0.9rem 0;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .blog-prose th {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--page-accent-strong);
+  }
+
+  .blog-prose td {
+    line-height: 1.55;
+    color: var(--page-muted);
+  }
+
   .case-shell {
     @apply grid gap-10;
   }
@@ -1427,7 +1598,13 @@
 
   .site-nav {
     display: grid;
-    grid-template-columns: minmax(11rem, 1fr) minmax(8rem, 1fr) minmax(8rem, 1fr) minmax(10rem, 1fr) minmax(12rem, 1fr);
+    grid-template-columns:
+      minmax(11rem, 1.1fr)
+      minmax(7.5rem, 0.85fr)
+      minmax(6.5rem, 0.72fr)
+      minmax(6.5rem, 0.72fr)
+      minmax(8rem, 0.85fr)
+      minmax(10rem, 0.92fr);
     gap: 0;
     min-height: clamp(5.8rem, 8vw, 8.4rem);
     padding: 0;
@@ -2556,6 +2733,7 @@
 
     .nav-cell--docs,
     .nav-cell--portal,
+    .nav-cell--blog,
     .nav-cell--socials {
       display: none;
     }
