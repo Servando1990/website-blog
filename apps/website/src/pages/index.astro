@@ -7,13 +7,27 @@ import { HeroTrajectoryField } from '../components/HeroTrajectoryField';
 import {
   bookingUrl,
   founderProfile,
-  serviceAreas,
   testimonials,
   trustPrinciples,
 } from '../lib/siteContent';
 import { publishedCaseStudies } from '../lib/caseStudies';
 
 const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
+
+const operatingBridge = [
+  {
+    label: 'Context',
+    summary: 'Gather the mandate, materials, relationship memory, and constraints that usually live in different places.',
+  },
+  {
+    label: 'Ship',
+    summary: 'Feed context to agents and ship systems that turn messy workflow inputs into usable decision support.',
+  },
+  {
+    label: 'Iterate',
+    summary: 'Refine logic with new context, operator feedback, and evidence so the system keeps producing trusted outputs.',
+  },
+];
 
 const privateCapitalAgentRows = [
   { step: 1, workflow: 'Define the mandate', agent: 'Structure the deal into a clear opportunity profile.', phase: 'Setup' },
@@ -62,14 +76,14 @@ const privateCapitalAgentRows = [
               <span>1. Scope</span>
               <a href={bookingUrl} target="_blank" rel="noopener noreferrer">Open</a>
             </div>
-            <code>book founder call --workflow "private capital"</code>
+            <code>talk to founder --system "private capital"</code>
           </div>
           <div class="hermes-command">
             <div class="hermes-command__meta">
               <span>2. Build</span>
               <a href="/case-studies">View</a>
             </div>
-            <code>ship evidence-linked system --with adoption</code>
+            <code>run case studies --view</code>
           </div>
         </div>
       </div>
@@ -218,19 +232,21 @@ const privateCapitalAgentRows = [
       })();
     </script>
 
-    <section class="hermes-feature-grid">
-      <div class="hermes-section-title">
-        <span>Features</span>
+    <section class="hermes-operating-bridge" aria-label="Operating focus">
+      <div class="hermes-operating-bridge__copy">
+        <span class="hermes-eyebrow">Operating focus</span>
+        <h2>Turn scattered context into a handoff someone can act on.</h2>
       </div>
 
-      <div class="hermes-feature-grid__inner">
-        {serviceAreas.map((service) => (
-          <article class="hermes-feature">
-            <span>{service.title}</span>
-            <p>{service.summary}</p>
-          </article>
+      <ol class="hermes-operating-steps">
+        {operatingBridge.map((step, index) => (
+          <li style={`--bridge-index: ${index}`}>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <strong>{step.label}</strong>
+            <p>{step.summary}</p>
+          </li>
         ))}
-      </div>
+      </ol>
     </section>
 
     <section class="hermes-split-section">

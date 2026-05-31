@@ -2005,6 +2005,7 @@
   }
 
   .hermes-action,
+  .hermes-operating-bridge,
   .hermes-feature-grid,
   .hermes-split-section,
   .hermes-testimonial-section,
@@ -2300,6 +2301,113 @@
     font-weight: 500;
     letter-spacing: 0.08em;
     color: color-mix(in oklab, var(--page-accent-strong) 78%, var(--page-ink));
+  }
+
+  .hermes-operating-bridge {
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.68fr) minmax(0, 1.32fr);
+    background:
+      linear-gradient(120deg, color-mix(in oklab, var(--page-accent-soft) 46%, transparent), transparent 48%),
+      color-mix(in oklab, var(--page-bg) 96%, transparent);
+  }
+
+  .hermes-operating-bridge__copy {
+    display: grid;
+    align-content: center;
+    gap: 1rem;
+    min-height: clamp(18rem, 25vw, 25rem);
+    border-right: 1px solid var(--page-line);
+    padding: clamp(1.4rem, 3vw, 2.4rem);
+  }
+
+  .hermes-operating-bridge__copy h2 {
+    max-width: 12ch;
+    font-size: clamp(2rem, 4.2vw, 4rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+
+  .hermes-operating-steps {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+  }
+
+  .hermes-operating-steps::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: clamp(2.3rem, 4vw, 3.5rem);
+    z-index: 0;
+    width: 100%;
+    height: 1px;
+    background: color-mix(in oklab, var(--page-line) 86%, transparent);
+  }
+
+  .hermes-operating-steps::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: clamp(2.3rem, 4vw, 3.5rem);
+    z-index: 1;
+    width: 34%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--page-accent-warm), transparent);
+    animation: hermes-bridge-scan 7.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+
+  .hermes-operating-steps li {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    align-content: start;
+    gap: 0.95rem;
+    min-height: clamp(18rem, 25vw, 25rem);
+    border-right: 1px solid var(--page-line);
+    padding: clamp(1.35rem, 2.4vw, 2rem);
+    animation: hermes-bridge-step 7.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    animation-delay: calc(var(--bridge-index) * 1.15s);
+  }
+
+  .hermes-operating-steps li:last-child {
+    border-right: 0;
+  }
+
+  .hermes-operating-steps li::before {
+    content: '';
+    width: 0.7rem;
+    height: 0.7rem;
+    margin-top: clamp(0.62rem, 1.05vw, 0.88rem);
+    border: 1px solid color-mix(in oklab, var(--page-accent-strong) 80%, var(--page-line));
+    border-radius: 999px;
+    background: var(--page-bg);
+    animation: hermes-bridge-dot 7.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    animation-delay: calc(var(--bridge-index) * 1.15s);
+  }
+
+  .hermes-operating-steps span {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--page-muted);
+  }
+
+  .hermes-operating-steps strong {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2vw, 1.85rem);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    color: var(--page-ink);
+  }
+
+  .hermes-operating-steps p {
+    max-width: 24rem;
+    line-height: 1.7;
+    color: var(--page-muted);
   }
 
   .hermes-feature-grid__inner {
@@ -2701,6 +2809,51 @@
     }
   }
 
+  @keyframes hermes-bridge-scan {
+    0% {
+      opacity: 0;
+      transform: translate3d(-35%, 0, 0);
+    }
+
+    18%,
+    62% {
+      opacity: 0.72;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translate3d(290%, 0, 0);
+    }
+  }
+
+  @keyframes hermes-bridge-step {
+    0%,
+    18% {
+      background: color-mix(in oklab, var(--page-accent) 8%, transparent);
+    }
+
+    36%,
+    100% {
+      background: transparent;
+    }
+  }
+
+  @keyframes hermes-bridge-dot {
+    0%,
+    18% {
+      background: var(--page-accent-warm);
+      box-shadow: 0 0 0 0.35rem color-mix(in oklab, var(--page-accent-warm) 10%, transparent);
+      transform: scale(1.08);
+    }
+
+    36%,
+    100% {
+      background: var(--page-bg);
+      box-shadow: 0 0 0 0 color-mix(in oklab, var(--page-accent-warm) 0%, transparent);
+      transform: scale(1);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hermes-float,
     .hermes-agent-turn,
@@ -2709,7 +2862,10 @@
     .terminal-caret,
     .hermes-terminal::after,
     .hermes-hero__inner > *,
-    .hermes-testimonial-rail blockquote {
+    .hermes-testimonial-rail blockquote,
+    .hermes-operating-steps::after,
+    .hermes-operating-steps li,
+    .hermes-operating-steps li::before {
       animation: none;
       opacity: 1;
       transform: none;
@@ -2758,10 +2914,40 @@
     }
 
     .hermes-action__grid,
+    .hermes-operating-bridge,
     .hermes-split-section--two,
     .hermes-feature-grid__inner,
     .hermes-testimonial-section {
       grid-template-columns: 1fr;
+    }
+
+    .hermes-operating-bridge__copy {
+      min-height: 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--page-line);
+    }
+
+    .hermes-operating-bridge__copy h2 {
+      max-width: 16ch;
+    }
+
+    .hermes-operating-steps {
+      grid-template-columns: 1fr;
+    }
+
+    .hermes-operating-steps::before,
+    .hermes-operating-steps::after {
+      display: none;
+    }
+
+    .hermes-operating-steps li {
+      min-height: 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--page-line);
+    }
+
+    .hermes-operating-steps li:last-child {
+      border-bottom: 0;
     }
 
     .hermes-section-title {
