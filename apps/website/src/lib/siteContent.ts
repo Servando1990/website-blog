@@ -4,7 +4,7 @@ export const navigation = [
   { href: '/', label: 'Home' },
   { href: '/case-studies', label: 'Case Studies' },
   { href: '/tools', label: 'Tools' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/blog/from-search-to-loi', label: 'Blog' },
 ];
 
 export const trustedCompanies = ['BBVA', 'KPMG', 'PwC', 'Fintonic', 'Minsait'];

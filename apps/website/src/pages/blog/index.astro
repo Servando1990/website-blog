@@ -1,0 +1,19 @@
+---
+const postUrl = '/blog/from-search-to-loi';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0;url=${postUrl}`} />
+    <link rel="canonical" href={postUrl} />
+    <title>Redirecting to blog post</title>
+    <script is:inline>
+      window.location.replace('/blog/from-search-to-loi');
+    </script>
+  </head>
+  <body>
+    <a href={postUrl}>Continue to the latest post</a>
+  </body>
+</html>

@@ -2,5 +2,12 @@
   "buildCommand": "cd ../.. && npm run website:build",
   "outputDirectory": "dist",
   "framework": "astro",
-  "installCommand": "cd ../.. && npm install"
-} 
+  "installCommand": "cd ../.. && npm install",
+  "redirects": [
+    {
+      "source": "/blog",
+      "destination": "/blog/from-search-to-loi",
+      "permanent": true
+    }
+  ]
+}
