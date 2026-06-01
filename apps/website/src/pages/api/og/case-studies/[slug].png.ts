@@ -35,7 +35,7 @@ export const GET: APIRoute = async ({ params }) => {
           background: '#ffffff',
           color: '#111111',
           padding: '54px 64px',
-          fontFamily: '"Inter", "Segoe UI", sans-serif',
+          fontFamily: '"Geist", "Segoe UI", sans-serif',
         },
         children: [
           {

@@ -7,6 +7,9 @@ export default defineConfig({
     tailwind(),
     react()
   ],
+  build: {
+    inlineStylesheets: 'always'
+  },
   output: 'static',
   site: 'https://controlthrive.com',
   server: {
