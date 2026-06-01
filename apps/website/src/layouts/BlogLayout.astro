@@ -11,11 +11,23 @@ const {
     category = 'Essay',
     publishDate,
     readTime = '12 min read',
+    ogImage,
+    ogImageAlt,
+    ogImageWidth,
+    ogImageHeight,
   },
 } = Astro.props;
 ---
 
-<Layout title={`${title} | controlthrive`} description={description} ogType="article">
+<Layout
+  title={`${title} | controlthrive`}
+  description={description}
+  ogType="article"
+  ogImage={ogImage}
+  ogImageAlt={ogImageAlt}
+  ogImageWidth={ogImageWidth}
+  ogImageHeight={ogImageHeight}
+>
   <Header />
 
   <main class="site-main case-study-main blog-main">

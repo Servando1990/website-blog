@@ -5,6 +5,10 @@ description: "A controlthrive essay on why private capital needs specialized wor
 category: "Private capital workflows"
 publishDate: "2026-05-31"
 readTime: "6 min read"
+ogImage: "/blog/search-to-loi-image.jpg"
+ogImageAlt: "Pink flowers growing across a textured stone wall."
+ogImageWidth: 1536
+ogImageHeight: 1024
 ---
 
 # From Search to LOI
