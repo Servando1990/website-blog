@@ -2005,12 +2005,132 @@
   }
 
   .hermes-action,
+  .hermes-announcement,
   .hermes-operating-bridge,
   .hermes-feature-grid,
   .hermes-split-section,
   .hermes-testimonial-section,
   .hermes-cta {
     border-bottom: 1px solid var(--page-line);
+  }
+
+  .hermes-announcement {
+    background: color-mix(in oklab, var(--page-bg) 96%, var(--page-accent-cool));
+  }
+
+  .hermes-announcement__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(8rem, 0.18fr);
+    align-items: stretch;
+    min-height: clamp(10.5rem, 15vw, 13.5rem);
+    overflow: hidden;
+    color: inherit;
+    isolation: isolate;
+  }
+
+  .hermes-announcement__inner::before,
+  .hermes-announcement__inner::after {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    content: '';
+  }
+
+  .hermes-announcement__inner::before {
+    background:
+      linear-gradient(90deg, var(--page-bg) 0%, color-mix(in oklab, var(--page-bg) 86%, transparent) 34%, transparent 72%),
+      linear-gradient(180deg, color-mix(in oklab, var(--page-line) 58%, transparent) 0 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in oklab, var(--page-line) 52%, transparent) 0 1px, transparent 1px);
+    background-size: auto, 100% 50%, 20.2% 100%;
+  }
+
+  .hermes-announcement__inner::after {
+    background:
+      radial-gradient(circle at 78% 16%, color-mix(in oklab, var(--page-accent-warm) 16%, transparent), transparent 24%),
+      linear-gradient(90deg, transparent 52%, color-mix(in oklab, var(--page-bg) 35%, transparent) 78%, var(--page-bg) 100%);
+    mix-blend-mode: screen;
+    opacity: 0.72;
+  }
+
+  .hermes-announcement__copy {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    align-content: center;
+    gap: 0.45rem;
+    padding: clamp(1.2rem, 2.3vw, 1.9rem) clamp(1.25rem, 3vw, 2.3rem);
+  }
+
+  .hermes-announcement__copy span,
+  .hermes-announcement__cta {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--page-accent-warm) 78%, var(--page-muted));
+  }
+
+  .hermes-announcement__copy h2 {
+    max-width: 16ch;
+    font-size: clamp(1.8rem, 4vw, 3.9rem);
+    font-weight: 500;
+    line-height: 0.98;
+    letter-spacing: -0.06em;
+  }
+
+  .hermes-announcement__copy p {
+    max-width: 34rem;
+    font-size: clamp(0.98rem, 1.3vw, 1.12rem);
+    line-height: 1.6;
+    color: var(--page-muted);
+  }
+
+  .hermes-announcement__image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .hermes-announcement__image img {
+    width: 100%;
+    height: 100%;
+    min-height: clamp(10.5rem, 15vw, 13.5rem);
+    object-fit: cover;
+    object-position: right 32%;
+    filter: saturate(0.82) contrast(0.96) brightness(0.54);
+    opacity: 0.74;
+    transform: scale(1.04);
+    mask-image:
+      linear-gradient(90deg, transparent 0%, transparent 28%, rgb(0 0 0 / 0.38) 43%, rgb(0 0 0) 76%, rgb(0 0 0) 100%),
+      linear-gradient(180deg, transparent 0%, rgb(0 0 0) 16%, rgb(0 0 0) 84%, transparent 100%);
+    mask-composite: intersect;
+    transition: transform 720ms cubic-bezier(0.22, 1, 0.36, 1), filter 720ms cubic-bezier(0.22, 1, 0.36, 1), opacity 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .hermes-announcement__cta {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    min-width: clamp(7.5rem, 11vw, 10rem);
+    padding-inline: 1.1rem;
+    border-left: 1px solid var(--page-line);
+    transition: color 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .hermes-announcement__inner:hover .hermes-announcement__image img {
+    filter: saturate(0.92) contrast(1) brightness(0.62);
+    opacity: 0.86;
+    transform: scale(1.07) translateX(-0.7rem);
+  }
+
+  .hermes-announcement__inner:hover .hermes-announcement__cta {
+    color: var(--page-ink);
   }
 
   .hermes-action__grid {
@@ -2872,7 +2992,9 @@
     }
 
     .hermes-command,
-    .hermes-command code {
+    .hermes-command code,
+    .hermes-announcement__image img,
+    .hermes-announcement__cta {
       transition: none;
     }
 
@@ -2911,6 +3033,31 @@
 
     .hermes-hero {
       min-height: auto;
+    }
+
+    .hermes-announcement__inner {
+      grid-template-columns: 1fr;
+      min-height: 18rem;
+    }
+
+    .hermes-announcement__inner::before {
+      background:
+        linear-gradient(180deg, var(--page-bg) 0%, color-mix(in oklab, var(--page-bg) 82%, transparent) 48%, transparent 100%),
+        linear-gradient(180deg, color-mix(in oklab, var(--page-line) 58%, transparent) 0 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in oklab, var(--page-line) 52%, transparent) 0 1px, transparent 1px);
+      background-size: auto, 100% 50%, 33.333% 100%;
+    }
+
+    .hermes-announcement__image img {
+      object-position: center bottom;
+      mask-image: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 0.62) 40%, rgb(0 0 0) 100%);
+    }
+
+    .hermes-announcement__cta {
+      justify-items: start;
+      min-width: 0;
+      border-top: 1px solid var(--page-line);
+      padding: 1rem clamp(1.25rem, 3vw, 2.3rem);
     }
 
     .hermes-action__grid,

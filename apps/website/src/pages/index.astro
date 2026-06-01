@@ -14,6 +14,15 @@ import { publishedCaseStudies } from '../lib/caseStudies';
 
 const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
 
+const latestBlogPost = {
+  href: '/blog',
+  eyebrow: 'Latest blog',
+  title: 'From Search to LOI',
+  subtitle: 'Why private capital needs workflow agents',
+  image: '/blog/search-to-loi-image.jpg',
+  alt: 'Pink flowers growing across a textured stone wall.',
+};
+
 const operatingBridge = [
   {
     label: 'Context',
@@ -231,6 +240,22 @@ const privateCapitalAgentRows = [
         observer.observe(action);
       })();
     </script>
+
+    <section class="hermes-announcement" aria-label="Latest blog post">
+      <a class="hermes-announcement__inner" href={latestBlogPost.href}>
+        <figure class="hermes-announcement__image">
+          <img src={latestBlogPost.image} alt={latestBlogPost.alt} loading="eager" decoding="async" />
+        </figure>
+
+        <div class="hermes-announcement__copy">
+          <span>{latestBlogPost.eyebrow}</span>
+          <h2>{latestBlogPost.title}</h2>
+          <p>{latestBlogPost.subtitle}</p>
+        </div>
+
+        <span class="hermes-announcement__cta">Read post</span>
+      </a>
+    </section>
 
     <section class="hermes-operating-bridge" aria-label="Operating focus">
       <div class="hermes-operating-bridge__copy">
