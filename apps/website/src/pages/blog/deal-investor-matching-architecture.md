@@ -21,11 +21,11 @@ intent into a machine-readable contract, preserves meaning from noisy CRM data,
 ranks candidates by evidence, and prevents known bad matches from becoming
 visible recommendations.
 
-The system described here was shaped by repeated production failure modes:
-search instructions that did not govern membership, relevant investors lost to
-parser drift, visible results that were known mismatches, stale relationship
-history overvalued as signal, generic rationale, and quality that could not be
-replayed under stable conditions.
+The system described here was shaped by repeated production lessons: search
+instructions need to govern membership, relevant investors need protection from
+parser drift, visible results need clear mismatch controls, relationship history
+needs freshness-aware weighting, rationale needs specific evidence, and quality
+needs to be replayable under stable conditions.
 
 The resulting architecture is useful beyond investor matching. The same pattern
 applies to sales account prioritization, expert matching, diligence routing,
@@ -59,14 +59,14 @@ wrong names.
 
 ---
 
-## Problems and Architectural Responses
+## Lessons and Architectural Responses
 
 The specification history behind this system is best understood as a sequence of
-product failure modes converted into architectural requirements. Each problem
-exposed a place where a ranked-list product needed stronger contracts,
-guardrails, evidence, or evaluation.
+product lessons converted into architectural requirements. Each lesson exposed a
+place where a ranked-list product needed stronger contracts, guardrails,
+evidence, or evaluation.
 
-| Problem                                                                                                               | Architectural response                                                                                                               |
+| Lesson                                                                                                                | Architectural response                                                                                                               |
 | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | Search setup was interpreted inconsistently across extraction, filtering, scoring, and reasoning.                     | Resolve one canonical search intent contract per run and make every downstream layer consume it.                                     |
 | Explicit scope constraints could influence narrative but not shortlist membership.                                    | Apply contract-derived allowed and excluded sets in deterministic eligibility gates before ranking.                                  |
@@ -77,10 +77,10 @@ guardrails, evidence, or evaluation.
 | Relationship history overvalued stale volume and undervalued recent high-quality interactions.                        | Split relationship volume from relationship quality and apply recency/freshness multipliers.                                         |
 | LLM-written rationale could become generic, repetitive, or policy-led.                                                | Split reasoning into evidence extraction and narrative synthesis, then normalize visible rationale into bounded sections.            |
 | Long documents, text-only inputs, and large uploads introduced extraction and transport fragility.                    | Use reference-based document ingestion, first-class text handling, and extraction completeness diagnostics.                          |
-| Product quality depended on remembering past incidents manually.                                                      | Build benchmark replay with frozen data, run manifests, candidate lineage, trust checks, ranking metrics, and prompt-quality checks. |
+| Product quality improved when past lessons became replayable.                                                        | Build benchmark replay with frozen data, run manifests, candidate lineage, trust checks, ranking metrics, and prompt-quality checks. |
 
 This is the central product story: the architecture evolved from recurring
-quality problems into a governed search system, not from a desire to add more
+quality lessons into a governed search system, not from a desire to add more
 agents.
 
 ---
@@ -165,7 +165,7 @@ The most important product correction was introducing one canonical
 machine-readable representation of user intent.
 
 Without this contract, the same free-form instruction can guide extraction,
-influence notes reasoning, appear in summary copy, and still fail to govern
+influence notes reasoning, appear in summary copy, and still not govern
 shortlist membership. That is search drift.
 
 The fix is a **Search Intent Contract** resolved once per run. It captures
@@ -203,7 +203,7 @@ free-form user setup -> typed intent contract -> shared by every downstream laye
 ## Layer 3: CRM Ingestion and Taxonomy Preservation
 
 Search quality is not only an LLM problem. In this system, some of the most
-important relevance failures were ingestion failures.
+important relevance lessons came from ingestion behavior.
 
 If a CRM industry value is silently dropped, a relevant investor can look
 industry-neutral. If a contact type falls back to a generic label, a non-investor
@@ -373,7 +373,7 @@ memo, not search-policy narration.
 
 Stable investor profile context lives separately from deal-specific rationale.
 Relationship history also lives separately from investor identity. This avoids a
-common UX failure where one summary field becomes a pile of profile facts,
+common UX issue where one summary field becomes a pile of profile facts,
 behavioral diagnostics, score movement, and risk caveats.
 
 The visible rationale stays compact: summary, fit, risks, relationship read, and
@@ -396,11 +396,11 @@ reviewing." That means some signals cannot remain mere caveats.
 
 Hard disqualifiers include clear fee, check-size, structure, subtype, mandate,
 or industry conflicts. The exact categories are intentionally narrow: a weak
-caveat should not become an exclusion, but a known eligibility failure should
+caveat should not become an exclusion, but a known eligibility conflict should
 not remain visible.
 
 The key product insight was that the LLM was often detecting these conflicts
-correctly. The failure was downstream: conflicts remained as score penalties or
+correctly. The downstream issue was that conflicts remained as score penalties or
 rationale caveats instead of becoming visibility decisions.
 
 The system now needs a hard-disqualifier promotion layer:
@@ -411,7 +411,7 @@ structured conflict evidence -> hard eligibility category -> excluded from final
 
 Not every negative signal becomes a hard exclusion. Weak uncertainty, old pass
 reasons, or minor caveats can remain soft penalties. The precision layer is
-narrow by design: it promotes only clear eligibility failures.
+narrow by design: it promotes only clear eligibility conflicts.
 
 The system also protects against contradictory final copy. If the generated
 rationale itself says the candidate is a poor match, the candidate should not
@@ -474,8 +474,8 @@ review workflow = shortlist comprehension + curation + export + review signal + 
 
 ## Layer 10: Operational Reliability
 
-Matching quality is meaningless if runs fail, time out, or produce invisible
-results.
+Matching quality is meaningless if runs time out, break down, or produce
+invisible results.
 
 The production architecture uses a browser-facing application, a serverless
 backend-for-frontend, durable document storage, managed workflow execution, and
@@ -535,8 +535,8 @@ disappeared, entered the top bucket, or moved down.
 
 The evaluation strategy has two layers.
 
-**Silver checks** are deterministic and catch trust failures, ingestion
-regressions, contract mismatches, and sentinel failures. **Gold checks** are
+**Silver checks** are deterministic and catch trust violations, ingestion
+regressions, contract mismatches, and sentinel misses. **Gold checks** are
 human-labeled and measure ranking quality with a small ordinal relevance scale.
 
 Gold labels should evaluate the union of top candidates from baseline and
@@ -552,7 +552,7 @@ trust violations -> ingestion health -> top-10 precision -> coverage -> rational
 The ranking principle is explicit:
 
 ```text
-trust failures before recall gains; top-10 quality before broad top-100 volume
+trust violations before recall gains; top-10 quality before broad top-100 volume
 ```
 
 ---
@@ -563,23 +563,23 @@ The system can be summarized as four cooperating engines.
 
 **Search** translates user intent into structured scope: allowed candidate
 types, exclusions, deal structures, industries, owner universe, lifecycle mode,
-and requested count. Search fails when the product ignores the user's stated
-scope or returns candidates the user explicitly ruled out.
+and requested count. Search loses trust when the product ignores the user's
+stated scope or returns candidates the user explicitly ruled out.
 
 **Relevance** ranks in-scope candidates by evidence: mandate fit, sector fit,
 check-size plausibility, geography, relationship freshness, CRM context, and
-grounded rationale. Relevance fails when technically eligible candidates rank
+grounded rationale. Relevance degrades when technically eligible candidates rank
 above better-supported ones.
 
 **Precision** protects the visible shortlist. It asks whether a result has a
 known hard mismatch, an eligibility-level notes conflict, a contradictory
 rationale, or only appears because the product is padding to a target count.
-Precision fails when the system knowingly shows a bad result.
+Precision loses trust when the system knowingly shows a bad result.
 
 **Evaluation** makes quality durable. It compares the same request under the
-same data conditions, checks trust failures before recall gains, and measures
+same data conditions, checks trust violations before recall gains, and measures
 top-of-list quality, ingestion health, rationale quality, and run stability.
-Evaluation fails when product learning remains anecdotal.
+Evaluation breaks down when product learning remains anecdotal.
 
 ---
 
@@ -598,7 +598,7 @@ component scoring with reasons and missing-data policy
 structured evidence before narrative prose
 hard disqualifiers promoted before final visibility
 over-fetch before late precision gates
-typed failures and replayable artifacts
+typed outcomes and replayable artifacts
 trust metrics before recall metrics
 ```
 
@@ -614,12 +614,12 @@ decision system.
 The system began as a matching pipeline: parse a deal, fetch investors, filter
 obvious mismatches, score fit, and use notes to improve rationale.
 
-Production use revealed that this was not enough.
+Production use clarified that a trusted search partner needs more structure.
 
 Users did not only want a ranked list. They wanted the product to behave like a
 trusted search partner. That meant the product had to respect the user's stated
 scope, understand contextual CRM evidence, avoid visibly wrong candidates,
-explain results in readable language, and learn from each failure.
+explain results in readable language, and learn from each review.
 
 The architecture therefore evolved from a linear ranking pipeline into a
 production-hardened decision system. Input handling became resilient across
@@ -628,7 +628,7 @@ instructions became a canonical search contract, deterministic rules became
 guardrails, contextual profile data moved into relevance, relationship history
 became freshness-aware, LLM reasoning split into extraction and synthesis, hard
 conflicts became exclusions, the UI became a review and curation workspace, and
-evaluation converted incidents into permanent regression cases.
+evaluation converted production lessons into permanent regression cases.
 
 That is the anatomy of a serious matching system.
 
@@ -652,7 +652,7 @@ In high-stakes matching, the user does not experience the system as a model.
 They experience it as a set of visible recommendations.
 
 That means the architecture must optimize for shortlist trust: fewer wrong
-results, stronger top results, evidence-led explanations, clear failure states,
+results, stronger top results, evidence-led explanations, clear exception states,
 and replayable evaluation.
 
 The durable lesson is simple:
