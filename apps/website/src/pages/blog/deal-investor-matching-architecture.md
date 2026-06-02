@@ -73,11 +73,6 @@ evidence, or evaluation.
 | Relevant candidates could disappear because CRM taxonomy values were dropped or normalized differently across layers. | Centralize taxonomy behavior and preserve normalized unknown values instead of silently discarding them.                             |
 | Structurally compatible candidates could appear despite contextual evidence of misfit.                                | Treat the matrix as a guardrail, then use CRM notes, profile context, and coherence checks to govern relevance and final visibility. |
 | Known hard mismatches could survive as low-ranked or caveated recommendations.                                        | Promote clear fee, check-size, structure, subtype, and mandate conflicts into hard disqualifiers.                                    |
-| Sparse investor profiles could rank too highly because missing investor data behaved like neutral evidence.           | Score missing investor-side data conservatively while keeping missing deal-side data neutral or diagnostic.                          |
-| Relationship history overvalued stale volume and undervalued recent high-quality interactions.                        | Split relationship volume from relationship quality and apply recency/freshness multipliers.                                         |
-| LLM-written rationale could become generic, repetitive, or policy-led.                                                | Split reasoning into evidence extraction and narrative synthesis, then normalize visible rationale into bounded sections.            |
-| Long documents, text-only inputs, and large uploads introduced extraction and transport fragility.                    | Use reference-based document ingestion, first-class text handling, and extraction completeness diagnostics.                          |
-| Product quality improved when past lessons became replayable.                                                        | Build benchmark replay with frozen data, run manifests, candidate lineage, trust checks, ranking metrics, and prompt-quality checks. |
 
 This is the central product story: the architecture evolved from recurring
 quality lessons into a governed search system, not from a desire to add more
