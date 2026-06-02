@@ -165,6 +165,13 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"deal-investor-matching-architecture.md": {
+	id: "deal-investor-matching-architecture.md";
+  slug: "deal-investor-matching-architecture";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 "deal-structure-positioning-not-classification.md": {
 	id: "deal-structure-positioning-not-classification.md";
   slug: "deal-structure-positioning-not-classification";
