@@ -11,10 +11,6 @@ readTime: "14 min read"
 
 <p class="blog-subtitle">A governed search architecture for high-trust investor matching systems</p>
 
-**Last Updated:** June 2026  
-**Audience:** Technical leaders, product teams, operators, and builders of
-high-trust search systems
-
 ---
 
 ## Thesis
