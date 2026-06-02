@@ -87,39 +87,87 @@ agents.
 
 ## Architecture in One View
 
-```text
-Deal input + search setup
-        |
-        v
-Extraction and input diagnostics
-        |
-        v
-Canonical search intent contract
-        |
-        v
-CRM raw fetch -> transform -> normalized candidate universe
-        |
-        v
-Deterministic guardrails and scope filters
-        |
-        v
-One representative per firm, with firm-level evidence preserved
-        |
-        v
-Component scoring and weighted aggregation
-        |
-        v
-Over-fetched reasoning window
-        |
-        v
-CRM evidence extraction -> rationale synthesis
-        |
-        v
-Post-reasoning penalties, hard disqualifiers, coherence checks, vetoes
-        |
-        v
-Ranked shortlist + rationale + diagnostics + evaluation artifacts
-```
+<figure class="matching-architecture-diagram" aria-label="Deal-investor matching architecture flow">
+  <ol class="matching-architecture-flow">
+    <li class="matching-architecture-step" style="--step: 0">
+      <span class="matching-architecture-index">01</span>
+      <div class="matching-architecture-card">
+        <span>Intake</span>
+        <strong>Deal input + search setup</strong>
+      </div>
+    </li>
+    <li class="matching-architecture-step" style="--step: 1">
+      <span class="matching-architecture-index">02</span>
+      <div class="matching-architecture-card">
+        <span>Extraction</span>
+        <strong>Extraction and input diagnostics</strong>
+      </div>
+    </li>
+    <li class="matching-architecture-step" style="--step: 2">
+      <span class="matching-architecture-index">03</span>
+      <div class="matching-architecture-card">
+        <span>Contract</span>
+        <strong>Canonical search intent contract</strong>
+      </div>
+    </li>
+    <li class="matching-architecture-step" style="--step: 3">
+      <span class="matching-architecture-index">04</span>
+      <div class="matching-architecture-card">
+        <span>Universe</span>
+        <strong>CRM raw fetch -> transform -> normalized candidate universe</strong>
+      </div>
+    </li>
+    <li class="matching-architecture-step" style="--step: 4">
+      <span class="matching-architecture-index">05</span>
+      <div class="matching-architecture-card">
+        <span>Guardrails</span>
+        <strong>Deterministic guardrails and scope filters</strong>
+      </div>
+    </li>
+    <li class="matching-architecture-step" style="--step: 5">
+      <span class="matching-architecture-index">06</span>
+      <div class="matching-architecture-card">
+        <span>Firm view</span>
+        <strong>One representative per firm, with firm-level evidence preserved</strong>
+      </div>
+    </li>
+    <li class="matching-architecture-step" style="--step: 6">
+      <span class="matching-architecture-index">07</span>
+      <div class="matching-architecture-card">
+        <span>Scoring</span>
+        <strong>Component scoring and weighted aggregation</strong>
+      </div>
+    </li>
+    <li class="matching-architecture-step" style="--step: 7">
+      <span class="matching-architecture-index">08</span>
+      <div class="matching-architecture-card">
+        <span>Reasoning window</span>
+        <strong>Over-fetched reasoning window</strong>
+      </div>
+    </li>
+    <li class="matching-architecture-step" style="--step: 8">
+      <span class="matching-architecture-index">09</span>
+      <div class="matching-architecture-card">
+        <span>Evidence</span>
+        <strong>CRM evidence extraction -> rationale synthesis</strong>
+      </div>
+    </li>
+    <li class="matching-architecture-step" style="--step: 9">
+      <span class="matching-architecture-index">10</span>
+      <div class="matching-architecture-card">
+        <span>Precision</span>
+        <strong>Post-reasoning penalties, hard disqualifiers, coherence checks, vetoes</strong>
+      </div>
+    </li>
+    <li class="matching-architecture-step" style="--step: 10">
+      <span class="matching-architecture-index">11</span>
+      <div class="matching-architecture-card">
+        <span>Output</span>
+        <strong>Ranked shortlist + rationale + diagnostics + evaluation artifacts</strong>
+      </div>
+    </li>
+  </ol>
+</figure>
 
 The architecture deliberately separates:
 
