@@ -377,32 +377,6 @@ Evaluation breaks down when product learning remains anecdotal.
 
 ---
 
-## Reusable Design Patterns
-
-The reusable architecture is compact:
-
-```text
-intent contract before candidate logic
-separate deal facts from search scope
-raw fetch before transformation
-centralized taxonomy behavior
-matrix as guardrail, not relevance engine
-one visible entity with preserved evidence fan-in
-component scoring with reasons and missing-data policy
-structured evidence before narrative prose
-hard disqualifiers promoted before final visibility
-over-fetch before late precision gates
-typed outcomes and replayable artifacts
-trust metrics before recall metrics
-```
-
-These patterns generalize to any ranked-list product where the output has
-business consequence. The core move is to stop treating search, scoring, LLM
-reasoning, and evaluation as separate features. They are layers of one governed
-decision system.
-
----
-
 ## The Product Story
 
 The system began as a matching pipeline: parse a deal, fetch investors, filter
