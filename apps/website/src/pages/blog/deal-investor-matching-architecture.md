@@ -164,15 +164,49 @@ agents.
   </ol>
 </figure>
 
-The architecture deliberately separates:
-
-- **What the deal is**
-- **What the user is asking for**
-- **How ranking should be weighted**
-- **Which candidates are structurally eligible**
-- **Which candidates are relevant**
-- **Which candidates are too risky or contradictory to show**
-- **Why each visible candidate belongs**
+<figure class="architecture-separation-report" aria-label="Architecture separation report">
+  <figcaption>
+    <span>Debugging report</span>
+    <strong>What the architecture keeps separate</strong>
+  </figcaption>
+  <div class="architecture-separation-grid">
+    <div class="architecture-separation-row">
+      <span>01</span>
+      <strong>Deal facts</strong>
+      <p>What the deal is</p>
+    </div>
+    <div class="architecture-separation-row">
+      <span>02</span>
+      <strong>Search intent</strong>
+      <p>What the user is asking for</p>
+    </div>
+    <div class="architecture-separation-row">
+      <span>03</span>
+      <strong>Scoring policy</strong>
+      <p>How ranking should be weighted</p>
+    </div>
+    <div class="architecture-separation-row">
+      <span>04</span>
+      <strong>Eligibility</strong>
+      <p>Which candidates are structurally eligible</p>
+    </div>
+    <div class="architecture-separation-row">
+      <span>05</span>
+      <strong>Relevance</strong>
+      <p>Which candidates have evidence of fit</p>
+    </div>
+    <div class="architecture-separation-row">
+      <span>06</span>
+      <strong>Precision</strong>
+      <p>Which candidates are too risky or contradictory to show</p>
+    </div>
+    <div class="architecture-separation-row">
+      <span>07</span>
+      <strong>Rationale</strong>
+      <p>Why each visible candidate belongs</p>
+    </div>
+  </div>
+</figure>
 
 That separation is what makes the system debuggable.
 

@@ -1316,6 +1316,92 @@
     color: var(--page-ink);
   }
 
+  .architecture-separation-report {
+    width: min(100%, 47rem);
+    margin: clamp(2rem, 4vw, 3rem) 0;
+    border-top: 1px solid color-mix(in oklab, var(--page-line) 86%, transparent);
+    border-bottom: 1px solid color-mix(in oklab, var(--page-line) 86%, transparent);
+  }
+
+  .architecture-separation-report figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.65rem 1rem;
+    padding: 0 0 0.9rem;
+  }
+
+  .architecture-separation-report figcaption span {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--page-muted) 86%, var(--page-accent-strong));
+  }
+
+  .architecture-separation-report figcaption strong {
+    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--page-ink);
+  }
+
+  .architecture-separation-grid {
+    display: grid;
+    border-top: 1px solid color-mix(in oklab, var(--page-line) 70%, transparent);
+  }
+
+  .architecture-separation-row {
+    display: grid;
+    grid-template-columns: 2.7rem minmax(7.5rem, 0.38fr) minmax(0, 1fr);
+    gap: clamp(0.65rem, 2vw, 1rem);
+    align-items: baseline;
+    padding: 0.82rem 0;
+    border-bottom: 1px solid color-mix(in oklab, var(--page-line) 62%, transparent);
+  }
+
+  .architecture-separation-row:last-child {
+    border-bottom: 0;
+  }
+
+  .architecture-separation-row > span {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: color-mix(in oklab, var(--page-muted) 78%, var(--page-accent-strong));
+  }
+
+  .architecture-separation-row strong {
+    font-size: 0.98rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+    color: var(--page-ink);
+  }
+
+  .architecture-separation-row p {
+    margin: 0;
+    font-size: clamp(0.95rem, 1vw, 1.02rem);
+    line-height: 1.55;
+    color: color-mix(in oklab, var(--page-muted) 92%, var(--page-ink));
+  }
+
+  @media (max-width: 640px) {
+    .architecture-separation-row {
+      grid-template-columns: 2.2rem minmax(0, 1fr);
+      gap: 0.28rem 0.75rem;
+    }
+
+    .architecture-separation-row p {
+      grid-column: 2;
+    }
+  }
+
   @keyframes architecture-step-enter {
     to {
       opacity: 1;
