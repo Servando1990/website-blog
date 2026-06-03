@@ -167,7 +167,7 @@ agents.
 <figure class="architecture-separation-report" aria-label="Architecture separation report">
   <figcaption>
     <span>Debugging report</span>
-    <strong>What the architecture keeps separate</strong>
+    <p>What the architecture keeps separate</p>
   </figcaption>
   <div class="architecture-separation-grid">
     <div class="architecture-separation-row">

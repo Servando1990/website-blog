@@ -1324,11 +1324,6 @@
   }
 
   .architecture-separation-report figcaption {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.65rem 1rem;
     padding: 0 0 0.9rem;
   }
 
@@ -1342,11 +1337,13 @@
     color: color-mix(in oklab, var(--page-muted) 86%, var(--page-accent-strong));
   }
 
-  .architecture-separation-report figcaption strong {
+  .architecture-separation-report figcaption p {
+    margin: 0.4rem 0 0;
+    max-width: 34rem;
     font-size: clamp(1.05rem, 1.5vw, 1.3rem);
     font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
+    letter-spacing: 0;
+    line-height: 1.28;
     color: var(--page-ink);
   }
 
