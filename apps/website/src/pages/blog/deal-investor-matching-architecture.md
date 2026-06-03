@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/BlogLayout.astro
 title: "The Anatomy of an Investor Matching Architecture"
+cardTitle: "Investor Matching Architecture"
 description: "A governed search architecture for high-trust deal-investor matching systems: intent contracts, CRM normalization, guardrails, evidence-led ranking, and replayable evaluation."
 category: "Private capital workflows"
 publishDate: "2026-06-02"

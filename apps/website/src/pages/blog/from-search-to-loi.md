@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/BlogLayout.astro
 title: "From Search to LOI: Why Private Capital Needs Workflow Agents"
+cardTitle: "From Search to LOI"
 description: "A controlthrive essay on why private capital needs specialized workflow agents around the handoffs from search to LOI."
 category: "Private capital workflows"
 publishDate: "2026-05-31"

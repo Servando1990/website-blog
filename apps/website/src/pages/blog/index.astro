@@ -1,19 +1,139 @@
 ---
-const postUrl = '/blog/deal-investor-matching-architecture';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+type BlogPostFrontmatter = {
+  title: string;
+  cardTitle?: string;
+  description: string;
+  category?: string;
+  publishDate: string;
+  readTime?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+};
+
+type BlogPostModule = {
+  frontmatter: BlogPostFrontmatter;
+  url: string;
+};
+
+const formatDate = (date: string) =>
+  new Intl.DateTimeFormat('en', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${date}T00:00:00Z`));
+
+const postModules = Object.values(
+  import.meta.glob<BlogPostModule>('./*.md', { eager: true }),
+);
+const posts = postModules
+  .map((post) => ({
+    href: post.url,
+    title: post.frontmatter.title,
+    cardTitle: post.frontmatter.cardTitle ?? post.frontmatter.title,
+    description: post.frontmatter.description,
+    category: post.frontmatter.category ?? 'Essay',
+    publishDate: post.frontmatter.publishDate,
+    readTime: post.frontmatter.readTime ?? 'Essay',
+    image: post.frontmatter.ogImage ?? '/api/og/home.png',
+    imageAlt: post.frontmatter.ogImageAlt ?? `${post.frontmatter.title} cover image.`,
+  }))
+  .sort((a, b) => (
+    new Date(`${b.publishDate}T00:00:00Z`).getTime()
+    - new Date(`${a.publishDate}T00:00:00Z`).getTime()
+  ));
+
+const featuredPost = posts[0];
+const categories = Array.from(new Set(posts.map((post) => post.category)));
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="refresh" content={`0;url=${postUrl}`} />
-    <link rel="canonical" href={postUrl} />
-    <title>Redirecting to blog post</title>
-    <script is:inline>
-      window.location.replace('/blog/deal-investor-matching-architecture');
-    </script>
-  </head>
-  <body>
-    <a href={postUrl}>Continue to the latest post</a>
-  </body>
-</html>
+<Layout
+  title="Blog | controlthrive"
+  description="Latest essays from controlthrive on private capital workflows, investor matching, workflow agents, and production AI systems."
+  ogImage={featuredPost?.image}
+  ogImageAlt={featuredPost?.imageAlt}
+>
+  <Header />
+
+  <main class="site-main case-study-main blog-index-main">
+    {featuredPost && (
+      <section class="blog-index-hero" aria-label="Featured blog post">
+        <div class="site-container blog-index-hero__grid">
+          <div class="blog-index-hero__copy">
+            <span class="blog-index-eyebrow">Latest blog</span>
+            <h1>{featuredPost.title}</h1>
+            <p>{featuredPost.description}</p>
+
+            <div class="blog-index-meta" aria-label="Post metadata">
+              <span>{featuredPost.category}</span>
+              <span>{featuredPost.readTime}</span>
+            </div>
+
+            <div class="blog-index-byline">
+              <span>By controlthrive</span>
+              <time datetime={featuredPost.publishDate}>{formatDate(featuredPost.publishDate)}</time>
+            </div>
+
+            <a class="button-primary blog-index-hero__cta" href={featuredPost.href}>
+              Read post
+            </a>
+          </div>
+
+          <a class="blog-index-hero__image" href={featuredPost.href} aria-label={`Read ${featuredPost.title}`}>
+            <img src={featuredPost.image} alt={featuredPost.imageAlt} loading="eager" decoding="async" />
+          </a>
+        </div>
+      </section>
+    )}
+
+    <section class="blog-index-latest section-divider" aria-label="Latest posts">
+      <div class="site-container blog-index-latest__inner">
+        <div class="blog-index-latest__header">
+          <h2>
+            Latest Posts
+            <span>{posts.length}</span>
+          </h2>
+        </div>
+
+        {categories.length > 0 && (
+          <div class="blog-index-filters" aria-label="Post categories">
+            <span>All</span>
+            {categories.map((category) => (
+              <span>{category}</span>
+            ))}
+          </div>
+        )}
+
+        <div class="blog-index-grid">
+          {posts.map((post) => (
+            <article class="blog-index-card">
+              <a class="blog-index-card__image" href={post.href} aria-label={`Read ${post.title}`}>
+                <img src={post.image} alt={post.imageAlt} loading="lazy" decoding="async" />
+              </a>
+
+              <div class="blog-index-card__copy">
+                <div class="blog-index-card__meta">
+                  <span>{post.category}</span>
+                  <span>{post.readTime}</span>
+                </div>
+
+                <h3>
+                  <a href={post.href}>{post.cardTitle}</a>
+                </h3>
+
+                <p>{post.description}</p>
+                <time datetime={post.publishDate}>{formatDate(post.publishDate)}</time>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

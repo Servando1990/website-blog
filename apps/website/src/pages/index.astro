@@ -14,13 +14,45 @@ import { publishedCaseStudies } from '../lib/caseStudies';
 
 const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
 
+type BlogPostFrontmatter = {
+  title: string;
+  cardTitle?: string;
+  description: string;
+  publishDate: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+};
+
+type BlogPostModule = {
+  frontmatter: BlogPostFrontmatter;
+  url: string;
+};
+
+const blogPostModules = Object.values(
+  import.meta.glob<BlogPostModule>('./blog/*.md', { eager: true }),
+);
+const sortedBlogPosts = blogPostModules
+  .map((post) => ({
+    href: post.url,
+    title: post.frontmatter.cardTitle ?? post.frontmatter.title,
+    subtitle: post.frontmatter.description,
+    publishDate: post.frontmatter.publishDate,
+    image: post.frontmatter.ogImage ?? '/api/og/home.png',
+    alt: post.frontmatter.ogImageAlt ?? `${post.frontmatter.title} cover image.`,
+  }))
+  .sort((a, b) => (
+    new Date(`${b.publishDate}T00:00:00Z`).getTime()
+    - new Date(`${a.publishDate}T00:00:00Z`).getTime()
+  ));
+const latestPost = sortedBlogPosts[0];
+
 const latestBlogPost = {
-  href: '/blog/deal-investor-matching-architecture',
+  href: latestPost?.href ?? '/blog',
   eyebrow: 'Latest blog',
-  title: 'Investor Matching Architecture',
-  subtitle: 'A governed search architecture for high-trust matching systems',
-  image: '/api/og/home.png',
-  alt: 'controlthrive social preview graphic.',
+  title: latestPost?.title ?? 'controlthrive blog',
+  subtitle: latestPost?.subtitle ?? 'Essays on private capital workflows and production AI systems.',
+  image: latestPost?.image ?? '/api/og/home.png',
+  alt: latestPost?.alt ?? 'controlthrive social preview graphic.',
 };
 
 const operatingBridge = [
