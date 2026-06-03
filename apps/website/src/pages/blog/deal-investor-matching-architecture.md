@@ -5,11 +5,19 @@ description: "A governed search architecture for high-trust deal-investor matchi
 category: "Private capital workflows"
 publishDate: "2026-06-02"
 readTime: "14 min read"
+ogImage: "/blog/investor-matching-cover.jpg"
+ogImageAlt: "Green vines growing across a weathered ochre stone wall."
+ogImageWidth: 1536
+ogImageHeight: 1024
 ---
 
 # The Anatomy of an Investor Matching Architecture
 
 <p class="blog-subtitle">A governed search architecture for high-trust investor matching systems</p>
+
+<figure class="blog-lead-image">
+  <img src="/blog/investor-matching-cover.jpg" alt="Green vines growing across a weathered ochre stone wall." loading="eager" decoding="async" />
+</figure>
 
 ---
 
