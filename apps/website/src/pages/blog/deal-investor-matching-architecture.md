@@ -214,423 +214,140 @@ That separation is what makes the system debuggable.
 
 ## Layer 1: Input Handling and Deal Extraction
 
-The system has to work whether the user provides a polished PDF, a long teaser,
-a short text brief, or a previously parsed deal. That makes input handling a
-product concern, not just an upload concern.
+**Job:** Accept PDFs, teasers, text briefs, or previously parsed deals and turn
+them into structured deal facts.
 
-The durable pattern is to pass references to large documents rather than large
-inline payloads. The workflow receives a small document URI, loads the bytes at
-runtime, and then performs structured extraction. This avoids orchestration
-payload limits and keeps cloud execution reliable.
+**Rule:** Large documents move by reference, not inline payload. Extraction must
+return completeness diagnostics and warnings.
 
-Extraction also needs diagnostics. Long documents can contain conflicting
-figures, and text-only searches may omit important fields. The system should
-surface deal completeness and extraction warnings so a weak input does not
-silently become a weak shortlist.
-
-Reusable pattern:
-
-```text
-large input -> durable reference -> runtime loading -> structured extraction -> completeness diagnostics
-```
+**Why it matters:** Weak or ambiguous input should be visible before it becomes
+a weak shortlist.
 
 ---
 
 ## Layer 2: Canonical Search Intent
 
-The most important product correction was introducing one canonical
-machine-readable representation of user intent.
+**Job:** Convert free-form setup into one typed Search Intent Contract.
 
-Without this contract, the same free-form instruction can guide extraction,
-influence notes reasoning, appear in summary copy, and still not govern
-shortlist membership. That is search drift.
+**Rule:** Keep deal facts, search scope, and scoring policy separate. Explicit
+exclusions win, allowed criteria preserve OR semantics, requested count is an
+upper bound, and ambiguity stays unresolved.
 
-The fix is a **Search Intent Contract** resolved once per run. It captures
-allowed and excluded investor categories, deal structures, industry scope,
-lifecycle mode, owner scope, subtype refinements, requested count, soft
-preferences, and unresolved clauses.
-
-The contract is not the same as the deal. The extracted deal says what the
-company is. The contract says what the user wants the search to return.
-
-It is also not the same as scoring policy. Scoring controls can say "emphasize
-relationships" or "make notes conflicts stronger." Search intent says "these
-candidates are in or out of scope."
-
-This separation creates three internal objects:
-
-```text
-Deal facts          = extracted company/deal truth
-Search intent      = candidate scope and explicit constraints
-Scoring policy     = ranking weights and adjustment behavior
-```
-
-The precision rules are simple: explicit exclusions win, multiple allowed
-criteria preserve OR semantics, requested result count is an upper bound, and
-ambiguous clauses stay unresolved rather than guessed.
-
-Reusable pattern:
-
-```text
-free-form user setup -> typed intent contract -> shared by every downstream layer
-```
+**Why it matters:** Downstream layers should share one definition of "in scope."
 
 ---
 
 ## Layer 3: CRM Ingestion and Taxonomy Preservation
 
-Search quality is not only an LLM problem. In this system, some of the most
-important relevance lessons came from ingestion behavior.
+**Job:** Turn noisy CRM records into a normalized candidate universe without
+losing source meaning.
 
-If a CRM industry value is silently dropped, a relevant investor can look
-industry-neutral. If a contact type falls back to a generic label, a non-investor
-can enter the candidate universe. If lifecycle labels collapse incorrectly,
-prospecting mode can include contacts that should never be searched.
+**Rule:** Cache raw CRM data separately from transformation. Centralize taxonomy
+aliases, skip rules, unknown-value preservation, and text scanning.
 
-The ingestion architecture responds with two main decisions.
-
-External CRM fetches are expensive and operationally fragile. Transformation
-logic changes more often than the external data. The durable pattern is:
-
-```text
-raw CRM fetch -> raw cache/snapshot -> uncached transform -> typed candidate models
-```
-
-This makes parser fixes immediately effective without forcing a live CRM fetch
-on every test run.
-
-Industry recognition should not live in scattered prompt examples, parser maps,
-and free-text scanners. When a synonym is supported in one layer but not another,
-cross-layer drift appears.
-
-The architecture centralizes taxonomy behavior: canonical values, aliases, skip
-rules, unknown-value preservation, and deterministic text scanning. This is
-especially important for long-tail CRM values that do not fit neatly into a
-small internal enum.
-
-Some CRM values are not ordinary missing data. Examples include:
-
-```text
-agnostic, blocked, bounced, non-investor, support, unknown
-```
-
-These values need explicit product semantics. They should not fall into generic
-defaults.
-
-Parser warnings, unmapped-value counts, and preserved unknown tokens are not
-developer noise. They are quality metrics. The evaluation system should track
-them because ingestion regressions can look like ranking regressions downstream.
-
-Reusable pattern:
-
-```text
-do not start evaluation at ranking; evaluate whether source meaning survived ingestion
-```
+**Why it matters:** Parser or taxonomy drift can look like ranking drift.
+Ingestion health is a product quality signal.
 
 ---
 
 ## Layer 4: Candidate Scope and Guardrails
 
-After ingestion, the system narrows the universe before scoring.
+**Job:** Narrow the candidate universe before scoring.
 
-Early filters apply owner scope, prior-run exclusions, lifecycle rules,
-lead-mode suppression, contact/deal compatibility, subtype compatibility, and
-explicit search-contract exclusions.
+**Rule:** Apply owner, lifecycle, contact, deal, subtype, and search-contract
+gates first. Use the matrix as a guardrail and context as the relevance signal.
 
-The matrix layer is best understood as a guardrail, not the intelligence engine.
-It catches obvious structural incompatibilities and protects against wildly
-wrong categories. It should not be the sole reason a candidate is considered a
-good match.
-
-The target balance is:
-
-```text
-matrix = safety net
-context = relevance signal
-scoring = ranking mechanism
-contract = user intent authority
-```
-
-This balance matters because structured CRM fields are often incomplete.
-Over-relying on a matrix can exclude a good candidate with sparse structured
-data. Under-relying on guardrails can let obvious mismatches through. The system
-needs both.
+**Why it matters:** Ranking should compare plausible candidates, not rescue
+out-of-scope ones.
 
 ---
 
 ## Layer 5: Firm-Level Championing
 
-The system returns one visible row per firm, not one row per contact. This makes
-the shortlist usable: the operator reviews firms rather than duplicated people.
+**Job:** Present one visible representative per firm.
 
-But the system must not throw away evidence when it selects a representative
-contact. The selected "champion" retains the broader firm context:
+**Rule:** Deduplicate the visible row, but keep firm-level evidence fan-in behind
+the champion.
 
-```text
-one visible representative + firm-level evidence fan-in
-```
-
-This enables a clean user experience while preserving relationship intelligence.
-
-Reusable pattern:
-
-```text
-deduplicate visible entities, but preserve hidden evidence fan-in
-```
-
-This applies to any system where multiple people represent one organization,
-account, household, vendor, or institution.
+**Why it matters:** Operators review firms, while relationship intelligence may
+live across multiple contacts.
 
 ---
 
 ## Layer 6: Relevance Scoring
 
-Scoring ranks candidates that survive the hard scope filters. The architecture
-uses component scores rather than one opaque model score.
+**Job:** Rank eligible candidates with explainable component scores.
 
-The components cover commercial fit, sector fit, geography, relationship
-quality, financial fit, contextual profile signals, and notes-derived signals.
-Each component carries both a score and a reason, which lets the product explain
-rank without exposing raw CRM data.
+**Rule:** Score commercial fit, sector fit, geography, financial fit,
+relationship quality, profile context, and notes evidence with explicit
+missing-data and freshness policy.
 
-Missing data is handled deliberately. Missing deal data should not punish
-investors; missing investor preference data should be conservative; explicit
-negative evidence should be penalized or excluded. This prevents "unknown" from
-behaving like "neutral good enough."
-
-Relationship scoring separates volume from quality. A firm with many old passes
-or no-responses is not necessarily a strong relationship. Recent positive
-history should outrank stale pass-heavy volume, and the output should explain
-that distinction in plain language.
-
-Freshness is applied beyond notes deltas. Relationship evidence can be fresh,
-stale, or missing, and that freshness affects core ranking so old evidence does
-not stay high by default.
-
-Reusable pattern:
-
-```text
-score fit with components, reasons, missing-data policy, and recency-aware relationship quality
-```
+**Why it matters:** "Unknown" should not behave like positive evidence, and
+stale relationship volume should not outrank fresh fit.
 
 ---
 
 ## Layer 7: Evidence-Led Reasoning
 
-The system uses LLMs where language understanding is valuable, but it does not
-delegate product policy to a single prompt.
+**Job:** Use language models to recover and explain supported evidence.
 
-The reasoning layer is staged:
+**Rule:** Extract structured CRM evidence first, then synthesize the
+operator-facing rationale. Keep profile, relationship history, and deal-specific
+rationale separate.
 
-```text
-context assembly
-        |
-        v
-structured CRM evidence extraction
-        |
-        v
-operator-facing rationale synthesis
-        |
-        v
-deterministic relationship read and normalization
-```
-
-The evidence pass reads CRM notes, profile context, deal facts, scoring context,
-and search intent. It produces structured evidence: key facts, deal-match
-signals, constraints, pass reasons, positive and negative signals, conflicts,
-quotes, and industry inclusions or exclusions.
-
-This pass should not write polished UI prose. Its job is to recover supported
-evidence.
-
-The writing pass consumes that evidence and produces concise rationale:
-matching summary, fit factors, possible risks, and a context note. Contract
-awareness shapes the emphasis, but the copy should read like a short investment
-memo, not search-policy narration.
-
-Stable investor profile context lives separately from deal-specific rationale.
-Relationship history also lives separately from investor identity. This avoids a
-common UX issue where one summary field becomes a pile of profile facts,
-behavioral diagnostics, score movement, and risk caveats.
-
-The visible rationale stays compact: summary, fit, risks, relationship read, and
-investor snapshot when available.
-
-Reusable pattern:
-
-```text
-extract evidence first; synthesize copy second; keep diagnostics out of the main narrative
-```
+**Why it matters:** Rationale should read like a compact investment memo, not
+search-policy narration or a pile of diagnostics.
 
 ---
 
 ## Layer 8: Precision and Final Visibility
 
-Precision is where the system decides what should not be visible.
+**Job:** Decide what should not be shown.
 
-The architecture treats a visible result as a product claim: "this is worth
-reviewing." That means some signals cannot remain mere caveats.
+**Rule:** Promote clear fee, check-size, structure, subtype, mandate, and
+industry conflicts into exclusions. Use late rationale vetoes and over-fetch
+before final truncation.
 
-Hard disqualifiers include clear fee, check-size, structure, subtype, mandate,
-or industry conflicts. The exact categories are intentionally narrow: a weak
-caveat should not become an exclusion, but a known eligibility conflict should
-not remain visible.
-
-The key product insight was that the LLM was often detecting these conflicts
-correctly. The downstream issue was that conflicts remained as score penalties or
-rationale caveats instead of becoming visibility decisions.
-
-The system now needs a hard-disqualifier promotion layer:
-
-```text
-structured conflict evidence -> hard eligibility category -> excluded from final shortlist
-```
-
-Not every negative signal becomes a hard exclusion. Weak uncertainty, old pass
-reasons, or minor caveats can remain soft penalties. The precision layer is
-narrow by design: it promotes only clear eligibility conflicts.
-
-The system also protects against contradictory final copy. If the generated
-rationale itself says the candidate is a poor match, the candidate should not
-remain visible simply because earlier numeric scores were high.
-
-This is a late-stage safety check:
-
-```text
-if final rationale says "do not use this" -> do not show it as a recommendation
-```
-
-Late vetoes require recall buffering. If the user asks for 100 results, the
-system should reason over more than 100 candidates, then remove hard mismatches
-and return the best compliant subset.
-
-Without over-fetching, late precision gates can shrink the final list too much
-or miss clean replacements just outside the original window.
-
-Reusable pattern:
-
-```text
-over-fetch -> reason -> promote hard disqualifiers -> veto contradictions -> truncate to requested upper bound
-```
+**Why it matters:** A visible recommendation is a product claim. Hard conflicts
+should not survive as caveats.
 
 ---
 
 ## Layer 9: Review Workflow
 
-The frontend is not just a display surface. It is part of the matching product.
+**Job:** Help operators understand, curate, export, review, and replay the
+shortlist.
 
-A high-trust shortlist needs:
+**Rule:** Show requested, returned, and compliant counts. Let selected rows drive
+exports, attach review signal to exact rationale fields, and persist runs.
 
-```text
-clear intake -> visible progress -> readable results -> curation -> export -> review signal -> replay
-```
-
-If the compliant pool is smaller than the requested count, the product should
-return fewer names rather than pad with contradictory results. The UI should
-show requested count, returned count, and compliant pool size so the operator
-understands whether filters were strict or the result was simply capped.
-
-Operators also need to curate a final subset, not export every returned name.
-Selection state therefore controls exports and reports.
-
-Review signal is most useful when it is attached to the exact rationale field
-being reviewed. Inline review turns the workflow into future evaluation material
-without introducing a separate review tool.
-
-Finally, run history should not live only in browser memory. A cross-device
-product needs account-scoped recent runs, stable open/reuse behavior, and share
-links that reload persisted results.
-
-Reusable pattern:
-
-```text
-review workflow = shortlist comprehension + curation + export + review signal + replay
-```
+**Why it matters:** The UI is part of the matching system, not just a display
+surface.
 
 ---
 
 ## Layer 10: Operational Reliability
 
-Matching quality is meaningless if runs time out, break down, or produce
-invisible results.
+**Job:** Make long-running matching runs inspectable and recoverable.
 
-The production architecture uses a browser-facing application, a serverless
-backend-for-frontend, durable document storage, managed workflow execution, and
-artifact-based result retrieval. The general pattern is:
+**Rule:** Use browser, backend-for-frontend, workflow, durable artifacts, and a
+polling UI, with reference ingestion, runtime secrets, raw-data caching,
+progress, retries, and result artifacts.
 
-```text
-browser -> backend-for-frontend -> workflow run -> durable artifacts -> polling UI
-```
-
-Reliability depends on reference-based ingestion, runtime secret loading, raw
-data caching, result artifacts, resilient polling, retry handling, and progress
-signals for long-running reasoning steps.
-
-Operational artifacts are not only for engineers. They are product trust tools.
-Step-level summaries and compact tables let support, product, and engineering
-inspect where a candidate was removed, boosted, demoted, or vetoed.
-
-Reusable pattern:
-
-```text
-workflow state tells you whether a run finished; artifacts tell you what happened
-```
+**Why it matters:** Workflow state says whether the run finished. Artifacts
+explain what happened.
 
 ---
 
 ## Layer 11: Evaluation
 
-Evaluation is not an add-on. It is the mechanism that turns production learning
-into permanent product quality.
+**Job:** Turn product learning into repeatable quality checks.
 
-The benchmark system exists to answer one question:
+**Rule:** Compare the same request against frozen or strongly identified data
+snapshots. Emit manifests, candidate lineage, silver checks, and gold labels.
 
-```text
-Under the same input and same data snapshot, did this change make the visible shortlist more correct, more trustworthy, and more useful at the top?
-```
-
-The benchmark unit is not a CLI command or a hand-run demo. It is the same
-production-shaped path the user experiences:
-
-```text
-request shape + controls + frozen data + workflow execution + UI result artifact
-```
-
-The snapshot must freeze or strongly identify data that affects search:
-candidate records, profile fields, notes, owner and lifecycle context, parser
-inputs, and taxonomy version.
-
-Without this, a comparison may confuse code changes with live CRM drift.
-
-Every benchmark run should emit a manifest with code, model, prompt, config,
-request, snapshot, parser, taxonomy, and resolved-contract provenance. The
-manifest prevents false comparisons.
-
-Candidate lineage explains whether a candidate survived each major stage, from
-scope filters through final top-N truncation. This answers why a candidate
-disappeared, entered the top bucket, or moved down.
-
-The evaluation strategy has two layers.
-
-**Silver checks** are deterministic and catch trust violations, ingestion
-regressions, contract mismatches, and sentinel misses. **Gold checks** are
-human-labeled and measure ranking quality with a small ordinal relevance scale.
-
-Gold labels should evaluate the union of top candidates from baseline and
-candidate runs, so the system does not only judge names that one version happened
-to surface.
-
-Evaluation should prioritize:
-
-```text
-trust violations -> ingestion health -> top-10 precision -> coverage -> rationale quality -> jitter
-```
-
-The ranking principle is explicit:
-
-```text
-trust violations before recall gains; top-10 quality before broad top-100 volume
-```
+**Why it matters:** Trust violations and top-of-list quality matter before broad
+recall gains.
 
 ---
 
