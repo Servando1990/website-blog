@@ -85,16 +85,6 @@ export const industryFocus = [
 
 export const tools = [
   {
-    name: 'AI Assessment',
-    href: 'https://ai-framework-demo.vercel.app/',
-    summary:
-      'A fast way to separate a credible workflow opportunity from vague internal enthusiasm.',
-    audience:
-      'Best for leaders who want a cleaner view of whether an internal build is actually worth pursuing.',
-    outcome: 'You leave with a practical readiness view and a clearer next step.',
-    ctaLabel: 'Open assessment',
-  },
-  {
     name: 'Enrichment Calculator',
     href: 'https://enrichmet-calculator.vercel.app',
     summary:
