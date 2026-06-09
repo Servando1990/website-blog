@@ -57,7 +57,7 @@ A credible investor match may depend on deal structure, check size, geography, s
 
 Some of that data is external. Search and extraction tools can help build the outside universe from websites, portfolio pages, filings, articles, and public signals. But the edge often sits inside the firm's own memory. CRM notes are not administrative leftovers; they are proprietary context. They explain what an investor actually said, how preferences changed, what they passed on, where they have appetite, and where outreach would be low quality.
 
-A good search layer should therefore produce more than a list. It should produce a ranked shortlist with reasons: why the investor is included, which criteria they satisfy, which risks should be visible, and what evidence supports the rationale.
+A good search layer should therefore produce more than a list. It should produce a [ranked shortlist with reasons](/blog/deal-investor-matching-architecture): why the investor is included, which criteria they satisfy, which risks should be visible, and what evidence supports the rationale.
 
 That is the difference between search and fit judgment. The output should not be "500 possible investors." It should be "these are the 25 investors worth scarce partner attention, and here is why."
 
@@ -67,7 +67,7 @@ The cleanest way to think about workflow agents in private capital is to separat
 
 | Layer | Core question | What the workflow agent should support |
 |---|---|---|
-| Upstream search | Who should see this opportunity? | Turn the mandate into structured criteria, search internal and external context, apply exclusions, rank credible matches, and explain why each belongs. |
+| Upstream search | Who should see this opportunity? | Turn the mandate into structured criteria, search internal and external context, apply exclusions, [rank credible matches](/case-studies/ai-investor-matching-platform-capital-advisory), and explain why each belongs. |
 | Downstream triage | Is this opportunity worth more time? | Screen the opportunity against an investor thesis, identify fit and gaps, route the next action, and avoid turning every inbound deck into full diligence. |
 | Diligence | What do we need to believe, verify, model, or negotiate? | Extract facts, verify data, synthesize risks, support memo work, and keep financial math deterministic. |
 

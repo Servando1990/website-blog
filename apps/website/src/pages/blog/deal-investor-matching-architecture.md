@@ -24,7 +24,7 @@ ogImageHeight: 1024
 
 ## Thesis
 
-A high-trust deal-investor matching system is not a large prompt attached to a
+A high-trust [deal-investor matching system](/case-studies/ai-investor-matching-platform-capital-advisory) is not a large prompt attached to a
 CRM. It is a governed search architecture: one that translates messy user
 intent into a machine-readable contract, preserves meaning from noisy CRM data,
 ranks candidates by evidence, and prevents known bad matches from becoming
@@ -37,7 +37,7 @@ needs freshness-aware weighting, rationale needs specific evidence, and quality
 needs to be replayable under stable conditions.
 
 The resulting architecture is useful beyond investor matching. The same pattern
-applies to sales account prioritization, expert matching, diligence routing,
+applies to sales account prioritization, expert matching, [diligence routing](/blog/from-search-to-loi),
 vendor selection, underwriter triage, grant review, recruiting, and any domain
 where a ranked shortlist must be both useful and defensible.
 
@@ -248,7 +248,7 @@ upper bound, and ambiguity stays unresolved.
 
 ## Layer 3: CRM Ingestion and Taxonomy Preservation
 
-**Job:** Turn noisy CRM records into a normalized candidate universe without
+**Job:** Turn [noisy CRM records](/case-studies/ai-matching-engine-manufacturing) into a normalized candidate universe without
 losing source meaning.
 
 **Rule:** Cache raw CRM data separately from transformation. Centralize taxonomy

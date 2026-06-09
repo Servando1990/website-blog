@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import InteractiveCaseStudyDiagram from '../../components/InteractiveCaseStudyDiagram';
 import { bookingUrl } from '../../lib/siteContent';
 import { getCaseStudyBySlug, publishedCaseStudies } from '../../lib/caseStudies';
+import { caseStudyInlineLinks, renderInlineLinks } from '../../lib/inlineLinks';
 
 export function getStaticPaths() {
   return publishedCaseStudies.map((caseStudy) => ({
@@ -42,6 +43,7 @@ const readTimeSource = [
 const readTimeMinutes = Math.max(1, Math.ceil(countWords(readTimeSource) / 220));
 
 const relatedStudies = publishedCaseStudies.filter((study) => study.slug !== caseStudy.slug).slice(0, 2);
+const inlineLinks = caseStudyInlineLinks[caseStudy.slug] ?? [];
 ---
 
 <Layout
@@ -134,7 +136,7 @@ const relatedStudies = publishedCaseStudies.filter((study) => study.slug !== cas
             <span class="eyebrow">What was at stake</span>
             <h2>The business problem behind the build.</h2>
             {caseStudy.challenge.map((paragraph) => (
-              <p>{paragraph}</p>
+              <p set:html={renderInlineLinks(paragraph, inlineLinks)} />
             ))}
           </section>
 
@@ -142,7 +144,7 @@ const relatedStudies = publishedCaseStudies.filter((study) => study.slug !== cas
             <span class="eyebrow">What we built</span>
             <h2>A system designed for real decision-making.</h2>
             {caseStudy.design.map((paragraph) => (
-              <p>{paragraph}</p>
+              <p set:html={renderInlineLinks(paragraph, inlineLinks)} />
             ))}
           </section>
 
@@ -151,7 +153,7 @@ const relatedStudies = publishedCaseStudies.filter((study) => study.slug !== cas
             <h2>The decisions that made the workflow hold up.</h2>
             <ul>
               {caseStudy.implementationHighlights.map((item) => (
-                <li>{item}</li>
+                <li set:html={renderInlineLinks(item, inlineLinks)} />
               ))}
             </ul>
             <InteractiveCaseStudyDiagram
@@ -166,14 +168,14 @@ const relatedStudies = publishedCaseStudies.filter((study) => study.slug !== cas
             <span class="eyebrow">What changed</span>
             <h2>Result</h2>
             {caseStudy.result.map((paragraph) => (
-              <p>{paragraph}</p>
+              <p set:html={renderInlineLinks(paragraph, inlineLinks)} />
             ))}
           </section>
 
           <section>
             <span class="eyebrow">Takeaway</span>
             <h2>What this work says about how ControlThrive builds.</h2>
-            <p>{caseStudy.takeaway}</p>
+            <p set:html={renderInlineLinks(caseStudy.takeaway, inlineLinks)} />
           </section>
         </article>
       </div>
