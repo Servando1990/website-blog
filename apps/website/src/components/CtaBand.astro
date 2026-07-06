@@ -1,0 +1,46 @@
+---
+import { bookingUrl, trustPrinciples } from '../lib/siteContent';
+
+interface Props {
+  index?: string;
+  title?: string;
+  copy?: string;
+  showPrinciples?: boolean;
+}
+
+const {
+  index = '07',
+  title = 'If the workflow matters, the software path should feel clear.',
+  copy = 'Bring the process, bottleneck, or review workflow you want to improve. We can pressure-test the idea together and define the right next build.',
+  showPrinciples = true,
+} = Astro.props;
+---
+
+<section class="section section--ruled">
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="sec-head__index">{index}</span>
+      <span class="sec-head__label">Next step</span>
+    </header>
+
+    <h2 class="cta-final__title">{title}</h2>
+    <p class="sec-lede">{copy}</p>
+
+    <div class="cta-final__actions">
+      <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+        Book a founder call
+      </a>
+      <a class="btn-line" href="mailto:servando@controlthrive.com">
+        Email controlthrive
+      </a>
+    </div>
+
+    {showPrinciples && (
+      <div class="principles" aria-label="Operating principles">
+        {trustPrinciples.map((principle) => (
+          <span>{principle.title}</span>
+        ))}
+      </div>
+    )}
+  </div>
+</section>

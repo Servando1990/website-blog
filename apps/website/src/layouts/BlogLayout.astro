@@ -2,7 +2,7 @@
 import Layout from './Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { bookingUrl } from '../lib/siteContent';
+import CtaBand from '../components/CtaBand.astro';
 
 const {
   frontmatter: {
@@ -30,47 +30,31 @@ const {
 >
   <Header />
 
-  <main class="site-main case-study-main blog-main">
-    <section class="section-frame blog-hero-frame">
-      <div class="site-container blog-shell">
-        <div class="blog-kicker">
-          <a class="text-link" href="/">controlthrive</a>
+  <main>
+    <section class="page-intro" style="padding-bottom: 0">
+      <div class="wrap">
+        <div class="meta-row">
           <span>{category}</span>
           <time datetime={publishDate}>{publishDate}</time>
           <span>{readTime}</span>
         </div>
+      </div>
+    </section>
 
-        <article class="blog-prose">
+    <section class="section" style="padding-top: 1.5rem">
+      <div class="wrap">
+        <article class="prose">
           <slot />
         </article>
       </div>
     </section>
 
-    <section class="section-frame section-divider">
-      <div class="site-container">
-        <div class="cta-band">
-          <div class="cta-band__grid">
-            <div class="page-stack">
-              <span class="eyebrow">Next step</span>
-              <h2 class="section-title">Want this workflow mapped against your process?</h2>
-              <p class="supporting-copy max-w-[36rem]">
-                Bring the mandate, investor workflow, or diligence handoff that feels too scattered.
-                We can turn it into a concrete operating path together.
-              </p>
-            </div>
-
-            <div class="page-stack lg:items-end">
-              <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-                Book a founder call
-              </a>
-              <a class="button-secondary" href="/case-studies">
-                Read the case studies
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <CtaBand
+      index="02"
+      title="Want this workflow mapped against your process?"
+      copy="Bring the mandate, investor workflow, or diligence handoff that feels too scattered. We can turn it into a concrete operating path together."
+      showPrinciples={false}
+    />
   </main>
 
   <Footer />

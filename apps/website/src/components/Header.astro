@@ -1,12 +1,19 @@
 ---
-import ThemeToggle from './ThemeToggle';
-import { bookingUrl, navigation } from '../lib/siteContent';
+import Glyph from './Glyph.astro';
+import { bookingUrl } from '../lib/siteContent';
 
 const pathname = Astro.url.pathname;
 
+const links = [
+  { href: '/case-studies', label: 'Work' },
+  { href: '/#product', label: 'Product' },
+  { href: '/blog', label: 'Writing' },
+  { href: '/tools', label: 'Tools' },
+];
+
 function isActive(href: string) {
-  if (href === '/') {
-    return pathname === href;
+  if (href.startsWith('/#')) {
+    return false;
   }
 
   return pathname.startsWith(href);
@@ -14,73 +21,46 @@ function isActive(href: string) {
 ---
 
 <header class="site-header">
-  <nav class="site-nav" aria-label="Primary">
-    <a class="brand-mark" href="/">
-      <span class="brand-mark__word">controlthrive</span>
-      <span class="brand-mark__detail">Founder-led software partner for private capital</span>
-    </a>
-
-    <div class="nav-cell nav-cell--docs">
-      <a class="nav-link" href="/case-studies" aria-current={isActive('/case-studies') ? 'page' : undefined}>
-        Case Studies
+  <div class="wrap">
+    <nav class="site-nav" aria-label="Primary">
+      <a class="brand" href="/">
+        <Glyph size={16} />
+        <span class="brand__word">controlthrive</span>
       </a>
-    </div>
 
-    <div class="nav-cell nav-cell--portal">
-      <a class="nav-link" href="/tools" aria-current={isActive('/tools') ? 'page' : undefined}>
-        Tools
-      </a>
-    </div>
-
-    <div class="nav-cell nav-cell--blog">
-      <a class="nav-link" href="/blog" aria-current={isActive('/blog') ? 'page' : undefined}>
-        Blog
-      </a>
-    </div>
-
-    <div class="nav-cell nav-cell--socials">
-      <span>Socials</span>
-      <div class="social-links social-links--nav">
-        <a href="https://x.com/vandotorres" target="_blank" rel="noopener noreferrer" aria-label="Visit controlthrive on X">
-          X
-        </a>
-        <a href="https://github.com/Servando1990" target="_blank" rel="noopener noreferrer" aria-label="Visit controlthrive on GitHub">
-          GH
-        </a>
+      <div class="nav-links">
+        {links.map((link) => (
+          <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>
+            {link.label}
+          </a>
+        ))}
       </div>
-    </div>
 
-    <div class="nav-cell nav-cell--theme">
-      <span>Theme</span>
-      <div class="nav-actions">
-        <a class="button-secondary nav-cta" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-          Book a founder call
-        </a>
-        <ThemeToggle client:load />
-        <button
-          id="mobile-menu-button"
-          class="mobile-menu-button"
-          type="button"
-          aria-expanded="false"
-          aria-controls="mobile-menu"
-          aria-label="Toggle menu"
-        >
-          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h16"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </nav>
+      <a class="btn-ink nav-cta" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+        Book a founder call
+      </a>
 
-  <div id="mobile-menu" class="mobile-menu hidden">
-    <div class="mobile-menu__inner">
-      {navigation.map((item) => (
-        <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
-          {item.label}
-        </a>
+      <button
+        id="menu-btn"
+        class="menu-btn"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Toggle menu"
+      >
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M2 4.5h12M2 8h12M2 11.5h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"></path>
+        </svg>
+      </button>
+    </nav>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    <div class="wrap mobile-menu__inner">
+      {links.map((link) => (
+        <a href={link.href}>{link.label}</a>
       ))}
-      <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+      <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">
         Book a founder call
       </a>
     </div>
@@ -88,28 +68,21 @@ function isActive(href: string) {
 </header>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const button = document.getElementById('mobile-menu-button');
-    const menu = document.getElementById('mobile-menu');
+  const button = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
 
-    if (!button || !menu) {
-      return;
-    }
-
+  if (button && menu) {
     const syncState = (expanded: boolean) => {
       button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-      menu.classList.toggle('hidden', !expanded);
+      menu.hidden = !expanded;
     };
 
-    syncState(false);
-
     button.addEventListener('click', () => {
-      const isExpanded = button.getAttribute('aria-expanded') === 'true';
-      syncState(!isExpanded);
+      syncState(button.getAttribute('aria-expanded') !== 'true');
     });
 
     menu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => syncState(false));
     });
-  });
+  }
 </script>
