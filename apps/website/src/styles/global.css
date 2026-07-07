@@ -25,6 +25,7 @@
     --hairline: #e8e8e8;
     --hairline-2: #dcdcdc;
     --live: #3b82f6;     /* the one blue dot */
+    --selection: #e4e4e4;
 
     --radius-card: 10px;
     --radius-pane: 12px;
@@ -35,6 +36,29 @@
       0 12px 32px -12px rgb(0 0 0 / 0.12);
 
     --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Dark — the same quiet system, tinted neutrals instead of a flip to
+     pure black. One class drives both these tokens and Tailwind's
+     `dark:` utilities (used by the case-study diagram island). */
+  :root.dark {
+    --canvas: #101012;
+    --surface: #17171a;
+    --rail: #1b1b1e;
+    --hover: #222226;
+    --field: #1d1d20;
+    --ink: #ededee;
+    --ink-2: #9a9aa0;
+    --ink-3: #6c6c72;
+    --hairline: #262629;
+    --hairline-2: #323236;
+    --live: #4f9dff;
+    --selection: rgb(255 255 255 / 0.16);
+
+    --shadow-lift: 0 1px 2px rgb(0 0 0 / 0.4);
+    --shadow-pane:
+      0 1px 2px rgb(0 0 0 / 0.3),
+      0 20px 45px -20px rgb(0 0 0 / 0.65);
   }
 
   html {
@@ -51,10 +75,13 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     font-feature-settings: 'ss01' on;
+    transition:
+      background-color 180ms var(--ease-out),
+      color 180ms var(--ease-out);
   }
 
   ::selection {
-    background: #e4e4e4;
+    background: var(--selection);
   }
 
   :focus-visible {
@@ -274,7 +301,8 @@
   }
 }
 
-.menu-btn {
+.menu-btn,
+.theme-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -284,13 +312,24 @@
   color: var(--ink);
   transition: background-color 120ms var(--ease-out);
 }
-.menu-btn:hover {
+.menu-btn:hover,
+.theme-toggle:hover {
   background: var(--hover);
 }
 @media (min-width: 768px) {
   .menu-btn {
     display: none;
   }
+}
+
+.theme-toggle [data-icon='sun'] {
+  display: none;
+}
+.dark .theme-toggle [data-icon='sun'] {
+  display: inline-flex;
+}
+.dark .theme-toggle [data-icon='moon'] {
+  display: none;
 }
 
 .mobile-menu {
