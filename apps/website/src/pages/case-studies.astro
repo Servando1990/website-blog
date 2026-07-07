@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { bookingUrl } from '../lib/siteContent';
+import CtaBand from '../components/CtaBand.astro';
 import { publishedCaseStudies } from '../lib/caseStudies';
 ---
 
@@ -12,77 +12,58 @@ import { publishedCaseStudies } from '../lib/caseStudies';
 >
   <Header />
 
-  <main class="site-main case-study-main">
-    <section class="section-frame">
-      <div class="site-container page-stack">
-        <div class="page-intro">
-          <span class="eyebrow">Case studies</span>
-          <h1 class="display-title display-title--compact">
-            Delivery stories for private capital teams and adjacent operators.
-          </h1>
-          <p class="lede">
-            These projects show what it looks like when controlthrive works as a close software
-            partner: clear workflow framing, careful system design, and delivery that stands up in
-            day-to-day use.
-          </p>
-        </div>
+  <main>
+    <section class="page-intro">
+      <div class="wrap">
+        <span class="mono-label">Case studies</span>
+        <h1 class="page-title">
+          Delivery stories for private capital teams and adjacent operators.
+        </h1>
+        <p class="page-lede">
+          What it looks like when controlthrive works as a close software
+          partner: clear workflow framing, careful system design, and delivery
+          that stands up in day-to-day use.
+        </p>
       </div>
     </section>
 
-    <section class="section-frame section-divider">
-      <div class="site-container case-list">
-        {publishedCaseStudies.map((study) => (
-          <article class="case-card">
-            <div class="case-card__meta">
-              <span class="label-chip">{study.industry}</span>
-              <p class="featured-study__outcome">{study.featuredOutcome}</p>
-            </div>
-
-            <div class="case-card__content">
-              <h2 class="text-[2rem] md:text-[2.55rem]">{study.title}</h2>
-              <p class="case-card__summary">{study.cardSummary}</p>
-
-              <div class="hero-actions">
-                <a class="button-primary" href={`/case-studies/${study.slug}`}>
-                  Read the case study
-                </a>
-                {study.proofLink ? (
-                  <a class="text-link" href={study.proofLink.href} target="_blank" rel="noopener noreferrer">
-                    {study.proofLink.label}
-                  </a>
-                ) : null}
+    <section class="section section--ruled" style="padding-top: 0; border-top: 0">
+      <div class="wrap">
+        <div class="work-list">
+          {publishedCaseStudies.map((study) => (
+            <article class="work-row">
+              <div class="work-row__meta">
+                <span class="mono-label">{study.industry}</span>
+                <p class="work-row__outcome">{study.featuredOutcome}</p>
               </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    <section class="section-frame section-divider">
-      <div class="site-container">
-        <div class="cta-band">
-          <div class="cta-band__grid">
-            <div class="page-stack">
-              <span class="eyebrow">Work with controlthrive</span>
-              <h2 class="section-title">Need a technical partner who can make the path feel concrete?</h2>
-              <p class="supporting-copy max-w-[36rem]">
-                If you are evaluating an investor workflow, monitoring process, or internal tool,
-                we can pressure-test the idea together and define the right next build.
-              </p>
-            </div>
-
-            <div class="page-stack lg:items-end">
-              <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-                Book a founder call
-              </a>
-              <a class="button-secondary" href="/tools">
-                Explore the tools first
-              </a>
-            </div>
-          </div>
+              <div class="work-row__body">
+                <h3>
+                  <a href={`/case-studies/${study.slug}`}>{study.title}</a>
+                </h3>
+                <p>{study.cardSummary}</p>
+                <div class="work-row__links">
+                  <a class="link-quiet" href={`/case-studies/${study.slug}`}>
+                    Read case study
+                  </a>
+                  {study.proofLink ? (
+                    <a class="link-quiet" href={study.proofLink.href} target="_blank" rel="noopener noreferrer">
+                      {study.proofLink.label}
+                    </a>
+                  ) : null}
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
+
+    <CtaBand
+      index="02"
+      title="Need a technical partner who can make the path feel concrete?"
+      copy="If you are evaluating an investor workflow, monitoring process, or internal tool, we can pressure-test the idea together and define the right next build."
+      showPrinciples={false}
+    />
   </main>
 
   <Footer />

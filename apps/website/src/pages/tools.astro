@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CtaBand from '../components/CtaBand.astro';
 import { bookingUrl, tools } from '../lib/siteContent';
 ---
 
@@ -11,70 +12,55 @@ import { bookingUrl, tools } from '../lib/siteContent';
 >
   <Header />
 
-  <main class="site-main">
-    <section class="section-frame">
-      <div class="site-container page-stack">
-        <div class="page-intro">
-          <span class="eyebrow">Tools</span>
-          <h1 class="display-title display-title--compact">
-            Quick diagnostics before a larger workflow build.
-          </h1>
-          <p class="lede">
-            These tools are built to help a team sharpen the conversation before a bigger delivery
-            effort starts. Use them when you want signal, not a sales funnel.
-          </p>
+  <main>
+    <section class="page-intro">
+      <div class="wrap">
+        <span class="mono-label">Tools</span>
+        <h1 class="page-title">
+          Quick diagnostics before a larger workflow build.
+        </h1>
+        <p class="page-lede">
+          Built to help a team sharpen the conversation before a bigger
+          delivery effort starts. Use them when you want signal, not a sales
+          funnel.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--ruled" style="padding-top: 0; border-top: 0">
+      <div class="wrap">
+        <div class="work-list">
+          {tools.map((tool) => (
+            <article class="tool-row">
+              <div>
+                <span class="mono-label">Tool</span>
+                <h3 style="margin-top: 0.8rem">{tool.name}</h3>
+              </div>
+              <div class="tool-row__copy">
+                <p>{tool.summary}</p>
+                <p>{tool.audience}</p>
+                <p>{tool.outcome}</p>
+                <div class="tool-row__actions">
+                  <a class="btn-ink" href={tool.href} target="_blank" rel="noopener noreferrer">
+                    {tool.ctaLabel}
+                  </a>
+                  <a class="btn-line" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+                    Talk to the founder instead
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
 
-    <section class="section-frame section-divider">
-      <div class="site-container tool-grid">
-        {tools.map((tool) => (
-          <article class="tool-card">
-            <span class="label-chip">Tool</span>
-            <h2>{tool.name}</h2>
-            <p>{tool.summary}</p>
-            <p>{tool.audience}</p>
-            <p>{tool.outcome}</p>
-            <div class="hero-actions">
-              <a class="button-primary" href={tool.href} target="_blank" rel="noopener noreferrer">
-                {tool.ctaLabel}
-              </a>
-              <a class="button-secondary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-                Talk to the founder instead
-              </a>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    <section class="section-frame section-divider">
-      <div class="site-container">
-        <div class="cta-band">
-          <div class="cta-band__grid">
-            <div class="page-stack">
-              <span class="eyebrow">Prefer a conversation?</span>
-              <h2 class="section-title">Sometimes the fastest route is just getting the workflow on the table.</h2>
-              <p class="supporting-copy max-w-[36rem]">
-                If the problem is high-stakes, messy, or tied to multiple teams, a founder call is
-                usually the better starting point. We can sort the priorities together and decide
-                whether a tool, workshop, or build makes the most sense.
-              </p>
-            </div>
-
-            <div class="page-stack lg:items-end">
-              <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-                Book a founder call
-              </a>
-              <a class="button-secondary" href="/case-studies">
-                Review the work first
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <CtaBand
+      index="02"
+      title="Sometimes the fastest route is getting the workflow on the table."
+      copy="If the problem is high-stakes, messy, or tied to multiple teams, a founder call is usually the better starting point. We can sort the priorities together and decide whether a tool, workshop, or build makes the most sense."
+      showPrinciples={false}
+    />
   </main>
 
   <Footer />

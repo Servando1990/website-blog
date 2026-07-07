@@ -38,7 +38,7 @@ const posts = postModules
     description: post.frontmatter.description,
     category: post.frontmatter.category ?? 'Essay',
     publishDate: post.frontmatter.publishDate,
-    readTime: post.frontmatter.readTime ?? 'Essay',
+    readTime: post.frontmatter.readTime,
     image: post.frontmatter.ogImage ?? '/api/og/home.png',
     imageAlt: post.frontmatter.ogImageAlt ?? `${post.frontmatter.title} cover image.`,
   }))
@@ -48,91 +48,66 @@ const posts = postModules
   ));
 
 const featuredPost = posts[0];
-const categories = Array.from(new Set(posts.map((post) => post.category)));
+const restPosts = posts.slice(1);
 ---
 
 <Layout
-  title="Blog | controlthrive"
-  description="Latest essays from controlthrive on private capital workflows, investor matching, workflow agents, and production AI systems."
+  title="Writing | controlthrive"
+  description="Essays from controlthrive on private capital workflows, investor matching, workflow agents, and production AI systems."
   ogImage={featuredPost?.image}
   ogImageAlt={featuredPost?.imageAlt}
 >
   <Header />
 
-  <main class="site-main case-study-main blog-index-main">
+  <main>
+    <section class="page-intro">
+      <div class="wrap">
+        <span class="mono-label">Writing</span>
+        <h1 class="page-title">
+          Essays on private capital workflows and production AI systems.
+        </h1>
+      </div>
+    </section>
+
     {featuredPost && (
-      <section class="blog-index-hero" aria-label="Featured blog post">
-        <div class="site-container blog-index-hero__grid">
-          <div class="blog-index-hero__copy">
-            <span class="blog-index-eyebrow">Latest blog</span>
-            <h1>{featuredPost.title}</h1>
-            <p>{featuredPost.description}</p>
-
-            <div class="blog-index-meta" aria-label="Post metadata">
-              <span>{featuredPost.category}</span>
-              <span>{featuredPost.readTime}</span>
+      <section class="section section--ruled" style="padding-top: 0; border-top: 0" aria-label="Latest essay">
+        <div class="wrap">
+          <article class="work-row" style="border-top: 1px solid var(--hairline)">
+            <div class="work-row__meta">
+              <span class="mono-label">Latest</span>
+              <a class="frame-img" href={featuredPost.href} aria-label={`Read ${featuredPost.title}`}>
+                <img src={featuredPost.image} alt={featuredPost.imageAlt} loading="eager" decoding="async" />
+              </a>
             </div>
-
-            <div class="blog-index-byline">
-              <span>By controlthrive</span>
-              <time datetime={featuredPost.publishDate}>{formatDate(featuredPost.publishDate)}</time>
+            <div class="work-row__body">
+              <h3><a href={featuredPost.href}>{featuredPost.title}</a></h3>
+              <p>{featuredPost.description}</p>
+              <div class="meta-row" style="margin-top: 1rem">
+                <span>{featuredPost.category}</span>
+                <time datetime={featuredPost.publishDate}>{formatDate(featuredPost.publishDate)}</time>
+                {featuredPost.readTime && <span>{featuredPost.readTime}</span>}
+              </div>
+              <div class="work-row__links">
+                <a class="link-quiet" href={featuredPost.href}>Read essay</a>
+              </div>
             </div>
+          </article>
 
-            <a class="button-primary blog-index-hero__cta" href={featuredPost.href}>
-              Read post
-            </a>
-          </div>
-
-          <a class="blog-index-hero__image" href={featuredPost.href} aria-label={`Read ${featuredPost.title}`}>
-            <img src={featuredPost.image} alt={featuredPost.imageAlt} loading="eager" decoding="async" />
-          </a>
+          {restPosts.length > 0 && (
+            <div class="writing-list">
+              {restPosts.map((post) => (
+                <article class="writing-row">
+                  <time datetime={post.publishDate}>{formatDate(post.publishDate)}</time>
+                  <h3><a href={post.href}>{post.cardTitle}</a></h3>
+                  <a class="link-quiet" href={post.href}>Read</a>
+                  <p>{post.description}</p>
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     )}
-
-    <section class="blog-index-latest section-divider" aria-label="Latest posts">
-      <div class="site-container blog-index-latest__inner">
-        <div class="blog-index-latest__header">
-          <h2>
-            Latest Posts
-            <span>{posts.length}</span>
-          </h2>
-        </div>
-
-        {categories.length > 0 && (
-          <div class="blog-index-filters" aria-label="Post categories">
-            <span>All</span>
-            {categories.map((category) => (
-              <span>{category}</span>
-            ))}
-          </div>
-        )}
-
-        <div class="blog-index-grid">
-          {posts.map((post) => (
-            <article class="blog-index-card">
-              <a class="blog-index-card__image" href={post.href} aria-label={`Read ${post.title}`}>
-                <img src={post.image} alt={post.imageAlt} loading="lazy" decoding="async" />
-              </a>
-
-              <div class="blog-index-card__copy">
-                <div class="blog-index-card__meta">
-                  <span>{post.category}</span>
-                  <span>{post.readTime}</span>
-                </div>
-
-                <h3>
-                  <a href={post.href}>{post.cardTitle}</a>
-                </h3>
-
-                <p>{post.description}</p>
-                <time datetime={post.publishDate}>{formatDate(post.publishDate)}</time>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
   </main>
 
   <Footer />

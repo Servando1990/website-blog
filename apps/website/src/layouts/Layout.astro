@@ -63,7 +63,31 @@ const resolvedOgImage = resolvedOgImageUrl.href;
     <meta name="twitter:image" content={resolvedOgImage} />
     {ogImageAlt && <meta name="twitter:image:alt" content={ogImageAlt} />}
 
-    <meta name="theme-color" content="#FFFFFF" />
+    <meta name="theme-color" content="#fafafa" />
+
+    <script is:inline>
+      (() => {
+        const getStoredTheme = () => {
+          try {
+            return localStorage.getItem('theme');
+          } catch {
+            return null;
+          }
+        };
+
+        const preferredTheme = getStoredTheme();
+        const resolvedTheme =
+          preferredTheme ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        document.documentElement.classList.toggle('dark', resolvedTheme === 'dark');
+
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) {
+          meta.setAttribute('content', resolvedTheme === 'dark' ? '#101012' : '#fafafa');
+        }
+      })();
+    </script>
 
     <script async is:inline src="https://www.googletagmanager.com/gtag/js?id=G-LLMXBYB3P8"></script>
     <script is:inline>
@@ -75,48 +99,10 @@ const resolvedOgImage = resolvedOgImageUrl.href;
       gtag('config', 'G-LLMXBYB3P8');
     </script>
 
-    <script is:inline>
-      const getStoredTheme = () => {
-        try {
-          return localStorage.getItem('theme');
-        } catch {
-          return null;
-        }
-      };
-
-      const allowedPalettes = ['oxford', 'stone', 'olive'];
-      const getStoredPalette = () => {
-        try {
-          return localStorage.getItem('palette');
-        } catch {
-          return null;
-        }
-      };
-
-      const paletteFromUrl = new URLSearchParams(window.location.search).get('palette');
-      const resolvedPalette = allowedPalettes.includes(paletteFromUrl || '')
-        ? paletteFromUrl
-        : getStoredPalette() || 'oxford';
-
-      try {
-        localStorage.setItem('palette', resolvedPalette);
-      } catch {}
-
-      document.documentElement.dataset.palette = resolvedPalette;
-
-      const preferredTheme = getStoredTheme();
-      const resolvedTheme =
-        preferredTheme ||
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-
-      document.documentElement.classList.toggle('dark', resolvedTheme === 'dark');
-      document.documentElement.dataset.theme = resolvedTheme;
-    </script>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@100;200;300;400;500;600;700;800;900&family=Geist+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 

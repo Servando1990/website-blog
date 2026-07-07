@@ -1,0 +1,22 @@
+---
+/** The six-ray spark, thin strokes, monochrome — shared with PA-OS. */
+interface Props {
+  size?: number;
+}
+
+const { size = 16 } = Astro.props;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 16 16"
+  fill="none"
+  aria-hidden="true"
+>
+  <path
+    d="M8 2.1v11.8M2.9 5.05l10.2 5.9M13.1 5.05l-10.2 5.9"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"></path>
+</svg>

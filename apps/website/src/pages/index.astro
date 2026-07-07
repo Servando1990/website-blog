@@ -2,25 +2,51 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { HeroAsciiField } from '../components/HeroAsciiField';
-import { HeroTrajectoryField } from '../components/HeroTrajectoryField';
+import CtaBand from '../components/CtaBand.astro';
+import Glyph from '../components/Glyph.astro';
 import {
   bookingUrl,
   founderProfile,
+  serviceAreas,
   testimonials,
-  trustPrinciples,
+  trustedCompanies,
 } from '../lib/siteContent';
 import { publishedCaseStudies } from '../lib/caseStudies';
 
 const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
+
+const featuredQuote = testimonials[0];
+const supportingQuotes = [testimonials[1], testimonials[3], testimonials[4]];
+
+const founderParagraphs = [
+  founderProfile.paragraphs[0],
+  founderProfile.paragraphs[1],
+  founderProfile.paragraphs[4],
+];
+
+const operatingBridge = [
+  {
+    label: 'Context',
+    summary:
+      'Gather the mandate, materials, relationship memory, and constraints that usually live in different places.',
+  },
+  {
+    label: 'Ship',
+    summary:
+      'Feed context to agents and ship systems that turn messy workflow inputs into usable decision support.',
+  },
+  {
+    label: 'Iterate',
+    summary:
+      'Refine logic with new context, operator feedback, and evidence so the system keeps producing trusted outputs.',
+  },
+];
 
 type BlogPostFrontmatter = {
   title: string;
   cardTitle?: string;
   description: string;
   publishDate: string;
-  ogImage?: string;
-  ogImageAlt?: string;
 };
 
 type BlogPostModule = {
@@ -28,371 +54,450 @@ type BlogPostModule = {
   url: string;
 };
 
+const formatDate = (date: string) =>
+  new Intl.DateTimeFormat('en', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${date}T00:00:00Z`));
+
 const blogPostModules = Object.values(
   import.meta.glob<BlogPostModule>('./blog/*.md', { eager: true }),
 );
-const sortedBlogPosts = blogPostModules
+const latestPosts = blogPostModules
   .map((post) => ({
     href: post.url,
     title: post.frontmatter.cardTitle ?? post.frontmatter.title,
-    subtitle: post.frontmatter.description,
+    description: post.frontmatter.description,
     publishDate: post.frontmatter.publishDate,
-    image: post.frontmatter.ogImage ?? '/api/og/home.png',
-    alt: post.frontmatter.ogImageAlt ?? `${post.frontmatter.title} cover image.`,
   }))
-  .sort((a, b) => (
-    new Date(`${b.publishDate}T00:00:00Z`).getTime()
-    - new Date(`${a.publishDate}T00:00:00Z`).getTime()
-  ));
-const latestPost = sortedBlogPosts[0];
+  .sort(
+    (a, b) =>
+      new Date(`${b.publishDate}T00:00:00Z`).getTime() -
+      new Date(`${a.publishDate}T00:00:00Z`).getTime(),
+  )
+  .slice(0, 3);
 
-const latestBlogPost = {
-  href: latestPost?.href ?? '/blog',
-  eyebrow: 'Latest blog',
-  title: latestPost?.title ?? 'controlthrive blog',
-  subtitle: latestPost?.subtitle ?? 'Essays on private capital workflows and production AI systems.',
-  image: latestPost?.image ?? '/api/og/home.png',
-  alt: latestPost?.alt ?? 'controlthrive social preview graphic.',
-};
+const requestAccess = 'mailto:servando@controlthrive.com?subject=PA-OS%20access';
 
-const operatingBridge = [
+const productProofs = [
   {
-    label: 'Context',
-    summary: 'Gather the mandate, materials, relationship memory, and constraints that usually live in different places.',
+    title: 'Import that never asks twice.',
+    copy: 'Drop a CRM export. The agent maps it, dedupes it, and remembers every decision you make.',
   },
   {
-    label: 'Ship',
-    summary: 'Feed context to agents and ship systems that turn messy workflow inputs into usable decision support.',
+    title: 'A typed mandate in two minutes.',
+    copy: 'Drop the deck. Every extracted field is quoted back to its source page.',
   },
   {
-    label: 'Iterate',
-    summary: 'Refine logic with new context, operator feedback, and evidence so the system keeps producing trusted outputs.',
+    title: 'Reports every number can defend.',
+    copy: 'White-label client reporting where each figure traces to the record behind it.',
   },
-];
-
-const privateCapitalAgentRows = [
-  { step: 1, workflow: 'Define the mandate', agent: 'Structure the deal into a clear opportunity profile.', phase: 'Setup' },
-  { step: 2, workflow: 'Package the opportunity', agent: 'Extract, normalize, and flag gaps in deal materials.', phase: 'Setup' },
-  { step: 3, workflow: 'Define the investor profile / thesis', agent: 'Turn the mandate into investor-fit criteria, exclusions, and thesis nuance.', phase: 'Setup' },
-  { step: 4, workflow: 'Search the investor universe', agent: 'Find likely-fit investors across CRM memory and external sources.', phase: 'Search' },
-  { step: 5, workflow: 'Prioritize matches', agent: 'Rank investors by fit and explain the rationale, signals, risks, and constraints.', phase: 'Search' },
-  { step: 6, workflow: 'Prepare outreach / handoff', agent: 'Preserve deal and relationship context for outreach, export, sequence, or review handoff.', phase: 'Search' },
-  { step: 7, workflow: 'Support investor triage', agent: "Screen the deal against the investor's thesis and route the next action.", phase: 'Review' },
-  { step: 8, workflow: 'Verify company data', agent: 'Pre-fill intake, flag gaps or inconsistencies, and ask the company to confirm.', phase: 'Review' },
-  { step: 9, workflow: 'Prepare diligence', agent: 'Create memo-ready analysis, scorecards, risk flags, and follow-up questions.', phase: 'Review' },
-  { step: 10, workflow: 'Analyze structure', agent: 'Compare deal structures, constraints, and return implications using deterministic math.', phase: 'Decision' },
-  { step: 11, workflow: 'Move toward LOI / term sheet', agent: 'Summarize open issues, term-sheet readiness, and decision points.', phase: 'Decision' },
-  { step: 12, workflow: 'Support close', agent: 'Track final diligence, legal items, approvals, and follow-ups.', phase: 'Decision' },
-  { step: 13, workflow: 'Monitor, pass, or nurture', agent: 'Capture pass rationale, set reminders, and suggest better-fit future paths.', phase: 'Memory' },
 ];
 ---
 
 <Layout
-  title="controlthrive | Software Partner for Private Capital Teams"
-  description="Founder-led software partner for private capital teams that need clearer investor workflows, portfolio monitoring, and internal systems that hold up in practice."
+  title="controlthrive | Software Studio for Private Capital Teams"
+  description="Founder-led software studio for private capital teams. We turn mandates, relationship memory, and deal context into agentic systems kept under human review."
   ogImage="/api/og/home.png"
+  ogImageAlt="controlthrive social preview card for private capital software and production AI systems."
 >
   <Header />
 
-  <main class="site-main hermes-page">
-    <section class="hermes-hero">
-      <div class="hermes-noise" aria-hidden="true"></div>
-      <div class="hermes-float hermes-float--one" aria-hidden="true"></div>
-      <div class="hermes-float hermes-float--two" aria-hidden="true"></div>
-      <HeroTrajectoryField client:load />
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div>
+          <p class="hero__eyebrow reveal">
+            <span class="mono-label">Software studio · Private capital</span>
+          </p>
+          <h1 class="hero__title reveal" style="--reveal-delay: 60ms">
+            Production AI where the judgment stays yours.
+          </h1>
+          <p class="hero__lede reveal" style="--reveal-delay: 120ms">
+            controlthrive is a founder-led software studio for private capital
+            teams. We turn mandates, relationship memory, and deal context into
+            agentic systems where every claim carries a receipt — and nothing
+            ships without human review.
+          </p>
+          <div class="hero__actions reveal" style="--reveal-delay: 180ms">
+            <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+              Book a founder call
+            </a>
+            <a class="link-quiet" href="/case-studies">See the work</a>
+          </div>
+        </div>
 
-      <div class="hermes-hero__inner">
-        <span class="hermes-eyebrow">Founder-led software partner for private capital</span>
-        <h1 class="hermes-title">
-          <span>control</span>
-          <span>thrive</span>
-        </h1>
-        <p class="hermes-kicker">
-          We partner with private capital teams to turn their context into production AI
+        <p class="sr-only">
+          Preview of PA-OS: agents handle sourcing, standardization, matching,
+          outreach, and reporting — each one proposes a change with cited
+          evidence that a person approves before anything is written.
         </p>
+        <div class="rq reveal" style="--reveal-delay: 240ms" aria-hidden="true" data-rq>
+          <div class="rq__bar">
+            <Glyph size={14} />
+            <span class="rq__title">PA-OS · agents at work</span>
+            <span class="rq__count"><i class="dot-live"></i><span data-rq-step>1 / 5</span></span>
+          </div>
 
-        <div class="hermes-command-list" aria-label="Engagement flow">
-          <div class="hermes-command">
-            <div class="hermes-command__meta">
-              <span>1. Scope</span>
-              <a href={bookingUrl} target="_blank" rel="noopener noreferrer">Open</a>
+          <article class="rq__item rq__item--active" data-rq-active>
+            <div class="rq__kind-row">
+              <span class="rq__kind" data-rq-kind>Sourcing</span>
+              <span class="rq__conf" data-rq-conf>cited</span>
             </div>
-            <code>talk to founder --system "private capital"</code>
-          </div>
-          <div class="hermes-command">
-            <div class="hermes-command__meta">
-              <span>2. Build</span>
-              <a href="/case-studies">View</a>
-            </div>
-            <code>run case studies --view</code>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="hermes-action" data-agent-action data-agent-rows={JSON.stringify(privateCapitalAgentRows)}>
-      <div class="hermes-action__grid">
-        <div class="hermes-terminal hermes-terminal--agent" aria-label="Human and agent private capital workflow exchange">
-          <div class="hermes-terminal__bar">
-            <span></span>
-            <span></span>
-            <span></span>
-            <strong>human-agent-run</strong>
-          </div>
-          <div class="hermes-terminal__body hermes-agent-cli">
-            <p class="hermes-agent-cli__prompt">
-              <span>›</span> replay --human-sets-step --agent-responds --speed fast
+            <p class="rq__claim" data-rq-claim>
+              Found 14 new investors for the Meridian mandate.
             </p>
-
-            <div class="hermes-agent-cli__stream" aria-label="Human instruction and agent response log" aria-live="polite">
-              <article class="hermes-agent-turn" data-agent-turn data-phase={privateCapitalAgentRows[0].phase}>
-                <p class="hermes-agent-turn__line">
-                  <span class="hermes-agent-turn__prompt">human sets</span>
-                  <span class="hermes-agent-turn__meta" data-agent-meta>{String(privateCapitalAgentRows[0].step).padStart(2, '0')} / {privateCapitalAgentRows[0].phase}</span>
-                  <span class="hermes-agent-turn__instruction" data-agent-instruction>{privateCapitalAgentRows[0].workflow}</span>
-                </p>
-                <p class="hermes-agent-turn__line hermes-agent-turn__line--agent">
-                  <span class="hermes-agent-turn__prompt hermes-agent-turn__prompt--agent">agent replies</span>
-                  <span class="hermes-agent-turn__response" data-agent-response>{privateCapitalAgentRows[0].agent}</span>
-                </p>
-              </article>
-
-              <div class="hermes-agent-cli__progress" aria-hidden="true">
-                <span data-agent-progress></span>
-              </div>
-            </div>
-
-            <p class="hermes-agent-cli__prompt hermes-agent-cli__prompt--final" data-agent-status>
-              <span>›</span> running step 01/13 --human_decision=pending<span class="terminal-caret"></span>
+            <p class="rq__evidence" data-rq-evidence>
+              deduped against your book · sources attached
             </p>
-          </div>
-        </div>
-
-        <div class="hermes-engraving">
-          <HeroAsciiField client:load />
-        </div>
-      </div>
-    </section>
-
-    <script is:inline>
-      (() => {
-        const action = document.querySelector('[data-agent-action]');
-
-        if (!action) {
-          return;
-        }
-
-        let turns = [];
-        try {
-          turns = JSON.parse(action.getAttribute('data-agent-rows') || '[]');
-        } catch {
-          turns = [];
-        }
-
-        const turn = action.querySelector('[data-agent-turn]');
-        const meta = action.querySelector('[data-agent-meta]');
-        const instruction = action.querySelector('[data-agent-instruction]');
-        const response = action.querySelector('[data-agent-response]');
-        const status = action.querySelector('[data-agent-status]');
-        const progress = action.querySelector('[data-agent-progress]');
-
-        if (!turn || !meta || !instruction || !response || !status || !turns.length) {
-          return;
-        }
-
-        let activeIndex = 0;
-        let cycleTimer;
-        let replyTimer;
-
-        const renderTurn = (index) => {
-          const row = turns[index % turns.length];
-          const nextRow = turns[(index + 1) % turns.length];
-          const paddedStep = String(row.step).padStart(2, '0');
-
-          window.clearTimeout(replyTimer);
-          turn.dataset.phase = row.phase;
-          turn.dataset.reply = 'pending';
-          turn.classList.remove('hermes-agent-turn--active');
-          void turn.offsetWidth;
-
-          meta.textContent = `${paddedStep} / ${row.phase}`;
-          instruction.textContent = row.workflow;
-          response.textContent = row.agent;
-          status.innerHTML = `<span>›</span> running step ${paddedStep}/${turns.length} --human_decision=pending<span class="terminal-caret"></span>`;
-
-          if (progress) {
-            progress.style.transform = `scaleX(${row.step / turns.length})`;
-          }
-
-          turn.classList.add('hermes-agent-turn--active');
-
-          replyTimer = window.setTimeout(() => {
-            turn.dataset.reply = 'ready';
-            const isLastStep = row.step === turns.length;
-            status.innerHTML = isLastStep
-              ? '<span>›</span> handoff ready --human_decision=true<span class="terminal-caret"></span>'
-              : `<span>›</span> step ${paddedStep} complete --next=${String(nextRow.step).padStart(2, '0')}<span class="terminal-caret"></span>`;
-          }, 760);
-        };
-
-        const startReplay = () => {
-          if (cycleTimer) {
-            return;
-          }
-
-          renderTurn(activeIndex);
-          cycleTimer = window.setInterval(() => {
-            activeIndex = (activeIndex + 1) % turns.length;
-            renderTurn(activeIndex);
-          }, 2600);
-        };
-
-        action.classList.add('hermes-action--ready');
-
-        const activate = () => {
-          action.classList.add('hermes-action--live');
-          startReplay();
-        };
-
-        if (!('IntersectionObserver' in window)) {
-          activate();
-          return;
-        }
-
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry?.isIntersecting) {
-              activate();
-              observer.disconnect();
-            }
-          },
-          { rootMargin: '-12% 0px -18%', threshold: 0.18 },
-        );
-
-        observer.observe(action);
-      })();
-    </script>
-
-    <section class="hermes-announcement" aria-label="Latest blog post">
-      <a class="hermes-announcement__inner" href={latestBlogPost.href}>
-        <figure class="hermes-announcement__image">
-          <img src={latestBlogPost.image} alt={latestBlogPost.alt} loading="eager" decoding="async" />
-        </figure>
-
-        <div class="hermes-announcement__copy">
-          <span>{latestBlogPost.eyebrow}</span>
-          <h2>{latestBlogPost.title}</h2>
-          <p>{latestBlogPost.subtitle}</p>
-        </div>
-
-        <span class="hermes-announcement__cta">Read post</span>
-      </a>
-    </section>
-
-    <section class="hermes-operating-bridge" aria-label="Operating focus">
-      <div class="hermes-operating-bridge__copy">
-        <span class="hermes-eyebrow">Operating focus</span>
-        <h2>Turn scattered context into a handoff someone can act on.</h2>
-      </div>
-
-      <ol class="hermes-operating-steps">
-        {operatingBridge.map((step, index) => (
-          <li style={`--bridge-index: ${index}`}>
-            <span>{String(index + 1).padStart(2, '0')}</span>
-            <strong>{step.label}</strong>
-            <p>{step.summary}</p>
-          </li>
-        ))}
-      </ol>
-    </section>
-
-    <section class="hermes-split-section">
-      <div class="hermes-section-title">
-        <span>Selected work</span>
-      </div>
-
-      <div class="hermes-study-list">
-        {featuredCaseStudies.map((study) => (
-          <article class="hermes-study">
-            <div>
-              <span>{study.industry}</span>
-              <h2>{study.title}</h2>
+            <div class="rq__actions">
+              <span class="rq__approve">Approve</span>
+              <span class="rq__edit">Edit</span>
             </div>
-            <p>{study.cardSummary}</p>
-            <a href={`/case-studies/${study.slug}`}>Read case study</a>
+            <span class="rq__logged" data-rq-logged>✓ Added to mandate — decision logged</span>
           </article>
-        ))}
+
+          <article class="rq__item rq__item--queued" data-rq-queued>
+            <div class="rq__kind-row">
+              <span class="rq__kind" data-rq-next-kind>Standardization</span>
+            </div>
+            <p class="rq__claim" data-rq-next-claim>
+              Turn the pitch deck into a typed, provenance-quoted mandate.
+            </p>
+          </article>
+
+          <div class="rq__foot">nothing ships without human review</div>
+        </div>
       </div>
     </section>
 
-    <section class="hermes-testimonial-section">
-      <div class="hermes-testimonial-intro">
-        <span class="hermes-eyebrow">Client Perspective</span>
-        <h2>Built for teams that want a partner, not a pitch.</h2>
-      </div>
-
-      <div class="hermes-testimonial-rail" aria-label="Client testimonials">
-        {testimonials.map((testimonial, index) => (
-          <blockquote style={`--testimonial-index: ${index}`}>
-            <p>“{testimonial.quote}”</p>
-            <cite>
-              <strong>{testimonial.name}</strong>
-              <span>{testimonial.role} • {testimonial.company}</span>
-            </cite>
-          </blockquote>
-        ))}
-      </div>
-    </section>
-
-    <section class="hermes-split-section hermes-split-section--two">
-      <div class="hermes-panel">
-        <span class="hermes-eyebrow">Founder-led</span>
-        <div class="hermes-founder-copy">
-          {founderProfile.paragraphs.map((paragraph) => (
-            <p>{paragraph}</p>
+    <!-- Proof strip -->
+    <section class="proof" aria-label="Selected clients">
+      <div class="wrap proof__row">
+        <span class="mono-label">In production at</span>
+        <div class="proof__names">
+          {trustedCompanies.map((company) => (
+            <span>{company}</span>
           ))}
         </div>
       </div>
+    </section>
 
-      <div class="hermes-panel hermes-panel--image">
-        <img src="/profile-pic.jpg" alt="Portrait of Servando Torres, founder of controlthrive" />
-        <div>
-          <span class="hermes-eyebrow">Founder-led</span>
-          <p>Servando Torres, Founder</p>
+    <!-- 01 What we build -->
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">01</span>
+          <span class="sec-head__label">What we build</span>
+        </header>
+
+        <h2 class="sec-title reveal">
+          Systems shaped around how your team already decides.
+        </h2>
+
+        <ul class="svc-list" style="margin-top: clamp(2rem, 5vw, 3rem)">
+          {serviceAreas.map((service, index) => (
+            <li class="svc-row reveal" style={`--reveal-delay: ${index * 70}ms`}>
+              <div class="svc-row__lead">
+                <span class="svc-row__num">{String(index + 1).padStart(2, '0')}</span>
+                <h3>{service.title}</h3>
+              </div>
+              <div class="svc-row__copy">
+                <p>{service.summary}</p>
+                <p>{service.detail}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- 02 How we work -->
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">02</span>
+          <span class="sec-head__label">How we work</span>
+        </header>
+
+        <div class="bridge">
+          {operatingBridge.map((step, index) => (
+            <div class="bridge__step reveal" style={`--reveal-delay: ${index * 70}ms`}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <strong>{step.label}</strong>
+              <p>{step.summary}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
 
-    <section class="hermes-feature-grid">
-      <div class="hermes-section-title">
-        <span>Built for trust</span>
-      </div>
+    <!-- 03 Product -->
+    <section class="section section--ruled" id="product">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">03</span>
+          <span class="sec-head__label">Product</span>
+        </header>
 
-      <div class="hermes-feature-grid__inner">
-        {trustPrinciples.map((principle) => (
-          <article class="hermes-feature">
-            <span>{principle.title}</span>
-            <p>{principle.summary}</p>
-          </article>
-        ))}
+        <div class="product reveal">
+          <div class="product__intro">
+            <span class="product__mark"><Glyph size={13} /></span>
+            <h3 class="product__name">
+              PA-OS
+              <span class="product__status"><i class="dot-live"></i>Closed beta</span>
+            </h3>
+            <p class="product__line">
+              The operating system for agent-ready placement agents.
+            </p>
+            <p class="product__copy">
+              Your broker-dealer keeps you compliant. Your CRM keeps names.
+              PA-OS runs the raise — and your relationship memory stays yours,
+              whichever broker-dealer you're on.
+            </p>
+            <div class="product__actions">
+              <a class="btn-ink" href={requestAccess}>Request access</a>
+            </div>
+          </div>
+
+          <ul class="product__proofs">
+            {productProofs.map((proof) => (
+              <li>
+                <strong>{proof.title}</strong>
+                <span>{proof.copy}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section class="hermes-cta">
-      <div>
-        <span class="hermes-eyebrow">Next step</span>
-        <h2>If the workflow matters, the software path should feel clear.</h2>
-      </div>
-      <div class="hermes-cta__actions">
-        <a class="button-primary" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-          Book a founder call
-        </a>
-        <a class="button-secondary" href="mailto:servando@controlthrive.com">
-          Email controlthrive
-        </a>
+    <!-- 04 Selected work -->
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">04</span>
+          <span class="sec-head__label">Selected work</span>
+        </header>
+
+        <div class="work-list">
+          {featuredCaseStudies.map((study, index) => (
+            <article class="work-row reveal" style={`--reveal-delay: ${index * 70}ms`}>
+              <div class="work-row__meta">
+                <span class="mono-label">{study.industry}</span>
+                <p class="work-row__outcome">{study.featuredOutcome}</p>
+              </div>
+              <div class="work-row__body">
+                <h3>
+                  <a href={`/case-studies/${study.slug}`}>{study.title}</a>
+                </h3>
+                <p>{study.cardSummary}</p>
+                <div class="work-row__links">
+                  <a class="link-quiet" href={`/case-studies/${study.slug}`}>
+                    Read case study
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
+
+    <!-- 05 Client perspective -->
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">05</span>
+          <span class="sec-head__label">Client perspective</span>
+        </header>
+
+        <blockquote class="quote-feature reveal">
+          <p>“{featuredQuote.quote}”</p>
+          <cite class="quote-cite">
+            <strong>{featuredQuote.name}</strong>
+            <span>{featuredQuote.role} · {featuredQuote.company}</span>
+          </cite>
+        </blockquote>
+
+        <div class="quote-grid">
+          {supportingQuotes.map((quote, index) => (
+            <blockquote class="reveal" style={`--reveal-delay: ${index * 70}ms`}>
+              <p>“{quote.quote}”</p>
+              <cite class="quote-cite">
+                <strong>{quote.name}</strong>
+                <span>{quote.role} · {quote.company}</span>
+              </cite>
+            </blockquote>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 Founder -->
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">06</span>
+          <span class="sec-head__label">Founder-led</span>
+        </header>
+
+        <div class="founder">
+          <figure class="founder__photo reveal">
+            <img
+              src="/profile-pic.jpg"
+              alt="Portrait of Servando Torres, founder of controlthrive"
+              loading="lazy"
+            />
+          </figure>
+
+          <div class="founder__copy reveal" style="--reveal-delay: 100ms">
+            {founderParagraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 Writing -->
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">07</span>
+          <span class="sec-head__label">Writing</span>
+        </header>
+
+        <div class="writing-list">
+          {latestPosts.map((post, index) => (
+            <article class="writing-row reveal" style={`--reveal-delay: ${index * 60}ms`}>
+              <time datetime={post.publishDate}>{formatDate(post.publishDate)}</time>
+              <h3><a href={post.href}>{post.title}</a></h3>
+              <a class="link-quiet" href={post.href}>Read</a>
+              <p>{post.description}</p>
+            </article>
+          ))}
+        </div>
+
+        <div style="margin-top: 2rem">
+          <a class="link-quiet" href="/blog">All writing</a>
+        </div>
+      </div>
+    </section>
+
+    <CtaBand index="08" />
   </main>
 
   <Footer />
+
+  <script>
+    // Staggered reveal on scroll — one orchestrated entrance per section.
+    const revealElements = document.querySelectorAll<HTMLElement>('.reveal');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      revealElements.forEach((el) => el.classList.add('is-visible'));
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: '0px 0px -8%', threshold: 0.1 },
+      );
+      revealElements.forEach((el) => observer.observe(el));
+    }
+
+    // Agents-at-work vignette — steps through PA-OS's five pillars, each an
+    // agent taking one action under the same cited, human-approved contract.
+    const pillars = [
+      {
+        kind: 'Sourcing',
+        receipt: 'cited',
+        claim: 'Found 14 new investors for the Meridian mandate.',
+        evidence: 'deduped against your book · sources attached',
+        logged: '✓ Added to mandate — decision logged',
+      },
+      {
+        kind: 'Standardization',
+        receipt: 'sourced',
+        claim: 'Turned the pitch deck into a typed, provenance-quoted mandate.',
+        evidence: 'deck p.4 — “seeking €40 million in commitments”',
+        logged: '✓ Mandate created — decision logged',
+      },
+      {
+        kind: 'Matching',
+        receipt: 'cited',
+        claim: 'Ranked 60 investors — who to approach, in what order, and why.',
+        evidence: 'each rank cited · do-not-contact enforced',
+        logged: '✓ Target list saved — decision logged',
+      },
+      {
+        kind: 'Campaigns',
+        receipt: 'for review',
+        claim: 'Drafted 38 outreach emails from the record.',
+        evidence: 'staged in your drafts · nothing sends itself',
+        logged: '✓ Kept in drafts — you send each one',
+      },
+      {
+        kind: 'Reporting',
+        receipt: 'traceable',
+        claim: 'Built this month’s client report for the Meridian mandate.',
+        evidence: 'white-label PDF · every number traces to a record',
+        logged: '✓ Report ready — decision logged',
+      },
+    ];
+
+    const rq = document.querySelector<HTMLElement>('[data-rq]');
+    const active = rq?.querySelector<HTMLElement>('[data-rq-active]');
+
+    if (rq && active && !reduceMotion) {
+      const fields = {
+        kind: rq.querySelector('[data-rq-kind]'),
+        conf: rq.querySelector('[data-rq-conf]'),
+        claim: rq.querySelector('[data-rq-claim]'),
+        evidence: rq.querySelector('[data-rq-evidence]'),
+        logged: rq.querySelector('[data-rq-logged]'),
+        step: rq.querySelector('[data-rq-step]'),
+        nextKind: rq.querySelector('[data-rq-next-kind]'),
+        nextClaim: rq.querySelector('[data-rq-next-claim]'),
+      };
+
+      let index = 0;
+
+      const render = (i: number) => {
+        const current = pillars[i % pillars.length];
+        const next = pillars[(i + 1) % pillars.length];
+
+        active.classList.remove('rq__item--approved', 'rq__item--active');
+        void active.offsetWidth;
+
+        if (fields.kind) fields.kind.textContent = current.kind;
+        if (fields.conf) fields.conf.textContent = current.receipt;
+        if (fields.claim) fields.claim.textContent = current.claim;
+        if (fields.evidence) fields.evidence.textContent = current.evidence;
+        if (fields.logged) fields.logged.textContent = current.logged;
+        if (fields.step) fields.step.textContent = `${(i % pillars.length) + 1} / ${pillars.length}`;
+        if (fields.nextKind) fields.nextKind.textContent = next.kind;
+        if (fields.nextClaim) fields.nextClaim.textContent = next.claim;
+
+        active.classList.add('rq__item--active');
+      };
+
+      window.setInterval(() => {
+        active.classList.add('rq__item--approved');
+        window.setTimeout(() => {
+          index = (index + 1) % pillars.length;
+          render(index);
+        }, 1100);
+      }, 4200);
+    }
+  </script>
 </Layout>
