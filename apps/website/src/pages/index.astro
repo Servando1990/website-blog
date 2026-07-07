@@ -131,40 +131,41 @@ const productProofs = [
         </div>
 
         <p class="sr-only">
-          Preview of PA-OS: an agent proposes record changes with cited
-          evidence, and a person approves each one before anything is written.
+          Preview of PA-OS: agents handle sourcing, standardization, matching,
+          outreach, and reporting — each one proposes a change with cited
+          evidence that a person approves before anything is written.
         </p>
         <div class="rq reveal" style="--reveal-delay: 240ms" aria-hidden="true" data-rq>
           <div class="rq__bar">
             <Glyph size={14} />
-            <span class="rq__title">PA-OS · Review queue</span>
-            <span class="rq__count"><i class="dot-live"></i>2 for review</span>
+            <span class="rq__title">PA-OS · agents at work</span>
+            <span class="rq__count"><i class="dot-live"></i><span data-rq-step>1 / 5</span></span>
           </div>
 
           <article class="rq__item rq__item--active" data-rq-active>
             <div class="rq__kind-row">
-              <span class="rq__kind" data-rq-kind>dedupe · needs review</span>
-              <span class="rq__conf" data-rq-conf>0.94</span>
+              <span class="rq__kind" data-rq-kind>Sourcing</span>
+              <span class="rq__conf" data-rq-conf>cited</span>
             </div>
             <p class="rq__claim" data-rq-claim>
-              Link “Meridian Growth Partners” to an existing investor record.
+              Found 14 new investors for the Meridian mandate.
             </p>
             <p class="rq__evidence" data-rq-evidence>
-              domain match · 14 prior touches · same signatory
+              deduped against your book · sources attached
             </p>
             <div class="rq__actions">
               <span class="rq__approve">Approve</span>
               <span class="rq__edit">Edit</span>
             </div>
-            <span class="rq__logged">✓ Approved — decision logged</span>
+            <span class="rq__logged" data-rq-logged>✓ Added to mandate — decision logged</span>
           </article>
 
           <article class="rq__item rq__item--queued" data-rq-queued>
             <div class="rq__kind-row">
-              <span class="rq__kind" data-rq-next-kind>deck extraction</span>
+              <span class="rq__kind" data-rq-next-kind>Standardization</span>
             </div>
             <p class="rq__claim" data-rq-next-claim>
-              Set target raise to €40M for the Meridian mandate.
+              Turn the pitch deck into a typed, provenance-quoted mandate.
             </p>
           </article>
 
@@ -418,26 +419,43 @@ const productProofs = [
       revealElements.forEach((el) => observer.observe(el));
     }
 
-    // Review-queue vignette — cycles through real PA-OS proposal shapes:
-    // dedupe linking, deck extraction with provenance, header mapping.
-    const proposals = [
+    // Agents-at-work vignette — steps through PA-OS's five pillars, each an
+    // agent taking one action under the same cited, human-approved contract.
+    const pillars = [
       {
-        kind: 'dedupe · needs review',
-        conf: '0.94',
-        claim: 'Link “Meridian Growth Partners” to an existing investor record.',
-        evidence: 'domain match · 14 prior touches · same signatory',
+        kind: 'Sourcing',
+        receipt: 'cited',
+        claim: 'Found 14 new investors for the Meridian mandate.',
+        evidence: 'deduped against your book · sources attached',
+        logged: '✓ Added to mandate — decision logged',
       },
       {
-        kind: 'deck extraction',
-        conf: '0.91',
-        claim: 'Set target raise to €40M for the Meridian mandate.',
-        evidence: 'deck p.4 · “seeking €40 million in commitments”',
+        kind: 'Standardization',
+        receipt: 'sourced',
+        claim: 'Turned the pitch deck into a typed, provenance-quoted mandate.',
+        evidence: 'deck p.4 — “seeking €40 million in commitments”',
+        logged: '✓ Mandate created — decision logged',
       },
       {
-        kind: 'header mapping',
-        conf: '0.88',
-        claim: 'Map CSV column “Inv_Type” to investor_type.',
-        evidence: '92% value overlap · seen in 3 prior imports',
+        kind: 'Matching',
+        receipt: 'cited',
+        claim: 'Ranked 60 investors — who to approach, in what order, and why.',
+        evidence: 'each rank cited · do-not-contact enforced',
+        logged: '✓ Target list saved — decision logged',
+      },
+      {
+        kind: 'Campaigns',
+        receipt: 'for review',
+        claim: 'Drafted 38 outreach emails from the record.',
+        evidence: 'staged in your drafts · nothing sends itself',
+        logged: '✓ Kept in drafts — you send each one',
+      },
+      {
+        kind: 'Reporting',
+        receipt: 'traceable',
+        claim: 'Built this month’s client report for the Meridian mandate.',
+        evidence: 'white-label PDF · every number traces to a record',
+        logged: '✓ Report ready — decision logged',
       },
     ];
 
@@ -450,6 +468,8 @@ const productProofs = [
         conf: rq.querySelector('[data-rq-conf]'),
         claim: rq.querySelector('[data-rq-claim]'),
         evidence: rq.querySelector('[data-rq-evidence]'),
+        logged: rq.querySelector('[data-rq-logged]'),
+        step: rq.querySelector('[data-rq-step]'),
         nextKind: rq.querySelector('[data-rq-next-kind]'),
         nextClaim: rq.querySelector('[data-rq-next-claim]'),
       };
@@ -457,16 +477,18 @@ const productProofs = [
       let index = 0;
 
       const render = (i: number) => {
-        const current = proposals[i % proposals.length];
-        const next = proposals[(i + 1) % proposals.length];
+        const current = pillars[i % pillars.length];
+        const next = pillars[(i + 1) % pillars.length];
 
         active.classList.remove('rq__item--approved', 'rq__item--active');
         void active.offsetWidth;
 
         if (fields.kind) fields.kind.textContent = current.kind;
-        if (fields.conf) fields.conf.textContent = current.conf;
+        if (fields.conf) fields.conf.textContent = current.receipt;
         if (fields.claim) fields.claim.textContent = current.claim;
         if (fields.evidence) fields.evidence.textContent = current.evidence;
+        if (fields.logged) fields.logged.textContent = current.logged;
+        if (fields.step) fields.step.textContent = `${(i % pillars.length) + 1} / ${pillars.length}`;
         if (fields.nextKind) fields.nextKind.textContent = next.kind;
         if (fields.nextClaim) fields.nextClaim.textContent = next.claim;
 
@@ -476,7 +498,7 @@ const productProofs = [
       window.setInterval(() => {
         active.classList.add('rq__item--approved');
         window.setTimeout(() => {
-          index = (index + 1) % proposals.length;
+          index = (index + 1) % pillars.length;
           render(index);
         }, 1100);
       }, 4200);
