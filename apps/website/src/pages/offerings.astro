@@ -1,0 +1,806 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Glyph from '../components/Glyph.astro';
+import { bookingUrl, testimonials, trustedCompanies } from '../lib/siteContent';
+
+const proofQuote = testimonials[0];
+
+const runSteps = [
+  {
+    label: '01',
+    title: 'Standardize',
+    detail: 'CSV, deck, CRM, and notes become typed records with review.',
+  },
+  {
+    label: '02',
+    title: 'Match',
+    detail: 'Mandate context and relationship memory produce ranked shortlists.',
+  },
+  {
+    label: '03',
+    title: 'Activate',
+    detail: 'Drafts, reports, and exports move forward only after approval.',
+  },
+];
+
+const requestAccess = 'mailto:servando@controlthrive.com?subject=PA-OS%20access';
+
+const offers = [
+  {
+    label: 'Product · Closed beta',
+    title: 'PA-OS for placement agents',
+    summary:
+      'A firm-owned operating layer for the raise, built on five pillars: search, standardization, matching, campaigns, and reporting. Standardize the book, match investors with evidence, draft outreach for approval, and prove the work every month.',
+    audience: 'Boutique placement agents, capital advisory firms, independent sponsors',
+    ships: [
+      'CRM import, mapping, dedupe, and persistent review decisions',
+      'Deck-to-mandate intake with provenance on extracted fields',
+      'Investor matching, relationship memory, and campaign-ready handoff',
+      'White-label activity reports that justify and defend the retainer',
+    ],
+  },
+  {
+    label: 'Software studio',
+    title: 'Founder-led systems for the raise',
+    summary:
+      'We partner with capital-raising operators on the five jobs that decide a raise — investor search, standardization, matching, campaigns, and reporting — shaped around your book and delivered as named artifacts on a cadence, with a human review gate on everything that leaves the firm.',
+    audience: 'Firms that want the outcomes now, without adopting new software',
+    ships: [
+      'Evidence-backed investor coverage report per mandate',
+      'Standardized book that feeds the CRM you already run',
+      'Staged outreach drafts — nothing sends without your approval',
+      'You own everything the system produces — exportable in full, anytime',
+    ],
+  },
+];
+
+const bespokeFootnote =
+  'A third lane exists for firms with their own engineering bench: bespoke builds with full IP transfer, priced 5–10x standard. If that is you, ask.';
+
+const proofRows = [
+  {
+    title: 'Investor matching in production',
+    copy:
+      'Atlas reduces a private capital advisory universe into ranked, reviewable shortlists using hard exclusions, champion selection, weighted fit scoring, and LLM notes reasoning.',
+    signal: '12.5k contact universe',
+  },
+  {
+    title: 'PA-OS product foundation',
+    copy:
+      'PA-OS turns the placement agent business model into software: sourcing search, data standardization, deal-investor matching, campaigns, and reporting under human control.',
+    signal: 'Closed beta',
+  },
+  {
+    title: 'Campaigns, run as an operating loop',
+    copy:
+      'The outreach engine behind the campaigns pillar runs a finite named-account universe through signals, plays, replies, and learning, with suppression and draft-never-send approval as hard rules.',
+    signal: '5 operating loops',
+  },
+];
+
+const principles = [
+  'Every claim carries a receipt',
+  'Human approval gates external action',
+  'Relationship memory stays firm-owned',
+  'Deterministic where safety matters',
+];
+---
+
+<Layout
+  title="Offerings | controlthrive"
+  description="A shareable one-page overview of controlthrive offerings: PA-OS, the operating system for placement agents (closed beta), and founder-led studio services for capital-raising operators."
+  ogImage="/api/og/home.png"
+  ogImageAlt="controlthrive offerings for private capital operating systems and evidence-led AI workflows."
+>
+  <Header />
+
+  <main>
+    <section class="offer-hero">
+      <div class="wrap offer-hero__grid">
+        <div class="offer-hero__copy">
+          <p class="offer-hero__eyebrow reveal">
+            <span class="mono-label">controlthrive offerings &middot; PA-OS closed beta</span>
+          </p>
+          <h1 class="offer-title reveal" style="--reveal-delay: 60ms">
+            Private capital operating systems, built from the workflow out.
+          </h1>
+          <p class="offer-lede reveal" style="--reveal-delay: 120ms">
+            controlthrive builds PA-OS, the operating system for placement
+            agents, now in closed beta — and partners as a founder-led
+            software studio with capital-raising operators. Mandates, CRM
+            memory, research, outreach, and reporting become production AI
+            systems where the judgment stays reviewable.
+          </p>
+          <div class="offer-actions reveal" style="--reveal-delay: 180ms">
+            <a class="btn-ink" href={requestAccess}>Request beta access</a>
+            <a class="btn-line" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+              Book a founder call
+            </a>
+          </div>
+        </div>
+
+        <div class="offer-console reveal" style="--reveal-delay: 220ms" aria-hidden="true">
+          <div class="offer-console__bar">
+            <Glyph size={14} />
+            <span>Raise operating layer</span>
+            <span><i class="dot-live"></i> live review</span>
+          </div>
+          <div class="offer-console__body">
+            <div class="offer-console__run">
+              <span class="mono-label">Mandate run</span>
+              <strong>Project Meridian</strong>
+              <p>From CRM export and deck to shortlist, drafts, and client report.</p>
+            </div>
+            <ol class="offer-console__steps">
+              {runSteps.map((step) => (
+                <li>
+                  <span>{step.label}</span>
+                  <div>
+                    <strong>{step.title}</strong>
+                    <p>{step.detail}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <div class="offer-console__queue">
+              <span>For review</span>
+              <strong>7 record updates &middot; 25 investor matches &middot; 12 drafts</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof" aria-label="Selected experience">
+      <div class="wrap proof__row">
+        <span class="mono-label">Experience across</span>
+        <div class="proof__names">
+          {trustedCompanies.map((company) => (
+            <span>{company}</span>
+          ))}
+          <span>MVV Capital Partners</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--ruled" id="offers">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">01</span>
+          <span class="sec-head__label">Commercial offers</span>
+        </header>
+
+        <h2 class="offer-section-title reveal">
+          A product, and a partner.
+        </h2>
+        <p class="sec-lede reveal" style="--reveal-delay: 40ms">
+          Services engagements start as a paid pilot — first usable
+          deliverable in week one — then move to a month-to-month
+          operate-and-improve subscription. Cancel anytime, full data
+          portability, no lock-in.
+        </p>
+
+        <div class="offer-list">
+          {offers.map((offer, index) => (
+            <article class="offer-row reveal" style={`--reveal-delay: ${index * 70}ms`}>
+              <div class="offer-row__lead">
+                <span class="mono-label">{offer.label}</span>
+                <h3>{offer.title}</h3>
+                <p>{offer.audience}</p>
+              </div>
+              <div class="offer-row__body">
+                <p>{offer.summary}</p>
+                <ul>
+                  {offer.ships.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <p class="offer-footnote reveal">{bespokeFootnote}</p>
+      </div>
+    </section>
+
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">02</span>
+          <span class="sec-head__label">Why this is credible</span>
+        </header>
+
+        <div class="proof-grid">
+          <div class="proof-copy reveal">
+            <h2 class="offer-section-title">
+              The offer comes from working software, not slideware.
+            </h2>
+            <p>
+              The private capital work has already forced the important product
+              lessons: standardization has to precede matching, relationship
+              memory has to be portable, evidence has to be visible, and
+              automation has to stop before regulated or relationship-sensitive
+              action leaves the firm.
+            </p>
+          </div>
+
+          <div class="proof-panel reveal" style="--reveal-delay: 120ms">
+            {proofRows.map((row) => (
+              <article>
+                <span>{row.signal}</span>
+                <h3>{row.title}</h3>
+                <p>{row.copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">03</span>
+          <span class="sec-head__label">Operating model</span>
+        </header>
+
+        <div class="layer-map reveal">
+          <div class="layer-map__intro">
+            <span class="mono-label">The missing layer</span>
+            <h2>
+              Your compliance chassis keeps you registered. Your CRM keeps
+              names. The operating layer runs the raise.
+            </h2>
+          </div>
+          <div class="layer-map__rows">
+            <div>
+              <span>Regulatory chassis</span>
+              <strong>Broker-dealer, AR, approvals, disclosure</strong>
+            </div>
+            <div>
+              <span>CRM and memory</span>
+              <strong>Contacts, companies, notes, history, ownership</strong>
+            </div>
+            <div>
+              <span>controlthrive layer</span>
+              <strong>Mandate intake, matching, drafts, reports, review queue</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="principle-strip" aria-label="Product principles">
+          {principles.map((principle) => (
+            <span>{principle}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">04</span>
+          <span class="sec-head__label">Client perspective</span>
+        </header>
+
+        <blockquote class="offer-quote reveal">
+          <p>&ldquo;{proofQuote.quote}&rdquo;</p>
+          <cite>
+            <strong>{proofQuote.name}</strong>
+            <span>{proofQuote.role} &middot; {proofQuote.company}</span>
+          </cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">05</span>
+          <span class="sec-head__label">Next step</span>
+        </header>
+
+        <h2 class="cta-final__title">
+          Bring the workflow. I will help turn it into the first useful system.
+        </h2>
+        <p class="sec-lede">
+          Best starting points: a placement-agent book that needs
+          standardizing, an investor targeting workflow, a mandate that needs
+          coverage, or a reporting bottleneck that puts the retainer at risk.
+        </p>
+
+        <div class="cta-final__actions">
+          <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+            Book a founder call
+          </a>
+          <a class="btn-line" href="mailto:servando@controlthrive.com?subject=controlthrive%20offerings">
+            Email controlthrive
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script>
+    const revealElements = document.querySelectorAll<HTMLElement>('.reveal');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      revealElements.forEach((el) => el.classList.add('is-visible'));
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: '0px 0px -8%', threshold: 0.1 },
+      );
+      revealElements.forEach((el) => observer.observe(el));
+    }
+  </script>
+</Layout>
+
+<style>
+  .offer-hero {
+    padding-block: 4.5rem 4rem;
+  }
+
+  .offer-hero__grid {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 960px) {
+    .offer-hero__grid {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    }
+  }
+
+  .offer-hero__eyebrow {
+    margin-bottom: 1.35rem;
+  }
+
+  .offer-title {
+    max-width: 13ch;
+    color: var(--ink);
+    font-size: 2.45rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  @media (min-width: 760px) {
+    .offer-title {
+      font-size: 3rem;
+    }
+  }
+
+  .offer-lede {
+    max-width: 35rem;
+    margin-top: 1.35rem;
+    color: var(--ink-2);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+
+  .offer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .offer-console {
+    width: 100%;
+    max-width: 430px;
+    justify-self: center;
+    overflow: hidden;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-pane);
+    background: var(--surface);
+    box-shadow: var(--shadow-pane);
+  }
+
+  @media (min-width: 960px) {
+    .offer-console {
+      justify-self: end;
+    }
+  }
+
+  .offer-console__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding-inline: 0.9rem;
+    border-bottom: 1px solid var(--hairline);
+    color: var(--ink);
+  }
+
+  .offer-console__bar span {
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  .offer-console__bar span:last-child {
+    display: inline-flex;
+    gap: 0.45rem;
+    align-items: center;
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    color: var(--ink-2);
+  }
+
+  .offer-console__bar .dot-live {
+    animation: pulse-dot 2.4s ease-in-out infinite;
+  }
+
+  .offer-console__body {
+    padding: 1rem;
+  }
+
+  .offer-console__run {
+    padding: 0.95rem;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-card);
+    background: var(--rail);
+  }
+
+  .offer-console__run strong {
+    display: block;
+    margin-top: 0.55rem;
+    color: var(--ink);
+    font-size: 1.0625rem;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  .offer-console__run p {
+    margin-top: 0.35rem;
+    color: var(--ink-2);
+    font-size: 0.8125rem;
+    line-height: 1.55;
+  }
+
+  .offer-console__steps {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.8rem;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .offer-console__steps li {
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    gap: 0.7rem;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .offer-console__steps > li > span {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--ink-3);
+  }
+
+  .offer-console__steps strong {
+    display: block;
+    color: var(--ink);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .offer-console__steps p {
+    margin-top: 0.2rem;
+    color: var(--ink-2);
+    font-size: 0.78125rem;
+    line-height: 1.5;
+  }
+
+  .offer-console__queue {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.85rem 0.95rem;
+    border-radius: var(--radius-card);
+    background: var(--ink);
+    color: var(--surface);
+  }
+
+  .offer-console__queue span {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.72;
+  }
+
+  .offer-console__queue strong {
+    font-size: 0.84375rem;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .offer-section-title {
+    max-width: 34rem;
+    color: var(--ink);
+    font-size: 1.75rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.18;
+    text-wrap: balance;
+  }
+
+  .offer-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.5rem;
+  }
+
+  .offer-row {
+    display: grid;
+    gap: 1rem 3rem;
+    padding-block: 2rem;
+    border-top: 1px solid var(--hairline);
+    transition:
+      border-color 160ms var(--ease-out),
+      transform 160ms var(--ease-out);
+  }
+
+  @media (hover: hover) {
+    .offer-row:hover {
+      border-color: var(--hairline-2);
+      transform: translateY(-1px);
+    }
+  }
+
+  @media (min-width: 840px) {
+    .offer-row {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    }
+  }
+
+  .offer-row__lead h3 {
+    max-width: 20rem;
+    margin-top: 0.85rem;
+    color: var(--ink);
+    font-size: 1.35rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.28;
+  }
+
+  .offer-row__lead p {
+    max-width: 18rem;
+    margin-top: 0.7rem;
+    color: var(--ink-3);
+    font-size: 0.84375rem;
+    line-height: 1.55;
+  }
+
+  .offer-row__body > p {
+    max-width: 37rem;
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+
+  .offer-row__body ul {
+    display: grid;
+    gap: 0.65rem;
+    margin-top: 1.1rem;
+  }
+
+  .offer-row__body li {
+    position: relative;
+    padding-left: 1rem;
+    color: var(--ink-2);
+    font-size: 0.875rem;
+    line-height: 1.55;
+  }
+
+  .offer-row__body li::before {
+    content: '';
+    position: absolute;
+    top: 0.68em;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--hairline-2);
+  }
+
+  .offer-footnote {
+    max-width: 42rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--hairline);
+    color: var(--ink-3);
+    font-size: 0.84375rem;
+    line-height: 1.6;
+  }
+
+  .proof-grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .proof-grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    }
+  }
+
+  .proof-copy p {
+    max-width: 34rem;
+    margin-top: 1.1rem;
+    color: var(--ink-2);
+    font-size: 0.9875rem;
+    line-height: 1.75;
+  }
+
+  .proof-panel {
+    overflow: hidden;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-pane);
+    background: var(--surface);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .proof-panel article {
+    padding: 1.2rem 1.25rem;
+  }
+
+  .proof-panel article + article {
+    border-top: 1px solid var(--hairline);
+  }
+
+  .proof-panel span {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .proof-panel h3 {
+    margin-top: 0.55rem;
+    color: var(--ink);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  .proof-panel p {
+    margin-top: 0.45rem;
+    color: var(--ink-2);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .layer-map {
+    display: grid;
+    gap: 2rem;
+    align-items: start;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--hairline);
+  }
+
+  @media (min-width: 880px) {
+    .layer-map {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    }
+  }
+
+  .layer-map__intro h2 {
+    max-width: 25rem;
+    margin-top: 0.9rem;
+    color: var(--ink);
+    font-size: 1.45rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  .layer-map__rows {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .layer-map__rows div {
+    display: grid;
+    gap: 0.45rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  @media (min-width: 640px) {
+    .layer-map__rows div {
+      grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+      gap: 1.5rem;
+      align-items: baseline;
+    }
+  }
+
+  .layer-map__rows span {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .layer-map__rows strong {
+    color: var(--ink);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.55;
+  }
+
+  .principle-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1.5rem;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .principle-strip span {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .offer-quote {
+    max-width: 47rem;
+  }
+
+  .offer-quote p {
+    color: var(--ink);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+
+  .offer-quote cite {
+    display: block;
+    margin-top: 1.35rem;
+    font-style: normal;
+  }
+
+  .offer-quote strong {
+    display: block;
+    color: var(--ink);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .offer-quote span {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--ink-3);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.02em;
+  }
+</style>
