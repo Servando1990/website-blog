@@ -15,7 +15,7 @@ export const serviceAreas = [
     summary:
       'Live search agents find and enrich investors for a specific mandate, with every claim traced to a source you can open.',
     detail:
-      'Delivered as an evidence-backed coverage report per mandate — paying for compute and fresh data, not a stale database subscription.',
+      'The system works the mandate continuously — coverage stays current instead of decaying the way a bought list does.',
   },
   {
     title: 'Standardization — from messy book to typed records',
@@ -43,7 +43,7 @@ export const serviceAreas = [
     summary:
       'White-label activity and progress reports where every number traces to the record behind it.',
     detail:
-      'The artifact that justifies and defends the retainer — produced monthly from the same book the other pillars keep current.',
+      'What justifies and defends the retainer — generated from the same living book the other pillars keep current.',
   },
 ];
 
