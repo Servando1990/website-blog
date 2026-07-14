@@ -11,25 +11,39 @@ export const trustedCompanies = ['BBVA', 'KPMG', 'PwC', 'Fintonic', 'Minsait'];
 
 export const serviceAreas = [
   {
-    title: 'Investor coverage and targeting',
+    title: 'Search — investor sourcing and enrichment',
     summary:
-      'We build workflows that help advisory and capital formation teams move from scattered deal context to ranked investor coverage with reasoning people can review.',
+      'Live search agents find and enrich investors for a specific mandate, with every claim traced to a source you can open.',
     detail:
-      'That usually means combining source material, relationship memory, and decision rules in one system that stays usable under real deadlines.',
+      'Delivered as an evidence-backed coverage report per mandate — paying for compute and fresh data, not a stale database subscription.',
   },
   {
-    title: 'Portfolio monitoring and research workflows',
+    title: 'Standardization — from messy book to typed records',
     summary:
-      'We design dashboards, alerting layers, and evidence-linked review tools that help teams act faster without losing the underlying context.',
+      'CSV exports, transcripts, and meeting notes become a typed, relational investor book through suggest-then-approve proposals.',
     detail:
-      'The goal is not a black box. The goal is a workflow where the signal, source material, and next action still make sense to the team using it.',
+      'The book feeds the CRM you already run instead of replacing it, and every mapping decision you make is remembered.',
   },
   {
-    title: 'Internal operating systems for deal teams',
+    title: 'Matching — mandate to ranked shortlist',
     summary:
-      'From internal tooling to decision support systems, we shape software around how a team already works instead of asking them to adopt a new operating religion.',
+      'Mandates and deals crossed against your investor book produce qualified shortlists: who to approach, in what order, and why.',
     detail:
-      'Founder-led continuity helps the system survive contact with the real process, not just the scoped idea.',
+      'Hard exclusions and do-not-contact rules are deterministic; the ranking reasoning stays visible and reviewable.',
+  },
+  {
+    title: 'Campaigns — personalized outreach, drafts only',
+    summary:
+      'Mailbox-native outreach drafted from the record, personalized per relationship, staged for your review.',
+    detail:
+      'Nothing sends without your approval — compliance-by-construction inside your broker-dealer rails, never around them.',
+  },
+  {
+    title: 'Reporting — the work, made visible',
+    summary:
+      'White-label activity and progress reports where every number traces to the record behind it.',
+    detail:
+      'The artifact that justifies and defends the retainer — produced monthly from the same book the other pillars keep current.',
   },
 ];
 
