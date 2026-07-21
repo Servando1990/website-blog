@@ -1,0 +1,398 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Glyph from '../components/Glyph.astro';
+
+const requestAccess = 'mailto:servando@controlthrive.com?subject=PA-OS%20access';
+
+// The five pillars of a raise, each an agent taking one action under the same
+// cited, human-approved contract. Rail labels stay short; the focus tile shows
+// the full receipt. Copy shared with the homepage vignette.
+const pillars = [
+  {
+    label: 'Source',
+    kind: 'Sourcing',
+    receipt: 'cited',
+    claim: 'Found 14 new investors for the Meridian mandate.',
+    evidence: 'deduped against your book · sources attached',
+    logged: '✓ Added to mandate — decision logged',
+  },
+  {
+    label: 'Standardize',
+    kind: 'Standardization',
+    receipt: 'sourced',
+    claim: 'Turned the pitch deck into a typed, provenance-quoted mandate.',
+    evidence: 'deck p.4 — “seeking €40 million in commitments”',
+    logged: '✓ Mandate created — decision logged',
+  },
+  {
+    label: 'Match',
+    kind: 'Matching',
+    receipt: 'cited',
+    claim: 'Ranked 60 investors — who to approach, in what order, and why.',
+    evidence: 'each rank cited · do-not-contact enforced',
+    logged: '✓ Target list saved — decision logged',
+  },
+  {
+    label: 'Campaigns',
+    kind: 'Campaigns',
+    receipt: 'for review',
+    claim: 'Drafted 38 outreach emails from the record.',
+    evidence: 'staged in your drafts · nothing sends itself',
+    logged: '✓ Kept in drafts — you send each one',
+  },
+  {
+    label: 'Report',
+    kind: 'Reporting',
+    receipt: 'traceable',
+    claim: 'Built this month’s client report for the Meridian mandate.',
+    evidence: 'white-label PDF · every number traces to a record',
+    logged: '✓ Report ready — decision logged',
+  },
+];
+
+// Server-render the strongest single frame (Matching) so the page is complete
+// before JS and for reduced-motion / screenshot / share.
+const start = 2;
+const initial = pillars[start];
+---
+
+<Layout
+  title="PA-OS — the operating system for placement agents"
+  description="PA-OS runs the whole raise on one agent: search, standardization, matching, campaigns, and reporting — every claim cited, nothing sent without your review. Closed beta."
+  ogImage="/api/og/pa-os.png"
+  ogImageAlt="PA-OS — the operating system for placement agents: source, standardize, match, campaigns, report."
+>
+  <main class="stage">
+    <a class="mark" href="/" aria-label="controlthrive home">
+      <span class="mark__glyph"><Glyph size={15} /></span>
+      <span class="mark__word">controlthrive</span>
+    </a>
+
+    <section class="lede-col">
+      <p class="tag"><i class="dot-live"></i>PA-OS · closed beta</p>
+      <h1 class="h1">The operating system for placement agents.</h1>
+      <p class="lede">
+        Search, standardization, matching, campaigns, and reporting — one agent,
+        one chat, on top of the CRM you already use. Every claim carries a
+        receipt, and nothing sends itself.
+      </p>
+    </section>
+
+    <!-- All five pillars at once; a pulse walks the rail and the tile shows the
+         lit pillar's cited receipt. Breadth legible at a glance. -->
+    <section class="os" data-os aria-label="PA-OS — the five jobs of a raise">
+      <ol class="os__rail">
+        {pillars.map((p, i) => (
+          <li class={`os__pillar${i === start ? ' is-active' : ''}`} data-pillar={i}>
+            <span class="os__dot"></span>
+            <span class="os__label">{p.label}</span>
+          </li>
+        ))}
+      </ol>
+
+      <article class="os__tile">
+        <div class="os__kindrow">
+          <span class="os__kind" data-os-kind>{initial.kind}</span>
+          <span class="os__receipt" data-os-receipt>{initial.receipt}</span>
+        </div>
+        <p class="os__claim" data-os-claim>{initial.claim}</p>
+        <p class="os__evidence" data-os-evidence>{initial.evidence}</p>
+        <div class="os__actions">
+          <span class="os__approve">Approve</span>
+          <span class="os__edit">Edit</span>
+          <span class="os__logged" data-os-logged>{initial.logged}</span>
+        </div>
+      </article>
+
+      <p class="os__foot">nothing ships without human review</p>
+    </section>
+
+    <div class="cta">
+      <a class="btn-ink" href={requestAccess}>Request access</a>
+      <span class="cta__note">closed beta · for placement agents &amp; independent bankers</span>
+    </div>
+  </main>
+
+  <script is:inline define:vars={{ pillars, start }}>
+    const root = document.querySelector('[data-os]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (root && !reduceMotion) {
+      const railItems = Array.from(root.querySelectorAll('.os__pillar'));
+      const tile = root.querySelector('.os__tile');
+      const f = {
+        kind: root.querySelector('[data-os-kind]'),
+        receipt: root.querySelector('[data-os-receipt]'),
+        claim: root.querySelector('[data-os-claim]'),
+        evidence: root.querySelector('[data-os-evidence]'),
+        logged: root.querySelector('[data-os-logged]'),
+      };
+
+      let i = start;
+
+      const render = (n) => {
+        const p = pillars[n];
+        railItems.forEach((el, idx) => el.classList.toggle('is-active', idx === n));
+        if (f.kind) f.kind.textContent = p.kind;
+        if (f.receipt) f.receipt.textContent = p.receipt;
+        if (f.claim) f.claim.textContent = p.claim;
+        if (f.evidence) f.evidence.textContent = p.evidence;
+        if (f.logged) f.logged.textContent = p.logged;
+      };
+
+      setInterval(() => {
+        tile?.classList.add('is-swapping');
+        setTimeout(() => {
+          i = (i + 1) % pillars.length;
+          render(i);
+          tile?.classList.remove('is-swapping');
+        }, 260);
+      }, 2600);
+    }
+  </script>
+
+  <style>
+    .stage {
+      min-height: 100svh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: clamp(1.75rem, 4vh, 3rem);
+      max-width: 720px;
+      margin-inline: auto;
+      padding: clamp(1.5rem, 5vw, 2.75rem) clamp(1.25rem, 6vw, 2.5rem)
+        clamp(1.75rem, 5vh, 3rem);
+    }
+
+    /* Brand mark — navigable, not a nav bar. */
+    .mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--ink);
+      width: fit-content;
+    }
+    .mark__glyph {
+      display: inline-flex;
+      color: var(--ink);
+    }
+    .mark__word {
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .lede-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-self: end;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    .h1 {
+      font-size: clamp(1.9rem, 6vw, 2.85rem);
+      line-height: 1.04;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin: 0;
+    }
+    .lede {
+      font-size: clamp(0.98rem, 2.4vw, 1.08rem);
+      line-height: 1.55;
+      color: var(--ink-2);
+      max-width: 34rem;
+      margin: 0;
+    }
+
+    /* The diagram — all five always visible. */
+    .os {
+      display: flex;
+      flex-direction: column;
+      gap: 1.35rem;
+      align-self: center;
+    }
+    .os__rail {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      position: relative;
+    }
+    /* connector line behind the dots — one system */
+    .os__rail::before {
+      content: '';
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      top: 5px;
+      height: 1px;
+      background: var(--hairline-2);
+    }
+    .os__pillar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .os__dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      background: var(--canvas);
+      box-shadow: inset 0 0 0 1.5px var(--ink-3);
+      transition:
+        box-shadow 220ms var(--ease-out),
+        background-color 220ms var(--ease-out);
+    }
+    .os__label {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.02em;
+      color: var(--ink-3);
+      transition: color 220ms var(--ease-out);
+      text-align: center;
+    }
+    .os__pillar.is-active .os__dot {
+      background: var(--live);
+      box-shadow:
+        inset 0 0 0 1.5px var(--live),
+        0 0 0 4px color-mix(in srgb, var(--live) 18%, transparent);
+    }
+    .os__pillar.is-active .os__label {
+      color: var(--ink);
+    }
+
+    .os__tile {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-pane);
+      box-shadow: var(--shadow-lift);
+      padding: 1.1rem 1.2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      transition: opacity 240ms var(--ease-out), transform 240ms var(--ease-out);
+    }
+    .os__tile.is-swapping {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    .os__kindrow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .os__kind {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .os__receipt {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.02em;
+      color: var(--ink-3);
+    }
+    .os__receipt::before {
+      content: '● ';
+      color: var(--live);
+      font-size: 0.6em;
+      vertical-align: middle;
+    }
+    .os__claim {
+      font-size: 0.98rem;
+      line-height: 1.4;
+      color: var(--ink);
+      margin: 0;
+    }
+    .os__evidence {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      line-height: 1.4;
+      color: var(--ink-3);
+      margin: 0;
+    }
+    .os__actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.15rem;
+      flex-wrap: wrap;
+    }
+    .os__approve,
+    .os__edit {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.28rem 0.7rem;
+      border-radius: 7px;
+    }
+    .os__approve {
+      background: var(--ink);
+      color: var(--surface);
+    }
+    .os__edit {
+      color: var(--ink-2);
+      border: 1px solid var(--hairline);
+    }
+    .os__logged {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--ink-3);
+    }
+    .os__foot {
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.04em;
+      color: var(--ink-3);
+      margin: 0;
+    }
+
+    .cta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .cta__note {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.02em;
+      color: var(--ink-3);
+    }
+
+    @media (max-width: 520px) {
+      .os__logged {
+        margin-left: 0;
+        width: 100%;
+      }
+      .os__label {
+        font-size: 0.625rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .os__tile {
+        transition: none;
+      }
+    }
+  </style>
+</Layout>
