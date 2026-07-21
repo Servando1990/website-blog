@@ -9,78 +9,82 @@ import { bookingUrl } from '../lib/siteContent';
 const svg = (paths: string) =>
   `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
 
+const extIcon = svg('<path d="M9 3.5h3.5V7"/><path d="M12.5 3.5 7.5 8.5"/><path d="M11 9.5v3H3.5V5H6.5"/>');
+
+// Each pillar mirrors the real product panel: a header with counts + an
+// "Open …" link, an optional evidence note, and hairline rows that each carry a
+// state — an outline action button, or a status (In pipeline / Passed) + link.
 const pillars = [
   {
     label: 'Source',
     icon: svg('<circle cx="7" cy="7" r="4"/><path d="M10.2 10.2 14 14"/>'),
-    kind: 'Sourcing',
-    receipt: 'cited',
-    agent: 'searched the web + your book',
-    claim: 'Found 10 family offices for the Meridian mandate.',
+    head: 'Investor discovery · Project Meridian',
+    meta: '8 reviewable of 12 found · 19 Jul 2026',
+    link: 'Open mandate',
+    note: '4 candidates withheld — no source evidence, so PA-OS won’t present them for approval.',
     rows: [
-      { primary: 'Rockmont Family Office', secondary: '€20M avg check · EU real estate', action: 'Approve' },
-      { primary: 'Aldwych Capital Office', secondary: '€10–30M · value-add RE', action: 'Approve' },
+      { n: '1', name: 'Rockmont Family Office', detail: '€20M avg check · EU real estate · Helsinki', badge: 'New', state: 'in', status: 'In pipeline', link: 'Open' },
+      { n: '2', name: 'Aldwych Capital Office', detail: '€10–30M · value-add RE · London', badge: 'New', state: 'action', action: 'Add to Meridian', link: 'Pass' },
+      { n: '5', name: 'Talstein Multi-Family Office', detail: '€15M avg · diversified · Zurich', badge: 'New', state: 'passed', status: 'Passed', link: 'Reconsider' },
     ],
-    more: '+ 8 more',
-    footer: 'deduped against your book · every source attached',
   },
   {
     label: 'Standardize',
     icon: svg('<path d="M2.5 3.5h11"/><path d="M4.6 6v6.5M8 6v6.5M11.4 6v6.5"/>'),
-    kind: 'Standardization',
-    receipt: 'sourced',
-    agent: 'read the pitch deck',
-    claim: 'Turned a 34-page deck into a typed mandate.',
+    head: 'Mandate extraction · Project Meridian',
+    meta: '9 fields typed · 2 flagged · 19 Jul 2026',
+    link: 'Open mandate',
+    note: '2 low-confidence fields — quoted to source, flagged for your review.',
     rows: [
-      { primary: 'Asset class → Real estate', secondary: 'deck p.2', action: 'Approve' },
-      { primary: 'Target raise → €40M', secondary: 'deck p.4', action: 'Approve' },
-      { primary: 'Check size → €5–15M', secondary: 'deck p.6', action: 'Approve' },
+      { n: '1', name: 'Asset class — Real estate', detail: 'deck p.2 · “private real estate strategies”', badge: 'p.2', state: 'action', action: 'Accept', link: 'Edit' },
+      { n: '2', name: 'Target raise — €40M', detail: 'deck p.4 · “seeking €40 million”', badge: 'p.4', state: 'in', status: 'Accepted', link: 'Open' },
+      { n: '3', name: 'Check size — €5–15M', detail: 'deck p.6 · flagged low confidence', badge: 'p.6', state: 'action', action: 'Accept', link: 'Edit' },
     ],
-    footer: 'every field quoted to its source page',
   },
   {
     label: 'Match',
     icon: svg('<path d="M2 4l3 4-3 4M14 4l-3 4 3 4"/><circle cx="8" cy="8" r="0.7" fill="currentColor" stroke="none"/>'),
-    kind: 'Matching',
-    receipt: 'cited',
-    agent: 'ranked your book vs. the mandate',
-    claim: 'Ranked 60 investors — here’s the top 3.',
+    head: 'Investor matching · Project Meridian',
+    meta: 'top 3 of 60 ranked · 19 Jul 2026',
+    link: 'Open mandate',
+    note: '',
     rows: [
-      { primary: '1 · Rockmont Family Office', secondary: '94 fit · invests EU RE, €20M ticket', action: 'why' },
-      { primary: '2 · Meridian Trust', secondary: '89 fit · value-add mandate', action: 'why' },
-      { primary: '3 · Aldwych Capital Office', secondary: '85 fit · ticket size match', action: 'why' },
+      { n: '1', name: 'Rockmont Family Office', detail: '94 fit · invests EU RE, €20M ticket', badge: '94', state: 'in', status: 'Shortlisted', link: 'Why' },
+      { n: '2', name: 'Meridian Trust Office', detail: '89 fit · value-add mandate match', badge: '89', state: 'action', action: 'Add to shortlist', link: 'Why' },
+      { n: '3', name: 'Aldwych Capital Office', detail: '85 fit · ticket size match', badge: '85', state: 'action', action: 'Add to shortlist', link: 'Why' },
     ],
-    footer: 'each rank cited · do-not-contact enforced',
   },
   {
     label: 'Campaigns',
     icon: svg('<path d="M14 2 7 9"/><path d="M14 2 9.5 14 7 9 2 6.5 14 2z"/>'),
-    kind: 'Campaigns',
-    receipt: 'for review',
-    agent: 'drafted outreach from the record',
-    claim: '38 emails drafted — staged in your drafts.',
+    head: 'Outreach drafts · Project Meridian',
+    meta: '38 drafted · staged in your drafts · 19 Jul 2026',
+    link: 'Open drafts',
+    note: 'Nothing sends itself — every draft waits for you to send.',
     rows: [
-      { primary: 'To: Rockmont Family Office', secondary: '“Meridian — EU real estate, €20M ticket…”', action: 'Review draft' },
+      { n: '1', name: 'To: Rockmont Family Office', detail: '“Meridian — EU real estate, €20M ticket…”', badge: 'Draft', state: 'action', action: 'Review draft', link: 'Discard' },
+      { n: '2', name: 'To: Aldwych Capital Office', detail: '“Following up on value-add real estate…”', badge: 'Draft', state: 'action', action: 'Review draft', link: 'Discard' },
+      { n: '3', name: 'To: Meridian Trust Office', detail: '“Introducing the Meridian mandate…”', badge: 'Draft', state: 'action', action: 'Review draft', link: 'Discard' },
     ],
-    footer: 'nothing sends itself — you send each one',
   },
   {
     label: 'Report',
     icon: svg('<path d="M4 2.5h5L12 5.5v8H4z"/><path d="M6.2 8.6h3.6M6.2 11h3.6"/>'),
-    kind: 'Reporting',
-    receipt: 'traceable',
-    agent: 'built this month’s client report',
-    claim: 'Meridian — activity report ready.',
+    head: 'Activity report · Project Meridian',
+    meta: 'this month · every figure sourced · 19 Jul 2026',
+    link: 'Open PDF',
+    note: '',
     rows: [
-      { primary: '12 emails · 5 meetings · 3 calls', secondary: '€40M pipeline · 60 investors touched', action: 'Open PDF' },
+      { n: '1', name: 'Outreach — 12 emails, 5 meetings, 3 calls', detail: 'each figure traces to a record', badge: '', state: 'action', action: 'Open PDF', link: 'Rebuild' },
+      { n: '2', name: 'Pipeline — €40M across 8 investors', detail: '3 in diligence · 2 committed', badge: '', state: 'in', status: 'In report', link: 'Open' },
+      { n: '3', name: 'Coverage — 60 of 72 mapped', detail: '12 pending review', badge: '', state: 'action', action: 'Open PDF', link: 'Rebuild' },
     ],
-    footer: 'white-label PDF · every number traces to a record',
   },
 ];
 
-// Server-render the strongest single frame (Matching) so the page is complete
-// before JS and for reduced-motion / screenshot / share.
-const start = 2;
+// Server-render Sourcing first so the page is complete before JS and for
+// reduced-motion / screenshot / share.
+const start = 0;
 const initial = pillars[start];
 ---
 
@@ -126,27 +130,40 @@ const initial = pillars[start];
       </div>
 
       <article class="os__tile">
-        <div class="os__cardhead">
-          <span class="os__agent">
-            <span class="os__agenticon"><Glyph size={12} /></span>
-            Agent · <span data-os-agent>{initial.agent}</span>
-          </span>
-          <span class="os__receipt" data-os-receipt>{initial.receipt}</span>
-        </div>
-        <p class="os__claim" data-os-claim>{initial.claim}</p>
+        <header class="os__phead">
+          <div class="os__ptitle">
+            <strong data-os-head>{initial.head}</strong>
+            <span class="os__pmeta" data-os-meta>{initial.meta}</span>
+          </div>
+          <span class="os__plink" data-os-link>{initial.link}</span>
+        </header>
+        <p class="os__pnote" data-os-note hidden={!initial.note}>{initial.note}</p>
         <ul class="os__rows" data-os-rows>
           {initial.rows.map((r) => (
             <li class="os__row">
-              <span class="os__rowtext">
-                <strong>{r.primary}</strong>
-                <span>{r.secondary}</span>
-              </span>
-              <span class={`os__chip${r.action === 'Approve' ? '' : ' os__chip--ghost'}`}>{r.action}</span>
+              <span class="os__rn">{r.n}</span>
+              <div class="os__rmain">
+                <div class="os__rnamerow">
+                  <span class="os__rname">{r.name}<span class="os__ext" set:html={extIcon} /></span>
+                  {r.badge && <span class="os__badge">{r.badge}</span>}
+                </div>
+                <div class="os__rdetail">{r.detail}</div>
+              </div>
+              <div class="os__ractions">
+                {r.state === 'action' && (
+                  <button type="button" class="os__btn"><span class="os__btnplus">+</span>{r.action}</button>
+                )}
+                {r.state === 'in' && (
+                  <span class="os__status os__status--in"><span class="os__statustick">✓</span>{r.status}</span>
+                )}
+                {r.state === 'passed' && (
+                  <span class="os__status os__status--passed"><span class="os__statustick">✕</span>{r.status}</span>
+                )}
+                <span class="os__pass">{r.link}</span>
+              </div>
             </li>
           ))}
-          {initial.more && <li class="os__more">{initial.more}</li>}
         </ul>
-        <p class="os__note" data-os-note>{initial.footer}</p>
       </article>
 
       <p class="os__foot">nothing ships without human review</p>
@@ -158,7 +175,7 @@ const initial = pillars[start];
     </div>
   </main>
 
-  <script is:inline define:vars={{ pillars, start }}>
+  <script is:inline define:vars={{ pillars, start, extIcon }}>
     const root = document.querySelector('[data-os]');
     const diagram = root && root.querySelector('.os__diagram');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -169,45 +186,64 @@ const initial = pillars[start];
       const tile = root.querySelector('.os__tile');
       const rowsEl = root.querySelector('[data-os-rows]');
       const f = {
-        agent: root.querySelector('[data-os-agent]'),
-        receipt: root.querySelector('[data-os-receipt]'),
-        claim: root.querySelector('[data-os-claim]'),
+        head: root.querySelector('[data-os-head]'),
+        meta: root.querySelector('[data-os-meta]'),
+        link: root.querySelector('[data-os-link]'),
         note: root.querySelector('[data-os-note]'),
+      };
+
+      const el = (tag, cls, text) => {
+        const n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (text != null) n.textContent = text;
+        return n;
       };
 
       const renderRows = (p) => {
         if (!rowsEl) return;
         rowsEl.replaceChildren();
         p.rows.forEach((r) => {
-          const li = document.createElement('li');
-          li.className = 'os__row';
-          const text = document.createElement('span');
-          text.className = 'os__rowtext';
-          const strong = document.createElement('strong');
-          strong.textContent = r.primary;
-          const sec = document.createElement('span');
-          sec.textContent = r.secondary;
-          text.append(strong, sec);
-          const chip = document.createElement('span');
-          chip.className = 'os__chip' + (r.action === 'Approve' ? '' : ' os__chip--ghost');
-          chip.textContent = r.action;
-          li.append(text, chip);
+          const li = el('li', 'os__row');
+          li.append(el('span', 'os__rn', r.n));
+
+          const main = el('div', 'os__rmain');
+          const namerow = el('div', 'os__rnamerow');
+          const name = el('span', 'os__rname', r.name);
+          const ext = el('span', 'os__ext');
+          ext.innerHTML = extIcon;
+          name.append(ext);
+          namerow.append(name);
+          if (r.badge) namerow.append(el('span', 'os__badge', r.badge));
+          main.append(namerow, el('div', 'os__rdetail', r.detail));
+          li.append(main);
+
+          const actions = el('div', 'os__ractions');
+          if (r.state === 'action') {
+            const btn = el('button', 'os__btn');
+            btn.type = 'button';
+            btn.append(el('span', 'os__btnplus', '+'), document.createTextNode(r.action));
+            actions.append(btn);
+          } else {
+            const st = el('span', 'os__status os__status--' + r.state);
+            st.append(el('span', 'os__statustick', r.state === 'in' ? '✓' : '✕'), document.createTextNode(r.status));
+            actions.append(st);
+          }
+          actions.append(el('span', 'os__pass', r.link));
+          li.append(actions);
+
           rowsEl.append(li);
         });
-        if (p.more) {
-          const li = document.createElement('li');
-          li.className = 'os__more';
-          li.textContent = p.more;
-          rowsEl.append(li);
-        }
       };
 
       const fillTile = (n) => {
         const p = pillars[n];
-        if (f.agent) f.agent.textContent = p.agent;
-        if (f.receipt) f.receipt.textContent = p.receipt;
-        if (f.claim) f.claim.textContent = p.claim;
-        if (f.note) f.note.textContent = p.footer;
+        if (f.head) f.head.textContent = p.head;
+        if (f.meta) f.meta.textContent = p.meta;
+        if (f.link) f.link.textContent = p.link;
+        if (f.note) {
+          f.note.textContent = p.note || '';
+          f.note.hidden = !p.note;
+        }
         renderRows(p);
       };
 
@@ -465,116 +501,168 @@ const initial = pillars[start];
       opacity: 0;
       transform: translateY(8px);
     }
-    .os__cardhead {
+    .os__phead {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
       gap: 1rem;
     }
-    .os__agent {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-family: var(--font-mono);
-      font-size: 0.6875rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+    .os__ptitle {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      min-width: 0;
+    }
+    .os__ptitle strong {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: -0.005em;
       color: var(--ink);
     }
-    .os__agenticon {
-      display: inline-flex;
-      color: var(--live);
-    }
-    .os__agenticon :global(svg) {
-      width: 12px;
-      height: 12px;
-      display: block;
-    }
-    .os__receipt {
+    .os__pmeta {
       font-family: var(--font-mono);
-      font-size: 0.6875rem;
-      letter-spacing: 0.02em;
+      font-size: 0.68rem;
       color: var(--ink-3);
-      white-space: nowrap;
     }
-    .os__receipt::before {
-      content: '● ';
-      color: var(--live);
-      font-size: 0.6em;
-      vertical-align: middle;
+    .os__plink {
+      flex: none;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--ink-2);
     }
-    .os__claim {
-      font-size: 0.98rem;
-      line-height: 1.35;
-      font-weight: 550;
-      color: var(--ink);
-      margin: 0.1rem 0 0.15rem;
+    .os__pnote {
+      font-size: 0.76rem;
+      line-height: 1.4;
+      color: #9a7d43;
+      margin: 0.15rem 0 0;
     }
     .os__rows {
       list-style: none;
-      margin: 0;
+      margin: 0.1rem 0 0;
       padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 0.45rem;
     }
     .os__row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      padding: 0.5rem 0.6rem;
-      border: 1px solid var(--hairline);
-      border-radius: 8px;
-      background: var(--canvas);
+      gap: 0.7rem;
+      padding: 0.6rem 0;
+      border-top: 1px solid var(--hairline);
     }
-    .os__rowtext {
+    .os__row:first-child {
+      border-top: 0;
+    }
+    .os__rn {
+      flex: none;
+      width: 0.9rem;
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--ink-3);
+    }
+    .os__rmain {
+      flex: 1 1 auto;
+      min-width: 0;
       display: flex;
       flex-direction: column;
-      gap: 0.1rem;
+      gap: 0.15rem;
+    }
+    .os__rnamerow {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
       min-width: 0;
     }
-    .os__rowtext strong {
-      font-size: 0.82rem;
+    .os__rname {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.84rem;
       font-weight: 550;
       color: var(--ink);
-    }
-    .os__rowtext > span {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--ink-3);
+      text-decoration: underline;
+      text-decoration-color: var(--hairline-2);
+      text-underline-offset: 2px;
+      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;
     }
-    .os__chip {
+    .os__ext {
+      display: inline-flex;
+      color: var(--ink-3);
+    }
+    .os__ext :global(svg) {
+      width: 11px;
+      height: 11px;
+      display: block;
+    }
+    .os__badge {
       flex: none;
-      font-size: 0.72rem;
-      font-weight: 500;
-      padding: 0.3rem 0.66rem;
-      border-radius: 6px;
-      background: var(--ink);
-      color: var(--surface);
-    }
-    .os__chip--ghost {
-      background: transparent;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.02em;
       color: var(--ink-2);
+      padding: 0.08rem 0.4rem;
       border: 1px solid var(--hairline-2);
+      border-radius: 999px;
     }
-    .os__more {
+    .os__rdetail {
       font-family: var(--font-mono);
       font-size: 0.7rem;
-      letter-spacing: 0.02em;
       color: var(--ink-3);
-      padding-left: 0.2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .os__note {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      line-height: 1.4;
+    .os__ractions {
+      flex: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .os__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--hairline-2);
+      border-radius: 8px;
+      padding: 0.32rem 0.66rem;
+      cursor: pointer;
+      transition:
+        background-color 120ms var(--ease-out),
+        border-color 120ms var(--ease-out);
+    }
+    .os__btn:hover {
+      background: var(--hover);
+      border-color: var(--ink-3);
+    }
+    .os__btnplus {
+      font-size: 0.95em;
       color: var(--ink-3);
-      margin: 0.15rem 0 0;
+    }
+    .os__pass {
+      font-size: 0.75rem;
+      color: var(--ink-3);
+    }
+    .os__status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      color: var(--ink-2);
+      white-space: nowrap;
+    }
+    .os__statustick {
+      color: var(--ink-3);
+    }
+    .os__status--in .os__statustick {
+      color: var(--live);
     }
     .os__foot {
       text-align: center;
@@ -602,8 +690,8 @@ const initial = pillars[start];
       .os__label {
         font-size: 0.625rem;
       }
-      .os__rowtext > span {
-        white-space: normal;
+      .os__rdetail {
+        display: none;
       }
     }
 
