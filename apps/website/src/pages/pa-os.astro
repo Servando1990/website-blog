@@ -15,45 +15,66 @@ const pillars = [
     icon: svg('<circle cx="7" cy="7" r="4"/><path d="M10.2 10.2 14 14"/>'),
     kind: 'Sourcing',
     receipt: 'cited',
-    claim: 'Found 14 new investors for the Meridian mandate.',
-    evidence: 'deduped against your book · sources attached',
-    logged: '✓ Added to mandate — decision logged',
+    agent: 'searched the web + your book',
+    claim: 'Found 10 family offices for the Meridian mandate.',
+    rows: [
+      { primary: 'Rockmont Family Office', secondary: '€20M avg check · EU real estate', action: 'Approve' },
+      { primary: 'Aldwych Capital Office', secondary: '€10–30M · value-add RE', action: 'Approve' },
+    ],
+    more: '+ 8 more',
+    footer: 'deduped against your book · every source attached',
   },
   {
     label: 'Standardize',
     icon: svg('<path d="M2.5 3.5h11"/><path d="M4.6 6v6.5M8 6v6.5M11.4 6v6.5"/>'),
     kind: 'Standardization',
     receipt: 'sourced',
-    claim: 'Turned the pitch deck into a typed, provenance-quoted mandate.',
-    evidence: 'deck p.4 — “seeking €40 million in commitments”',
-    logged: '✓ Mandate created — decision logged',
+    agent: 'read the pitch deck',
+    claim: 'Turned a 34-page deck into a typed mandate.',
+    rows: [
+      { primary: 'Asset class → Real estate', secondary: 'deck p.2', action: 'Approve' },
+      { primary: 'Target raise → €40M', secondary: 'deck p.4', action: 'Approve' },
+      { primary: 'Check size → €5–15M', secondary: 'deck p.6', action: 'Approve' },
+    ],
+    footer: 'every field quoted to its source page',
   },
   {
     label: 'Match',
     icon: svg('<path d="M2 4l3 4-3 4M14 4l-3 4 3 4"/><circle cx="8" cy="8" r="0.7" fill="currentColor" stroke="none"/>'),
     kind: 'Matching',
     receipt: 'cited',
-    claim: 'Ranked 60 investors — who to approach, in what order, and why.',
-    evidence: 'each rank cited · do-not-contact enforced',
-    logged: '✓ Target list saved — decision logged',
+    agent: 'ranked your book vs. the mandate',
+    claim: 'Ranked 60 investors — here’s the top 3.',
+    rows: [
+      { primary: '1 · Rockmont Family Office', secondary: '94 fit · invests EU RE, €20M ticket', action: 'why' },
+      { primary: '2 · Meridian Trust', secondary: '89 fit · value-add mandate', action: 'why' },
+      { primary: '3 · Aldwych Capital Office', secondary: '85 fit · ticket size match', action: 'why' },
+    ],
+    footer: 'each rank cited · do-not-contact enforced',
   },
   {
     label: 'Campaigns',
     icon: svg('<path d="M14 2 7 9"/><path d="M14 2 9.5 14 7 9 2 6.5 14 2z"/>'),
     kind: 'Campaigns',
     receipt: 'for review',
-    claim: 'Drafted 38 outreach emails from the record.',
-    evidence: 'staged in your drafts · nothing sends itself',
-    logged: '✓ Kept in drafts — you send each one',
+    agent: 'drafted outreach from the record',
+    claim: '38 emails drafted — staged in your drafts.',
+    rows: [
+      { primary: 'To: Rockmont Family Office', secondary: '“Meridian — EU real estate, €20M ticket…”', action: 'Review draft' },
+    ],
+    footer: 'nothing sends itself — you send each one',
   },
   {
     label: 'Report',
     icon: svg('<path d="M4 2.5h5L12 5.5v8H4z"/><path d="M6.2 8.6h3.6M6.2 11h3.6"/>'),
     kind: 'Reporting',
     receipt: 'traceable',
-    claim: 'Built this month’s client report for the Meridian mandate.',
-    evidence: 'white-label PDF · every number traces to a record',
-    logged: '✓ Report ready — decision logged',
+    agent: 'built this month’s client report',
+    claim: 'Meridian — activity report ready.',
+    rows: [
+      { primary: '12 emails · 5 meetings · 3 calls', secondary: '€40M pipeline · 60 investors touched', action: 'Open PDF' },
+    ],
+    footer: 'white-label PDF · every number traces to a record',
   },
 ];
 
@@ -105,17 +126,27 @@ const initial = pillars[start];
       </div>
 
       <article class="os__tile">
-        <div class="os__kindrow">
-          <span class="os__kind" data-os-kind>{initial.kind}</span>
+        <div class="os__cardhead">
+          <span class="os__agent">
+            <span class="os__agenticon"><Glyph size={12} /></span>
+            Agent · <span data-os-agent>{initial.agent}</span>
+          </span>
           <span class="os__receipt" data-os-receipt>{initial.receipt}</span>
         </div>
         <p class="os__claim" data-os-claim>{initial.claim}</p>
-        <p class="os__evidence" data-os-evidence>{initial.evidence}</p>
-        <div class="os__actions">
-          <span class="os__approve">Approve</span>
-          <span class="os__edit">Edit</span>
-          <span class="os__logged" data-os-logged>{initial.logged}</span>
-        </div>
+        <ul class="os__rows" data-os-rows>
+          {initial.rows.map((r) => (
+            <li class="os__row">
+              <span class="os__rowtext">
+                <strong>{r.primary}</strong>
+                <span>{r.secondary}</span>
+              </span>
+              <span class={`os__chip${r.action === 'Approve' ? '' : ' os__chip--ghost'}`}>{r.action}</span>
+            </li>
+          ))}
+          {initial.more && <li class="os__more">{initial.more}</li>}
+        </ul>
+        <p class="os__note" data-os-note>{initial.footer}</p>
       </article>
 
       <p class="os__foot">nothing ships without human review</p>
@@ -134,45 +165,88 @@ const initial = pillars[start];
 
     if (root && diagram && !reduceMotion) {
       const railItems = Array.from(root.querySelectorAll('.os__pillar'));
+      const rail = root.querySelector('.os__rail');
       const tile = root.querySelector('.os__tile');
+      const rowsEl = root.querySelector('[data-os-rows]');
       const f = {
-        kind: root.querySelector('[data-os-kind]'),
+        agent: root.querySelector('[data-os-agent]'),
         receipt: root.querySelector('[data-os-receipt]'),
         claim: root.querySelector('[data-os-claim]'),
-        evidence: root.querySelector('[data-os-evidence]'),
-        logged: root.querySelector('[data-os-logged]'),
+        note: root.querySelector('[data-os-note]'),
+      };
+
+      const renderRows = (p) => {
+        if (!rowsEl) return;
+        rowsEl.replaceChildren();
+        p.rows.forEach((r) => {
+          const li = document.createElement('li');
+          li.className = 'os__row';
+          const text = document.createElement('span');
+          text.className = 'os__rowtext';
+          const strong = document.createElement('strong');
+          strong.textContent = r.primary;
+          const sec = document.createElement('span');
+          sec.textContent = r.secondary;
+          text.append(strong, sec);
+          const chip = document.createElement('span');
+          chip.className = 'os__chip' + (r.action === 'Approve' ? '' : ' os__chip--ghost');
+          chip.textContent = r.action;
+          li.append(text, chip);
+          rowsEl.append(li);
+        });
+        if (p.more) {
+          const li = document.createElement('li');
+          li.className = 'os__more';
+          li.textContent = p.more;
+          rowsEl.append(li);
+        }
       };
 
       const fillTile = (n) => {
         const p = pillars[n];
-        if (f.kind) f.kind.textContent = p.kind;
+        if (f.agent) f.agent.textContent = p.agent;
         if (f.receipt) f.receipt.textContent = p.receipt;
         if (f.claim) f.claim.textContent = p.claim;
-        if (f.evidence) f.evidence.textContent = p.evidence;
-        if (f.logged) f.logged.textContent = p.logged;
+        if (f.note) f.note.textContent = p.footer;
+        renderRows(p);
       };
 
       const TRAVEL = 900; // the glow glides the rail
       const DWELL = 4200; // rest on each pillar
+      const CYCLE = TRAVEL + DWELL;
 
       let i = start;
 
-      const step = () => {
-        const next = (i + 1) % pillars.length;
-        // send the glow + progress line toward the next pillar
-        diagram.style.setProperty('--i', String(next));
-        // fade the tile while the pulse is in transit
+      // Move the glow to pillar n; swap the card in after `delay` (once the glow
+      // has travelled, on auto-play; quickly, on hover).
+      const activate = (n, delay) => {
+        diagram.style.setProperty('--i', String(n));
         tile?.classList.add('is-swapping');
         window.setTimeout(() => {
-          railItems[i]?.classList.remove('is-active');
-          railItems[next]?.classList.add('is-active');
-          fillTile(next);
+          railItems.forEach((el, idx) => el.classList.toggle('is-active', idx === n));
+          fillTile(n);
           tile?.classList.remove('is-swapping');
-          i = next;
-        }, TRAVEL);
+        }, delay);
+        i = n;
       };
 
-      window.setInterval(step, DWELL + TRAVEL);
+      const step = () => activate((i + 1) % pillars.length, TRAVEL);
+
+      let timer = window.setInterval(step, CYCLE);
+
+      // Hover (or tap) a pillar to pin its card and pause; leaving the rail resumes.
+      railItems.forEach((el, idx) => {
+        const jump = () => {
+          window.clearInterval(timer);
+          if (idx !== i) activate(idx, 220);
+        };
+        el.addEventListener('mouseenter', jump);
+        el.addEventListener('click', jump);
+      });
+      rail?.addEventListener('mouseleave', () => {
+        window.clearInterval(timer);
+        timer = window.setInterval(step, CYCLE);
+      });
     }
   </script>
 
@@ -391,25 +465,38 @@ const initial = pillars[start];
       opacity: 0;
       transform: translateY(8px);
     }
-    .os__kindrow {
+    .os__cardhead {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
     }
-    .os__kind {
+    .os__agent {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
       font-family: var(--font-mono);
       font-size: 0.6875rem;
       font-weight: 500;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       color: var(--ink);
+    }
+    .os__agenticon {
+      display: inline-flex;
+      color: var(--live);
+    }
+    .os__agenticon :global(svg) {
+      width: 12px;
+      height: 12px;
+      display: block;
     }
     .os__receipt {
       font-family: var(--font-mono);
       font-size: 0.6875rem;
       letter-spacing: 0.02em;
       color: var(--ink-3);
+      white-space: nowrap;
     }
     .os__receipt::before {
       content: '● ';
@@ -419,44 +506,75 @@ const initial = pillars[start];
     }
     .os__claim {
       font-size: 0.98rem;
-      line-height: 1.4;
+      line-height: 1.35;
+      font-weight: 550;
       color: var(--ink);
-      margin: 0;
+      margin: 0.1rem 0 0.15rem;
     }
-    .os__evidence {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      line-height: 1.4;
-      color: var(--ink-3);
+    .os__rows {
+      list-style: none;
       margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
     }
-    .os__actions {
+    .os__row {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      margin-top: 0.15rem;
-      flex-wrap: wrap;
-    }
-    .os__approve,
-    .os__edit {
-      font-size: 0.75rem;
-      font-weight: 500;
-      padding: 0.28rem 0.7rem;
-      border-radius: 7px;
-    }
-    .os__approve {
-      background: var(--ink);
-      color: var(--surface);
-    }
-    .os__edit {
-      color: var(--ink-2);
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.5rem 0.6rem;
       border: 1px solid var(--hairline);
+      border-radius: 8px;
+      background: var(--canvas);
     }
-    .os__logged {
-      margin-left: auto;
+    .os__rowtext {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      min-width: 0;
+    }
+    .os__rowtext strong {
+      font-size: 0.82rem;
+      font-weight: 550;
+      color: var(--ink);
+    }
+    .os__rowtext > span {
       font-family: var(--font-mono);
       font-size: 0.72rem;
       color: var(--ink-3);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .os__chip {
+      flex: none;
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 0.3rem 0.66rem;
+      border-radius: 6px;
+      background: var(--ink);
+      color: var(--surface);
+    }
+    .os__chip--ghost {
+      background: transparent;
+      color: var(--ink-2);
+      border: 1px solid var(--hairline-2);
+    }
+    .os__more {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.02em;
+      color: var(--ink-3);
+      padding-left: 0.2rem;
+    }
+    .os__note {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      line-height: 1.4;
+      color: var(--ink-3);
+      margin: 0.15rem 0 0;
     }
     .os__foot {
       text-align: center;
@@ -481,12 +599,11 @@ const initial = pillars[start];
     }
 
     @media (max-width: 520px) {
-      .os__logged {
-        margin-left: 0;
-        width: 100%;
-      }
       .os__label {
         font-size: 0.625rem;
+      }
+      .os__rowtext > span {
+        white-space: normal;
       }
     }
 
