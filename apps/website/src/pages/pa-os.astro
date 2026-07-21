@@ -26,9 +26,9 @@ const pillars = [
     link: 'Open mandate',
     note: '4 candidates withheld — no source evidence, so PA-OS won’t present them for approval.',
     rows: [
-      { n: '1', name: 'Rockmont Family Office', detail: '€20M avg check · EU real estate · Helsinki', badge: 'New', state: 'in', status: 'In pipeline', link: 'Open' },
-      { n: '2', name: 'Aldwych Capital Office', detail: '€10–30M · value-add RE · London', badge: 'New', state: 'action', action: 'Add to Meridian', link: 'Pass' },
-      { n: '5', name: 'Talstein Multi-Family Office', detail: '€15M avg · diversified · Zurich', badge: 'New', state: 'passed', status: 'Passed', link: 'Reconsider' },
+      { n: '1', name: 'Rockmont Family Office', detail: '€20M avg check · EU real estate · Helsinki', badge: 'New', ext: true, state: 'in', status: 'In pipeline', link: 'Open' },
+      { n: '2', name: 'Aldwych Capital Office', detail: '€10–30M · value-add RE · London', badge: 'New', ext: true, state: 'action', action: 'Add to Meridian', link: 'Pass' },
+      { n: '5', name: 'Talstein Multi-Family Office', detail: '€15M avg · diversified · Zurich', badge: 'New', ext: true, state: 'passed', status: 'Passed', link: 'Reconsider' },
     ],
   },
   {
@@ -39,9 +39,9 @@ const pillars = [
     link: 'Open mandate',
     note: '2 low-confidence fields — quoted to source, flagged for your review.',
     rows: [
-      { n: '1', name: 'Asset class — Real estate', detail: 'deck p.2 · “private real estate strategies”', badge: 'p.2', state: 'action', action: 'Accept', link: 'Edit' },
-      { n: '2', name: 'Target raise — €40M', detail: 'deck p.4 · “seeking €40 million”', badge: 'p.4', state: 'in', status: 'Accepted', link: 'Open' },
-      { n: '3', name: 'Check size — €5–15M', detail: 'deck p.6 · flagged low confidence', badge: 'p.6', state: 'action', action: 'Accept', link: 'Edit' },
+      { n: '1', name: 'Asset class — Real estate', detail: 'deck p.2 · “private real estate strategies”', badge: 'p.2', ext: false, state: 'action', action: 'Accept', link: 'Edit' },
+      { n: '2', name: 'Target raise — €40M', detail: 'deck p.4 · “seeking €40 million”', badge: 'p.4', ext: false, state: 'in', status: 'Accepted', link: 'Open' },
+      { n: '3', name: 'Check size — €5–15M', detail: 'deck p.6 · flagged low confidence', badge: 'p.6', ext: false, state: 'action', action: 'Accept', link: 'Edit' },
     ],
   },
   {
@@ -52,9 +52,9 @@ const pillars = [
     link: 'Open mandate',
     note: '',
     rows: [
-      { n: '1', name: 'Rockmont Family Office', detail: '94 fit · invests EU RE, €20M ticket', badge: '94', state: 'in', status: 'Shortlisted', link: 'Why' },
-      { n: '2', name: 'Meridian Trust Office', detail: '89 fit · value-add mandate match', badge: '89', state: 'action', action: 'Add to shortlist', link: 'Why' },
-      { n: '3', name: 'Aldwych Capital Office', detail: '85 fit · ticket size match', badge: '85', state: 'action', action: 'Add to shortlist', link: 'Why' },
+      { n: '1', name: 'Rockmont Family Office', detail: '94 fit · invests EU RE, €20M ticket', badge: '94', ext: true, state: 'in', status: 'Shortlisted', link: 'Why' },
+      { n: '2', name: 'Meridian Trust Office', detail: '89 fit · value-add mandate match', badge: '89', ext: true, state: 'action', action: 'Add to shortlist', link: 'Why' },
+      { n: '3', name: 'Aldwych Capital Office', detail: '85 fit · ticket size match', badge: '85', ext: true, state: 'action', action: 'Add to shortlist', link: 'Why' },
     ],
   },
   {
@@ -65,9 +65,9 @@ const pillars = [
     link: 'Open drafts',
     note: 'Nothing sends itself — every draft waits for you to send.',
     rows: [
-      { n: '1', name: 'To: Rockmont Family Office', detail: '“Meridian — EU real estate, €20M ticket…”', badge: 'Draft', state: 'action', action: 'Review draft', link: 'Discard' },
-      { n: '2', name: 'To: Aldwych Capital Office', detail: '“Following up on value-add real estate…”', badge: 'Draft', state: 'action', action: 'Review draft', link: 'Discard' },
-      { n: '3', name: 'To: Meridian Trust Office', detail: '“Introducing the Meridian mandate…”', badge: 'Draft', state: 'action', action: 'Review draft', link: 'Discard' },
+      { n: '1', name: 'To: Rockmont Family Office', detail: '“Meridian — EU real estate, €20M ticket…”', badge: 'Draft', ext: false, state: 'action', action: 'Review draft', link: 'Discard' },
+      { n: '2', name: 'To: Aldwych Capital Office', detail: '“Following up on value-add real estate…”', badge: 'Draft', ext: false, state: 'action', action: 'Review draft', link: 'Discard' },
+      { n: '3', name: 'To: Meridian Trust Office', detail: '“Introducing the Meridian mandate…”', badge: 'Draft', ext: false, state: 'action', action: 'Review draft', link: 'Discard' },
     ],
   },
   {
@@ -78,9 +78,9 @@ const pillars = [
     link: 'Open PDF',
     note: '',
     rows: [
-      { n: '1', name: 'Outreach — 12 emails, 5 meetings, 3 calls', detail: 'each figure traces to a record', badge: '', state: 'action', action: 'Open PDF', link: 'Rebuild' },
-      { n: '2', name: 'Pipeline — €40M across 8 investors', detail: '3 in diligence · 2 committed', badge: '', state: 'in', status: 'In report', link: 'Open' },
-      { n: '3', name: 'Coverage — 60 of 72 mapped', detail: '12 pending review', badge: '', state: 'action', action: 'Open PDF', link: 'Rebuild' },
+      { n: '1', name: 'Outreach — 12 emails, 5 meetings, 3 calls', detail: 'each figure traces to a record', badge: '', ext: false, state: 'action', action: 'Open PDF', link: 'Rebuild' },
+      { n: '2', name: 'Pipeline — €40M across 8 investors', detail: '3 in diligence · 2 committed', badge: '', ext: false, state: 'in', status: 'In report', link: 'Open' },
+      { n: '3', name: 'Coverage — 60 of 72 mapped', detail: '12 pending review', badge: '', ext: false, state: 'action', action: 'Open PDF', link: 'Rebuild' },
     ],
   },
 ];
@@ -147,7 +147,7 @@ const initial = pillars[start];
               <span class="os__rn">{r.n}</span>
               <div class="os__rmain">
                 <div class="os__rnamerow">
-                  <span class="os__rname">{r.name}<span class="os__ext" set:html={extIcon} /></span>
+                  <span class={`os__rname${r.ext ? ' os__rname--link' : ''}`}>{r.name}{r.ext && <span class="os__ext" set:html={extIcon} />}</span>
                   {r.badge && <span class="os__badge">{r.badge}</span>}
                 </div>
                 <div class="os__rdetail">{r.detail}</div>
@@ -211,10 +211,12 @@ const initial = pillars[start];
 
           const main = el('div', 'os__rmain');
           const namerow = el('div', 'os__rnamerow');
-          const name = el('span', 'os__rname', r.name);
-          const ext = el('span', 'os__ext');
-          ext.innerHTML = extIcon;
-          name.append(ext);
+          const name = el('span', 'os__rname' + (r.ext ? ' os__rname--link' : ''), r.name);
+          if (r.ext) {
+            const ext = el('span', 'os__ext');
+            ext.innerHTML = extIcon;
+            name.append(ext);
+          }
           namerow.append(name);
           if (r.badge) namerow.append(el('span', 'os__badge', r.badge));
           main.append(namerow, el('div', 'os__rdetail', r.detail));
@@ -584,12 +586,14 @@ const initial = pillars[start];
       font-size: 0.84rem;
       font-weight: 550;
       color: var(--ink);
-      text-decoration: underline;
-      text-decoration-color: var(--hairline-2);
-      text-underline-offset: 2px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+    .os__rname--link {
+      text-decoration: underline;
+      text-decoration-color: var(--hairline-2);
+      text-underline-offset: 2px;
     }
     .os__ext {
       display: inline-flex;
