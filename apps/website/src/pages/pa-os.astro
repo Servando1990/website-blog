@@ -1,8 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Glyph from '../components/Glyph.astro';
-
-const requestAccess = 'mailto:servando@controlthrive.com?subject=PA-OS%20access';
+import { bookingUrl } from '../lib/siteContent';
 
 // The five pillars of a raise, each an agent taking one action under the same
 // cited, human-approved contract. Rail labels stay short; the focus tile shows
@@ -123,7 +122,7 @@ const initial = pillars[start];
     </section>
 
     <div class="cta">
-      <a class="btn-ink" href={requestAccess}>Request access</a>
+      <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">Request access</a>
       <span class="cta__note">closed beta · for placement agents &amp; independent bankers</span>
     </div>
   </main>
