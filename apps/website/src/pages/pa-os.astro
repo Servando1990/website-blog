@@ -291,7 +291,10 @@ const initial = pillars[start];
     }
   </script>
 
-  <style>
+  <!-- Global (not scoped): the tile rows are rebuilt in JS, and scoped styles
+       only attach to server-rendered elements. This is a standalone page and
+       every selector is os__/page-prefixed, so global is safe here. -->
+  <style is:global>
     .stage {
       min-height: 100svh;
       display: grid;
