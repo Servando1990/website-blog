@@ -79,8 +79,6 @@ const latestPosts = blogPostModules
   )
   .slice(0, 3);
 
-const requestAccess = 'mailto:servando@controlthrive.com?subject=PA-OS%20access';
-
 const productProofs = [
   {
     title: 'Import that never asks twice.',
@@ -264,7 +262,8 @@ const productProofs = [
               whichever broker-dealer you're on.
             </p>
             <div class="product__actions">
-              <a class="btn-ink" href={requestAccess}>Request access</a>
+              <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">Request access</a>
+              <a class="link-quiet" href="/pa-os">See PA-OS</a>
             </div>
           </div>
 

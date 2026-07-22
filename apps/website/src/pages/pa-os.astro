@@ -1,0 +1,710 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Glyph from '../components/Glyph.astro';
+import { bookingUrl } from '../lib/siteContent';
+
+// The five pillars of a raise, each an agent taking one action under the same
+// cited, human-approved contract. Rail labels stay short; the focus tile shows
+// the full receipt. Copy shared with the homepage vignette.
+const svg = (paths: string) =>
+  `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
+
+// Explicit width/height so it stays small even when injected by JS (which
+// creates elements without Astro's scoped-style attribute).
+const extIcon =
+  '<svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3.5h3.5V7"/><path d="M12.5 3.5 7.5 8.5"/><path d="M11 9.5v3H3.5V5H6.5"/></svg>';
+
+// Each pillar mirrors the real product panel: a header with counts + an
+// "Open …" link, an optional evidence note, and hairline rows that each carry a
+// state — an outline action button, or a status (In pipeline / Passed) + link.
+const pillars = [
+  {
+    label: 'Source',
+    icon: svg('<circle cx="7" cy="7" r="4"/><path d="M10.2 10.2 14 14"/>'),
+    head: 'Investor discovery · Project Meridian',
+    meta: '8 reviewable of 12 found · 19 Jul 2026',
+    link: 'Open mandate',
+    note: '4 candidates withheld — no source evidence, so PA-OS won’t present them for approval.',
+    rows: [
+      { n: '1', name: 'Rockmont Family Office', detail: '€20M avg check · EU real estate · Helsinki', badge: 'New', ext: true, state: 'in', status: 'In pipeline', link: 'Open' },
+      { n: '2', name: 'Aldwych Capital Office', detail: '€10–30M · value-add RE · London', badge: 'New', ext: true, state: 'action', action: 'Add to Meridian', link: 'Pass' },
+      { n: '5', name: 'Talstein Multi-Family Office', detail: '€15M avg · diversified · Zurich', badge: 'New', ext: true, state: 'passed', status: 'Passed', link: 'Reconsider' },
+    ],
+  },
+  {
+    label: 'Standardize',
+    icon: svg('<path d="M2.5 3.5h11"/><path d="M4.6 6v6.5M8 6v6.5M11.4 6v6.5"/>'),
+    head: 'Mandate extraction · Project Meridian',
+    meta: '9 fields typed · 2 flagged · 19 Jul 2026',
+    link: 'Open mandate',
+    note: '2 low-confidence fields — quoted to source, flagged for your review.',
+    rows: [
+      { n: '1', name: 'Asset class — Real estate', detail: 'deck p.2 · “private real estate strategies”', badge: 'p.2', ext: false, state: 'action', action: 'Accept', link: 'Edit' },
+      { n: '2', name: 'Target raise — €40M', detail: 'deck p.4 · “seeking €40 million”', badge: 'p.4', ext: false, state: 'in', status: 'Accepted', link: 'Open' },
+      { n: '3', name: 'Check size — €5–15M', detail: 'deck p.6 · flagged low confidence', badge: 'p.6', ext: false, state: 'action', action: 'Accept', link: 'Edit' },
+    ],
+  },
+  {
+    label: 'Match',
+    icon: svg('<path d="M2 4l3 4-3 4M14 4l-3 4 3 4"/><circle cx="8" cy="8" r="0.7" fill="currentColor" stroke="none"/>'),
+    head: 'Investor matching · Project Meridian',
+    meta: 'top 3 of 60 ranked · 19 Jul 2026',
+    link: 'Open mandate',
+    note: '',
+    rows: [
+      { n: '1', name: 'Rockmont Family Office', detail: '94 fit · invests EU RE, €20M ticket', badge: '94', ext: true, state: 'in', status: 'Shortlisted', link: 'Why' },
+      { n: '2', name: 'Meridian Trust Office', detail: '89 fit · value-add mandate match', badge: '89', ext: true, state: 'action', action: 'Add to shortlist', link: 'Why' },
+      { n: '3', name: 'Aldwych Capital Office', detail: '85 fit · ticket size match', badge: '85', ext: true, state: 'action', action: 'Add to shortlist', link: 'Why' },
+    ],
+  },
+  {
+    label: 'Campaigns',
+    icon: svg('<path d="M14 2 7 9"/><path d="M14 2 9.5 14 7 9 2 6.5 14 2z"/>'),
+    head: 'Outreach drafts · Project Meridian',
+    meta: '38 drafted · staged in your drafts · 19 Jul 2026',
+    link: 'Open drafts',
+    note: 'Nothing sends itself — every draft waits for you to send.',
+    rows: [
+      { n: '1', name: 'To: Rockmont Family Office', detail: '“Meridian — EU real estate, €20M ticket…”', badge: 'Draft', ext: false, state: 'action', action: 'Review draft', link: 'Discard' },
+      { n: '2', name: 'To: Aldwych Capital Office', detail: '“Following up on value-add real estate…”', badge: 'Draft', ext: false, state: 'action', action: 'Review draft', link: 'Discard' },
+      { n: '3', name: 'To: Meridian Trust Office', detail: '“Introducing the Meridian mandate…”', badge: 'Draft', ext: false, state: 'action', action: 'Review draft', link: 'Discard' },
+    ],
+  },
+  {
+    label: 'Report',
+    icon: svg('<path d="M4 2.5h5L12 5.5v8H4z"/><path d="M6.2 8.6h3.6M6.2 11h3.6"/>'),
+    head: 'Activity report · Project Meridian',
+    meta: 'this month · every figure sourced · 19 Jul 2026',
+    link: 'Open PDF',
+    note: '',
+    rows: [
+      { n: '1', name: 'Outreach — 12 emails, 5 meetings, 3 calls', detail: 'each figure traces to a record', badge: '', ext: false, state: 'action', action: 'Open PDF', link: 'Rebuild' },
+      { n: '2', name: 'Pipeline — €40M across 8 investors', detail: '3 in diligence · 2 committed', badge: '', ext: false, state: 'in', status: 'In report', link: 'Open' },
+      { n: '3', name: 'Coverage — 60 of 72 mapped', detail: '12 pending review', badge: '', ext: false, state: 'action', action: 'Open PDF', link: 'Rebuild' },
+    ],
+  },
+];
+
+// Server-render Sourcing first so the page is complete before JS and for
+// reduced-motion / screenshot / share.
+const start = 0;
+const initial = pillars[start];
+---
+
+<Layout
+  title="PA-OS — the operating system for placement agents"
+  description="PA-OS runs the whole raise on one agent: search, standardization, matching, campaigns, and reporting — every claim cited back to its source. Closed beta."
+  ogImage="/api/og/pa-os.png"
+  ogImageAlt="PA-OS — the operating system for placement agents: source, standardize, match, campaigns, report."
+>
+  <main class="stage">
+    <a class="mark" href="/" aria-label="controlthrive home">
+      <span class="mark__glyph"><Glyph size={15} /></span>
+      <span class="mark__word">controlthrive</span>
+    </a>
+
+    <section class="lede-col">
+      <p class="tag"><i class="dot-live"></i>PA-OS · closed beta</p>
+      <h1 class="h1">The operating system for placement agents.</h1>
+      <p class="lede">
+        Search, standardization, matching, campaigns, and reporting — one agent,
+        one chat, on top of the CRM you already use. Every claim carries a
+        receipt back to its source.
+      </p>
+    </section>
+
+    <!-- All five pillars at once; a pulse walks the rail and the tile shows the
+         lit pillar's cited receipt. Breadth legible at a glance. -->
+    <section class="os" data-os aria-label="PA-OS — the five jobs of a raise">
+      <div class="os__diagram" style={`--i:${start}`}>
+        <div class="os__track" aria-hidden="true">
+          <span class="os__fill"></span>
+        </div>
+        <span class="os__orb" aria-hidden="true"></span>
+        <ol class="os__rail">
+          {pillars.map((p, i) => (
+            <li class={`os__pillar${i === start ? ' is-active' : ''}`} data-pillar={i}>
+              <span class="os__dot"></span>
+              <span class="os__icon" set:html={p.icon} />
+              <span class="os__label">{p.label}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <article class="os__tile">
+        <header class="os__phead">
+          <div class="os__ptitle">
+            <strong data-os-head>{initial.head}</strong>
+            <span class="os__pmeta" data-os-meta>{initial.meta}</span>
+          </div>
+          <span class="os__plink" data-os-link>{initial.link}</span>
+        </header>
+        <p class="os__pnote" data-os-note hidden={!initial.note}>{initial.note}</p>
+        <ul class="os__rows" data-os-rows>
+          {initial.rows.map((r) => (
+            <li class="os__row">
+              <span class="os__rn">{r.n}</span>
+              <div class="os__rmain">
+                <div class="os__rnamerow">
+                  <span class={`os__rname${r.ext ? ' os__rname--link' : ''}`}>{r.name}{r.ext && <span class="os__ext" set:html={extIcon} />}</span>
+                  {r.badge && <span class="os__badge">{r.badge}</span>}
+                </div>
+                <div class="os__rdetail">{r.detail}</div>
+              </div>
+              <div class="os__ractions">
+                {r.state === 'action' && (
+                  <button type="button" class="os__btn"><span class="os__btnplus">+</span>{r.action}</button>
+                )}
+                {r.state === 'in' && (
+                  <span class="os__status os__status--in"><span class="os__statustick">✓</span>{r.status}</span>
+                )}
+                {r.state === 'passed' && (
+                  <span class="os__status os__status--passed"><span class="os__statustick">✕</span>{r.status}</span>
+                )}
+                <span class="os__pass">{r.link}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </article>
+    </section>
+
+    <div class="cta">
+      <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">Request access</a>
+      <span class="cta__note">closed beta · for placement agents &amp; independent bankers</span>
+    </div>
+  </main>
+
+  <script is:inline define:vars={{ pillars, start, extIcon }}>
+    const root = document.querySelector('[data-os]');
+    const diagram = root && root.querySelector('.os__diagram');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (root && diagram && !reduceMotion) {
+      const railItems = Array.from(root.querySelectorAll('.os__pillar'));
+      const rail = root.querySelector('.os__rail');
+      const tile = root.querySelector('.os__tile');
+      const rowsEl = root.querySelector('[data-os-rows]');
+      const f = {
+        head: root.querySelector('[data-os-head]'),
+        meta: root.querySelector('[data-os-meta]'),
+        link: root.querySelector('[data-os-link]'),
+        note: root.querySelector('[data-os-note]'),
+      };
+
+      const el = (tag, cls, text) => {
+        const n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (text != null) n.textContent = text;
+        return n;
+      };
+
+      const renderRows = (p) => {
+        if (!rowsEl) return;
+        rowsEl.replaceChildren();
+        p.rows.forEach((r) => {
+          const li = el('li', 'os__row');
+          li.append(el('span', 'os__rn', r.n));
+
+          const main = el('div', 'os__rmain');
+          const namerow = el('div', 'os__rnamerow');
+          const name = el('span', 'os__rname' + (r.ext ? ' os__rname--link' : ''), r.name);
+          if (r.ext) {
+            const ext = el('span', 'os__ext');
+            ext.innerHTML = extIcon;
+            name.append(ext);
+          }
+          namerow.append(name);
+          if (r.badge) namerow.append(el('span', 'os__badge', r.badge));
+          main.append(namerow, el('div', 'os__rdetail', r.detail));
+          li.append(main);
+
+          const actions = el('div', 'os__ractions');
+          if (r.state === 'action') {
+            const btn = el('button', 'os__btn');
+            btn.type = 'button';
+            btn.append(el('span', 'os__btnplus', '+'), document.createTextNode(r.action));
+            actions.append(btn);
+          } else {
+            const st = el('span', 'os__status os__status--' + r.state);
+            st.append(el('span', 'os__statustick', r.state === 'in' ? '✓' : '✕'), document.createTextNode(r.status));
+            actions.append(st);
+          }
+          actions.append(el('span', 'os__pass', r.link));
+          li.append(actions);
+
+          rowsEl.append(li);
+        });
+      };
+
+      const fillTile = (n) => {
+        const p = pillars[n];
+        if (f.head) f.head.textContent = p.head;
+        if (f.meta) f.meta.textContent = p.meta;
+        if (f.link) f.link.textContent = p.link;
+        if (f.note) {
+          f.note.textContent = p.note || '';
+          f.note.hidden = !p.note;
+        }
+        renderRows(p);
+      };
+
+      const TRAVEL = 900; // the glow glides the rail
+      const DWELL = 4200; // rest on each pillar
+      const CYCLE = TRAVEL + DWELL;
+
+      let i = start;
+
+      // Move the glow to pillar n; swap the card in after `delay` (once the glow
+      // has travelled, on auto-play; quickly, on hover).
+      const activate = (n, delay) => {
+        diagram.style.setProperty('--i', String(n));
+        tile?.classList.add('is-swapping');
+        window.setTimeout(() => {
+          railItems.forEach((el, idx) => el.classList.toggle('is-active', idx === n));
+          fillTile(n);
+          tile?.classList.remove('is-swapping');
+        }, delay);
+        i = n;
+      };
+
+      const step = () => activate((i + 1) % pillars.length, TRAVEL);
+
+      let timer = window.setInterval(step, CYCLE);
+
+      // Hover (or tap) a pillar to pin its card and pause; leaving the rail resumes.
+      railItems.forEach((el, idx) => {
+        const jump = () => {
+          window.clearInterval(timer);
+          if (idx !== i) activate(idx, 220);
+        };
+        el.addEventListener('mouseenter', jump);
+        el.addEventListener('click', jump);
+      });
+      rail?.addEventListener('mouseleave', () => {
+        window.clearInterval(timer);
+        timer = window.setInterval(step, CYCLE);
+      });
+    }
+  </script>
+
+  <!-- Global (not scoped): the tile rows are rebuilt in JS, and scoped styles
+       only attach to server-rendered elements. This is a standalone page and
+       every selector is os__/page-prefixed, so global is safe here. -->
+  <style is:global>
+    .stage {
+      min-height: 100svh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: clamp(1.75rem, 4vh, 3rem);
+      max-width: 720px;
+      margin-inline: auto;
+      padding: clamp(1.5rem, 5vw, 2.75rem) clamp(1.25rem, 6vw, 2.5rem)
+        clamp(1.75rem, 5vh, 3rem);
+    }
+
+    /* Brand mark — navigable, not a nav bar. */
+    .mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--ink);
+      width: fit-content;
+    }
+    .mark__glyph {
+      display: inline-flex;
+      color: var(--ink);
+    }
+    .mark__word {
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .lede-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-self: end;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    .h1 {
+      font-size: clamp(1.9rem, 6vw, 2.85rem);
+      line-height: 1.04;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin: 0;
+    }
+    .lede {
+      font-size: clamp(0.98rem, 2.4vw, 1.08rem);
+      line-height: 1.55;
+      color: var(--ink-2);
+      max-width: 34rem;
+      margin: 0;
+    }
+
+    /* The diagram — all five pillars always visible; a glow travels the rail. */
+    .os {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+      align-self: center;
+    }
+
+    /* --i (0..4), set inline and advanced by JS, drives the fill + orb. */
+    .os__diagram {
+      position: relative;
+    }
+
+    /* base track under the row of dots */
+    .os__track {
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      top: 5px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--hairline-2);
+    }
+    /* progress line — fills from the first pillar to the active one */
+    .os__fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: calc(var(--i, 0) * 25%);
+      border-radius: 2px;
+      background: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--live) 40%, transparent),
+        var(--live)
+      );
+      transition: width 900ms var(--ease-out);
+    }
+    /* the travelling pulse */
+    .os__orb {
+      position: absolute;
+      top: 6px;
+      left: calc(10% + var(--i, 0) * 20%);
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--live);
+      transform: translate(-50%, -50%);
+      box-shadow:
+        0 0 0 5px color-mix(in srgb, var(--live) 15%, transparent),
+        0 0 16px 3px color-mix(in srgb, var(--live) 55%, transparent);
+      transition: left 900ms var(--ease-out);
+      z-index: 3;
+    }
+
+    .os__rail {
+      position: relative;
+      z-index: 2;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+    .os__pillar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .os__dot {
+      position: relative;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--canvas);
+      box-shadow: inset 0 0 0 1.5px var(--ink-3);
+      transition:
+        box-shadow 300ms var(--ease-out),
+        background-color 300ms var(--ease-out);
+    }
+    .os__icon {
+      display: inline-flex;
+      color: var(--ink-3);
+      transition:
+        color 300ms var(--ease-out),
+        transform 300ms var(--ease-out);
+    }
+    .os__icon :global(svg) {
+      width: 17px;
+      height: 17px;
+      display: block;
+    }
+    .os__label {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.02em;
+      color: var(--ink-3);
+      transition: color 300ms var(--ease-out);
+      text-align: center;
+    }
+
+    /* active pillar — filled dot with an expanding ripple, lit icon + label */
+    .os__pillar.is-active .os__dot {
+      background: var(--live);
+      box-shadow: inset 0 0 0 1.5px var(--live);
+    }
+    .os__pillar.is-active .os__dot::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 999px;
+      border: 1.5px solid var(--live);
+      animation: os-ripple 1800ms var(--ease-out) infinite;
+    }
+    .os__pillar.is-active .os__icon {
+      color: var(--live);
+      transform: translateY(-1px) scale(1.1);
+    }
+    .os__pillar.is-active .os__label {
+      color: var(--ink);
+    }
+
+    @keyframes os-ripple {
+      0% {
+        transform: scale(0.6);
+        opacity: 0.9;
+      }
+      70% {
+        opacity: 0;
+      }
+      100% {
+        transform: scale(2.2);
+        opacity: 0;
+      }
+    }
+
+    .os__tile {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-pane);
+      box-shadow: var(--shadow-lift);
+      padding: 1.1rem 1.2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      transition: opacity 380ms var(--ease-out), transform 380ms var(--ease-out);
+    }
+    .os__tile.is-swapping {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    .os__phead {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .os__ptitle {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      min-width: 0;
+    }
+    .os__ptitle strong {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: -0.005em;
+      color: var(--ink);
+    }
+    .os__pmeta {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--ink-3);
+    }
+    .os__plink {
+      flex: none;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--ink-2);
+    }
+    .os__pnote {
+      font-size: 0.76rem;
+      line-height: 1.4;
+      color: #9a7d43;
+      margin: 0.15rem 0 0;
+    }
+    .os__rows {
+      list-style: none;
+      margin: 0.1rem 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .os__row {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.6rem 0;
+      border-top: 1px solid var(--hairline);
+    }
+    .os__row:first-child {
+      border-top: 0;
+    }
+    .os__rn {
+      flex: none;
+      width: 0.9rem;
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--ink-3);
+    }
+    .os__rmain {
+      flex: 1 1 auto;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .os__rnamerow {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      min-width: 0;
+    }
+    .os__rname {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.84rem;
+      font-weight: 550;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .os__rname--link {
+      text-decoration: underline;
+      text-decoration-color: var(--hairline-2);
+      text-underline-offset: 2px;
+    }
+    .os__ext {
+      display: inline-flex;
+      color: var(--ink-3);
+      flex: none;
+    }
+    /* Fully global so it also matches JS-injected rows (which lack the scope attr). */
+    :global(.os__ext svg) {
+      width: 11px;
+      height: 11px;
+      display: block;
+    }
+    .os__badge {
+      flex: none;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.02em;
+      color: var(--ink-2);
+      padding: 0.08rem 0.4rem;
+      border: 1px solid var(--hairline-2);
+      border-radius: 999px;
+    }
+    .os__rdetail {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--ink-3);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .os__ractions {
+      flex: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .os__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--hairline-2);
+      border-radius: 8px;
+      padding: 0.32rem 0.66rem;
+      cursor: pointer;
+      transition:
+        background-color 120ms var(--ease-out),
+        border-color 120ms var(--ease-out);
+    }
+    .os__btn:hover {
+      background: var(--hover);
+      border-color: var(--ink-3);
+    }
+    .os__btnplus {
+      font-size: 0.95em;
+      color: var(--ink-3);
+    }
+    .os__pass {
+      font-size: 0.75rem;
+      color: var(--ink-3);
+    }
+    .os__status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      color: var(--ink-2);
+      white-space: nowrap;
+    }
+    .os__statustick {
+      color: var(--ink-3);
+    }
+    .os__status--in .os__statustick {
+      color: var(--live);
+    }
+    .cta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .cta__note {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.02em;
+      color: var(--ink-3);
+    }
+
+    @media (max-width: 520px) {
+      .os__label {
+        font-size: 0.625rem;
+      }
+      .os__rdetail {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .os__tile,
+      .os__fill,
+      .os__orb {
+        transition: none;
+      }
+      .os__pillar.is-active .os__dot::after {
+        animation: none;
+      }
+    }
+  </style>
+</Layout>
