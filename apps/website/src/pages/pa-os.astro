@@ -3,9 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import Glyph from '../components/Glyph.astro';
 import { bookingUrl } from '../lib/siteContent';
 
-// The five pillars of a raise, each an agent taking one action under the same
-// cited, human-approved contract. Rail labels stay short; the focus tile shows
-// the full receipt. Copy shared with the homepage vignette.
+// The cold-outreach pager. One job: a placement agent reads this in two
+// minutes and agrees to a screen share. Everything shown here is something
+// the product actually does today (see business-translation.md); the one
+// pillar still in build says so on its own card.
+
 const svg = (paths: string) =>
   `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
 
@@ -19,7 +21,8 @@ const extIcon =
 // state — an outline action button, or a status (In pipeline / Passed) + link.
 const pillars = [
   {
-    label: 'Source',
+    label: 'Search',
+    flag: '',
     icon: svg('<circle cx="7" cy="7" r="4"/><path d="M10.2 10.2 14 14"/>'),
     head: 'Investor discovery · Project Meridian',
     meta: '8 reviewable of 12 found · 19 Jul 2026',
@@ -33,6 +36,7 @@ const pillars = [
   },
   {
     label: 'Standardize',
+    flag: '',
     icon: svg('<path d="M2.5 3.5h11"/><path d="M4.6 6v6.5M8 6v6.5M11.4 6v6.5"/>'),
     head: 'Mandate extraction · Project Meridian',
     meta: '9 fields typed · 2 flagged · 19 Jul 2026',
@@ -46,24 +50,26 @@ const pillars = [
   },
   {
     label: 'Match',
+    flag: '',
     icon: svg('<path d="M2 4l3 4-3 4M14 4l-3 4 3 4"/><circle cx="8" cy="8" r="0.7" fill="currentColor" stroke="none"/>'),
     head: 'Investor matching · Project Meridian',
     meta: 'top 3 of 60 ranked · 19 Jul 2026',
     link: 'Open mandate',
-    note: '',
+    note: 'Hartree excluded — standing policy, in its own words. No prompt lifts that.',
     rows: [
       { n: '1', name: 'Rockmont Family Office', detail: '94 fit · invests EU RE, €20M ticket', badge: '94', ext: true, state: 'in', status: 'Shortlisted', link: 'Why' },
       { n: '2', name: 'Meridian Trust Office', detail: '89 fit · value-add mandate match', badge: '89', ext: true, state: 'action', action: 'Add to shortlist', link: 'Why' },
-      { n: '3', name: 'Aldwych Capital Office', detail: '85 fit · ticket size match', badge: '85', ext: true, state: 'action', action: 'Add to shortlist', link: 'Why' },
+      { n: '3', name: 'Aldwych Capital Office', detail: '85 fit · profile only — no behaviour yet', badge: '85', ext: true, state: 'action', action: 'Add to shortlist', link: 'Why' },
     ],
   },
   {
     label: 'Campaigns',
+    flag: 'In build',
     icon: svg('<path d="M14 2 7 9"/><path d="M14 2 9.5 14 7 9 2 6.5 14 2z"/>'),
     head: 'Outreach drafts · Project Meridian',
-    meta: '38 drafted · staged in your drafts · 19 Jul 2026',
+    meta: 'mailbox-native · drafts only',
     link: 'Open drafts',
-    note: 'Nothing sends itself — every draft waits for you to send.',
+    note: 'In build. When it ships it drafts into your own mailbox — PA-OS has no send path, by design.',
     rows: [
       { n: '1', name: 'To: Rockmont Family Office', detail: '“Meridian — EU real estate, €20M ticket…”', badge: 'Draft', ext: false, state: 'action', action: 'Review draft', link: 'Discard' },
       { n: '2', name: 'To: Aldwych Capital Office', detail: '“Following up on value-add real estate…”', badge: 'Draft', ext: false, state: 'action', action: 'Review draft', link: 'Discard' },
@@ -72,114 +78,477 @@ const pillars = [
   },
   {
     label: 'Report',
+    flag: '',
     icon: svg('<path d="M4 2.5h5L12 5.5v8H4z"/><path d="M6.2 8.6h3.6M6.2 11h3.6"/>'),
-    head: 'Activity report · Project Meridian',
-    meta: 'this month · every figure sourced · 19 Jul 2026',
+    head: 'Activity report · Project Meridian · v3',
+    meta: 'your firm’s name and logo · every figure sourced',
     link: 'Open PDF',
     note: '',
     rows: [
-      { n: '1', name: 'Outreach — 12 emails, 5 meetings, 3 calls', detail: 'each figure traces to a record', badge: '', ext: false, state: 'action', action: 'Open PDF', link: 'Rebuild' },
+      { n: '1', name: 'Outreach — 12 emails, 5 meetings, 3 calls', detail: 'each figure traces to a record', badge: '', ext: false, state: 'action', action: 'Open PDF', link: 'Export' },
       { n: '2', name: 'Pipeline — €40M across 8 investors', detail: '3 in diligence · 2 committed', badge: '', ext: false, state: 'in', status: 'In report', link: 'Open' },
-      { n: '3', name: 'Coverage — 60 of 72 mapped', detail: '12 pending review', badge: '', ext: false, state: 'action', action: 'Open PDF', link: 'Rebuild' },
+      { n: '3', name: 'Coverage — 60 of 72 mapped', detail: '12 pending review', badge: '', ext: false, state: 'action', action: 'Open PDF', link: 'Export' },
     ],
   },
 ];
 
-// Server-render Sourcing first so the page is complete before JS and for
+// Server-render Search first so the page is complete before JS and for
 // reduced-motion / screenshot / share.
 const start = 0;
 const initial = pillars[start];
+
+// Stated as guarantees, not prohibitions. Same five rules, but a placement
+// agent should read what they get, not a list of what the software refuses.
+const guarantees = [
+  {
+    title: 'The send button stays yours.',
+    copy: 'Outreach is drafted into your own mailbox and waits there for you to send. That is the design — PA-OS has no send path of its own.',
+  },
+  {
+    title: 'Every change asks you first.',
+    copy: 'A new firm, a corrected field, a logged pass — each one waits in For review with the old value beside the new one and the words behind it.',
+  },
+  {
+    title: 'An honest blank over a confident guess.',
+    copy: '“SPAC sponsor” has no defensible type, so the field stays empty and PA-OS names the word it could not place rather than inventing one.',
+  },
+  {
+    title: 'It shows you its own edges.',
+    copy: 'When nobody recorded an outcome, PA-OS says so rather than filling the blank. You see what was recorded, and what never was.',
+  },
+  {
+    title: 'The book stays the firm’s.',
+    copy: 'Your broker-dealer keeps you compliant, your CRM keeps names, and everything PA-OS produces exports in full, any time you ask.',
+  },
+];
 ---
 
 <Layout
   title="PA-OS — the operating system for placement agents"
-  description="PA-OS runs the whole raise on one agent: search, standardization, matching, campaigns, and reporting — every claim cited back to its source. Closed beta."
+  description="PA-OS runs the whole raise on one agent: search, standardization, matching, campaigns, and reporting — every claim cited back to its source, nothing sent without you. Closed beta."
   ogImage="/api/og/pa-os.png"
-  ogImageAlt="PA-OS — the operating system for placement agents: source, standardize, match, campaigns, report."
+  ogImageAlt="PA-OS — the operating system for placement agents: search, standardize, match, campaigns, report."
 >
-  <main class="stage">
-    <a class="mark" href="/" aria-label="controlthrive home">
-      <span class="mark__glyph"><Glyph size={15} /></span>
-      <span class="mark__word">controlthrive</span>
-    </a>
+  <div class="pa">
+    <!-- Slim bar: brand home, and the ask always one click away. -->
+    <header class="pa-bar">
+      <div class="pa-bar__inner">
+        <a class="mark" href="/" aria-label="controlthrive home">
+          <span class="mark__glyph"><Glyph size={15} /></span>
+          <span class="mark__word">controlthrive</span>
+        </a>
+        <span class="pa-bar__chip"><i class="dot-live"></i>PA-OS · closed beta</span>
+        <a class="btn-ink pa-bar__cta" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+          Request access
+        </a>
+      </div>
+    </header>
 
-    <section class="lede-col">
-      <p class="tag"><i class="dot-live"></i>PA-OS · closed beta</p>
-      <h1 class="h1">The operating system for placement agents.</h1>
-      <p class="lede">
-        Search, standardization, matching, campaigns, and reporting — one agent,
-        one chat, on top of the CRM you already use. Every claim carries a
-        receipt back to its source.
-      </p>
-    </section>
-
-    <!-- All five pillars at once; a pulse walks the rail and the tile shows the
-         lit pillar's cited receipt. Breadth legible at a glance. -->
-    <section class="os" data-os aria-label="PA-OS — the five jobs of a raise">
-      <div class="os__diagram" style={`--i:${start}`}>
-        <div class="os__track" aria-hidden="true">
-          <span class="os__fill"></span>
+    <main>
+      <!-- Hero: the claim, then the product moving under it. -->
+      <section class="pa-hero">
+        <div class="pa-wrap">
+          <p class="tag"><i class="dot-live"></i>PA-OS · closed beta</p>
+          <h1 class="pa-h1">The operating system for placement agents.</h1>
+          <p class="pa-lede">
+            Your broker-dealer keeps you compliant. Your CRM keeps names.
+            PA-OS runs the raise — search, standardization, matching, campaigns
+            and reporting — as one agent you talk to, with a receipt behind
+            every claim.
+          </p>
+          <div class="pa-actions">
+            <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">Request access</a>
+            <a class="link-quiet" href="#loop">See how it works</a>
+          </div>
         </div>
-        <span class="os__orb" aria-hidden="true"></span>
-        <ol class="os__rail">
-          {pillars.map((p, i) => (
-            <li class={`os__pillar${i === start ? ' is-active' : ''}`} data-pillar={i}>
-              <span class="os__dot"></span>
-              <span class="os__icon" set:html={p.icon} />
-              <span class="os__label">{p.label}</span>
-            </li>
-          ))}
-        </ol>
+
+        <!-- All five pillars at once; a pulse walks the rail and the frame
+             shows the lit pillar's cited receipt. Breadth at a glance. -->
+        <div class="pa-wrap">
+          <section class="os" data-os aria-label="PA-OS — the five jobs of a raise">
+            <div class="os__diagram" style={`--i:${start}`}>
+              <div class="os__track" aria-hidden="true">
+                <span class="os__fill"></span>
+              </div>
+              <span class="os__orb" aria-hidden="true"></span>
+              <ol class="os__rail">
+                {pillars.map((p, i) => (
+                  <li class={`os__pillar${i === start ? ' is-active' : ''}`} data-pillar={i}>
+                    <span class="os__dot"></span>
+                    <span class="os__icon" set:html={p.icon} />
+                    <span class="os__label">{p.label}</span>
+                    {p.flag && <span class="os__flag">{p.flag}</span>}
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <article class="os__win">
+              <div class="os__chrome">
+                <span class="os__chromemark"><Glyph size={13} /></span>
+                <span class="os__chromeword">PA-OS</span>
+                <span class="os__chromepath" data-os-crumb>Search</span>
+                <span class="os__chromelive"><i class="dot-live"></i>live</span>
+              </div>
+
+              <div class="os__tile">
+                <header class="os__phead">
+                  <div class="os__ptitle">
+                    <strong data-os-head>{initial.head}</strong>
+                    <span class="os__pmeta" data-os-meta>{initial.meta}</span>
+                  </div>
+                  <span class="os__plink" data-os-link>{initial.link}</span>
+                </header>
+                <p class="os__pnote" data-os-note hidden={!initial.note}>{initial.note}</p>
+                <ul class="os__rows" data-os-rows>
+                  {initial.rows.map((r) => (
+                    <li class="os__row">
+                      <span class="os__rn">{r.n}</span>
+                      <div class="os__rmain">
+                        <div class="os__rnamerow">
+                          <span class={`os__rname${r.ext ? ' os__rname--link' : ''}`}>{r.name}{r.ext && <span class="os__ext" set:html={extIcon} />}</span>
+                          {r.badge && <span class="os__badge">{r.badge}</span>}
+                        </div>
+                        <div class="os__rdetail">{r.detail}</div>
+                      </div>
+                      <div class="os__ractions">
+                        {r.state === 'action' && (
+                          <button type="button" class="os__btn"><span class="os__btnplus">+</span>{r.action}</button>
+                        )}
+                        {r.state === 'in' && (
+                          <span class="os__status os__status--in"><span class="os__statustick">✓</span>{r.status}</span>
+                        )}
+                        {r.state === 'passed' && (
+                          <span class="os__status os__status--passed"><span class="os__statustick">✕</span>{r.status}</span>
+                        )}
+                        <span class="os__pass">{r.link}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          </section>
+        </div>
+      </section>
+
+      <!-- The loop, one beat per surface. Each demo plays once, on entry. -->
+      <div id="loop" class="pa-beats">
+        <!-- 01 — the cockpit -->
+        <article class="beat" data-beat>
+          <div class="beat__copy">
+            <p class="beat__eyebrow"><span>01</span>One cockpit</p>
+            <h2 class="beat__title">Ask for it in your own words.</h2>
+            <p class="beat__body">
+              Type <strong>@</strong> and you get the real record, not a name
+              that nearly matches — so “Project Solis” never loses “Project
+              Solís”. PA-OS answers from your own book, and every claim links
+              back to the row it came from.
+            </p>
+            <p class="beat__receipt">workspace facts cited to workspace evidence · web facts cited to dated sources</p>
+          </div>
+
+          <div class="beat__demo">
+            <div class="pane">
+              <div class="pane__bar">
+                <span class="pane__mark"><Glyph size={12} /></span>
+                <span class="pane__title">Chat</span>
+                <span class="pane__meta">Project Meridian</span>
+              </div>
+              <div class="pane__body">
+                <div class="chat__ask">
+                  <span class="chat__who">You</span>
+                  <p class="chat__typed"><span data-type>&nbsp;</span><i class="chat__caret" data-caret></i></p>
+                </div>
+                <div class="chat__work step" style="--d:1400ms">
+                  <span class="chat__spin"></span>reading the book · 312 firms · 74 pursuits
+                </div>
+                <div class="chat__answer step" style="--d:2000ms">
+                  <p class="chat__line">
+                    12 firms rank above 80. Rockmont leads — it has taken EU
+                    real estate twice at this ticket.
+                  </p>
+                  <ul class="chat__cites">
+                    <li><span class="cite__k">pursuit</span>Aurora · committed €18M · 2024</li>
+                    <li><span class="cite__k">call</span>14 Mar · “EU real estate is the mandate”</li>
+                    <li><span class="cite__k">withheld</span>2 firms had no source on record — not shown to you</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 02 — the review gate -->
+        <article class="beat beat--flip" data-beat>
+          <div class="beat__copy">
+            <p class="beat__eyebrow"><span>02</span>For review</p>
+            <h2 class="beat__title">The agent drafts. You decide.</h2>
+            <p class="beat__body">
+              A new firm, a corrected field, a logged pass — every change the
+              agent wants to make stops here with the old value, the new value
+              and the words behind it. Until you approve, the book has not
+              changed.
+            </p>
+            <p class="beat__receipt">no silent writes · every approval keeps an audit receipt</p>
+          </div>
+
+          <div class="beat__demo">
+            <div class="pane">
+              <div class="pane__bar">
+                <span class="pane__mark"><Glyph size={12} /></span>
+                <span class="pane__title">For review</span>
+                <span class="pane__meta"><i class="dot-live"></i>3 waiting on you</span>
+              </div>
+              <div class="pane__body">
+                <div class="rev step" style="--d:200ms">
+                  <div class="rev__head">
+                    <span class="rev__kind">Field change</span>
+                    <span class="rev__src">from your 14 Mar call</span>
+                  </div>
+                  <p class="rev__claim">Halcyon Partners — Country</p>
+                  <div class="rev__diff">
+                    <span class="rev__old">Sweden</span>
+                    <span class="rev__arrow">→</span>
+                    <span class="rev__new">Denmark</span>
+                  </div>
+                  <p class="rev__quote">“We moved the office to Copenhagen last spring.”</p>
+                  <div class="rev__actions" data-swap-out>
+                    <span class="rev__approve">Approve</span>
+                    <span class="rev__edit">Edit</span>
+                    <span class="rev__dismiss">Dismiss</span>
+                  </div>
+                  <p class="rev__done" data-swap-in>✓ Applied — audit receipt kept</p>
+                </div>
+
+                <div class="rev rev--quiet step" style="--d:500ms">
+                  <div class="rev__head">
+                    <span class="rev__kind">New investor</span>
+                    <span class="rev__src">type left empty — “SPAC sponsor” could not be placed</span>
+                  </div>
+                  <p class="rev__claim">Gatewood Capital</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 03 — discovery beyond the book -->
+        <article class="beat" data-beat>
+          <div class="beat__copy">
+            <p class="beat__eyebrow"><span>03</span>Search</p>
+            <h2 class="beat__title">Find the ones you don’t have yet.</h2>
+            <p class="beat__body">
+              Ask for investors beyond your book and cited candidates come back
+              as decisions: open the source, see whether it’s new or a possible
+              duplicate, then Add or Pass. Add creates the firm and one
+              Identified pursuit in a single approved move.
+            </p>
+            <p class="beat__receipt">names without evidence are withheld — the run says how many, and why</p>
+          </div>
+
+          <div class="beat__demo">
+            <div class="pane">
+              <div class="pane__bar">
+                <span class="pane__mark"><Glyph size={12} /></span>
+                <span class="pane__title">Discovery</span>
+                <span class="pane__meta">8 reviewable of 12 found</span>
+              </div>
+              <div class="pane__body">
+                <p class="disc__note step" style="--d:150ms">
+                  4 candidates withheld — no source evidence. This run is marked partial.
+                </p>
+                <ul class="disc__rows">
+                  <li class="disc__row step" style="--d:350ms">
+                    <div class="disc__main">
+                      <span class="disc__name">Aldwych Capital Office<span class="os__ext" set:html={extIcon} /></span>
+                      <span class="disc__detail">€10–30M · value-add RE · London · 3 sources</span>
+                    </div>
+                    <div class="disc__act" data-swap-out>
+                      <span class="disc__add"><span class="os__btnplus">+</span>Add to Meridian</span>
+                      <span class="disc__pass">Pass</span>
+                    </div>
+                    <span class="disc__added" data-swap-in>✓ Added at Identified</span>
+                  </li>
+                  <li class="disc__row step" style="--d:500ms">
+                    <div class="disc__main">
+                      <span class="disc__name">Talstein Multi-Family Office<span class="os__ext" set:html={extIcon} /></span>
+                      <span class="disc__detail">possible duplicate of Talstein MFO — you choose</span>
+                    </div>
+                    <div class="disc__act">
+                      <span class="disc__add disc__add--warn">Resolve</span>
+                      <span class="disc__pass">Pass</span>
+                    </div>
+                  </li>
+                  <li class="disc__row step" style="--d:650ms">
+                    <div class="disc__main">
+                      <span class="disc__name">Rockmont Family Office<span class="os__ext" set:html={extIcon} /></span>
+                      <span class="disc__detail">already on your book · 2 pursuits</span>
+                    </div>
+                    <div class="disc__act">
+                      <span class="disc__known">Known</span>
+                      <span class="disc__pass">Open</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 04 — relationship memory -->
+        <article class="beat beat--flip" data-beat>
+          <div class="beat__copy">
+            <p class="beat__eyebrow"><span>04</span>Relationship memory</p>
+            <h2 class="beat__title">Walk into the call knowing.</h2>
+            <p class="beat__body">
+              Before you meet is assembled from your own records while you read
+              it: where the relationship stands, what the firm has told you it
+              will not do in its exact words, what it did on past raises — and,
+              in the same card, what PA-OS does not know.
+            </p>
+            <p class="beat__receipt">no status field to rot · nothing saved, nothing sent</p>
+          </div>
+
+          <div class="beat__demo">
+            <div class="pane">
+              <div class="pane__bar">
+                <span class="pane__mark"><Glyph size={12} /></span>
+                <span class="pane__title">Before you meet</span>
+                <span class="pane__meta">Larkmere Capital · today 15:00</span>
+              </div>
+              <div class="pane__body">
+                <div class="brief__standing step" style="--d:150ms">
+                  <span class="brief__dot"></span>
+                  <div>
+                    <strong>Warm — two calls, last 14 Mar</strong>
+                    <span>derived from 2 interactions · 3 pursuits · 1 restriction</span>
+                  </div>
+                </div>
+
+                <div class="brief__block step" style="--d:350ms">
+                  <span class="brief__k">Will not do</span>
+                  <p class="brief__quote">“No US deals. That is firm policy, not this year.”</p>
+                  <span class="brief__meta">standing policy · stated 14 Mar · enforced in Matching</span>
+                </div>
+
+                <div class="brief__block step" style="--d:500ms">
+                  <span class="brief__k">Past raises</span>
+                  <p class="brief__row">Aurora — passed · “timing was wrong for the vintage”</p>
+                  <p class="brief__row">Meridian — in diligence since 2 Jul</p>
+                </div>
+
+                <div class="brief__block brief__block--unknown step" style="--d:650ms">
+                  <span class="brief__k">What PA-OS does not know</span>
+                  <p class="brief__row">Nobody logged an outcome on the 2 Feb call — listed, never guessed.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 05 — the report -->
+        <article class="beat" data-beat>
+          <div class="beat__copy">
+            <p class="beat__eyebrow"><span>05</span>Reporting</p>
+            <h2 class="beat__title">A report every number can defend.</h2>
+            <p class="beat__body">
+              Under your firm’s name and logo, not ours. Each figure traces to
+              the record behind it, the rows travel with it as Excel or CSV,
+              and the version you sent in July stays exactly as it went out.
+            </p>
+            <p class="beat__receipt">versioned · white-label · every caveat carried, never hidden</p>
+          </div>
+
+          <div class="beat__demo">
+            <div class="pane">
+              <div class="pane__bar">
+                <span class="pane__mark"><Glyph size={12} /></span>
+                <span class="pane__title">Activity report</span>
+                <span class="pane__meta">Project Meridian · v3</span>
+              </div>
+              <div class="pane__body">
+                <div class="rep__brand step" style="--d:150ms">
+                  <span class="rep__logo">MP</span>
+                  <div>
+                    <strong>Meridian Partners</strong>
+                    <span>July 2026 · prepared for the sponsor</span>
+                  </div>
+                  <span class="rep__ver">v3</span>
+                </div>
+
+                <ul class="rep__figs">
+                  <li class="step" style="--d:350ms"><b>12</b><span>emails, meetings and calls</span><i>12 rows</i></li>
+                  <li class="step" style="--d:450ms"><b>€40M</b><span>pipeline across 8 investors</span><i>8 pursuits</i></li>
+                  <li class="step" style="--d:550ms"><b>60/72</b><span>book mapped to the mandate</span><i>12 pending</i></li>
+                </ul>
+
+                <p class="rep__caveat step" style="--d:700ms">
+                  Every figure opens the rows it was counted from.
+                </p>
+
+                <div class="rep__foot step" style="--d:850ms">
+                  <span class="rep__exp">Export XLSX</span>
+                  <span class="rep__exp">CSV</span>
+                  <span class="rep__vernote">v2 kept exactly as it went out</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
 
-      <article class="os__tile">
-        <header class="os__phead">
-          <div class="os__ptitle">
-            <strong data-os-head>{initial.head}</strong>
-            <span class="os__pmeta" data-os-meta>{initial.meta}</span>
-          </div>
-          <span class="os__plink" data-os-link>{initial.link}</span>
-        </header>
-        <p class="os__pnote" data-os-note hidden={!initial.note}>{initial.note}</p>
-        <ul class="os__rows" data-os-rows>
-          {initial.rows.map((r) => (
-            <li class="os__row">
-              <span class="os__rn">{r.n}</span>
-              <div class="os__rmain">
-                <div class="os__rnamerow">
-                  <span class={`os__rname${r.ext ? ' os__rname--link' : ''}`}>{r.name}{r.ext && <span class="os__ext" set:html={extIcon} />}</span>
-                  {r.badge && <span class="os__badge">{r.badge}</span>}
-                </div>
-                <div class="os__rdetail">{r.detail}</div>
-              </div>
-              <div class="os__ractions">
-                {r.state === 'action' && (
-                  <button type="button" class="os__btn"><span class="os__btnplus">+</span>{r.action}</button>
-                )}
-                {r.state === 'in' && (
-                  <span class="os__status os__status--in"><span class="os__statustick">✓</span>{r.status}</span>
-                )}
-                {r.state === 'passed' && (
-                  <span class="os__status os__status--passed"><span class="os__statustick">✕</span>{r.status}</span>
-                )}
-                <span class="os__pass">{r.link}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </article>
-    </section>
+      <!-- The rails. For this buyer, the "never" list is the pitch. -->
+      <section class="pa-not">
+        <div class="pa-wrap">
+          <p class="beat__eyebrow"><span>06</span>The rails</p>
+          <h2 class="pa-h2">Five guarantees, enforced in code.</h2>
+          <ul class="not__list">
+            {guarantees.map((item) => (
+              <li>
+                <strong>{item.title}</strong>
+                <span>{item.copy}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-    <div class="cta">
-      <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">Request access</a>
-      <span class="cta__note">closed beta · for placement agents &amp; independent bankers</span>
-    </div>
-  </main>
+      <section class="pa-close">
+        <div class="pa-wrap">
+          <h2 class="pa-h2">See it run on your own book.</h2>
+          <p class="pa-lede">
+            Thirty minutes, screen share, founder-led. Bring a CRM export and a
+            live mandate — or watch it on ours first.
+          </p>
+          <div class="pa-actions">
+            <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">Request access</a>
+            <a class="btn-line" href="mailto:servando@controlthrive.com?subject=PA-OS%20access">Email the founder</a>
+          </div>
+          <p class="pa-fine">
+            Closed beta · for placement agents and independent bankers · desktop
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pa-foot">
+      <div class="pa-wrap pa-foot__row">
+        <a class="mark" href="/" aria-label="controlthrive home">
+          <span class="mark__glyph"><Glyph size={14} /></span>
+          <span class="mark__word">controlthrive</span>
+        </a>
+        <span>Built by controlthrive · founder-led · © 2026</span>
+      </div>
+    </footer>
+  </div>
 
   <script is:inline define:vars={{ pillars, start, extIcon }}>
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---- hero: the pulse walks the rail, the window swaps ---- */
     const root = document.querySelector('[data-os]');
     const diagram = root && root.querySelector('.os__diagram');
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (root && diagram && !reduceMotion) {
       const railItems = Array.from(root.querySelectorAll('.os__pillar'));
@@ -191,6 +560,7 @@ const initial = pillars[start];
         meta: root.querySelector('[data-os-meta]'),
         link: root.querySelector('[data-os-link]'),
         note: root.querySelector('[data-os-note]'),
+        crumb: root.querySelector('[data-os-crumb]'),
       };
 
       const el = (tag, cls, text) => {
@@ -243,6 +613,7 @@ const initial = pillars[start];
         if (f.head) f.head.textContent = p.head;
         if (f.meta) f.meta.textContent = p.meta;
         if (f.link) f.link.textContent = p.link;
+        if (f.crumb) f.crumb.textContent = p.label;
         if (f.note) {
           f.note.textContent = p.note || '';
           f.note.hidden = !p.note;
@@ -287,21 +658,84 @@ const initial = pillars[start];
         timer = window.setInterval(step, CYCLE);
       });
     }
+
+    /* ---- beats: each demo plays once, when it scrolls into view ---- */
+    const beats = Array.from(document.querySelectorAll('[data-beat]'));
+    // Every name on this page is invented. No client project is ever named here.
+    const ASK = 'Who should see @Project Solís, and why?';
+    const askMarkup =
+      'Who should see <span class="chat__at">@Project Solís</span>, and why?';
+
+    const typeInto = (node, caret, text, done) => {
+      let n = 0;
+      const tick = () => {
+        node.textContent = text.slice(0, ++n);
+        if (n < text.length) {
+          window.setTimeout(tick, 26);
+        } else {
+          node.innerHTML = askMarkup;
+          caret?.classList.add('is-done');
+          done && done();
+        }
+      };
+      window.setTimeout(tick, 320);
+    };
+
+    const play = (beat) => {
+      if (beat.dataset.played) return;
+      beat.dataset.played = '1';
+      beat.classList.add('is-live');
+
+      const target = beat.querySelector('[data-type]');
+      const caret = beat.querySelector('[data-caret]');
+      if (target) typeInto(target, caret, ASK);
+
+      // The one decisive click each surface asks for: Approve, Add.
+      if (beat.querySelector('[data-swap-in]')) {
+        window.setTimeout(() => beat.classList.add('is-swapped'), 2400);
+      }
+    };
+
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      beats.forEach((b) => {
+        b.dataset.played = '1';
+        b.classList.add('is-live', 'is-instant', 'is-swapped');
+        const target = b.querySelector('[data-type]');
+        const caret = b.querySelector('[data-caret]');
+        if (target) target.innerHTML = askMarkup;
+        caret?.classList.add('is-done');
+      });
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              play(entry.target);
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: '0px 0px -12%', threshold: 0.25 },
+      );
+      beats.forEach((b) => io.observe(b));
+    }
   </script>
 
-  <!-- Global (not scoped): the tile rows are rebuilt in JS, and scoped styles
+  <!-- Global (not scoped): the hero rows are rebuilt in JS, and scoped styles
        only attach to server-rendered elements. This is a standalone page and
-       every selector is os__/page-prefixed, so global is safe here. -->
+       every selector is page-prefixed, so global is safe here. -->
   <style is:global>
-    .stage {
+    .pa {
+      display: flex;
+      flex-direction: column;
       min-height: 100svh;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      gap: clamp(1.75rem, 4vh, 3rem);
-      max-width: 720px;
+    }
+
+    .pa-wrap {
+      width: 100%;
+      max-width: 1000px;
       margin-inline: auto;
-      padding: clamp(1.5rem, 5vw, 2.75rem) clamp(1.25rem, 6vw, 2.5rem)
-        clamp(1.75rem, 5vh, 3rem);
+      padding-inline: clamp(1.25rem, 5vw, 2.5rem);
     }
 
     /* Brand mark — navigable, not a nav bar. */
@@ -322,12 +756,62 @@ const initial = pillars[start];
       letter-spacing: -0.01em;
     }
 
-    .lede-col {
+    /* ---- the bar ---- */
+    .pa-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: color-mix(in srgb, var(--canvas) 86%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .pa-bar__inner {
+      width: 100%;
+      max-width: 1000px;
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+      height: 3.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .pa-bar__chip {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    @media (min-width: 700px) {
+      .pa-bar__chip {
+        display: inline-flex;
+      }
+    }
+    .pa-bar__cta {
+      margin-left: auto;
+      height: 2rem;
+      padding-inline: 0.9rem;
+    }
+    @media (min-width: 700px) {
+      .pa-bar__cta {
+        margin-left: 0;
+      }
+    }
+
+    /* ---- hero ---- */
+    /* Tight on purpose: the rail and the top of the product window have to be
+       reachable in the first screen, not one scroll down. */
+    .pa-hero {
+      padding-block: clamp(2rem, 5vw, 3.25rem) clamp(3rem, 7vw, 5rem);
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      align-self: end;
+      gap: clamp(2rem, 4.5vw, 3rem);
     }
+
     .tag {
       display: inline-flex;
       align-items: center;
@@ -338,34 +822,63 @@ const initial = pillars[start];
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--ink-3);
+      margin: 0 0 1.1rem;
     }
-    .h1 {
-      font-size: clamp(1.9rem, 6vw, 2.85rem);
-      line-height: 1.04;
-      font-weight: 600;
-      letter-spacing: -0.02em;
+    .pa-h1 {
+      font-size: clamp(2.2rem, 6.2vw, 3.5rem);
+      line-height: 1.03;
+      font-weight: 500;
+      letter-spacing: -0.035em;
       color: var(--ink);
       margin: 0;
+      max-width: 16ch;
+      text-wrap: balance;
     }
-    .lede {
-      font-size: clamp(0.98rem, 2.4vw, 1.08rem);
-      line-height: 1.55;
+    .pa-h2 {
+      font-size: clamp(1.6rem, 3.6vw, 2.25rem);
+      line-height: 1.12;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin: 0.75rem 0 0;
+      max-width: 22ch;
+      text-wrap: balance;
+    }
+    .pa-lede {
+      font-size: clamp(1rem, 2.2vw, 1.125rem);
+      line-height: 1.6;
       color: var(--ink-2);
-      max-width: 34rem;
-      margin: 0;
+      max-width: 36rem;
+      margin: 1.35rem 0 0;
+    }
+    .pa-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.1rem;
+      margin-top: 2rem;
+    }
+    .pa-fine {
+      margin-top: 1.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.04em;
+      color: var(--ink-3);
     }
 
-    /* The diagram — all five pillars always visible; a glow travels the rail. */
+    /* ---- the five-pillar rail + product window ---- */
     .os {
       display: flex;
       flex-direction: column;
-      gap: 1.75rem;
-      align-self: center;
+      gap: 1.9rem;
     }
 
     /* --i (0..4), set inline and advanced by JS, drives the fill + orb. */
     .os__diagram {
       position: relative;
+      max-width: 760px;
+      margin-inline: auto;
+      width: 100%;
     }
 
     /* base track under the row of dots */
@@ -423,7 +936,8 @@ const initial = pillars[start];
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.6rem;
+      cursor: default;
     }
     .os__dot {
       position: relative;
@@ -443,7 +957,7 @@ const initial = pillars[start];
         color 300ms var(--ease-out),
         transform 300ms var(--ease-out);
     }
-    .os__icon :global(svg) {
+    .os__icon svg {
       width: 17px;
       height: 17px;
       display: block;
@@ -455,6 +969,17 @@ const initial = pillars[start];
       color: var(--ink-3);
       transition: color 300ms var(--ease-out);
       text-align: center;
+    }
+    .os__flag {
+      font-family: var(--font-mono);
+      font-size: 0.5625rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      border: 1px solid var(--hairline-2);
+      border-radius: 999px;
+      padding: 0.05rem 0.4rem;
+      margin-top: -0.2rem;
     }
 
     /* active pillar — filled dot with an expanding ripple, lit icon + label */
@@ -492,15 +1017,65 @@ const initial = pillars[start];
       }
     }
 
-    .os__tile {
+    /* the window that holds the lit pillar */
+    .os__win {
       background: var(--surface);
       border: 1px solid var(--hairline);
       border-radius: var(--radius-pane);
-      box-shadow: var(--shadow-lift);
+      box-shadow: var(--shadow-pane);
+      overflow: hidden;
+      max-width: 760px;
+      width: 100%;
+      margin-inline: auto;
+    }
+    .os__chrome {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      height: 2.6rem;
+      padding-inline: 0.9rem;
+      border-bottom: 1px solid var(--hairline);
+      background: var(--rail);
+    }
+    .os__chromemark {
+      display: inline-flex;
+      color: var(--ink);
+    }
+    .os__chromeword {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .os__chromepath {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--ink-3);
+    }
+    .os__chromepath::before {
+      content: '/';
+      margin-right: 0.45rem;
+      color: var(--hairline-2);
+    }
+    .os__chromelive {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--ink-3);
+    }
+    .os__chromelive .dot-live {
+      animation: pulse-dot 2.4s ease-in-out infinite;
+    }
+
+    .os__tile {
       padding: 1.1rem 1.2rem 1rem;
       display: flex;
       flex-direction: column;
       gap: 0.55rem;
+      min-height: 13.5rem;
       transition: opacity 380ms var(--ease-out), transform 380ms var(--ease-out);
     }
     .os__tile.is-swapping {
@@ -601,8 +1176,7 @@ const initial = pillars[start];
       color: var(--ink-3);
       flex: none;
     }
-    /* Fully global so it also matches JS-injected rows (which lack the scope attr). */
-    :global(.os__ext svg) {
+    .os__ext svg {
       width: 11px;
       height: 11px;
       display: block;
@@ -674,25 +1248,735 @@ const initial = pillars[start];
     .os__status--in .os__statustick {
       color: var(--live);
     }
-    .cta {
+
+    /* ---- beats ---- */
+    .pa-beats {
       display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
+      flex-direction: column;
+      border-top: 1px solid var(--hairline);
     }
-    .cta__note {
+
+    .beat {
+      width: 100%;
+      max-width: 1000px;
+      margin-inline: auto;
+      padding: clamp(2.75rem, 7vw, 4.75rem) clamp(1.25rem, 5vw, 2.5rem);
+      display: grid;
+      gap: clamp(1.75rem, 4vw, 3.5rem);
+      align-items: center;
+    }
+    .beat + .beat {
+      border-top: 1px solid var(--hairline);
+    }
+    @media (min-width: 900px) {
+      .beat {
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      }
+      /* Flipped: the demo still gets the wide column, the copy the narrow one. */
+      .beat--flip {
+        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      }
+      .beat--flip .beat__copy {
+        order: 2;
+      }
+    }
+
+    .beat__eyebrow {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
       font-family: var(--font-mono);
       font-size: 0.6875rem;
-      letter-spacing: 0.02em;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      margin: 0;
+    }
+    .beat__eyebrow span {
+      color: var(--ink-3);
+    }
+    .beat__title {
+      margin: 1.1rem 0 0;
+      font-size: clamp(1.45rem, 3.2vw, 2rem);
+      font-weight: 500;
+      letter-spacing: -0.028em;
+      line-height: 1.14;
+      color: var(--ink);
+      text-wrap: balance;
+      max-width: 18ch;
+    }
+    .beat__body {
+      margin: 1rem 0 0;
+      font-size: 0.9875rem;
+      line-height: 1.7;
+      color: var(--ink-2);
+      max-width: 32rem;
+    }
+    .beat__body strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .beat__receipt {
+      margin: 1.25rem 0 0;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--hairline);
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      line-height: 1.6;
+      color: var(--ink-3);
+      max-width: 30rem;
+    }
+
+    /* every demo pane shares the product's window language */
+    .pane {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-pane);
+      box-shadow: var(--shadow-pane);
+      overflow: hidden;
+    }
+    .pane__bar {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      height: 2.5rem;
+      padding-inline: 0.9rem;
+      border-bottom: 1px solid var(--hairline);
+      background: var(--rail);
+    }
+    .pane__mark {
+      display: inline-flex;
+      color: var(--ink);
+    }
+    .pane__title {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .pane__meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--ink-3);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pane__body {
+      padding: 1rem 1.1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      min-height: 15rem;
+    }
+
+    /* staged entrance — held until the beat scrolls in */
+    .step {
+      opacity: 0;
+      transform: translateY(8px);
+      transition:
+        opacity 460ms var(--ease-out),
+        transform 460ms var(--ease-out);
+      transition-delay: var(--d, 0ms);
+    }
+    .beat.is-live .step {
+      opacity: 1;
+      transform: none;
+    }
+    .beat.is-instant .step {
+      transition: none;
+    }
+
+    /* 01 — chat */
+    .chat__ask {
+      display: flex;
+      align-items: baseline;
+      gap: 0.65rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .chat__who {
+      flex: none;
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    .chat__typed {
+      margin: 0;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+    }
+    .chat__at {
+      color: var(--live);
+      background: color-mix(in srgb, var(--live) 9%, transparent);
+      border-radius: 5px;
+      padding: 0.05em 0.25em;
+    }
+    .chat__caret {
+      display: inline-block;
+      width: 1.5px;
+      height: 0.95em;
+      margin-left: 1px;
+      vertical-align: -0.1em;
+      background: var(--ink);
+      animation: pa-blink 1s steps(1) infinite;
+    }
+    .chat__caret.is-done {
+      display: none;
+    }
+    @keyframes pa-blink {
+      0%,
+      49% {
+        opacity: 1;
+      }
+      50%,
+      100% {
+        opacity: 0;
+      }
+    }
+    .chat__work {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--ink-3);
+    }
+    .chat__spin {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      border: 1.5px solid var(--hairline-2);
+      border-top-color: var(--live);
+      animation: pa-spin 900ms linear infinite;
+    }
+    @keyframes pa-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    .chat__line {
+      margin: 0;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+    .chat__cites {
+      list-style: none;
+      margin: 0.75rem 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .chat__cites li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      line-height: 1.5;
+      color: var(--ink-2);
+    }
+    .cite__k {
+      flex: none;
+      min-width: 3.9rem;
+      font-size: 0.5938rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      border: 1px solid var(--hairline-2);
+      border-radius: 999px;
+      padding: 0.05rem 0.4rem;
+      text-align: center;
+    }
+
+    /* 02 — for review */
+    .rev {
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-card);
+      padding: 0.85rem 0.9rem 0.9rem;
+      background: var(--surface);
+    }
+    .rev--quiet {
+      opacity: 0.55;
+    }
+    .beat.is-live .rev--quiet {
+      opacity: 0.55;
+    }
+    .rev__head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+    .rev__kind {
+      flex: none;
+      white-space: nowrap;
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    .rev__src {
+      font-family: var(--font-mono);
+      font-size: 0.6563rem;
+      color: var(--ink-3);
+      text-align: right;
+    }
+    .rev__claim {
+      margin: 0.5rem 0 0;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .rev__diff {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-top: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+    .rev__old {
+      color: var(--ink-3);
+      text-decoration: line-through;
+      text-decoration-color: var(--hairline-2);
+    }
+    .rev__arrow {
+      color: var(--ink-3);
+    }
+    .rev__new {
+      color: var(--ink);
+      background: var(--field);
+      border: 1px solid var(--hairline-2);
+      border-radius: 6px;
+      padding: 0.05rem 0.4rem;
+    }
+    .rev__quote {
+      margin: 0.7rem 0 0;
+      padding-left: 0.7rem;
+      border-left: 2px solid var(--hairline-2);
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      color: var(--ink-2);
+    }
+    .rev__actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.9rem;
+    }
+    .rev__approve,
+    .rev__edit {
+      display: inline-flex;
+      align-items: center;
+      height: 1.75rem;
+      padding-inline: 0.7rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .rev__approve {
+      background: var(--ink);
+      color: var(--surface);
+    }
+    .rev__edit {
+      background: var(--surface);
+      color: var(--ink);
+      border: 1px solid var(--hairline-2);
+    }
+    .rev__dismiss {
+      font-size: 0.75rem;
+      color: var(--ink-3);
+    }
+    .rev__done {
+      display: none;
+      align-items: center;
+      margin: 0.9rem 0 0;
+      height: 1.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--ink-2);
+    }
+
+    /* the approve → applied swap, driven by a class the script sets */
+    .beat.is-swapped [data-swap-out] {
+      display: none;
+    }
+    .beat.is-swapped [data-swap-in] {
+      display: inline-flex;
+      animation: fade-up 380ms var(--ease-out);
+    }
+    .beat.is-instant [data-swap-in] {
+      animation: none;
+    }
+
+    /* 03 — discovery */
+    .disc__note {
+      margin: 0;
+      font-size: 0.76rem;
+      line-height: 1.45;
+      color: #9a7d43;
+    }
+    .disc__rows {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .disc__row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.7rem 0;
+      border-top: 1px solid var(--hairline);
+    }
+    .disc__main {
+      flex: 1 1 auto;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.18rem;
+    }
+    .disc__name {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.84rem;
+      font-weight: 550;
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-color: var(--hairline-2);
+      text-underline-offset: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .disc__detail {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--ink-3);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .disc__act {
+      flex: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .disc__add {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--ink);
+      border: 1px solid var(--hairline-2);
+      border-radius: 8px;
+      padding: 0.32rem 0.66rem;
+      white-space: nowrap;
+    }
+    .disc__add--warn {
+      color: #9a7d43;
+      border-color: color-mix(in srgb, #9a7d43 35%, var(--hairline-2));
+    }
+    .disc__pass,
+    .disc__known {
+      font-size: 0.75rem;
+      color: var(--ink-3);
+      white-space: nowrap;
+    }
+    .disc__added {
+      display: none;
+      flex: none;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--ink-2);
+      white-space: nowrap;
+    }
+
+    /* 04 — the pre-meeting brief */
+    .brief__standing {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .brief__dot {
+      flex: none;
+      width: 8px;
+      height: 8px;
+      margin-top: 0.4rem;
+      border-radius: 999px;
+      background: var(--live);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--live) 14%, transparent);
+    }
+    .brief__standing strong {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .brief__standing span {
+      display: block;
+      margin-top: 0.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--ink-3);
+    }
+    .brief__block + .brief__block {
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--hairline);
+    }
+    .brief__k {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    .brief__quote {
+      margin: 0.5rem 0 0;
+      padding-left: 0.7rem;
+      border-left: 2px solid var(--hairline-2);
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+    .brief__meta {
+      display: block;
+      margin-top: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.6563rem;
+      color: var(--ink-3);
+    }
+    .brief__row {
+      margin: 0.45rem 0 0;
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      color: var(--ink-2);
+    }
+    .brief__block--unknown .brief__row {
       color: var(--ink-3);
     }
 
-    @media (max-width: 520px) {
+    /* 05 — the report */
+    .rep__brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .rep__logo {
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 8px;
+      background: var(--ink);
+      color: var(--surface);
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.04em;
+    }
+    .rep__brand strong {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .rep__brand span {
+      display: block;
+      margin-top: 0.15rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--ink-3);
+    }
+    .rep__ver {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      letter-spacing: 0.06em;
+      color: var(--ink-2);
+      border: 1px solid var(--hairline-2);
+      border-radius: 999px;
+      padding: 0.08rem 0.45rem;
+    }
+    .rep__figs {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .rep__figs li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.7rem;
+      padding: 0.6rem 0;
+      border-top: 1px solid var(--hairline);
+    }
+    .rep__figs li:first-child {
+      border-top: 0;
+    }
+    .rep__figs b {
+      flex: none;
+      min-width: 3.6rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+    }
+    .rep__figs span {
+      flex: 1 1 auto;
+      font-size: 0.8125rem;
+      color: var(--ink-2);
+    }
+    .rep__figs i {
+      flex: none;
+      font-style: normal;
+      font-family: var(--font-mono);
+      font-size: 0.6563rem;
+      color: var(--ink-3);
+      border-bottom: 1px dashed var(--hairline-2);
+    }
+    /* Quiet grey, not the amber warning tone — this line is a capability
+       now, not a caveat. */
+    .rep__caveat {
+      margin: 0;
+      font-size: 0.76rem;
+      line-height: 1.45;
+      color: var(--ink-3);
+    }
+    .rep__foot {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid var(--hairline);
+    }
+    .rep__exp {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--ink);
+      border: 1px solid var(--hairline-2);
+      border-radius: 8px;
+      padding: 0.28rem 0.6rem;
+    }
+    .rep__vernote {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.6563rem;
+      color: var(--ink-3);
+    }
+
+    /* ---- the rails ---- */
+    .pa-not {
+      border-top: 1px solid var(--hairline);
+      padding-block: clamp(3rem, 7vw, 5rem);
+      background: var(--rail);
+    }
+    .not__list {
+      list-style: none;
+      margin: clamp(1.75rem, 4vw, 2.75rem) 0 0;
+      padding: 0;
+      display: grid;
+      gap: 0;
+    }
+    @media (min-width: 820px) {
+      .not__list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: clamp(2rem, 5vw, 4rem);
+      }
+    }
+    .not__list li {
+      padding-block: 1.1rem;
+      border-top: 1px solid var(--hairline-2);
+    }
+    .not__list strong {
+      display: block;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .not__list span {
+      display: block;
+      margin-top: 0.35rem;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--ink-2);
+      max-width: 30rem;
+    }
+
+    /* ---- close ---- */
+    .pa-close {
+      border-top: 1px solid var(--hairline);
+      padding-block: clamp(3.5rem, 8vw, 6rem);
+    }
+    .pa-close .pa-h2 {
+      margin-top: 0;
+    }
+
+    .pa-foot {
+      border-top: 1px solid var(--hairline);
+      padding-block: 1.5rem 2rem;
+      margin-top: auto;
+    }
+    .pa-foot__row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .pa-foot__row span {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.03em;
+      color: var(--ink-3);
+    }
+
+    @media (max-width: 560px) {
       .os__label {
         font-size: 0.625rem;
       }
-      .os__rdetail {
+      .os__rdetail,
+      .disc__detail {
         display: none;
+      }
+      .os__flag {
+        display: none;
+      }
+      .pane__body {
+        padding: 0.85rem 0.9rem 0.95rem;
+        min-height: 0;
+      }
+      .cite__k {
+        min-width: 3.4rem;
       }
     }
 
@@ -702,8 +1986,15 @@ const initial = pillars[start];
       .os__orb {
         transition: none;
       }
-      .os__pillar.is-active .os__dot::after {
+      .os__pillar.is-active .os__dot::after,
+      .chat__spin,
+      .chat__caret,
+      .os__chromelive .dot-live {
         animation: none;
+      }
+      .step {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>

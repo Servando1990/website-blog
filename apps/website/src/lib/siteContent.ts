@@ -2,6 +2,8 @@ export const bookingUrl = 'https://cal.com/servando-torres-garcia-qco7rh/30min';
 
 export const navigation = [
   { href: '/', label: 'Home' },
+  { href: '/pa-os', label: 'PA-OS' },
+  { href: '/offerings', label: 'Services' },
   { href: '/case-studies', label: 'Case Studies' },
   { href: '/tools', label: 'Tools' },
   { href: '/blog', label: 'Blog' },
