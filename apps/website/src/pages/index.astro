@@ -11,120 +11,96 @@ import {
   testimonials,
   trustedCompanies,
 } from '../lib/siteContent';
-import { publishedCaseStudies } from '../lib/caseStudies';
 
-const featuredCaseStudies = publishedCaseStudies.slice(0, 3);
+// The home page has one job: a placement agent lands here and knows, in one
+// screen, what PA-OS is and what controlthrive is. Product first; the services
+// lane is named honestly and kept narrow so nobody has to guess whether this
+// is an agency.
 
 const featuredQuote = testimonials[0];
-const supportingQuotes = [testimonials[1], testimonials[3], testimonials[4]];
+const supportingQuotes = [testimonials[1], testimonials[3]];
 
 const founderParagraphs = [
   founderProfile.paragraphs[0],
-  founderProfile.paragraphs[1],
-  founderProfile.paragraphs[4],
+  founderProfile.paragraphs[2],
 ];
 
-const operatingBridge = [
+// The contrast that makes the category obvious. Left is the job today; right
+// is the same job with PA-OS. Every right-hand line is something the product
+// does now (business-translation.md).
+const contrast = [
   {
-    label: 'Context',
-    summary:
-      'Gather the mandate, materials, relationship memory, and constraints that usually live in different places.',
+    today: 'Your book lives in a CRM export, a partner’s memory, and four spreadsheets.',
+    withOs: 'One typed book, built from your own exports, with every mapping decision remembered.',
   },
   {
-    label: 'Ship',
-    summary:
-      'Feed context to agents and ship systems that turn messy workflow inputs into usable decision support.',
+    today: 'A deck becomes a mandate by hand, and the numbers get retyped.',
+    withOs: 'Drop the deck — the mandate comes back typed, each field quoted to its source page.',
   },
   {
-    label: 'Iterate',
-    summary:
-      'Refine logic with new context, operator feedback, and evidence so the system keeps producing trusted outputs.',
+    today: 'Who to call next is a judgment nobody can reconstruct a month later.',
+    withOs: 'A ranked shortlist with the argument and the evidence behind every name.',
+  },
+  {
+    today: 'The monthly client report is assembled by hand the week it is due.',
+    withOs: 'The report generates from the same living book — versioned, under your firm’s logo.',
+  },
+  {
+    today: 'The relationship memory walks out with whoever leaves.',
+    withOs: 'The memory is the firm’s, on any broker-dealer, exportable in full, any time.',
   },
 ];
 
-type BlogPostFrontmatter = {
-  title: string;
-  cardTitle?: string;
-  description: string;
-  publishDate: string;
-};
-
-type BlogPostModule = {
-  frontmatter: BlogPostFrontmatter;
-  url: string;
-};
-
-const formatDate = (date: string) =>
-  new Intl.DateTimeFormat('en', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-    timeZone: 'UTC',
-  }).format(new Date(`${date}T00:00:00Z`));
-
-const blogPostModules = Object.values(
-  import.meta.glob<BlogPostModule>('./blog/*.md', { eager: true }),
-);
-const latestPosts = blogPostModules
-  .map((post) => ({
-    href: post.url,
-    title: post.frontmatter.cardTitle ?? post.frontmatter.title,
-    description: post.frontmatter.description,
-    publishDate: post.frontmatter.publishDate,
-  }))
-  .sort(
-    (a, b) =>
-      new Date(`${b.publishDate}T00:00:00Z`).getTime() -
-      new Date(`${a.publishDate}T00:00:00Z`).getTime(),
-  )
-  .slice(0, 3);
-
-const productProofs = [
+const rails = [
   {
-    title: 'Import that never asks twice.',
-    copy: 'Drop a CRM export. The agent maps it, dedupes it, and remembers every decision you make.',
+    title: 'The send button stays yours.',
+    copy: 'Outreach is drafted into your own mailbox and waits there for you to send. PA-OS has no send path of its own.',
   },
   {
-    title: 'A typed mandate in two minutes.',
-    copy: 'Drop the deck. Every extracted field is quoted back to its source page.',
+    title: 'Every claim carries its source.',
+    copy: 'A claim you cannot open the evidence for is withheld, and the run tells you how many were withheld and why.',
   },
   {
-    title: 'Reports every number can defend.',
-    copy: 'White-label client reporting where each figure traces to the record behind it.',
+    title: 'Your judgment is the gate.',
+    copy: 'Every change the agent wants stops in For review with the old value beside the new one.',
+  },
+  {
+    title: 'Your book, your exit.',
+    copy: 'PA-OS sits on top of the CRM and broker-dealer you already have. Everything exports in full.',
   },
 ];
 ---
 
 <Layout
-  title="controlthrive | Software Studio for Private Capital Teams"
-  description="Founder-led software studio for private capital teams. We turn mandates, relationship memory, and deal context into agentic systems kept under human review."
+  title="PA-OS — the operating system for placement agents | controlthrive"
+  description="controlthrive builds PA-OS: the operating system for placement agents. Search, standardization, matching, campaigns and reporting on one agent — every claim cited, nothing sent without you. Closed beta."
   ogImage="/api/og/home.png"
-  ogImageAlt="controlthrive social preview card for private capital software and production AI systems."
+  ogImageAlt="PA-OS by controlthrive — the operating system for placement agents."
 >
   <Header />
 
   <main>
-    <!-- Hero -->
+    <!-- Hero — the product is the subject of the sentence. -->
     <section class="hero">
       <div class="wrap hero__grid">
         <div>
           <p class="hero__eyebrow reveal">
-            <span class="mono-label">Software studio · Private capital</span>
+            <span class="hero__chip"><i class="dot-live"></i>PA-OS · Closed beta</span>
           </p>
           <h1 class="hero__title reveal" style="--reveal-delay: 60ms">
-            Production AI where the judgment stays yours.
+            The operating system for placement agents.
           </h1>
           <p class="hero__lede reveal" style="--reveal-delay: 120ms">
-            controlthrive is a founder-led software studio for capital-raising
-            teams — and the maker of PA-OS, the operating system for placement
-            agents, now in closed beta. Every claim carries a receipt, and
-            nothing ships without human review.
+            Your broker-dealer keeps you compliant. Your CRM keeps names. PA-OS
+            runs the raise — search, standardization, matching, campaigns and
+            reporting — as one agent you talk to, with a receipt behind every
+            claim and nothing that sends itself.
           </p>
           <div class="hero__actions reveal" style="--reveal-delay: 180ms">
             <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-              Book a founder call
+              Request access
             </a>
-            <a class="link-quiet" href="/case-studies">See the work</a>
+            <a class="link-quiet" href="/pa-os">See the product</a>
           </div>
         </div>
 
@@ -133,41 +109,94 @@ const productProofs = [
           outreach, and reporting — each one proposes a change with cited
           evidence that a person approves before anything is written.
         </p>
-        <div class="rq reveal" style="--reveal-delay: 240ms" aria-hidden="true" data-rq>
-          <div class="rq__bar">
-            <Glyph size={14} />
-            <span class="rq__title">PA-OS · agents at work</span>
-            <span class="rq__count"><i class="dot-live"></i><span data-rq-step>1 / 5</span></span>
+
+        <!-- The product, collaged: the book behind, the ask floating over it,
+             the review card in front — one vanishing point. The wires are
+             ours: they run the provenance through the collage, from the ask
+             into the claim, and from the claim back to the row it came from. -->
+        <div class="deck reveal" style="--reveal-delay: 240ms" aria-hidden="true">
+          <div class="deck__plane">
+            <div class="deck__card deck__card--book">
+              <div class="dcard__bar">
+                <Glyph size={12} />
+                <span>Investor book</span>
+                <span class="dcard__meta">312 firms</span>
+              </div>
+              <ul class="dcard__rows">
+                <li class="is-cited"><b>Rockmont Family Office</b><i>94</i></li>
+                <li><b>Meridian Trust Office</b><i>89</i></li>
+                <li><b>Aldwych Capital Office</b><i>85</i></li>
+                <li><b>Talstein Multi-Family</b><i>81</i></li>
+                <li><b>Larkmere Capital</b><i>78</i></li>
+                <li><b>Gatewood Capital</b><i>74</i></li>
+                <li><b>Halcyon Partners</b><i>71</i></li>
+              </ul>
+            </div>
+
+            <div class="deck__card deck__card--ask">
+              Who should see <span class="deck__at">@Project Solís</span>, and why?
+            </div>
+
+            <svg
+              class="deck__wires"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path id="wireA" class="deck__wire" vector-effect="non-scaling-stroke"
+                d="M31 14 C 31 23, 23 24, 23 31" />
+              <path id="wireB" class="deck__wire" style="--wd:0.5s" vector-effect="non-scaling-stroke"
+                d="M85 40 C 95 39, 78 27, 68 24" />
+              <circle class="deck__spark" r="1.1">
+                <animateMotion dur="2.8s" repeatCount="indefinite" begin="0.9s">
+                  <mpath href="#wireA" xlink:href="#wireA" />
+                </animateMotion>
+              </circle>
+              <circle class="deck__spark" r="1.1">
+                <animateMotion dur="2.8s" repeatCount="indefinite" begin="2.1s">
+                  <mpath href="#wireB" xlink:href="#wireB" />
+                </animateMotion>
+              </circle>
+            </svg>
+
+            <div class="rq deck__card deck__card--front" data-rq>
+              <div class="rq__bar">
+                <Glyph size={14} />
+                <span class="rq__title">PA-OS · agents at work</span>
+                <span class="rq__count"><i class="dot-live"></i><span data-rq-step>3 / 5</span></span>
+              </div>
+
+              <article class="rq__item rq__item--active" data-rq-active>
+                <div class="rq__kind-row">
+                  <span class="rq__kind" data-rq-kind>Matching</span>
+                  <span class="rq__conf" data-rq-conf>cited</span>
+                </div>
+                <p class="rq__claim" data-rq-claim>
+                  Ranked 312 investors — who to approach, in what order, and why.
+                </p>
+                <p class="rq__evidence" data-rq-evidence>
+                  Rockmont leads · committed €18M on Aurora, 2024
+                </p>
+                <div class="rq__actions">
+                  <span class="rq__approve">Approve</span>
+                  <span class="rq__edit">Edit</span>
+                </div>
+                <span class="rq__logged" data-rq-logged>✓ Shortlist saved — decision logged</span>
+              </article>
+
+              <article class="rq__item rq__item--queued" data-rq-queued>
+                <div class="rq__kind-row">
+                  <span class="rq__kind" data-rq-next-kind>Before you meet</span>
+                </div>
+                <p class="rq__claim" data-rq-next-claim>
+                  Assemble the pre-meeting brief for Larkmere Capital.
+                </p>
+              </article>
+
+              <div class="rq__foot" data-rq-foot>every claim opens the record behind it</div>
+            </div>
           </div>
-
-          <article class="rq__item rq__item--active" data-rq-active>
-            <div class="rq__kind-row">
-              <span class="rq__kind" data-rq-kind>Sourcing</span>
-              <span class="rq__conf" data-rq-conf>cited</span>
-            </div>
-            <p class="rq__claim" data-rq-claim>
-              Found 14 new investors for the Meridian mandate.
-            </p>
-            <p class="rq__evidence" data-rq-evidence>
-              deduped against your book · sources attached
-            </p>
-            <div class="rq__actions">
-              <span class="rq__approve">Approve</span>
-              <span class="rq__edit">Edit</span>
-            </div>
-            <span class="rq__logged" data-rq-logged>✓ Added to mandate — decision logged</span>
-          </article>
-
-          <article class="rq__item rq__item--queued" data-rq-queued>
-            <div class="rq__kind-row">
-              <span class="rq__kind" data-rq-next-kind>Standardization</span>
-            </div>
-            <p class="rq__claim" data-rq-next-claim>
-              Turn the pitch deck into a typed, provenance-quoted mandate.
-            </p>
-          </article>
-
-          <div class="rq__foot">nothing ships without human review</div>
         </div>
       </div>
     </section>
@@ -175,7 +204,7 @@ const productProofs = [
     <!-- Proof strip -->
     <section class="proof" aria-label="Selected clients">
       <div class="wrap proof__row">
-        <span class="mono-label">In production at</span>
+        <span class="mono-label">Founder’s systems in production at</span>
         <div class="proof__names">
           {trustedCompanies.map((company) => (
             <span>{company}</span>
@@ -184,21 +213,57 @@ const productProofs = [
       </div>
     </section>
 
-    <!-- 01 What we build -->
-    <section class="section section--ruled">
+    <!-- 01 The contrast -->
+    <section class="section section--ruled" id="why">
       <div class="wrap">
         <header class="sec-head">
           <span class="sec-head__index">01</span>
-          <span class="sec-head__label">Software studio</span>
+          <span class="sec-head__label">Why it exists</span>
         </header>
 
         <h2 class="sec-title reveal">
-          The five jobs of a raise, handled.
+          Your CRM was built to store names. It was never built to run a raise.
         </h2>
         <p class="sec-lede reveal" style="--reveal-delay: 60ms">
-          We design and run the systems behind the work that decides a raise —
-          your judgment, encoded in software that compounds. Founder-led, and
-          you own everything the system produces, exportable in full, anytime.
+          A raise turns on five jobs, and every one of them is done today in a
+          spreadsheet, an inbox, or someone’s head. PA-OS is the layer that
+          runs them — and can show its work.
+        </p>
+
+        <div class="contrast">
+          <div class="contrast__col contrast__col--today">
+            <span class="mono-label">The raise today</span>
+            <ul>
+              {contrast.map((row, index) => (
+                <li class="reveal" style={`--reveal-delay: ${index * 50}ms`}>{row.today}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="contrast__col contrast__col--os">
+            <span class="mono-label"><i class="dot-live"></i>With PA-OS</span>
+            <ul>
+              {contrast.map((row, index) => (
+                <li class="reveal" style={`--reveal-delay: ${index * 50}ms`}>{row.withOs}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 The product -->
+    <section class="section section--ruled" id="product">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">02</span>
+          <span class="sec-head__label">The product</span>
+        </header>
+
+        <h2 class="sec-title reveal">One agent. The five jobs of a raise.</h2>
+        <p class="sec-lede reveal" style="--reveal-delay: 60ms">
+          Not five tools bolted together — one operating memory the whole firm
+          works from, in plain language, on top of the systems you already run.
         </p>
 
         <ul class="svc-list" style="margin-top: clamp(2rem, 5vw, 3rem)">
@@ -215,107 +280,44 @@ const productProofs = [
             </li>
           ))}
         </ul>
-      </div>
-    </section>
 
-    <!-- 02 How we work -->
-    <section class="section section--ruled">
-      <div class="wrap">
-        <header class="sec-head">
-          <span class="sec-head__index">02</span>
-          <span class="sec-head__label">How we work</span>
-        </header>
-
-        <div class="bridge">
-          {operatingBridge.map((step, index) => (
-            <div class="bridge__step reveal" style={`--reveal-delay: ${index * 70}ms`}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <strong>{step.label}</strong>
-              <p>{step.summary}</p>
-            </div>
-          ))}
+        <div class="product-cta reveal">
+          <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">Request access</a>
+          <a class="link-quiet" href="/pa-os">Walk through the product</a>
         </div>
       </div>
     </section>
 
-    <!-- 03 Product -->
-    <section class="section section--ruled" id="product">
+    <!-- 03 The rails -->
+    <section class="section section--ruled" id="how">
       <div class="wrap">
         <header class="sec-head">
           <span class="sec-head__index">03</span>
-          <span class="sec-head__label">Product</span>
+          <span class="sec-head__label">The rails</span>
         </header>
 
-        <div class="product reveal">
-          <div class="product__intro">
-            <span class="product__mark"><Glyph size={13} /></span>
-            <h3 class="product__name">
-              PA-OS
-              <span class="product__status"><i class="dot-live"></i>Closed beta</span>
-            </h3>
-            <p class="product__line">
-              The operating system for agent-ready placement agents.
-            </p>
-            <p class="product__copy">
-              Your broker-dealer keeps you compliant. Your CRM keeps names.
-              PA-OS runs the raise — and your relationship memory stays yours,
-              whichever broker-dealer you're on.
-            </p>
-            <div class="product__actions">
-              <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">Request access</a>
-              <a class="link-quiet" href="/pa-os">See PA-OS</a>
-            </div>
-          </div>
+        <h2 class="sec-title reveal">Agentic where it helps. Deterministic where it counts.</h2>
+        <p class="sec-lede reveal" style="--reveal-delay: 60ms">
+          An agent inside a regulated workflow is only useful if it cannot
+          surprise you. Four rules are enforced in code, not in a prompt.
+        </p>
 
-          <ul class="product__proofs">
-            {productProofs.map((proof) => (
-              <li>
-                <strong>{proof.title}</strong>
-                <span>{proof.copy}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul class="rails">
+          {rails.map((rail, index) => (
+            <li class="reveal" style={`--reveal-delay: ${index * 60}ms`}>
+              <strong>{rail.title}</strong>
+              <span>{rail.copy}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
 
-    <!-- 04 Selected work -->
+    <!-- 04 Client perspective -->
     <section class="section section--ruled">
       <div class="wrap">
         <header class="sec-head">
           <span class="sec-head__index">04</span>
-          <span class="sec-head__label">Selected work</span>
-        </header>
-
-        <div class="work-list">
-          {featuredCaseStudies.map((study, index) => (
-            <article class="work-row reveal" style={`--reveal-delay: ${index * 70}ms`}>
-              <div class="work-row__meta">
-                <span class="mono-label">{study.industry}</span>
-                <p class="work-row__outcome">{study.featuredOutcome}</p>
-              </div>
-              <div class="work-row__body">
-                <h3>
-                  <a href={`/case-studies/${study.slug}`}>{study.title}</a>
-                </h3>
-                <p>{study.cardSummary}</p>
-                <div class="work-row__links">
-                  <a class="link-quiet" href={`/case-studies/${study.slug}`}>
-                    Read case study
-                  </a>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- 05 Client perspective -->
-    <section class="section section--ruled">
-      <div class="wrap">
-        <header class="sec-head">
-          <span class="sec-head__index">05</span>
           <span class="sec-head__label">Client perspective</span>
         </header>
 
@@ -341,12 +343,52 @@ const productProofs = [
       </div>
     </section>
 
+    <!-- 05 Deployment. The human work, framed as what's included — not as a
+         second business. A real book is messy; landing it is the product. -->
+    <section class="section section--ruled" id="deployment">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">05</span>
+          <span class="sec-head__label">Deployment</span>
+        </header>
+
+        <div class="lane">
+          <div class="lane__copy">
+            <h2 class="sec-title reveal">You don’t roll this out alone.</h2>
+            <p class="sec-lede reveal" style="--reveal-delay: 60ms">
+              PA-OS lands on a real book — a messy export, half-typed mandates,
+              ten years of relationship memory in one partner’s head. We deploy
+              it with you, on your data, with the founder on the call.
+            </p>
+            <div class="lane__actions reveal" style="--reveal-delay: 120ms">
+              <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">Request access</a>
+            </div>
+          </div>
+
+          <ul class="lane__facts reveal" style="--reveal-delay: 100ms">
+            <li>
+              <strong>We load the book with you</strong>
+              <span>Your CRM export, your decks, your pipeline history. The first import is a working session, not a support ticket.</span>
+            </li>
+            <li>
+              <strong>The first mandate, together</strong>
+              <span>First standardization, first ranked shortlist, first client report — run beside you on live deals.</span>
+            </li>
+            <li>
+              <strong>Weekly until it holds</strong>
+              <span>Short sessions while the book beds in, then whenever the next raise needs it.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- 06 Founder -->
     <section class="section section--ruled">
       <div class="wrap">
         <header class="sec-head">
           <span class="sec-head__index">06</span>
-          <span class="sec-head__label">Founder-led</span>
+          <span class="sec-head__label">Who builds it</span>
         </header>
 
         <div class="founder">
@@ -367,32 +409,11 @@ const productProofs = [
       </div>
     </section>
 
-    <!-- 07 Writing -->
-    <section class="section section--ruled">
-      <div class="wrap">
-        <header class="sec-head">
-          <span class="sec-head__index">07</span>
-          <span class="sec-head__label">Writing</span>
-        </header>
-
-        <div class="writing-list">
-          {latestPosts.map((post, index) => (
-            <article class="writing-row reveal" style={`--reveal-delay: ${index * 60}ms`}>
-              <time datetime={post.publishDate}>{formatDate(post.publishDate)}</time>
-              <h3><a href={post.href}>{post.title}</a></h3>
-              <a class="link-quiet" href={post.href}>Read</a>
-              <p>{post.description}</p>
-            </article>
-          ))}
-        </div>
-
-        <div style="margin-top: 2rem">
-          <a class="link-quiet" href="/blog">All writing</a>
-        </div>
-      </div>
-    </section>
-
-    <CtaBand index="08" />
+    <CtaBand
+      index="07"
+      title="See it run on your own book."
+      copy="Thirty minutes, screen share, founder-led. Bring a CRM export and a live mandate — or watch it on ours first."
+    />
   </main>
 
   <Footer />
@@ -419,14 +440,16 @@ const productProofs = [
       revealElements.forEach((el) => observer.observe(el));
     }
 
-    // Agents-at-work vignette — steps through PA-OS's five pillars, each an
-    // agent taking one action under the same cited, human-approved contract.
+    // Agents at work — the front card steps through the five jobs of a raise.
+    // Each one carries the record it stands on, and the receipt line names
+    // what the claim is grounded in. Every name here is invented.
     const pillars = [
       {
-        kind: 'Sourcing',
+        kind: 'Search',
         receipt: 'cited',
-        claim: 'Found 14 new investors for the Meridian mandate.',
-        evidence: 'deduped against your book · sources attached',
+        claim: 'Found 12 investors beyond your book for the Meridian mandate.',
+        evidence: 'each one opens its source · 4 withheld, no evidence',
+        foot: 'a name without a source never reaches this list',
         logged: '✓ Added to mandate — decision logged',
       },
       {
@@ -434,28 +457,32 @@ const productProofs = [
         receipt: 'sourced',
         claim: 'Turned the pitch deck into a typed, provenance-quoted mandate.',
         evidence: 'deck p.4 — “seeking €40 million in commitments”',
+        foot: 'every field opens the page it was read from',
         logged: '✓ Mandate created — decision logged',
       },
       {
         kind: 'Matching',
         receipt: 'cited',
-        claim: 'Ranked 60 investors — who to approach, in what order, and why.',
-        evidence: 'each rank cited · do-not-contact enforced',
-        logged: '✓ Target list saved — decision logged',
+        claim: 'Ranked 312 investors — who to approach, in what order, and why.',
+        evidence: 'Rockmont leads · committed €18M on Aurora, 2024',
+        foot: 'every claim opens the record behind it',
+        logged: '✓ Shortlist saved — decision logged',
       },
       {
-        kind: 'Campaigns',
-        receipt: 'for review',
-        claim: 'Drafted 38 outreach emails from the record.',
-        evidence: 'staged in your drafts · nothing sends itself',
-        logged: '✓ Kept in drafts — you send each one',
+        kind: 'Before you meet',
+        receipt: 'derived',
+        claim: 'Assembled the pre-meeting brief for Larkmere Capital.',
+        evidence: '“No US deals. That is firm policy.” · their words, 14 Mar',
+        foot: 'worked out from your records, nothing saved, nothing sent',
+        logged: '✓ Read before the call — no record changed',
       },
       {
         kind: 'Reporting',
         receipt: 'traceable',
-        claim: 'Built this month’s client report for the Meridian mandate.',
-        evidence: 'white-label PDF · every number traces to a record',
-        logged: '✓ Report ready — decision logged',
+        claim: 'Built this month’s client report under your firm’s logo.',
+        evidence: '€40M across 8 investors · rows travel as XLSX',
+        foot: 'every figure opens the rows it was counted from',
+        logged: '✓ Version 3 saved — v2 kept as it went out',
       },
     ];
 
@@ -470,11 +497,12 @@ const productProofs = [
         evidence: rq.querySelector('[data-rq-evidence]'),
         logged: rq.querySelector('[data-rq-logged]'),
         step: rq.querySelector('[data-rq-step]'),
+        foot: rq.querySelector('[data-rq-foot]'),
         nextKind: rq.querySelector('[data-rq-next-kind]'),
         nextClaim: rq.querySelector('[data-rq-next-claim]'),
       };
 
-      let index = 0;
+      let index = 2; // Matching is what renders on the server
 
       const render = (i: number) => {
         const current = pillars[i % pillars.length];
@@ -488,6 +516,7 @@ const productProofs = [
         if (fields.claim) fields.claim.textContent = current.claim;
         if (fields.evidence) fields.evidence.textContent = current.evidence;
         if (fields.logged) fields.logged.textContent = current.logged;
+        if (fields.foot) fields.foot.textContent = current.foot;
         if (fields.step) fields.step.textContent = `${(i % pillars.length) + 1} / ${pillars.length}`;
         if (fields.nextKind) fields.nextKind.textContent = next.kind;
         if (fields.nextClaim) fields.nextClaim.textContent = next.claim;
@@ -501,7 +530,7 @@ const productProofs = [
           index = (index + 1) % pillars.length;
           render(index);
         }, 1100);
-      }, 4200);
+      }, 4400);
     }
   </script>
 </Layout>

@@ -3,12 +3,14 @@ import { bookingUrl } from '../lib/siteContent';
 
 const pathname = Astro.url.pathname;
 
+// Product only. The operated engagement is sold in conversation, not
+// advertised — /offerings stays live and linked from the footer, but a
+// "Services" nav item would cap the product at agency multiples.
 const links = [
-  { href: '/pa-os', label: 'PA-OS' },
-  { href: '/case-studies', label: 'Case studies' },
-  { href: '/#product', label: 'Product' },
+  { href: '/pa-os', label: 'Product' },
+  { href: '/#how', label: 'How it works' },
+  { href: '/#deployment', label: 'Deployment' },
   { href: '/blog', label: 'Writing' },
-  { href: '/tools', label: 'Tools' },
 ];
 
 function isActive(href: string) {
@@ -40,7 +42,7 @@ function isActive(href: string) {
       </div>
 
       <a class="btn-ink nav-cta" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-        Book a founder call
+        Request access
       </a>
 
       <button
@@ -87,7 +89,7 @@ function isActive(href: string) {
         <a href={link.href}>{link.label}</a>
       ))}
       <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-        Book a founder call
+        Request access
       </a>
     </div>
   </div>
