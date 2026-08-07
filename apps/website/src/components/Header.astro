@@ -41,7 +41,15 @@ function isActive(href: string) {
         ))}
       </div>
 
-      <a class="btn-ink nav-cta" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+      <a
+        class="btn-ink nav-cta"
+        href={bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-growth-cta="request-access"
+        data-growth-location="header"
+        data-growth-wedge="pa-os"
+      >
         Request access
       </a>
 
@@ -88,7 +96,15 @@ function isActive(href: string) {
       {links.map((link) => (
         <a href={link.href}>{link.label}</a>
       ))}
-      <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+      <a
+        class="btn-ink"
+        href={bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-growth-cta="request-access"
+        data-growth-location="mobile-menu"
+        data-growth-wedge="pa-os"
+      >
         Request access
       </a>
     </div>

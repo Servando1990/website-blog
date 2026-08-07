@@ -21,7 +21,14 @@ import { bookingUrl, navigation } from '../lib/siteContent';
         {navigation.map((item) => (
           <a href={item.href}>{item.label}</a>
         ))}
-        <a href={bookingUrl} target="_blank" rel="noopener noreferrer">Book a call</a>
+        <a
+          href={bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-growth-cta="book-founder-call"
+          data-growth-location="footer"
+          data-growth-wedge="pa-os">Book a call</a
+        >
       </div>
 
       <div class="footer-col">
