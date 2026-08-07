@@ -8,21 +8,21 @@ import { publishedCaseStudies } from '../lib/caseStudies';
 
 <Layout
   title="Case Studies | controlthrive"
-  description="Selected controlthrive case studies showing how founder-led software work supports private capital, advisory, and adjacent research workflows."
+  description="Selected controlthrive systems delivered across private capital, research, pricing, and data operations."
 >
   <Header />
 
   <main>
     <section class="page-intro">
       <div class="wrap">
-        <span class="mono-label">Case studies</span>
+        <span class="mono-label">Selected work</span>
         <h1 class="page-title">
-          Delivery stories for private capital teams and adjacent operators.
+          Production systems for difficult operating problems.
         </h1>
         <p class="page-lede">
-          What it looks like when controlthrive works as a close software
-          partner: clear workflow framing, careful system design, and delivery
-          that stands up in day-to-day use.
+          Case studies across private capital, research, pricing, and data
+          operations. They show the kind of judgment-heavy work controlthrive
+          can take from operating problem to working software.
         </p>
       </div>
     </section>
@@ -37,9 +37,9 @@ import { publishedCaseStudies } from '../lib/caseStudies';
                 <p class="work-row__outcome">{study.featuredOutcome}</p>
               </div>
               <div class="work-row__body">
-                <h3>
+                <h2>
                   <a href={`/case-studies/${study.slug}`}>{study.title}</a>
-                </h3>
+                </h2>
                 <p>{study.cardSummary}</p>
                 <div class="work-row__links">
                   <a class="link-quiet" href={`/case-studies/${study.slug}`}>
@@ -60,9 +60,12 @@ import { publishedCaseStudies } from '../lib/caseStudies';
 
     <CtaBand
       index="02"
-      title="Need a technical partner who can make the path feel concrete?"
-      copy="If you are evaluating an investor workflow, monitoring process, or internal tool, we can pressure-test the idea together and define the right next build."
+      title="Have a similar operating problem?"
+      copy="controlthrive takes on a small number of founder-led AI, data, and decision-system engagements alongside PA-OS."
       showPrinciples={false}
+      primaryLabel="Discuss an engagement"
+      secondaryHref="/pa-os"
+      secondaryLabel="See PA-OS"
     />
   </main>
 

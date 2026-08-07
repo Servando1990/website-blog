@@ -3,15 +3,57 @@ export const bookingUrl = 'https://cal.com/servando-torres-garcia-qco7rh/30min';
 export const navigation = [
   { href: '/', label: 'Home' },
   { href: '/pa-os', label: 'PA-OS' },
-  { href: '/offerings', label: 'Services' },
-  { href: '/case-studies', label: 'Case Studies' },
+  { href: '/design-partners', label: 'Design Partners' },
+  { href: '/services', label: 'Services' },
+  { href: '/case-studies', label: 'Work' },
   { href: '/tools', label: 'Tools' },
   { href: '/blog', label: 'Blog' },
 ];
 
+export const designPartnerIncludes = [
+  {
+    title: 'Bring the book across',
+    summary:
+      'We load CRM exports, decks, pipeline history, and relationship context into a reviewable operating base.',
+  },
+  {
+    title: 'Run a live mandate together',
+    summary:
+      'We standardize the ask, review the investor shortlist, and produce the first client-ready output on real work.',
+  },
+  {
+    title: 'Calibrate the judgment',
+    summary:
+      'Your exclusions, preferences, relationship history, and review decisions become part of how PA-OS works for the firm.',
+  },
+  {
+    title: 'Stay close to the outcome',
+    summary:
+      'Founder support stays included throughout the design partnership while the workflow and product mature together.',
+  },
+];
+
+export const serviceFocus = [
+  {
+    title: 'Decision systems',
+    summary:
+      'Turn a high-context operating decision into software people can inspect, trust, and use under pressure.',
+  },
+  {
+    title: 'Data and AI workflows',
+    summary:
+      'Connect fragmented data, agent reasoning, deterministic controls, and human review into one production path.',
+  },
+  {
+    title: 'Operated outcomes',
+    summary:
+      'When the work needs more than a handoff, we can run and improve the workflow beside the team after launch.',
+  },
+];
+
 export const trustedCompanies = ['BBVA', 'KPMG', 'PwC', 'Fintonic', 'Minsait'];
 
-export const serviceAreas = [
+export const productPillars = [
   {
     title: 'Search — investor sourcing and enrichment',
     summary:
@@ -34,11 +76,11 @@ export const serviceAreas = [
       'Hard exclusions and do-not-contact rules are deterministic; the ranking reasoning stays visible and reviewable.',
   },
   {
-    title: 'Campaigns — personalized outreach, drafts only',
+    title: 'Campaigns — personalized outreach (in build)',
     summary:
-      'Mailbox-native outreach drafted from the record, personalized per relationship, staged for your review.',
+      'Matching results move into a campaign-ready handoff today. Mailbox-native drafting is the next layer being built.',
     detail:
-      'Nothing sends without your approval — compliance-by-construction inside your broker-dealer rails, never around them.',
+      'When it ships, drafts will wait in your own mailbox for approval. PA-OS will have no autonomous send path.',
   },
   {
     title: 'Reporting — the work, made visible',
@@ -46,56 +88,6 @@ export const serviceAreas = [
       'White-label activity and progress reports where every number traces to the record behind it.',
     detail:
       'What justifies and defends the retainer — generated from the same living book the other pillars keep current.',
-  },
-];
-
-export const engagementSteps = [
-  {
-    step: '01',
-    title: 'Clarify the commercial problem',
-    summary:
-      'We start with the decision, bottleneck, or workflow that matters to the business, not with model selection.',
-  },
-  {
-    step: '02',
-    title: 'Design the operating workflow',
-    summary:
-      'We map the human steps, the data reality, and the right level of automation so the system fits how your team already works.',
-  },
-  {
-    step: '03',
-    title: 'Build the production path',
-    summary:
-      'We ship the software, orchestration, and interfaces needed to make the idea durable instead of experimental.',
-  },
-  {
-    step: '04',
-    title: 'Support adoption and next decisions',
-    summary:
-      'We stay close enough to the rollout to refine the system, improve trust, and shape what comes next.',
-  },
-];
-
-export const industryFocus = [
-  {
-    title: 'Capital Markets & Advisory',
-    summary:
-      'High-context workflows, relationship-heavy decisions, and teams that need judgment preserved rather than buried.',
-  },
-  {
-    title: 'Portfolio & Research Teams',
-    summary:
-      'Dashboards, monitoring, and intelligence layers that help analysts act faster without sacrificing auditability.',
-  },
-  {
-    title: 'Revenue & Commerce',
-    summary:
-      'Commercial systems where pricing, enrichment, and workflow speed have a direct impact on growth.',
-  },
-  {
-    title: 'Data-Heavy Operations',
-    summary:
-      'Messy record sets, fragmented processes, and operational environments where better software compounds quickly.',
   },
 ];
 
@@ -152,19 +144,19 @@ export const testimonials = [
 
 export const trustPrinciples = [
   {
-    title: 'Source-linked outputs',
+    title: 'Evidence on every claim',
     summary:
-      'The systems are designed so teams can still see the reasoning, supporting material, and tradeoffs behind an output before they act on it.',
+      'PA-OS keeps the source and reasoning beside the output so the team can review it before acting.',
   },
   {
-    title: 'Founder continuity',
+    title: 'Review before changes',
     summary:
-      'The same person who scopes the workflow stays close through delivery, which keeps decisions clearer and reduces handoff noise.',
+      'Record updates and relationship-sensitive actions stop for human approval.',
   },
   {
-    title: 'Built for day-to-day use',
+    title: 'Your book stays yours',
     summary:
-      'The goal is not a polished demo. The goal is software that holds up when a real team uses it under pressure and over time.',
+      'PA-OS works with the systems you already run, and the operating memory remains exportable.',
   },
 ];
 

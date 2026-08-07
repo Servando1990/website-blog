@@ -3,12 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { bookingUrl, tools } from '../lib/siteContent';
+import { tools } from '../lib/siteContent';
 ---
 
 <Layout
   title="Tools | controlthrive"
-  description="Lightweight controlthrive diagnostics for teams that want a clearer view before committing to a larger workflow build."
+  description="Free controlthrive tools for teams evaluating data quality and operating workflows."
 >
   <Header />
 
@@ -17,12 +17,11 @@ import { bookingUrl, tools } from '../lib/siteContent';
       <div class="wrap">
         <span class="mono-label">Tools</span>
         <h1 class="page-title">
-          Quick diagnostics before a larger workflow build.
+          Small tools for clearer operating decisions.
         </h1>
         <p class="page-lede">
-          Built to help a team sharpen the conversation before a bigger
-          delivery effort starts. Use them when you want signal, not a sales
-          funnel.
+          Standalone utilities from controlthrive. Use them freely; PA-OS
+          remains the product we build.
         </p>
       </div>
     </section>
@@ -44,8 +43,8 @@ import { bookingUrl, tools } from '../lib/siteContent';
                   <a class="btn-ink" href={tool.href} target="_blank" rel="noopener noreferrer">
                     {tool.ctaLabel}
                   </a>
-                  <a class="btn-line" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-                    Talk to the founder instead
+                  <a class="btn-line" href="/pa-os">
+                    See PA-OS
                   </a>
                 </div>
               </div>
@@ -55,12 +54,7 @@ import { bookingUrl, tools } from '../lib/siteContent';
       </div>
     </section>
 
-    <CtaBand
-      index="02"
-      title="Sometimes the fastest route is getting the workflow on the table."
-      copy="If the problem is high-stakes, messy, or tied to multiple teams, a founder call is usually the better starting point. We can sort the priorities together and decide whether a tool, workshop, or build makes the most sense."
-      showPrinciples={false}
-    />
+    <CtaBand index="02" showPrinciples={false} />
   </main>
 
   <Footer />

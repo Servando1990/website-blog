@@ -34,6 +34,8 @@ const ogVersion =
 const resolvedOgImageUrl = new URL(ogImage, baseUrl);
 resolvedOgImageUrl.searchParams.set('v', ogVersion);
 const resolvedOgImage = resolvedOgImageUrl.href;
+const ga4Id = import.meta.env.PUBLIC_GA4_ID?.trim() || 'G-LLMXBYB3P8';
+const gtmId = import.meta.env.PUBLIC_GTM_ID?.trim() || '';
 ---
 
 <!doctype html>
@@ -89,14 +91,26 @@ const resolvedOgImage = resolvedOgImageUrl.href;
       })();
     </script>
 
-    <script async is:inline src="https://www.googletagmanager.com/gtag/js?id=G-LLMXBYB3P8"></script>
-    <script is:inline>
+    <script is:inline define:vars={{ ga4Id, gtmId }}>
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
+      if (gtmId) {
+        window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+        const firstScript = document.getElementsByTagName('script')[0];
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtm.js?id=${gtmId}`;
+        firstScript.parentNode.insertBefore(script, firstScript);
+      } else {
+        window.gtag = function () {
+          window.dataLayer.push(arguments);
+        };
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${ga4Id}`;
+        document.head.appendChild(script);
+        window.gtag('js', new Date());
+        window.gtag('config', ga4Id);
       }
-      gtag('js', new Date());
-      gtag('config', 'G-LLMXBYB3P8');
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -109,31 +123,112 @@ const resolvedOgImage = resolvedOgImageUrl.href;
     <script type="application/ld+json" is:inline>
       {JSON.stringify({
         '@context': 'https://schema.org',
-        '@type': 'ProfessionalService',
-        name: 'controlthrive',
-        founder: {
-          '@type': 'Person',
-          name: 'Servando Torres',
-        },
-        email: 'servando@controlthrive.com',
-        url: baseUrl,
-        description,
-        sameAs: [
-          'https://x.com/vandotorres',
-          'https://www.linkedin.com/in/servando-torres-239a26b0/',
-          'https://x.com/servandotorres',
-          'https://linkedin.com/in/servandotorres',
-          'https://github.com/Servando1990',
-        ],
-        serviceType: [
-          'Private capital workflow software',
-          'Portfolio monitoring systems',
-          'Decision support tooling',
+        '@graph': [
+          {
+            '@type': 'Organization',
+            '@id': `${baseUrl}#organization`,
+            name: 'controlthrive',
+            founder: {
+              '@type': 'Person',
+              name: 'Servando Torres',
+            },
+            email: 'servando@controlthrive.com',
+            url: baseUrl,
+            description,
+            sameAs: [
+              'https://x.com/vandotorres',
+              'https://www.linkedin.com/in/servando-torres-239a26b0/',
+              'https://github.com/Servando1990',
+            ],
+          },
+          {
+            '@type': 'SoftwareApplication',
+            '@id': `${baseUrl}#pa-os`,
+            name: 'PA-OS',
+            applicationCategory: 'BusinessApplication',
+            operatingSystem: 'Web',
+            url: new URL('/pa-os', baseUrl).href,
+            description:
+              'The operating system for boutique placement agents: search, standardization, matching, and reporting under human control, with campaign drafting in build.',
+            creator: { '@id': `${baseUrl}#organization` },
+          },
         ],
       })}
     </script>
   </head>
   <body>
+    {
+      gtmId && (
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+            height="0"
+            width="0"
+            style="display:none;visibility:hidden"
+            title="Google Tag Manager"
+          ></iframe>
+        </noscript>
+      )
+    }
     <slot />
+
+    <script is:inline define:vars={{ gtmId }}>
+      (() => {
+        const attributionKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+        const currentUrl = new URL(window.location.href);
+        const currentAttribution = Object.fromEntries(
+          attributionKeys
+            .map((key) => [key, currentUrl.searchParams.get(key)])
+            .filter(([, value]) => value),
+        );
+
+        if (Object.keys(currentAttribution).length) {
+          try {
+            sessionStorage.setItem('controlthrive_attribution', JSON.stringify(currentAttribution));
+          } catch {
+            // Attribution still reaches GA4 on the current page when storage is unavailable.
+          }
+        }
+
+        const storedAttribution = () => {
+          try {
+            return JSON.parse(sessionStorage.getItem('controlthrive_attribution') || '{}');
+          } catch {
+            return {};
+          }
+        };
+
+        document.addEventListener('click', (click) => {
+          const element = click.target instanceof Element ? click.target.closest('a[data-growth-cta]') : null;
+          if (!(element instanceof HTMLAnchorElement)) return;
+
+          const attribution = { ...storedAttribution(), ...currentAttribution };
+          const destination = new URL(element.href, window.location.href);
+          if (destination.hostname === 'cal.com') {
+            for (const [key, value] of Object.entries(attribution)) {
+              if (typeof value === 'string' && value) destination.searchParams.set(key, value);
+            }
+            element.href = destination.toString();
+          }
+
+          const parameters = {
+            cta_id: element.dataset.growthCta || 'founding_partner',
+            cta_location: element.dataset.growthLocation || 'body',
+            offer_wedge: element.dataset.growthWedge || 'founding_partner',
+            page_path: window.location.pathname,
+            link_text: (element.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 100),
+            link_url: `${destination.origin}${destination.pathname}`,
+            campaign_id: attribution.utm_campaign || '(not set)',
+            content_id: attribution.utm_content || '(not set)',
+          };
+
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: 'founding_partner_cta_click', ...parameters });
+          if (!gtmId && typeof window.gtag === 'function') {
+            window.gtag('event', 'founding_partner_cta_click', parameters);
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

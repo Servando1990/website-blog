@@ -1,18 +1,28 @@
 ---
-import { bookingUrl, trustPrinciples } from '../lib/siteContent';
+import { bookingUrl, trustPrinciples } from "../lib/siteContent";
 
 interface Props {
   index?: string;
   title?: string;
   copy?: string;
   showPrinciples?: boolean;
+  primaryHref?: string;
+  primaryLabel?: string;
+  primaryExternal?: boolean;
+  secondaryHref?: string;
+  secondaryLabel?: string;
 }
 
 const {
-  index = '07',
-  title = 'If the workflow matters, the software path should feel clear.',
-  copy = 'Bring the process, bottleneck, or review workflow you want to improve. We can pressure-test the idea together and define the right next build.',
+  index = "07",
+  title = "Run one live mandate with PA-OS.",
+  copy = "Design partners get the product plus hands-on founder support on their real investor book, live mandates, and first operating outcomes.",
   showPrinciples = true,
+  primaryHref = bookingUrl,
+  primaryLabel = "Join the design-partner program",
+  primaryExternal = true,
+  secondaryHref = "/pa-os",
+  secondaryLabel = "See PA-OS",
 } = Astro.props;
 ---
 
@@ -27,20 +37,30 @@ const {
     <p class="sec-lede">{copy}</p>
 
     <div class="cta-final__actions">
-      <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-        Book a founder call
+      <a
+        class="btn-ink"
+        href={primaryHref}
+        target={primaryExternal ? "_blank" : undefined}
+        rel={primaryExternal ? "noopener noreferrer" : undefined}
+        data-growth-cta={primaryExternal ? "founding-partner" : undefined}
+        data-growth-location={primaryExternal ? "final-cta" : undefined}
+        data-growth-wedge={primaryExternal ? "founding-partner" : undefined}
+      >
+        {primaryLabel}
       </a>
-      <a class="btn-line" href="mailto:servando@controlthrive.com">
-        Email controlthrive
+      <a class="btn-line" href={secondaryHref}>
+        {secondaryLabel}
       </a>
     </div>
 
-    {showPrinciples && (
-      <div class="principles" aria-label="Operating principles">
-        {trustPrinciples.map((principle) => (
-          <span>{principle.title}</span>
-        ))}
-      </div>
-    )}
+    {
+      showPrinciples && (
+        <div class="principles" aria-label="Operating principles">
+          {trustPrinciples.map((principle) => (
+            <span>{principle.title}</span>
+          ))}
+        </div>
+      )
+    }
   </div>
 </section>

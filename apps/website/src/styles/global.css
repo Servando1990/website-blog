@@ -21,7 +21,7 @@
     --field: #f4f4f4;
     --ink: #1a1a1a;
     --ink-2: #6b7280;
-    --ink-3: #9ca3af;
+    --ink-3: #6d7480;
     --hairline: #e8e8e8;
     --hairline-2: #dcdcdc;
     --live: #3b82f6;     /* the one blue dot */
@@ -49,7 +49,7 @@
     --field: #1d1d20;
     --ink: #ededee;
     --ink-2: #9a9aa0;
-    --ink-3: #6c6c72;
+    --ink-3: #7d7d84;
     --hairline: #262629;
     --hairline-2: #323236;
     --live: #4f9dff;
@@ -272,7 +272,7 @@
   align-items: center;
   gap: 1.4rem;
 }
-@media (min-width: 768px) {
+@media (min-width: 980px) {
   .nav-links {
     display: flex;
   }
@@ -293,7 +293,7 @@
 .nav-cta {
   display: none;
 }
-@media (min-width: 768px) {
+@media (min-width: 980px) {
   .nav-cta {
     display: inline-flex;
     height: 2rem;
@@ -316,7 +316,7 @@
 .theme-toggle:hover {
   background: var(--hover);
 }
-@media (min-width: 768px) {
+@media (min-width: 980px) {
   .menu-btn {
     display: none;
   }
@@ -1029,7 +1029,7 @@
 }
 
 /* ---------------------------------------------------------------
-   Deployment — the forward-deployed work, shown as what's included
+   Product onboarding — how PA-OS starts on a firm's real book
    --------------------------------------------------------------- */
 
 .lane {
@@ -1107,7 +1107,7 @@
 }
 
 /* ---------------------------------------------------------------
-   Services — numbered editorial rows, no cards
+   Product pillars — numbered editorial rows, no cards
    --------------------------------------------------------------- */
 
 .svc-list {
@@ -1351,7 +1351,7 @@
   max-width: 17rem;
 }
 
-.work-row__body h3 {
+.work-row__body :is(h2, h3) {
   font-size: clamp(1.25rem, 2.6vw, 1.6rem);
   font-weight: 500;
   letter-spacing: -0.02em;
@@ -1360,10 +1360,10 @@
   max-width: 30rem;
   text-wrap: balance;
 }
-.work-row__body h3 a {
+.work-row__body :is(h2, h3) a {
   transition: color 140ms var(--ease-out);
 }
-.work-row__body h3 a:hover {
+.work-row__body :is(h2, h3) a:hover {
   color: var(--ink-2);
 }
 .work-row__body > p {

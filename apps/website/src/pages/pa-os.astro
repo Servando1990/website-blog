@@ -1,7 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Glyph from '../components/Glyph.astro';
-import { bookingUrl } from '../lib/siteContent';
+import Layout from "../layouts/Layout.astro";
+import Glyph from "../components/Glyph.astro";
+import { bookingUrl } from "../lib/siteContent";
 
 // The cold-outreach pager. One job: a placement agent reads this in two
 // minutes and agrees to a screen share. Everything shown here is something
@@ -21,73 +21,214 @@ const extIcon =
 // state — an outline action button, or a status (In pipeline / Passed) + link.
 const pillars = [
   {
-    label: 'Search',
-    flag: '',
+    label: "Search",
+    flag: "",
     icon: svg('<circle cx="7" cy="7" r="4"/><path d="M10.2 10.2 14 14"/>'),
-    head: 'Investor discovery · Project Meridian',
-    meta: '8 reviewable of 12 found · 19 Jul 2026',
-    link: 'Open mandate',
-    note: '4 candidates withheld — no source evidence, so PA-OS won’t present them for approval.',
+    head: "Investor discovery · Project Meridian",
+    meta: "8 reviewable of 12 found · 19 Jul 2026",
+    link: "Open mandate",
+    note: "4 candidates withheld — no source evidence, so PA-OS won’t present them for approval.",
     rows: [
-      { n: '1', name: 'Rockmont Family Office', detail: '€20M avg check · EU real estate · Helsinki', badge: 'New', ext: true, state: 'in', status: 'In pipeline', link: 'Open' },
-      { n: '2', name: 'Aldwych Capital Office', detail: '€10–30M · value-add RE · London', badge: 'New', ext: true, state: 'action', action: 'Add to Meridian', link: 'Pass' },
-      { n: '5', name: 'Talstein Multi-Family Office', detail: '€15M avg · diversified · Zurich', badge: 'New', ext: true, state: 'passed', status: 'Passed', link: 'Reconsider' },
+      {
+        n: "1",
+        name: "Rockmont Family Office",
+        detail: "€20M avg check · EU real estate · Helsinki",
+        badge: "New",
+        ext: true,
+        state: "in",
+        status: "In pipeline",
+        link: "Open",
+      },
+      {
+        n: "2",
+        name: "Aldwych Capital Office",
+        detail: "€10–30M · value-add RE · London",
+        badge: "New",
+        ext: true,
+        state: "action",
+        action: "Add to Meridian",
+        link: "Pass",
+      },
+      {
+        n: "5",
+        name: "Talstein Multi-Family Office",
+        detail: "€15M avg · diversified · Zurich",
+        badge: "New",
+        ext: true,
+        state: "passed",
+        status: "Passed",
+        link: "Reconsider",
+      },
     ],
   },
   {
-    label: 'Standardize',
-    flag: '',
-    icon: svg('<path d="M2.5 3.5h11"/><path d="M4.6 6v6.5M8 6v6.5M11.4 6v6.5"/>'),
-    head: 'Mandate extraction · Project Meridian',
-    meta: '9 fields typed · 2 flagged · 19 Jul 2026',
-    link: 'Open mandate',
-    note: '2 low-confidence fields — quoted to source, flagged for your review.',
+    label: "Standardize",
+    flag: "",
+    icon: svg(
+      '<path d="M2.5 3.5h11"/><path d="M4.6 6v6.5M8 6v6.5M11.4 6v6.5"/>',
+    ),
+    head: "Mandate extraction · Project Meridian",
+    meta: "9 fields typed · 2 flagged · 19 Jul 2026",
+    link: "Open mandate",
+    note: "2 low-confidence fields — quoted to source, flagged for your review.",
     rows: [
-      { n: '1', name: 'Asset class — Real estate', detail: 'deck p.2 · “private real estate strategies”', badge: 'p.2', ext: false, state: 'action', action: 'Accept', link: 'Edit' },
-      { n: '2', name: 'Target raise — €40M', detail: 'deck p.4 · “seeking €40 million”', badge: 'p.4', ext: false, state: 'in', status: 'Accepted', link: 'Open' },
-      { n: '3', name: 'Check size — €5–15M', detail: 'deck p.6 · flagged low confidence', badge: 'p.6', ext: false, state: 'action', action: 'Accept', link: 'Edit' },
+      {
+        n: "1",
+        name: "Asset class — Real estate",
+        detail: "deck p.2 · “private real estate strategies”",
+        badge: "p.2",
+        ext: false,
+        state: "action",
+        action: "Accept",
+        link: "Edit",
+      },
+      {
+        n: "2",
+        name: "Target raise — €40M",
+        detail: "deck p.4 · “seeking €40 million”",
+        badge: "p.4",
+        ext: false,
+        state: "in",
+        status: "Accepted",
+        link: "Open",
+      },
+      {
+        n: "3",
+        name: "Check size — €5–15M",
+        detail: "deck p.6 · flagged low confidence",
+        badge: "p.6",
+        ext: false,
+        state: "action",
+        action: "Accept",
+        link: "Edit",
+      },
     ],
   },
   {
-    label: 'Match',
-    flag: '',
-    icon: svg('<path d="M2 4l3 4-3 4M14 4l-3 4 3 4"/><circle cx="8" cy="8" r="0.7" fill="currentColor" stroke="none"/>'),
-    head: 'Investor matching · Project Meridian',
-    meta: 'top 3 of 60 ranked · 19 Jul 2026',
-    link: 'Open mandate',
-    note: 'Hartree excluded — standing policy, in its own words. No prompt lifts that.',
+    label: "Match",
+    flag: "",
+    icon: svg(
+      '<path d="M2 4l3 4-3 4M14 4l-3 4 3 4"/><circle cx="8" cy="8" r="0.7" fill="currentColor" stroke="none"/>',
+    ),
+    head: "Investor matching · Project Meridian",
+    meta: "top 3 of 60 ranked · 19 Jul 2026",
+    link: "Open mandate",
+    note: "Hartree excluded — standing policy, in its own words. No prompt lifts that.",
     rows: [
-      { n: '1', name: 'Rockmont Family Office', detail: '94 fit · invests EU RE, €20M ticket', badge: '94', ext: true, state: 'in', status: 'Shortlisted', link: 'Why' },
-      { n: '2', name: 'Meridian Trust Office', detail: '89 fit · value-add mandate match', badge: '89', ext: true, state: 'action', action: 'Add to shortlist', link: 'Why' },
-      { n: '3', name: 'Aldwych Capital Office', detail: '85 fit · profile only — no behaviour yet', badge: '85', ext: true, state: 'action', action: 'Add to shortlist', link: 'Why' },
+      {
+        n: "1",
+        name: "Rockmont Family Office",
+        detail: "94 fit · invests EU RE, €20M ticket",
+        badge: "94",
+        ext: true,
+        state: "in",
+        status: "Shortlisted",
+        link: "Why",
+      },
+      {
+        n: "2",
+        name: "Meridian Trust Office",
+        detail: "89 fit · value-add mandate match",
+        badge: "89",
+        ext: true,
+        state: "action",
+        action: "Add to shortlist",
+        link: "Why",
+      },
+      {
+        n: "3",
+        name: "Aldwych Capital Office",
+        detail: "85 fit · profile only — no behaviour yet",
+        badge: "85",
+        ext: true,
+        state: "action",
+        action: "Add to shortlist",
+        link: "Why",
+      },
     ],
   },
   {
-    label: 'Campaigns',
-    flag: 'In build',
+    label: "Campaigns",
+    flag: "In build",
     icon: svg('<path d="M14 2 7 9"/><path d="M14 2 9.5 14 7 9 2 6.5 14 2z"/>'),
-    head: 'Outreach drafts · Project Meridian',
-    meta: 'mailbox-native · drafts only',
-    link: 'Open drafts',
-    note: 'In build. When it ships it drafts into your own mailbox — PA-OS has no send path, by design.',
+    head: "Outreach drafts · Project Meridian",
+    meta: "mailbox-native · drafts only",
+    link: "Open drafts",
+    note: "In build. When it ships it drafts into your own mailbox — PA-OS has no send path, by design.",
     rows: [
-      { n: '1', name: 'To: Rockmont Family Office', detail: '“Meridian — EU real estate, €20M ticket…”', badge: 'Draft', ext: false, state: 'action', action: 'Review draft', link: 'Discard' },
-      { n: '2', name: 'To: Aldwych Capital Office', detail: '“Following up on value-add real estate…”', badge: 'Draft', ext: false, state: 'action', action: 'Review draft', link: 'Discard' },
-      { n: '3', name: 'To: Meridian Trust Office', detail: '“Introducing the Meridian mandate…”', badge: 'Draft', ext: false, state: 'action', action: 'Review draft', link: 'Discard' },
+      {
+        n: "1",
+        name: "To: Rockmont Family Office",
+        detail: "“Meridian — EU real estate, €20M ticket…”",
+        badge: "Draft",
+        ext: false,
+        state: "action",
+        action: "Review draft",
+        link: "Discard",
+      },
+      {
+        n: "2",
+        name: "To: Aldwych Capital Office",
+        detail: "“Following up on value-add real estate…”",
+        badge: "Draft",
+        ext: false,
+        state: "action",
+        action: "Review draft",
+        link: "Discard",
+      },
+      {
+        n: "3",
+        name: "To: Meridian Trust Office",
+        detail: "“Introducing the Meridian mandate…”",
+        badge: "Draft",
+        ext: false,
+        state: "action",
+        action: "Review draft",
+        link: "Discard",
+      },
     ],
   },
   {
-    label: 'Report',
-    flag: '',
-    icon: svg('<path d="M4 2.5h5L12 5.5v8H4z"/><path d="M6.2 8.6h3.6M6.2 11h3.6"/>'),
-    head: 'Activity report · Project Meridian · v3',
-    meta: 'your firm’s name and logo · every figure sourced',
-    link: 'Open PDF',
-    note: '',
+    label: "Report",
+    flag: "",
+    icon: svg(
+      '<path d="M4 2.5h5L12 5.5v8H4z"/><path d="M6.2 8.6h3.6M6.2 11h3.6"/>',
+    ),
+    head: "Activity report · Project Meridian · v3",
+    meta: "your firm’s name and logo · every figure sourced",
+    link: "Open PDF",
+    note: "",
     rows: [
-      { n: '1', name: 'Outreach — 12 emails, 5 meetings, 3 calls', detail: 'each figure traces to a record', badge: '', ext: false, state: 'action', action: 'Open PDF', link: 'Export' },
-      { n: '2', name: 'Pipeline — €40M across 8 investors', detail: '3 in diligence · 2 committed', badge: '', ext: false, state: 'in', status: 'In report', link: 'Open' },
-      { n: '3', name: 'Coverage — 60 of 72 mapped', detail: '12 pending review', badge: '', ext: false, state: 'action', action: 'Open PDF', link: 'Export' },
+      {
+        n: "1",
+        name: "Outreach — 12 emails, 5 meetings, 3 calls",
+        detail: "each figure traces to a record",
+        badge: "",
+        ext: false,
+        state: "action",
+        action: "Open PDF",
+        link: "Export",
+      },
+      {
+        n: "2",
+        name: "Pipeline — €40M across 8 investors",
+        detail: "3 in diligence · 2 committed",
+        badge: "",
+        ext: false,
+        state: "in",
+        status: "In report",
+        link: "Open",
+      },
+      {
+        n: "3",
+        name: "Coverage — 60 of 72 mapped",
+        detail: "12 pending review",
+        badge: "",
+        ext: false,
+        state: "action",
+        action: "Open PDF",
+        link: "Export",
+      },
     ],
   },
 ];
@@ -101,33 +242,33 @@ const initial = pillars[start];
 // agent should read what they get, not a list of what the software refuses.
 const guarantees = [
   {
-    title: 'The send button stays yours.',
-    copy: 'Outreach is drafted into your own mailbox and waits there for you to send. That is the design — PA-OS has no send path of its own.',
+    title: "The send button stays yours.",
+    copy: "Campaign drafting is in build. That layer is designed without an autonomous send path: drafts will wait in your own mailbox for you to send.",
   },
   {
-    title: 'Every change asks you first.',
-    copy: 'A new firm, a corrected field, a logged pass — each one waits in For review with the old value beside the new one and the words behind it.',
+    title: "Every change asks you first.",
+    copy: "A new firm, a corrected field, a logged pass — each one waits in For review with the old value beside the new one and the words behind it.",
   },
   {
-    title: 'An honest blank over a confident guess.',
-    copy: '“SPAC sponsor” has no defensible type, so the field stays empty and PA-OS names the word it could not place rather than inventing one.',
+    title: "An honest blank over a confident guess.",
+    copy: "“SPAC sponsor” has no defensible type, so the field stays empty and PA-OS names the word it could not place rather than inventing one.",
   },
   {
-    title: 'It shows you its own edges.',
-    copy: 'When nobody recorded an outcome, PA-OS says so rather than filling the blank. You see what was recorded, and what never was.',
+    title: "It shows you its own edges.",
+    copy: "When nobody recorded an outcome, PA-OS says so rather than filling the blank. You see what was recorded, and what never was.",
   },
   {
-    title: 'The book stays the firm’s.',
-    copy: 'Your broker-dealer keeps you compliant, your CRM keeps names, and everything PA-OS produces exports in full, any time you ask.',
+    title: "The book stays the firm’s.",
+    copy: "Your broker-dealer keeps you compliant, your CRM keeps names, and everything PA-OS produces exports in full, any time you ask.",
   },
 ];
 ---
 
 <Layout
   title="PA-OS — the operating system for placement agents"
-  description="PA-OS runs the whole raise on one agent: search, standardization, matching, campaigns, and reporting — every claim cited back to its source, nothing sent without you. Closed beta."
+  description="PA-OS runs the raise on one evidence-backed workflow: search, standardization, matching, and reporting, with campaign drafting in build. Closed beta."
   ogImage="/api/og/pa-os.png"
-  ogImageAlt="PA-OS — the operating system for placement agents: search, standardize, match, campaigns, report."
+  ogImageAlt="PA-OS — the operating system for placement agents: search, standardize, match, and report, with campaign drafting in build."
 >
   <div class="pa">
     <!-- Slim bar: brand home, and the ask always one click away. -->
@@ -137,9 +278,19 @@ const guarantees = [
           <span class="mark__glyph"><Glyph size={15} /></span>
           <span class="mark__word">controlthrive</span>
         </a>
-        <span class="pa-bar__chip"><i class="dot-live"></i>PA-OS · closed beta</span>
-        <a class="btn-ink pa-bar__cta" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-          Request access
+        <span class="pa-bar__chip"
+          ><i class="dot-live"></i>PA-OS · closed beta</span
+        >
+        <a
+          class="btn-ink pa-bar__cta"
+          href={bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-growth-cta="join-design-partners"
+          data-growth-location="product-bar"
+          data-growth-wedge="relationship-book"
+        >
+          Join the design-partner program
         </a>
       </div>
     </header>
@@ -151,13 +302,22 @@ const guarantees = [
           <p class="tag"><i class="dot-live"></i>PA-OS · closed beta</p>
           <h1 class="pa-h1">The operating system for placement agents.</h1>
           <p class="pa-lede">
-            Your broker-dealer keeps you compliant. Your CRM keeps names.
-            PA-OS runs the raise — search, standardization, matching, campaigns
-            and reporting — as one agent you talk to, with a receipt behind
-            every claim.
+            Your broker-dealer keeps you compliant. Your CRM keeps names. PA-OS
+            runs the raise as one evidence-backed workflow — from search and
+            standardization through matching and reporting, with campaign
+            drafting in build and a receipt behind every claim.
           </p>
           <div class="pa-actions">
-            <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">Request access</a>
+            <a
+              class="btn-ink"
+              href={bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-growth-cta="join-design-partners"
+              data-growth-location="product-hero"
+              data-growth-wedge="relationship-book"
+              >Join the design-partner program</a
+            >
             <a class="link-quiet" href="#loop">See how it works</a>
           </div>
         </div>
@@ -165,21 +325,30 @@ const guarantees = [
         <!-- All five pillars at once; a pulse walks the rail and the frame
              shows the lit pillar's cited receipt. Breadth at a glance. -->
         <div class="pa-wrap">
-          <section class="os" data-os aria-label="PA-OS — the five jobs of a raise">
+          <section
+            class="os"
+            data-os
+            aria-label="PA-OS — the five jobs of a raise"
+          >
             <div class="os__diagram" style={`--i:${start}`}>
               <div class="os__track" aria-hidden="true">
                 <span class="os__fill"></span>
               </div>
               <span class="os__orb" aria-hidden="true"></span>
               <ol class="os__rail">
-                {pillars.map((p, i) => (
-                  <li class={`os__pillar${i === start ? ' is-active' : ''}`} data-pillar={i}>
-                    <span class="os__dot"></span>
-                    <span class="os__icon" set:html={p.icon} />
-                    <span class="os__label">{p.label}</span>
-                    {p.flag && <span class="os__flag">{p.flag}</span>}
-                  </li>
-                ))}
+                {
+                  pillars.map((p, i) => (
+                    <li
+                      class={`os__pillar${i === start ? " is-active" : ""}`}
+                      data-pillar={i}
+                    >
+                      <span class="os__dot" />
+                      <span class="os__icon" set:html={p.icon} />
+                      <span class="os__label">{p.label}</span>
+                      {p.flag && <span class="os__flag">{p.flag}</span>}
+                    </li>
+                  ))
+                }
               </ol>
             </div>
 
@@ -199,32 +368,54 @@ const guarantees = [
                   </div>
                   <span class="os__plink" data-os-link>{initial.link}</span>
                 </header>
-                <p class="os__pnote" data-os-note hidden={!initial.note}>{initial.note}</p>
+                <p class="os__pnote" data-os-note hidden={!initial.note}>
+                  {initial.note}
+                </p>
                 <ul class="os__rows" data-os-rows>
-                  {initial.rows.map((r) => (
-                    <li class="os__row">
-                      <span class="os__rn">{r.n}</span>
-                      <div class="os__rmain">
-                        <div class="os__rnamerow">
-                          <span class={`os__rname${r.ext ? ' os__rname--link' : ''}`}>{r.name}{r.ext && <span class="os__ext" set:html={extIcon} />}</span>
-                          {r.badge && <span class="os__badge">{r.badge}</span>}
+                  {
+                    initial.rows.map((r) => (
+                      <li class="os__row">
+                        <span class="os__rn">{r.n}</span>
+                        <div class="os__rmain">
+                          <div class="os__rnamerow">
+                            <span
+                              class={`os__rname${r.ext ? " os__rname--link" : ""}`}
+                            >
+                              {r.name}
+                              {r.ext && (
+                                <span class="os__ext" set:html={extIcon} />
+                              )}
+                            </span>
+                            {r.badge && (
+                              <span class="os__badge">{r.badge}</span>
+                            )}
+                          </div>
+                          <div class="os__rdetail">{r.detail}</div>
                         </div>
-                        <div class="os__rdetail">{r.detail}</div>
-                      </div>
-                      <div class="os__ractions">
-                        {r.state === 'action' && (
-                          <button type="button" class="os__btn"><span class="os__btnplus">+</span>{r.action}</button>
-                        )}
-                        {r.state === 'in' && (
-                          <span class="os__status os__status--in"><span class="os__statustick">✓</span>{r.status}</span>
-                        )}
-                        {r.state === 'passed' && (
-                          <span class="os__status os__status--passed"><span class="os__statustick">✕</span>{r.status}</span>
-                        )}
-                        <span class="os__pass">{r.link}</span>
-                      </div>
-                    </li>
-                  ))}
+                        <div class="os__ractions">
+                          {r.state === "action" && (
+                            <button type="button" class="os__btn">
+                              <span class="os__btnplus">+</span>
+                              {r.action}
+                            </button>
+                          )}
+                          {r.state === "in" && (
+                            <span class="os__status os__status--in">
+                              <span class="os__statustick">✓</span>
+                              {r.status}
+                            </span>
+                          )}
+                          {r.state === "passed" && (
+                            <span class="os__status os__status--passed">
+                              <span class="os__statustick">✕</span>
+                              {r.status}
+                            </span>
+                          )}
+                          <span class="os__pass">{r.link}</span>
+                        </div>
+                      </li>
+                    ))
+                  }
                 </ul>
               </div>
             </article>
@@ -240,12 +431,15 @@ const guarantees = [
             <p class="beat__eyebrow"><span>01</span>One cockpit</p>
             <h2 class="beat__title">Ask for it in your own words.</h2>
             <p class="beat__body">
-              Type <strong>@</strong> and you get the real record, not a name
-              that nearly matches — so “Project Solis” never loses “Project
-              Solís”. PA-OS answers from your own book, and every claim links
-              back to the row it came from.
+              Type <strong>@</strong> and you get the real record, not a name that
+              nearly matches — so “Project Solis” never loses “Project Solís”. PA-OS
+              answers from your own book, and every claim links back to the row it
+              came from.
             </p>
-            <p class="beat__receipt">workspace facts cited to workspace evidence · web facts cited to dated sources</p>
+            <p class="beat__receipt">
+              workspace facts cited to workspace evidence · web facts cited to
+              dated sources
+            </p>
           </div>
 
           <div class="beat__demo">
@@ -258,10 +452,15 @@ const guarantees = [
               <div class="pane__body">
                 <div class="chat__ask">
                   <span class="chat__who">You</span>
-                  <p class="chat__typed"><span data-type>&nbsp;</span><i class="chat__caret" data-caret></i></p>
+                  <p class="chat__typed">
+                    <span data-type>&nbsp;</span><i
+                      class="chat__caret"
+                      data-caret></i>
+                  </p>
                 </div>
                 <div class="chat__work step" style="--d:1400ms">
-                  <span class="chat__spin"></span>reading the book · 312 firms · 74 pursuits
+                  <span class="chat__spin"></span>reading the book · 312 firms ·
+                  74 pursuits
                 </div>
                 <div class="chat__answer step" style="--d:2000ms">
                   <p class="chat__line">
@@ -269,9 +468,18 @@ const guarantees = [
                     real estate twice at this ticket.
                   </p>
                   <ul class="chat__cites">
-                    <li><span class="cite__k">pursuit</span>Aurora · committed €18M · 2024</li>
-                    <li><span class="cite__k">call</span>14 Mar · “EU real estate is the mandate”</li>
-                    <li><span class="cite__k">withheld</span>2 firms had no source on record — not shown to you</li>
+                    <li>
+                      <span class="cite__k">pursuit</span>Aurora · committed
+                      €18M · 2024
+                    </li>
+                    <li>
+                      <span class="cite__k">call</span>14 Mar · “EU real estate
+                      is the mandate”
+                    </li>
+                    <li>
+                      <span class="cite__k">withheld</span>2 firms had no source
+                      on record — not shown to you
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -290,7 +498,9 @@ const guarantees = [
               and the words behind it. Until you approve, the book has not
               changed.
             </p>
-            <p class="beat__receipt">no silent writes · every approval keeps an audit receipt</p>
+            <p class="beat__receipt">
+              no silent writes · every approval keeps an audit receipt
+            </p>
           </div>
 
           <div class="beat__demo">
@@ -298,7 +508,9 @@ const guarantees = [
               <div class="pane__bar">
                 <span class="pane__mark"><Glyph size={12} /></span>
                 <span class="pane__title">For review</span>
-                <span class="pane__meta"><i class="dot-live"></i>3 waiting on you</span>
+                <span class="pane__meta"
+                  ><i class="dot-live"></i>3 waiting on you</span
+                >
               </div>
               <div class="pane__body">
                 <div class="rev step" style="--d:200ms">
@@ -312,19 +524,25 @@ const guarantees = [
                     <span class="rev__arrow">→</span>
                     <span class="rev__new">Denmark</span>
                   </div>
-                  <p class="rev__quote">“We moved the office to Copenhagen last spring.”</p>
+                  <p class="rev__quote">
+                    “We moved the office to Copenhagen last spring.”
+                  </p>
                   <div class="rev__actions" data-swap-out>
                     <span class="rev__approve">Approve</span>
                     <span class="rev__edit">Edit</span>
                     <span class="rev__dismiss">Dismiss</span>
                   </div>
-                  <p class="rev__done" data-swap-in>✓ Applied — audit receipt kept</p>
+                  <p class="rev__done" data-swap-in>
+                    ✓ Applied — audit receipt kept
+                  </p>
                 </div>
 
                 <div class="rev rev--quiet step" style="--d:500ms">
                   <div class="rev__head">
                     <span class="rev__kind">New investor</span>
-                    <span class="rev__src">type left empty — “SPAC sponsor” could not be placed</span>
+                    <span class="rev__src"
+                      >type left empty — “SPAC sponsor” could not be placed</span
+                    >
                   </div>
                   <p class="rev__claim">Gatewood Capital</p>
                 </div>
@@ -344,7 +562,10 @@ const guarantees = [
               duplicate, then Add or Pass. Add creates the firm and one
               Identified pursuit in a single approved move.
             </p>
-            <p class="beat__receipt">names without evidence are withheld — the run says how many, and why</p>
+            <p class="beat__receipt">
+              names without evidence are withheld — the run says how many, and
+              why
+            </p>
           </div>
 
           <div class="beat__demo">
@@ -356,24 +577,43 @@ const guarantees = [
               </div>
               <div class="pane__body">
                 <p class="disc__note step" style="--d:150ms">
-                  4 candidates withheld — no source evidence. This run is marked partial.
+                  4 candidates withheld — no source evidence. This run is marked
+                  partial.
                 </p>
                 <ul class="disc__rows">
                   <li class="disc__row step" style="--d:350ms">
                     <div class="disc__main">
-                      <span class="disc__name">Aldwych Capital Office<span class="os__ext" set:html={extIcon} /></span>
-                      <span class="disc__detail">€10–30M · value-add RE · London · 3 sources</span>
+                      <span class="disc__name"
+                        >Aldwych Capital Office<span
+                          class="os__ext"
+                          set:html={extIcon}
+                        /></span
+                      >
+                      <span class="disc__detail"
+                        >€10–30M · value-add RE · London · 3 sources</span
+                      >
                     </div>
                     <div class="disc__act" data-swap-out>
-                      <span class="disc__add"><span class="os__btnplus">+</span>Add to Meridian</span>
+                      <span class="disc__add"
+                        ><span class="os__btnplus">+</span>Add to Meridian</span
+                      >
                       <span class="disc__pass">Pass</span>
                     </div>
-                    <span class="disc__added" data-swap-in>✓ Added at Identified</span>
+                    <span class="disc__added" data-swap-in
+                      >✓ Added at Identified</span
+                    >
                   </li>
                   <li class="disc__row step" style="--d:500ms">
                     <div class="disc__main">
-                      <span class="disc__name">Talstein Multi-Family Office<span class="os__ext" set:html={extIcon} /></span>
-                      <span class="disc__detail">possible duplicate of Talstein MFO — you choose</span>
+                      <span class="disc__name"
+                        >Talstein Multi-Family Office<span
+                          class="os__ext"
+                          set:html={extIcon}
+                        /></span
+                      >
+                      <span class="disc__detail"
+                        >possible duplicate of Talstein MFO — you choose</span
+                      >
                     </div>
                     <div class="disc__act">
                       <span class="disc__add disc__add--warn">Resolve</span>
@@ -382,8 +622,15 @@ const guarantees = [
                   </li>
                   <li class="disc__row step" style="--d:650ms">
                     <div class="disc__main">
-                      <span class="disc__name">Rockmont Family Office<span class="os__ext" set:html={extIcon} /></span>
-                      <span class="disc__detail">already on your book · 2 pursuits</span>
+                      <span class="disc__name"
+                        >Rockmont Family Office<span
+                          class="os__ext"
+                          set:html={extIcon}
+                        /></span
+                      >
+                      <span class="disc__detail"
+                        >already on your book · 2 pursuits</span
+                      >
                     </div>
                     <div class="disc__act">
                       <span class="disc__known">Known</span>
@@ -407,7 +654,9 @@ const guarantees = [
               will not do in its exact words, what it did on past raises — and,
               in the same card, what PA-OS does not know.
             </p>
-            <p class="beat__receipt">no status field to rot · nothing saved, nothing sent</p>
+            <p class="beat__receipt">
+              no status field to rot · nothing saved, nothing sent
+            </p>
           </div>
 
           <div class="beat__demo">
@@ -422,25 +671,39 @@ const guarantees = [
                   <span class="brief__dot"></span>
                   <div>
                     <strong>Warm — two calls, last 14 Mar</strong>
-                    <span>derived from 2 interactions · 3 pursuits · 1 restriction</span>
+                    <span
+                      >derived from 2 interactions · 3 pursuits · 1 restriction</span
+                    >
                   </div>
                 </div>
 
                 <div class="brief__block step" style="--d:350ms">
                   <span class="brief__k">Will not do</span>
-                  <p class="brief__quote">“No US deals. That is firm policy, not this year.”</p>
-                  <span class="brief__meta">standing policy · stated 14 Mar · enforced in Matching</span>
+                  <p class="brief__quote">
+                    “No US deals. That is firm policy, not this year.”
+                  </p>
+                  <span class="brief__meta"
+                    >standing policy · stated 14 Mar · enforced in Matching</span
+                  >
                 </div>
 
                 <div class="brief__block step" style="--d:500ms">
                   <span class="brief__k">Past raises</span>
-                  <p class="brief__row">Aurora — passed · “timing was wrong for the vintage”</p>
+                  <p class="brief__row">
+                    Aurora — passed · “timing was wrong for the vintage”
+                  </p>
                   <p class="brief__row">Meridian — in diligence since 2 Jul</p>
                 </div>
 
-                <div class="brief__block brief__block--unknown step" style="--d:650ms">
+                <div
+                  class="brief__block brief__block--unknown step"
+                  style="--d:650ms"
+                >
                   <span class="brief__k">What PA-OS does not know</span>
-                  <p class="brief__row">Nobody logged an outcome on the 2 Feb call — listed, never guessed.</p>
+                  <p class="brief__row">
+                    Nobody logged an outcome on the 2 Feb call — listed, never
+                    guessed.
+                  </p>
                 </div>
               </div>
             </div>
@@ -454,10 +717,12 @@ const guarantees = [
             <h2 class="beat__title">A report every number can defend.</h2>
             <p class="beat__body">
               Under your firm’s name and logo, not ours. Each figure traces to
-              the record behind it, the rows travel with it as Excel or CSV,
-              and the version you sent in July stays exactly as it went out.
+              the record behind it, the rows travel with it as Excel or CSV, and
+              the version you sent in July stays exactly as it went out.
             </p>
-            <p class="beat__receipt">versioned · white-label · every caveat carried, never hidden</p>
+            <p class="beat__receipt">
+              versioned · white-label · every caveat carried, never hidden
+            </p>
           </div>
 
           <div class="beat__demo">
@@ -478,9 +743,18 @@ const guarantees = [
                 </div>
 
                 <ul class="rep__figs">
-                  <li class="step" style="--d:350ms"><b>12</b><span>emails, meetings and calls</span><i>12 rows</i></li>
-                  <li class="step" style="--d:450ms"><b>€40M</b><span>pipeline across 8 investors</span><i>8 pursuits</i></li>
-                  <li class="step" style="--d:550ms"><b>60/72</b><span>book mapped to the mandate</span><i>12 pending</i></li>
+                  <li class="step" style="--d:350ms">
+                    <b>12</b><span>emails, meetings and calls</span><i
+                      >12 rows</i>
+                  </li>
+                  <li class="step" style="--d:450ms">
+                    <b>€40M</b><span>pipeline across 8 investors</span><i
+                      >8 pursuits</i>
+                  </li>
+                  <li class="step" style="--d:550ms">
+                    <b>60/72</b><span>book mapped to the mandate</span><i
+                      >12 pending</i>
+                  </li>
                 </ul>
 
                 <p class="rep__caveat step" style="--d:700ms">
@@ -490,7 +764,9 @@ const guarantees = [
                 <div class="rep__foot step" style="--d:850ms">
                   <span class="rep__exp">Export XLSX</span>
                   <span class="rep__exp">CSV</span>
-                  <span class="rep__vernote">v2 kept exactly as it went out</span>
+                  <span class="rep__vernote"
+                    >v2 kept exactly as it went out</span
+                  >
                 </div>
               </div>
             </div>
@@ -504,12 +780,14 @@ const guarantees = [
           <p class="beat__eyebrow"><span>06</span>The rails</p>
           <h2 class="pa-h2">Five guarantees, enforced in code.</h2>
           <ul class="not__list">
-            {guarantees.map((item) => (
-              <li>
-                <strong>{item.title}</strong>
-                <span>{item.copy}</span>
-              </li>
-            ))}
+            {
+              guarantees.map((item) => (
+                <li>
+                  <strong>{item.title}</strong>
+                  <span>{item.copy}</span>
+                </li>
+              ))
+            }
           </ul>
         </div>
       </section>
@@ -522,11 +800,25 @@ const guarantees = [
             live mandate — or watch it on ours first.
           </p>
           <div class="pa-actions">
-            <a class="btn-ink" href={bookingUrl} target="_blank" rel="noopener noreferrer">Request access</a>
-            <a class="btn-line" href="mailto:servando@controlthrive.com?subject=PA-OS%20access">Email the founder</a>
+            <a
+              class="btn-ink"
+              href={bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-growth-cta="join-design-partners"
+              data-growth-location="product-final"
+              data-growth-wedge="live-mandate"
+              >Join the design-partner program</a
+            >
+            <a
+              class="btn-line"
+              href="mailto:servando@controlthrive.com?subject=PA-OS%20access"
+              >Email the founder</a
+            >
           </div>
           <p class="pa-fine">
-            Closed beta · for placement agents and independent bankers · desktop
+            Closed beta · for boutique placement and capital-advisory firms ·
+            desktop
           </p>
         </div>
       </section>
@@ -544,23 +836,25 @@ const guarantees = [
   </div>
 
   <script is:inline define:vars={{ pillars, start, extIcon }}>
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
     /* ---- hero: the pulse walks the rail, the window swaps ---- */
-    const root = document.querySelector('[data-os]');
-    const diagram = root && root.querySelector('.os__diagram');
+    const root = document.querySelector("[data-os]");
+    const diagram = root && root.querySelector(".os__diagram");
 
     if (root && diagram && !reduceMotion) {
-      const railItems = Array.from(root.querySelectorAll('.os__pillar'));
-      const rail = root.querySelector('.os__rail');
-      const tile = root.querySelector('.os__tile');
-      const rowsEl = root.querySelector('[data-os-rows]');
+      const railItems = Array.from(root.querySelectorAll(".os__pillar"));
+      const rail = root.querySelector(".os__rail");
+      const tile = root.querySelector(".os__tile");
+      const rowsEl = root.querySelector("[data-os-rows]");
       const f = {
-        head: root.querySelector('[data-os-head]'),
-        meta: root.querySelector('[data-os-meta]'),
-        link: root.querySelector('[data-os-link]'),
-        note: root.querySelector('[data-os-note]'),
-        crumb: root.querySelector('[data-os-crumb]'),
+        head: root.querySelector("[data-os-head]"),
+        meta: root.querySelector("[data-os-meta]"),
+        link: root.querySelector("[data-os-link]"),
+        note: root.querySelector("[data-os-note]"),
+        crumb: root.querySelector("[data-os-crumb]"),
       };
 
       const el = (tag, cls, text) => {
@@ -574,34 +868,44 @@ const guarantees = [
         if (!rowsEl) return;
         rowsEl.replaceChildren();
         p.rows.forEach((r) => {
-          const li = el('li', 'os__row');
-          li.append(el('span', 'os__rn', r.n));
+          const li = el("li", "os__row");
+          li.append(el("span", "os__rn", r.n));
 
-          const main = el('div', 'os__rmain');
-          const namerow = el('div', 'os__rnamerow');
-          const name = el('span', 'os__rname' + (r.ext ? ' os__rname--link' : ''), r.name);
+          const main = el("div", "os__rmain");
+          const namerow = el("div", "os__rnamerow");
+          const name = el(
+            "span",
+            "os__rname" + (r.ext ? " os__rname--link" : ""),
+            r.name,
+          );
           if (r.ext) {
-            const ext = el('span', 'os__ext');
+            const ext = el("span", "os__ext");
             ext.innerHTML = extIcon;
             name.append(ext);
           }
           namerow.append(name);
-          if (r.badge) namerow.append(el('span', 'os__badge', r.badge));
-          main.append(namerow, el('div', 'os__rdetail', r.detail));
+          if (r.badge) namerow.append(el("span", "os__badge", r.badge));
+          main.append(namerow, el("div", "os__rdetail", r.detail));
           li.append(main);
 
-          const actions = el('div', 'os__ractions');
-          if (r.state === 'action') {
-            const btn = el('button', 'os__btn');
-            btn.type = 'button';
-            btn.append(el('span', 'os__btnplus', '+'), document.createTextNode(r.action));
+          const actions = el("div", "os__ractions");
+          if (r.state === "action") {
+            const btn = el("button", "os__btn");
+            btn.type = "button";
+            btn.append(
+              el("span", "os__btnplus", "+"),
+              document.createTextNode(r.action),
+            );
             actions.append(btn);
           } else {
-            const st = el('span', 'os__status os__status--' + r.state);
-            st.append(el('span', 'os__statustick', r.state === 'in' ? '✓' : '✕'), document.createTextNode(r.status));
+            const st = el("span", "os__status os__status--" + r.state);
+            st.append(
+              el("span", "os__statustick", r.state === "in" ? "✓" : "✕"),
+              document.createTextNode(r.status),
+            );
             actions.append(st);
           }
-          actions.append(el('span', 'os__pass', r.link));
+          actions.append(el("span", "os__pass", r.link));
           li.append(actions);
 
           rowsEl.append(li);
@@ -615,7 +919,7 @@ const guarantees = [
         if (f.link) f.link.textContent = p.link;
         if (f.crumb) f.crumb.textContent = p.label;
         if (f.note) {
-          f.note.textContent = p.note || '';
+          f.note.textContent = p.note || "";
           f.note.hidden = !p.note;
         }
         renderRows(p);
@@ -630,12 +934,14 @@ const guarantees = [
       // Move the glow to pillar n; swap the card in after `delay` (once the glow
       // has travelled, on auto-play; quickly, on hover).
       const activate = (n, delay) => {
-        diagram.style.setProperty('--i', String(n));
-        tile?.classList.add('is-swapping');
+        diagram.style.setProperty("--i", String(n));
+        tile?.classList.add("is-swapping");
         window.setTimeout(() => {
-          railItems.forEach((el, idx) => el.classList.toggle('is-active', idx === n));
+          railItems.forEach((el, idx) =>
+            el.classList.toggle("is-active", idx === n),
+          );
           fillTile(n);
-          tile?.classList.remove('is-swapping');
+          tile?.classList.remove("is-swapping");
         }, delay);
         i = n;
       };
@@ -650,19 +956,19 @@ const guarantees = [
           window.clearInterval(timer);
           if (idx !== i) activate(idx, 220);
         };
-        el.addEventListener('mouseenter', jump);
-        el.addEventListener('click', jump);
+        el.addEventListener("mouseenter", jump);
+        el.addEventListener("click", jump);
       });
-      rail?.addEventListener('mouseleave', () => {
+      rail?.addEventListener("mouseleave", () => {
         window.clearInterval(timer);
         timer = window.setInterval(step, CYCLE);
       });
     }
 
     /* ---- beats: each demo plays once, when it scrolls into view ---- */
-    const beats = Array.from(document.querySelectorAll('[data-beat]'));
+    const beats = Array.from(document.querySelectorAll("[data-beat]"));
     // Every name on this page is invented. No client project is ever named here.
-    const ASK = 'Who should see @Project Solís, and why?';
+    const ASK = "Who should see @Project Solís, and why?";
     const askMarkup =
       'Who should see <span class="chat__at">@Project Solís</span>, and why?';
 
@@ -674,7 +980,7 @@ const guarantees = [
           window.setTimeout(tick, 26);
         } else {
           node.innerHTML = askMarkup;
-          caret?.classList.add('is-done');
+          caret?.classList.add("is-done");
           done && done();
         }
       };
@@ -683,27 +989,27 @@ const guarantees = [
 
     const play = (beat) => {
       if (beat.dataset.played) return;
-      beat.dataset.played = '1';
-      beat.classList.add('is-live');
+      beat.dataset.played = "1";
+      beat.classList.add("is-live");
 
-      const target = beat.querySelector('[data-type]');
-      const caret = beat.querySelector('[data-caret]');
+      const target = beat.querySelector("[data-type]");
+      const caret = beat.querySelector("[data-caret]");
       if (target) typeInto(target, caret, ASK);
 
       // The one decisive click each surface asks for: Approve, Add.
-      if (beat.querySelector('[data-swap-in]')) {
-        window.setTimeout(() => beat.classList.add('is-swapped'), 2400);
+      if (beat.querySelector("[data-swap-in]")) {
+        window.setTimeout(() => beat.classList.add("is-swapped"), 2400);
       }
     };
 
-    if (reduceMotion || !('IntersectionObserver' in window)) {
+    if (reduceMotion || !("IntersectionObserver" in window)) {
       beats.forEach((b) => {
-        b.dataset.played = '1';
-        b.classList.add('is-live', 'is-instant', 'is-swapped');
-        const target = b.querySelector('[data-type]');
-        const caret = b.querySelector('[data-caret]');
+        b.dataset.played = "1";
+        b.classList.add("is-live", "is-instant", "is-swapped");
+        const target = b.querySelector("[data-type]");
+        const caret = b.querySelector("[data-caret]");
         if (target) target.innerHTML = askMarkup;
-        caret?.classList.add('is-done');
+        caret?.classList.add("is-done");
       });
     } else {
       const io = new IntersectionObserver(
@@ -715,7 +1021,7 @@ const guarantees = [
             }
           });
         },
-        { rootMargin: '0px 0px -12%', threshold: 0.25 },
+        { rootMargin: "0px 0px -12%", threshold: 0.25 },
       );
       beats.forEach((b) => io.observe(b));
     }
@@ -988,7 +1294,7 @@ const guarantees = [
       box-shadow: inset 0 0 0 1.5px var(--live);
     }
     .os__pillar.is-active .os__dot::after {
-      content: '';
+      content: "";
       position: absolute;
       inset: -4px;
       border-radius: 999px;
@@ -1053,7 +1359,7 @@ const guarantees = [
       color: var(--ink-3);
     }
     .os__chromepath::before {
-      content: '/';
+      content: "/";
       margin-right: 0.45rem;
       color: var(--hairline-2);
     }
@@ -1076,7 +1382,9 @@ const guarantees = [
       flex-direction: column;
       gap: 0.55rem;
       min-height: 13.5rem;
-      transition: opacity 380ms var(--ease-out), transform 380ms var(--ease-out);
+      transition:
+        opacity 380ms var(--ease-out),
+        transform 380ms var(--ease-out);
     }
     .os__tile.is-swapping {
       opacity: 0;

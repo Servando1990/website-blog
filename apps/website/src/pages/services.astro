@@ -1,0 +1,479 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Glyph from "../components/Glyph.astro";
+import { publishedCaseStudies } from "../lib/caseStudies";
+import {
+  bookingUrl,
+  serviceFocus,
+  testimonials,
+  trustedCompanies,
+} from "../lib/siteContent";
+
+const proofQuote = testimonials[0];
+
+const serviceStudyOrder = [
+  "ai-investor-matching-platform-capital-advisory",
+  "price-optimization-saas",
+  "ai-matching-engine-manufacturing",
+];
+
+const serviceStudies = serviceStudyOrder.flatMap((slug) => {
+  const study = publishedCaseStudies.find(
+    (candidate) => candidate.slug === slug,
+  );
+  return study ? [study] : [];
+});
+
+const deliverySteps = [
+  {
+    title: "Define the outcome",
+    summary:
+      "Start with the business decision, operating bottleneck, and observable result — not a predetermined technology stack.",
+  },
+  {
+    title: "Ship the first useful system",
+    summary:
+      "Build the smallest production path that connects the data, judgment, controls, and interface the team actually needs.",
+  },
+  {
+    title: "Operate and improve",
+    summary:
+      "Stay close after launch when the outcome requires an operated workflow, adoption support, or repeated improvement.",
+  },
+];
+---
+
+<Layout
+  title="Services | controlthrive"
+  description="Selected founder-led AI, data, and decision-system engagements for private-capital and adjacent operating teams."
+  ogImage="/api/og/home.png"
+  ogImageAlt="controlthrive services — founder-led AI and decision systems for high-context workflows."
+>
+  <Header />
+
+  <main>
+    <section class="services-hero">
+      <div class="wrap services-hero__grid">
+        <div>
+          <p class="services-hero__eyebrow reveal">
+            <span class="mono-label">Selective services · founder-led</span>
+          </p>
+          <h1 class="services-title reveal" style="--reveal-delay: 60ms">
+            AI systems for high-context workflows.
+          </h1>
+          <p class="services-lede reveal" style="--reveal-delay: 120ms">
+            controlthrive builds PA-OS and takes on a small number of separate
+            AI, data, and decision-system engagements. You work directly with
+            the founder from the operating problem to a production outcome.
+          </p>
+          <div class="services-actions reveal" style="--reveal-delay: 180ms">
+            <a
+              class="btn-ink"
+              href={bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-growth-cta="discuss-engagement"
+              data-growth-location="services-hero"
+              data-growth-wedge="services"
+            >
+              Discuss an engagement
+            </a>
+            <a class="link-quiet" href="/case-studies">See selected work</a>
+          </div>
+        </div>
+
+        <div
+          class="service-brief reveal"
+          style="--reveal-delay: 220ms"
+          aria-hidden="true"
+        >
+          <div class="service-brief__bar">
+            <Glyph size={14} />
+            <span>Engagement brief</span>
+            <span>founder-owned</span>
+          </div>
+          <dl>
+            <div>
+              <dt>Start with</dt>
+              <dd>A decision or workflow tied to a business outcome</dd>
+            </div>
+            <div>
+              <dt>Working mode</dt>
+              <dd>
+                Direct access, short feedback loops, production from the start
+              </dd>
+            </div>
+            <div>
+              <dt>What ships</dt>
+              <dd>
+                Software, orchestration, controls, and an operating handoff
+              </dd>
+            </div>
+            <div>
+              <dt>After launch</dt>
+              <dd>
+                Handoff, adoption support, or an operated improvement loop
+              </dd>
+            </div>
+          </dl>
+          <div class="service-brief__result">
+            <span>Measure of success</span>
+            <strong
+              >A real team can use it to produce the intended outcome.</strong
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof" aria-label="Selected founder experience">
+      <div class="wrap proof__row">
+        <span class="mono-label">Experience across</span>
+        <div class="proof__names">
+          {trustedCompanies.map((company) => <span>{company}</span>)}
+          <span>MVV Capital Partners</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">01</span>
+          <span class="sec-head__label">Good problems to bring</span>
+        </header>
+
+        <h2 class="sec-title reveal">
+          Work where context and judgment matter.
+        </h2>
+        <p class="sec-lede reveal" style="--reveal-delay: 60ms">
+          The strongest engagements have a clear operator, consequential
+          decisions, fragmented evidence, and a path from prototype to
+          day-to-day use.
+        </p>
+
+        <ul class="svc-list" style="margin-top: clamp(2rem, 5vw, 3rem)">
+          {
+            serviceFocus.map((item, index) => (
+              <li
+                class="svc-row reveal"
+                style={`--reveal-delay: ${index * 70}ms`}
+              >
+                <div class="svc-row__lead">
+                  <span class="svc-row__num">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3>{item.title}</h3>
+                </div>
+                <div class="svc-row__copy">
+                  <p>{item.summary}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">02</span>
+          <span class="sec-head__label">How the work moves</span>
+        </header>
+
+        <h2 class="sec-title reveal">
+          Outcome first. Working software quickly.
+        </h2>
+        <div class="delivery-list">
+          {
+            deliverySteps.map((step, index) => (
+              <article class="reveal" style={`--reveal-delay: ${index * 70}ms`}>
+                <span class="mono-label">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3>{step.title}</h3>
+                <p>{step.summary}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">03</span>
+          <span class="sec-head__label">Selected work</span>
+        </header>
+
+        <div class="work-list">
+          {
+            serviceStudies.map((study) => (
+              <article class="work-row reveal">
+                <div class="work-row__meta">
+                  <span class="mono-label">{study.industry}</span>
+                  <p class="work-row__outcome">{study.featuredOutcome}</p>
+                </div>
+                <div class="work-row__body">
+                  <h2>
+                    <a href={`/case-studies/${study.slug}`}>{study.title}</a>
+                  </h2>
+                  <p>{study.cardSummary}</p>
+                  <div class="work-row__links">
+                    <a class="link-quiet" href={`/case-studies/${study.slug}`}>
+                      Read case study
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="product-cta reveal">
+          <a class="btn-line" href="/case-studies">See all work</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">04</span>
+          <span class="sec-head__label">Client perspective</span>
+        </header>
+
+        <blockquote class="quote-feature reveal">
+          <p>“{proofQuote.quote}”</p>
+          <cite class="quote-cite">
+            <strong>{proofQuote.name}</strong>
+            <span>{proofQuote.role} · {proofQuote.company}</span>
+          </cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <CtaBand
+      index="05"
+      title="Bring the outcome, not a specification."
+      copy="Share the decision, bottleneck, and operating reality behind the system you need. We can determine whether there is a focused path to production."
+      showPrinciples={false}
+      primaryHref={bookingUrl}
+      primaryLabel="Discuss an engagement"
+      primaryExternal={true}
+      secondaryHref="/case-studies"
+      secondaryLabel="See selected work"
+    />
+  </main>
+
+  <Footer />
+
+  <script>
+    const revealElements = document.querySelectorAll<HTMLElement>(".reveal");
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      revealElements.forEach((el) => el.classList.add("is-visible"));
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: "0px 0px -8%", threshold: 0.1 },
+      );
+      revealElements.forEach((el) => observer.observe(el));
+    }
+  </script>
+</Layout>
+
+<style>
+  .services-hero {
+    padding-block: clamp(4rem, 9vw, 7rem) clamp(3.5rem, 8vw, 6rem);
+  }
+
+  .services-hero__grid {
+    display: grid;
+    gap: clamp(3rem, 7vw, 5rem);
+    align-items: center;
+  }
+
+  @media (min-width: 960px) {
+    .services-hero__grid {
+      grid-template-columns: minmax(0, 6.5fr) minmax(23rem, 5.5fr);
+    }
+  }
+
+  .services-hero__eyebrow {
+    margin-bottom: 1.5rem;
+  }
+
+  .services-title {
+    max-width: 11ch;
+    color: var(--ink);
+    font-size: clamp(2.7rem, 6vw, 5rem);
+    font-weight: 500;
+    letter-spacing: -0.055em;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  .services-lede {
+    max-width: 39rem;
+    margin-top: 1.6rem;
+    color: var(--ink-2);
+    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+    line-height: 1.65;
+  }
+
+  .services-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .service-brief {
+    width: 100%;
+    max-width: 31rem;
+    justify-self: center;
+    overflow: hidden;
+    border: 1px solid var(--hairline-2);
+    border-radius: var(--radius-pane);
+    background: var(--surface);
+    box-shadow: var(--shadow-pane);
+  }
+
+  @media (min-width: 960px) {
+    .service-brief {
+      justify-self: end;
+    }
+  }
+
+  .service-brief__bar {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    min-height: 2.85rem;
+    padding-inline: 1rem;
+    border-bottom: 1px solid var(--hairline);
+    color: var(--ink);
+    font-size: 0.78rem;
+  }
+
+  .service-brief__bar > :last-child {
+    margin-left: auto;
+    color: var(--ink-3);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .service-brief dl {
+    margin: 0;
+    padding: 0 1rem;
+  }
+
+  .service-brief dl > div {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .service-brief dt {
+    color: var(--ink-3);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .service-brief dd {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  .service-brief__result {
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: calc(var(--radius-pane) - 0.35rem);
+    background: var(--ink);
+    color: var(--canvas);
+  }
+
+  .service-brief__result span {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    opacity: 0.68;
+  }
+
+  .service-brief__result strong {
+    display: block;
+    margin-top: 0.45rem;
+    font-size: 0.84rem;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .delivery-list {
+    display: grid;
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    border-top: 1px solid var(--hairline-2);
+  }
+
+  @media (min-width: 780px) {
+    .delivery-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .delivery-list article {
+    padding: 1.8rem 0;
+    border-bottom: 1px solid var(--hairline-2);
+  }
+
+  @media (min-width: 780px) {
+    .delivery-list article {
+      padding: 2rem 2.2rem 2rem 0;
+    }
+
+    .delivery-list article + article {
+      padding-left: 2.2rem;
+      border-left: 1px solid var(--hairline-2);
+    }
+  }
+
+  .delivery-list h3 {
+    margin-top: 1rem;
+    color: var(--ink);
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .delivery-list p {
+    margin-top: 0.8rem;
+    color: var(--ink-2);
+    line-height: 1.65;
+  }
+</style>
