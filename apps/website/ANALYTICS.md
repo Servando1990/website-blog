@@ -12,6 +12,19 @@ The website measures one business path:
 - Incoming UTM attribution is retained for the browser session and passed to
   Cal.com. No name, email, CRM data, or other visitor-level PII is added.
 
+### Event contract
+
+| Field | Source | Values in use |
+| --- | --- | --- |
+| `cta_id` | `data-growth-cta` | `join-design-partners`, `talk-to-founder`, `discuss-engagement` |
+| `cta_location` | `data-growth-location` | the page section that produced the click |
+| `offer_wedge` | `data-growth-wedge` | `relationship-book`, `live-mandate`, `founding-partner`, `services` |
+| `page_path` | current path | — |
+| `campaign_id` | `utm_campaign` | `(not set)` when absent |
+| `content_id` | `utm_content` | `(not set)` when absent |
+
+## Google Tag Manager
+
 The current GA4 measurement id remains the fallback, so CTA tracking works
 immediately. To move tag administration into Google Tag Manager, set:
 
@@ -30,6 +43,11 @@ container and publish it. Then add:
    recommended event `generate_lead`.
 5. Mark `generate_lead` as a GA4 key event.
 
+Set `PUBLIC_GTM_ID` in Vercel only after the container is published.
+
 Use GA4 DebugView and GTM Preview to verify both events before publishing the
 container. Founding Growth reads these aggregate events; Slack is optional and
 should notify only on a confirmed booking, never on ordinary visits or clicks.
+
+Cal.com's setup reference:
+<https://cal.com/help/bookings/analytics>
