@@ -4,7 +4,7 @@
 
 /* ------------------------------------------------------------------
    controlthrive — quiet OS design system
-   Borrowed from the PA-OS surface language: quiet monochrome, hairline
+   Borrowed from the Paos surface language: quiet monochrome, hairline
    borders, soft radii. State is weight and dots, never color floods.
    One accent (the blue dot), used only where the product is live.
    ------------------------------------------------------------------ */
@@ -128,6 +128,10 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-3);
+}
+
+.brand-name {
+  text-transform: none;
 }
 
 .btn-ink,
@@ -536,7 +540,7 @@
 }
 
 /* ---------------------------------------------------------------
-   The collage — three real PA-OS surfaces on one vanishing point,
+   The collage — three real Paos surfaces on one vanishing point,
    with the provenance wired through them. The depth is the form;
    the wires are the argument.
    --------------------------------------------------------------- */
@@ -769,7 +773,7 @@
 
 /* ---------------------------------------------------------------
    Review-queue vignette — the product, shown not told.
-   A pixel-crafted recreation of the PA-OS review surface.
+   A pixel-crafted recreation of the Paos review surface.
    --------------------------------------------------------------- */
 
 .rq {
@@ -925,7 +929,7 @@
 }
 
 /* ---------------------------------------------------------------
-   Contrast — the raise today, beside the raise on PA-OS
+   Contrast — the raise today, beside the raise on Paos
    --------------------------------------------------------------- */
 
 .contrast {
@@ -1029,7 +1033,7 @@
 }
 
 /* ---------------------------------------------------------------
-   Product onboarding — how PA-OS starts on a firm's real book
+   Product onboarding — how Paos starts on a firm's real book
    --------------------------------------------------------------- */
 
 .lane {

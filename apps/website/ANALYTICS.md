@@ -1,4 +1,4 @@
-# PA-OS website tracking
+# Paos website tracking
 
 The website measures one business path:
 

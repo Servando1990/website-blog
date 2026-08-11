@@ -25,9 +25,9 @@ const pillars = [
     flag: "",
     icon: svg('<circle cx="7" cy="7" r="4"/><path d="M10.2 10.2 14 14"/>'),
     head: "Investor discovery · Project Meridian",
-    meta: "8 reviewable of 12 found · 19 Jul 2026",
+    meta: "8 ready to review · 4 need more evidence · 19 Jul 2026",
     link: "Open mandate",
-    note: "4 candidates withheld — no source evidence, so PA-OS won’t present them for approval.",
+    note: "4 candidates left out because their claims could not be verified.",
     rows: [
       {
         n: "1",
@@ -62,15 +62,15 @@ const pillars = [
     ],
   },
   {
-    label: "Standardize",
+    label: "Organize",
     flag: "",
     icon: svg(
       '<path d="M2.5 3.5h11"/><path d="M4.6 6v6.5M8 6v6.5M11.4 6v6.5"/>',
     ),
     head: "Mandate extraction · Project Meridian",
-    meta: "9 fields typed · 2 flagged · 19 Jul 2026",
+    meta: "9 details captured · 2 need review · 19 Jul 2026",
     link: "Open mandate",
-    note: "2 low-confidence fields — quoted to source, flagged for your review.",
+    note: "2 details need review — Paos shows the source page for each one.",
     rows: [
       {
         n: "1",
@@ -113,7 +113,7 @@ const pillars = [
     head: "Investor matching · Project Meridian",
     meta: "top 3 of 60 ranked · 19 Jul 2026",
     link: "Open mandate",
-    note: "Hartree excluded — standing policy, in its own words. No prompt lifts that.",
+    note: "Hartree excluded — your standing policy always takes priority.",
     rows: [
       {
         n: "1",
@@ -152,9 +152,9 @@ const pillars = [
     flag: "In build",
     icon: svg('<path d="M14 2 7 9"/><path d="M14 2 9.5 14 7 9 2 6.5 14 2z"/>'),
     head: "Outreach drafts · Project Meridian",
-    meta: "mailbox-native · drafts only",
+    meta: "drafts in your mailbox · never sent automatically",
     link: "Open drafts",
-    note: "In build. When it ships it drafts into your own mailbox — PA-OS has no send path, by design.",
+    note: "In build. When it ships, every draft will wait in your mailbox for you to review and send.",
     rows: [
       {
         n: "1",
@@ -243,32 +243,32 @@ const initial = pillars[start];
 const guarantees = [
   {
     title: "The send button stays yours.",
-    copy: "Campaign drafting is in build. That layer is designed without an autonomous send path: drafts will wait in your own mailbox for you to send.",
+    copy: "Campaign drafting is in build. When it ships, drafts will wait in your own mailbox. Paos will never send investor outreach without you.",
   },
   {
-    title: "Every change asks you first.",
-    copy: "A new firm, a corrected field, a logged pass — each one waits in For review with the old value beside the new one and the words behind it.",
+    title: "Every change waits for your review.",
+    copy: "A new firm, a corrected detail, or a logged pass only updates the book after you approve it. Paos shows what will change and why.",
   },
   {
-    title: "An honest blank over a confident guess.",
-    copy: "“SPAC sponsor” has no defensible type, so the field stays empty and PA-OS names the word it could not place rather than inventing one.",
+    title: "Unclear data stays clearly marked.",
+    copy: "If Paos cannot confidently categorize “SPAC sponsor,” it leaves the category open for review instead of guessing.",
   },
   {
-    title: "It shows you its own edges.",
-    copy: "When nobody recorded an outcome, PA-OS says so rather than filling the blank. You see what was recorded, and what never was.",
+    title: "It tells you what the data cannot answer.",
+    copy: "When nobody recorded an outcome, Paos says so. It never fills a gap with an invented answer.",
   },
   {
     title: "The book stays the firm’s.",
-    copy: "Your broker-dealer keeps you compliant, your CRM keeps names, and everything PA-OS produces exports in full, any time you ask.",
+    copy: "Your broker-dealer keeps you compliant, your CRM keeps names, and everything Paos produces exports in full, any time you ask.",
   },
 ];
 ---
 
 <Layout
-  title="PA-OS — the operating system for placement agents"
-  description="PA-OS runs the raise on one evidence-backed workflow: search, standardization, matching, and reporting, with campaign drafting in build. Closed beta."
+  title="Paos — the operating system for placement agents"
+  description="Paos brings investor discovery, a clean investor book, matching, and client reporting into one workflow, with campaign drafting in build. Closed beta."
   ogImage="/api/og/pa-os.png"
-  ogImageAlt="PA-OS — the operating system for placement agents: search, standardize, match, and report, with campaign drafting in build."
+  ogImageAlt="Paos — the operating system for placement agents: find investors, organize the book, match, and report, with campaign drafting in build."
 >
   <div class="pa">
     <!-- Slim bar: brand home, and the ask always one click away. -->
@@ -279,7 +279,8 @@ const guarantees = [
           <span class="mark__word">controlthrive</span>
         </a>
         <span class="pa-bar__chip"
-          ><i class="dot-live"></i>PA-OS · closed beta</span
+          ><i class="dot-live"></i><span class="brand-name">Paos</span> · closed
+          beta</span
         >
         <a
           class="btn-ink pa-bar__cta"
@@ -299,13 +300,16 @@ const guarantees = [
       <!-- Hero: the claim, then the product moving under it. -->
       <section class="pa-hero">
         <div class="pa-wrap">
-          <p class="tag"><i class="dot-live"></i>PA-OS · closed beta</p>
+          <p class="tag">
+            <i class="dot-live"></i><span class="brand-name">Paos</span> ·
+            closed beta
+          </p>
           <h1 class="pa-h1">The operating system for placement agents.</h1>
           <p class="pa-lede">
-            Your broker-dealer keeps you compliant. Your CRM keeps names. PA-OS
-            runs the raise as one evidence-backed workflow — from search and
-            standardization through matching and reporting, with campaign
-            drafting in build and a receipt behind every claim.
+            Your broker-dealer keeps you compliant. Your CRM keeps names. Paos
+            brings search, a clean investor book, matching, and reporting into
+            one workflow. Every recommendation shows its source, and campaign
+            drafting is still in build.
           </p>
           <div class="pa-actions">
             <a
@@ -328,7 +332,7 @@ const guarantees = [
           <section
             class="os"
             data-os
-            aria-label="PA-OS — the five jobs of a raise"
+            aria-label="Paos — the five jobs of a raise"
           >
             <div class="os__diagram" style={`--i:${start}`}>
               <div class="os__track" aria-hidden="true">
@@ -355,7 +359,7 @@ const guarantees = [
             <article class="os__win">
               <div class="os__chrome">
                 <span class="os__chromemark"><Glyph size={13} /></span>
-                <span class="os__chromeword">PA-OS</span>
+                <span class="os__chromeword">Paos</span>
                 <span class="os__chromepath" data-os-crumb>Search</span>
                 <span class="os__chromelive"><i class="dot-live"></i>live</span>
               </div>
@@ -432,13 +436,13 @@ const guarantees = [
             <h2 class="beat__title">Ask for it in your own words.</h2>
             <p class="beat__body">
               Type <strong>@</strong> and you get the real record, not a name that
-              nearly matches — so “Project Solis” never loses “Project Solís”. PA-OS
+              nearly matches — so “Project Solis” never loses “Project Solís”. Paos
               answers from your own book, and every claim links back to the row it
               came from.
             </p>
             <p class="beat__receipt">
-              workspace facts cited to workspace evidence · web facts cited to
-              dated sources
+              answers from your book link to your records · web research links
+              to dated sources
             </p>
           </div>
 
@@ -499,7 +503,7 @@ const guarantees = [
               changed.
             </p>
             <p class="beat__receipt">
-              no silent writes · every approval keeps an audit receipt
+              no silent changes · every approval is recorded
             </p>
           </div>
 
@@ -533,7 +537,7 @@ const guarantees = [
                     <span class="rev__dismiss">Dismiss</span>
                   </div>
                   <p class="rev__done" data-swap-in>
-                    ✓ Applied — audit receipt kept
+                    ✓ Applied — change recorded
                   </p>
                 </div>
 
@@ -541,7 +545,7 @@ const guarantees = [
                   <div class="rev__head">
                     <span class="rev__kind">New investor</span>
                     <span class="rev__src"
-                      >type left empty — “SPAC sponsor” could not be placed</span
+                      >category needs review — “SPAC sponsor” could not be placed</span
                     >
                   </div>
                   <p class="rev__claim">Gatewood Capital</p>
@@ -557,10 +561,9 @@ const guarantees = [
             <p class="beat__eyebrow"><span>03</span>Search</p>
             <h2 class="beat__title">Find the ones you don’t have yet.</h2>
             <p class="beat__body">
-              Ask for investors beyond your book and cited candidates come back
-              as decisions: open the source, see whether it’s new or a possible
-              duplicate, then Add or Pass. Add creates the firm and one
-              Identified pursuit in a single approved move.
+              Ask for investors beyond your book and every candidate comes back
+              with its sources and a clear next step. Check whether the firm is
+              new or a possible duplicate, then add it to the mandate or pass.
             </p>
             <p class="beat__receipt">
               names without evidence are withheld — the run says how many, and
@@ -573,12 +576,14 @@ const guarantees = [
               <div class="pane__bar">
                 <span class="pane__mark"><Glyph size={12} /></span>
                 <span class="pane__title">Discovery</span>
-                <span class="pane__meta">8 reviewable of 12 found</span>
+                <span class="pane__meta"
+                  >8 ready to review · 4 need more evidence</span
+                >
               </div>
               <div class="pane__body">
                 <p class="disc__note step" style="--d:150ms">
-                  4 candidates withheld — no source evidence. This run is marked
-                  partial.
+                  4 candidates left out because their claims could not be
+                  verified.
                 </p>
                 <ul class="disc__rows">
                   <li class="disc__row step" style="--d:350ms">
@@ -600,7 +605,7 @@ const guarantees = [
                       <span class="disc__pass">Pass</span>
                     </div>
                     <span class="disc__added" data-swap-in
-                      >✓ Added at Identified</span
+                      >✓ Added to Meridian</span
                     >
                   </li>
                   <li class="disc__row step" style="--d:500ms">
@@ -652,7 +657,7 @@ const guarantees = [
               Before you meet is assembled from your own records while you read
               it: where the relationship stands, what the firm has told you it
               will not do in its exact words, what it did on past raises — and,
-              in the same card, what PA-OS does not know.
+              in the same card, what Paos does not know.
             </p>
             <p class="beat__receipt">
               no status field to rot · nothing saved, nothing sent
@@ -699,7 +704,9 @@ const guarantees = [
                   class="brief__block brief__block--unknown step"
                   style="--d:650ms"
                 >
-                  <span class="brief__k">What PA-OS does not know</span>
+                  <span class="brief__k"
+                    >What <span class="brand-name">Paos</span> does not know</span
+                  >
                   <p class="brief__row">
                     Nobody logged an outcome on the 2 Feb call — listed, never
                     guessed.
@@ -812,7 +819,7 @@ const guarantees = [
             >
             <a
               class="btn-line"
-              href="mailto:servando@controlthrive.com?subject=PA-OS%20access"
+              href="mailto:servando@controlthrive.com?subject=Paos%20access"
               >Email the founder</a
             >
           </div>

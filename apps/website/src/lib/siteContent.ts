@@ -2,7 +2,7 @@ export const bookingUrl = 'https://cal.com/servando-torres-garcia-qco7rh/30min';
 
 export const navigation = [
   { href: '/', label: 'Home' },
-  { href: '/pa-os', label: 'PA-OS' },
+  { href: '/pa-os', label: 'Paos' },
   { href: '/design-partners', label: 'Design Partners' },
   { href: '/services', label: 'Services' },
   { href: '/case-studies', label: 'Work' },
@@ -14,22 +14,22 @@ export const designPartnerIncludes = [
   {
     title: 'Bring the book across',
     summary:
-      'We load CRM exports, decks, pipeline history, and relationship context into a reviewable operating base.',
+      'We bring CRM exports, decks, pipeline history, and relationship context into one working investor book.',
   },
   {
     title: 'Run a live mandate together',
     summary:
-      'We standardize the ask, review the investor shortlist, and produce the first client-ready output on real work.',
+      'We organize the mandate, review the investor shortlist, and produce the first client-ready output on real work.',
   },
   {
-    title: 'Calibrate the judgment',
+    title: 'Set your firm’s rules',
     summary:
-      'Your exclusions, preferences, relationship history, and review decisions become part of how PA-OS works for the firm.',
+      'Your exclusions, preferences, relationship history, and review decisions become part of how Paos works for the firm.',
   },
   {
     title: 'Stay close to the outcome',
     summary:
-      'Founder support stays included throughout the design partnership while the workflow and product mature together.',
+      'Direct founder support covers setup, the first operating run, and the path to a client-ready report.',
   },
 ];
 
@@ -37,12 +37,12 @@ export const serviceFocus = [
   {
     title: 'Decision systems',
     summary:
-      'Turn a high-context operating decision into software people can inspect, trust, and use under pressure.',
+      'Turn a complex business decision into software your team can inspect, trust, and use under pressure.',
   },
   {
     title: 'Data and AI workflows',
     summary:
-      'Connect fragmented data, agent reasoning, deterministic controls, and human review into one production path.',
+      'Connect fragmented data, AI-assisted decisions, reliable controls, and human review in one working system.',
   },
   {
     title: 'Operated outcomes',
@@ -55,37 +55,37 @@ export const trustedCompanies = ['BBVA', 'KPMG', 'PwC', 'Fintonic', 'Minsait'];
 
 export const productPillars = [
   {
-    title: 'Search — investor sourcing and enrichment',
+    title: 'Find investors beyond your book',
     summary:
-      'Live search agents find and enrich investors for a specific mandate, with every claim traced to a source you can open.',
+      'Paos searches for investors against a specific mandate and links every claim to a source you can open.',
     detail:
-      'The system works the mandate continuously — coverage stays current instead of decaying the way a bought list does.',
+      'Search continues as the mandate changes, so coverage stays current without buying another static list.',
   },
   {
-    title: 'Standardization — from messy book to typed records',
+    title: 'Turn scattered records into one clean book',
     summary:
-      'CSV exports, transcripts, and meeting notes become a typed, relational investor book through suggest-then-approve proposals.',
+      'CRM exports, transcripts, and meeting notes become one organized investor book that your team reviews before anything changes.',
     detail:
-      'The book feeds the CRM you already run instead of replacing it, and every mapping decision you make is remembered.',
+      'Paos works alongside your existing CRM and remembers how your firm organizes the book.',
   },
   {
-    title: 'Matching — mandate to ranked shortlist',
+    title: 'Match each mandate to the right investors',
     summary:
       'Mandates and deals crossed against your investor book produce qualified shortlists: who to approach, in what order, and why.',
     detail:
-      'Hard exclusions and do-not-contact rules are deterministic; the ranking reasoning stays visible and reviewable.',
+      'Hard exclusions and do-not-contact rules cannot be overridden, and the reason behind every recommendation remains visible.',
   },
   {
-    title: 'Campaigns — personalized outreach (in build)',
+    title: 'Prepare personalized outreach (in build)',
     summary:
-      'Matching results move into a campaign-ready handoff today. Mailbox-native drafting is the next layer being built.',
+      'Shortlists can move into your outreach process today. Drafting inside your own mailbox is the next layer being built.',
     detail:
-      'When it ships, drafts will wait in your own mailbox for approval. PA-OS will have no autonomous send path.',
+      'When it ships, drafts will wait in your own mailbox. Paos will never send investor outreach without you.',
   },
   {
-    title: 'Reporting — the work, made visible',
+    title: 'Produce client-ready reporting',
     summary:
-      'White-label activity and progress reports where every number traces to the record behind it.',
+      'Firm-branded activity and progress reports where every number traces to the record behind it.',
     detail:
       'What justifies and defends the retainer — generated from the same living book the other pillars keep current.',
   },
@@ -146,7 +146,7 @@ export const trustPrinciples = [
   {
     title: 'Evidence on every claim',
     summary:
-      'PA-OS keeps the source and reasoning beside the output so the team can review it before acting.',
+      'Paos keeps the source and reasoning beside the output so the team can review it before acting.',
   },
   {
     title: 'Review before changes',
@@ -156,7 +156,7 @@ export const trustPrinciples = [
   {
     title: 'Your book stays yours',
     summary:
-      'PA-OS works with the systems you already run, and the operating memory remains exportable.',
+      'Paos works with the systems you already run, and your relationship history remains exportable.',
   },
 ];
 
@@ -164,7 +164,7 @@ export const founderProfile = {
   paragraphs: [
     'My approach is built on high agency, deep ownership, and a bias toward tangible outcomes. Responsibility means staying with the work until there is a real result: something shipped, improved, clarified, automated, or made useful. I do not believe in vague promises or work that sounds impressive but never becomes value someone can actually feel.',
     'The business comes first. Tools are secondary. What matters is understanding the business context deeply enough to operate almost like an extension of the team: absorbing the domain knowledge, translating it into systems, and sharing progress repeatedly.',
-    'The best companies are becoming living knowledge bases. Every conversation, transcript, Slack message, decision, and customer interaction becomes part of the shared context that can help the product improve. My job is to capture that context and turn it into useful artifacts, workflows, and products that compound over time.',
+    'The best companies are becoming living knowledge bases. Every conversation, transcript, Slack message, decision, and customer interaction becomes part of the shared context that can help the product improve. My job is to capture that context and turn it into useful decisions, workflows, and products that get better over time.',
     'The goal matters more than the plan. Building has become faster, more fluid, and more dynamic, so alignment is everything. Once the destination is clear, the path can adapt quickly.',
     'The strongest partnerships are long-term ones where both sides are genuinely on the same side: thinking clearly, moving fast, and building something that keeps getting better.',
   ],

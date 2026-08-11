@@ -156,7 +156,7 @@ export const GET: APIRoute = async () => {
                   borderRadius: '999px',
                   background: colors.olive,
                 }),
-                div({}, 'PA-OS · CLOSED BETA'),
+                div({}, 'Paos · CLOSED BETA'),
               ]
             ),
             div(

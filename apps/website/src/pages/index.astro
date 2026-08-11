@@ -15,7 +15,7 @@ import {
 } from "../lib/siteContent";
 
 // The home page has one job: a placement agent lands here and knows, in one
-// screen, what PA-OS is and what controlthrive builds.
+// screen, what Paos is and what controlthrive builds.
 
 const featuredQuote = testimonials[0];
 const supportingQuotes = [testimonials[1], testimonials[3]];
@@ -26,35 +26,34 @@ const founderParagraphs = [
 ];
 
 // The contrast that makes the category obvious. Left is the job today; right
-// is the same job with PA-OS. Every right-hand line is something the product
+// is the same job with Paos. Every right-hand line is something the product
 // does now (business-translation.md).
 const contrast = [
   {
     today:
-      "Your book lives in a CRM export, a partner’s memory, and four spreadsheets.",
+      "Investor records are fragmented across CRM exports, spreadsheets, notes, and people.",
     withOs:
-      "One typed book, built from your own exports, with every mapping decision remembered.",
+      "One clean investor book your team can review, with every source and correction preserved.",
   },
   {
-    today: "A deck becomes a mandate by hand, and the numbers get retyped.",
+    today: "Deck terms are rekeyed before the mandate can be compared.",
     withOs:
-      "Drop the deck — the mandate comes back typed, each field quoted to its source page.",
+      "Upload the deck and review a mandate ready for matching, with every field linked to its source.",
   },
   {
-    today:
-      "Who to call next is a judgment nobody can reconstruct a month later.",
+    today: "Who to approach—and why—often remains undocumented.",
     withOs:
-      "A ranked shortlist with the argument and the evidence behind every name.",
+      "Review a ranked shortlist with an argument and evidence for every name.",
   },
   {
-    today: "The monthly client report is assembled by hand the week it is due.",
+    today: "Client reporting is rebuilt from scattered records.",
     withOs:
-      "The report generates from the same living book — versioned, under your firm’s logo.",
+      "Generate a firm-branded report from captured activity, with any missing data clearly called out.",
   },
   {
-    today: "The relationship memory walks out with whoever leaves.",
+    today: "Passes, restrictions, and outcomes disappear into notes.",
     withOs:
-      "The memory is the firm’s, on any broker-dealer, exportable in full, any time.",
+      "Keep approved relationship history attached to the firm and reuse it on the next mandate.",
   },
 ];
 
@@ -65,24 +64,24 @@ const rails = [
   },
   {
     title: "Every claim carries its source.",
-    copy: "A claim you cannot open the evidence for is withheld, and the run tells you how many were withheld and why.",
+    copy: "If a claim cannot be verified, Paos leaves it out and tells you why.",
   },
   {
     title: "Your judgment is the gate.",
-    copy: "Every change the agent wants stops in For review with the old value beside the new one.",
+    copy: "Every proposed change waits for your review, with what will change and why shown side by side.",
   },
   {
-    title: "Your book, your exit.",
-    copy: "PA-OS sits on top of the CRM and broker-dealer you already have. Everything exports in full.",
+    title: "Your reports travel with their evidence.",
+    copy: "Every report keeps the records behind its numbers, and those rows export to Excel or CSV.",
   },
 ];
 ---
 
 <Layout
-  title="PA-OS — the operating system for placement agents | controlthrive"
-  description="controlthrive builds PA-OS: the operating system for placement agents. Search, standardization, matching and reporting on one evidence-backed workflow, with campaign drafting in build. Closed beta."
+  title="Paos — the operating system for placement agents | controlthrive"
+  description="controlthrive builds Paos: one workflow for investor discovery, a clean investor book, matching, and client reporting. Campaign drafting is in build. Closed beta."
   ogImage="/api/og/home.png"
-  ogImageAlt="PA-OS by controlthrive — the operating system for placement agents."
+  ogImageAlt="Paos by controlthrive — the operating system for placement agents."
 >
   <Header />
 
@@ -93,17 +92,18 @@ const rails = [
         <div>
           <p class="hero__eyebrow reveal">
             <span class="hero__chip"
-              ><i class="dot-live"></i>PA-OS · Closed beta</span
+              ><i class="dot-live"></i><span class="brand-name">Paos</span> ·
+              Closed beta</span
             >
           </p>
           <h1 class="hero__title reveal" style="--reveal-delay: 60ms">
             The operating system for placement agents.
           </h1>
           <p class="hero__lede reveal" style="--reveal-delay: 120ms">
-            Your broker-dealer keeps you compliant. Your CRM keeps names. PA-OS
-            runs the raise as one evidence-backed workflow — from search and
-            standardization through matching and reporting, with campaign
-            drafting in build and nothing that sends itself.
+            Your broker-dealer keeps you compliant. Your CRM keeps names. Paos
+            brings search, a clean investor book, matching, and reporting into
+            one workflow, with a source behind every recommendation. Campaign
+            drafting is in build, and nothing sends itself.
           </p>
           <div class="hero__actions reveal" style="--reveal-delay: 180ms">
             <a
@@ -122,15 +122,15 @@ const rails = [
         </div>
 
         <p class="sr-only">
-          Preview of PA-OS: agents handle sourcing, standardization, matching,
-          campaign-ready handoff, and reporting — each one proposes a change
-          with cited evidence that a person approves before anything is written.
+          Preview of Paos: it finds investors, cleans the book, ranks matches,
+          prepares shortlists for outreach, and creates client reports. Every
+          recommendation includes a source, and a person approves changes
+          before they reach the book.
         </p>
 
         <!-- The product, collaged: the book behind, the ask floating over it,
-             the review card in front — one vanishing point. The wires are
-             ours: they run the provenance through the collage, from the ask
-             into the claim, and from the claim back to the row it came from. -->
+             the review card in front — one vanishing point. The wires connect
+             each recommendation to the record behind it. -->
         <div
           class="deck reveal"
           style="--reveal-delay: 240ms"
@@ -192,7 +192,7 @@ const rails = [
             <div class="rq deck__card deck__card--front" data-rq>
               <div class="rq__bar">
                 <Glyph size={14} />
-                <span class="rq__title">PA-OS · agents at work</span>
+                <span class="rq__title">Paos · agents at work</span>
                 <span class="rq__count"
                   ><i class="dot-live"></i><span data-rq-step>3 / 5</span></span
                 >
@@ -257,12 +257,13 @@ const rails = [
         </header>
 
         <h2 class="sec-title reveal">
-          Your CRM was built to store names. It was never built to run a raise.
+          Your CRM records the work. Paos helps run the raise.
         </h2>
         <p class="sec-lede reveal" style="--reveal-delay: 60ms">
-          A raise turns on five jobs, and every one of them is done today in a
-          spreadsheet, an inbox, or someone’s head. PA-OS is the layer that runs
-          them — and can show its work.
+          Teams still rebuild the same context across CRMs, spreadsheets,
+          inboxes, and individual memory. Paos carries the work from mandate
+          to shortlist to client report without starting over at each step.
+          Campaign drafting is still in build.
         </p>
 
         <div class="contrast">
@@ -280,7 +281,10 @@ const rails = [
           </div>
 
           <div class="contrast__col contrast__col--os">
-            <span class="mono-label"><i class="dot-live"></i>With PA-OS</span>
+            <span class="mono-label"
+              ><i class="dot-live"></i>With
+              <span class="brand-name">Paos</span></span
+            >
             <ul>
               {
                 contrast.map((row, index) => (
@@ -303,10 +307,11 @@ const rails = [
           <span class="sec-head__label">The product</span>
         </header>
 
-        <h2 class="sec-title reveal">One agent. The five jobs of a raise.</h2>
+        <h2 class="sec-title reveal">One system. The five jobs of a raise.</h2>
         <p class="sec-lede reveal" style="--reveal-delay: 60ms">
-          Not five tools bolted together — one operating memory the whole firm
-          works from, in plain language, on top of the systems you already run.
+          Not five tools bolted together — one shared investor book the whole
+          firm can work from, in plain language, alongside the systems you
+          already run.
         </p>
 
         <ul class="svc-list" style="margin-top: clamp(2rem, 5vw, 3rem)">
@@ -347,20 +352,20 @@ const rails = [
       </div>
     </section>
 
-    <!-- 03 The rails -->
+    <!-- 03 Built-in safeguards -->
     <section class="section section--ruled" id="how">
       <div class="wrap">
         <header class="sec-head">
           <span class="sec-head__index">03</span>
-          <span class="sec-head__label">The rails</span>
+          <span class="sec-head__label">Built-in safeguards</span>
         </header>
 
         <h2 class="sec-title reveal">
-          Agentic where it helps. Deterministic where it counts.
+          AI does the work. Your rules stay in control.
         </h2>
         <p class="sec-lede reveal" style="--reveal-delay: 60ms">
-          An agent inside a regulated workflow is only useful if it cannot
-          surprise you. Four product rules govern what the system may do.
+          Paos can research, organize, and recommend without taking decisions
+          away from your team. Four safeguards govern every action.
         </p>
 
         <ul class="rails">
@@ -427,9 +432,9 @@ const rails = [
               The product, with the founder beside you.
             </h2>
             <p class="sec-lede reveal" style="--reveal-delay: 60ms">
-              Early design partners get PA-OS plus hands-on support on a real
-              investor book and live mandates. We produce the first outcomes
-              together while the workflow and product mature side by side.
+              Early design partners get Paos set up on a real investor book and
+              live mandate, with direct founder support through the first
+              reviewed shortlist and client-ready report.
             </p>
             <div class="lane__actions reveal" style="--reveal-delay: 120ms">
               <a
@@ -461,7 +466,7 @@ const rails = [
       </div>
     </section>
 
-    <!-- 06 Selective services — visible, but secondary to PA-OS. -->
+    <!-- 06 Selective services — visible, but secondary to Paos. -->
     <section class="section section--ruled" id="services">
       <div class="wrap">
         <header class="sec-head">
@@ -475,7 +480,7 @@ const rails = [
               A small number of systems, built founder-to-founder.
             </h2>
             <p class="sec-lede reveal" style="--reveal-delay: 60ms">
-              Outside the PA-OS market, controlthrive takes on selected AI,
+              Outside the Paos market, controlthrive takes on selected AI,
               data, and decision-system engagements. The work is direct,
               production-focused, and accountable to a business outcome.
             </p>
@@ -525,8 +530,8 @@ const rails = [
 
     <CtaBand
       index="08"
-      title="Run one live mandate with PA-OS."
-      copy="Design partners get the product plus founder-led support on their own investor book, live mandates, and first operating outcomes."
+      title="Run one live mandate with Paos."
+      copy="Design partners get Paos plus direct founder support through the first reviewed shortlist and client-ready report."
     />
   </main>
 
@@ -562,23 +567,24 @@ const rails = [
     const pillars = [
       {
         kind: "Search",
-        receipt: "cited",
+        receipt: "sources attached",
         claim: "Found 12 investors beyond your book for the Meridian mandate.",
         evidence: "each one opens its source · 4 withheld, no evidence",
         foot: "a name without a source never reaches this list",
         logged: "✓ Added to mandate — decision logged",
       },
       {
-        kind: "Standardization",
-        receipt: "sourced",
-        claim: "Turned the pitch deck into a typed, provenance-quoted mandate.",
+        kind: "Organize",
+        receipt: "deck checked",
+        claim:
+          "Turned the pitch deck into a mandate ready for matching, with every field linked to its source.",
         evidence: "deck p.4 — “seeking €40 million in commitments”",
         foot: "every field opens the page it was read from",
         logged: "✓ Mandate created — decision logged",
       },
       {
         kind: "Matching",
-        receipt: "cited",
+        receipt: "records attached",
         claim:
           "Ranked 312 investors — who to approach, in what order, and why.",
         evidence: "Rockmont leads · committed €18M on Aurora, 2024",
@@ -587,7 +593,7 @@ const rails = [
       },
       {
         kind: "Before you meet",
-        receipt: "derived",
+        receipt: "from your records",
         claim: "Assembled the pre-meeting brief for Larkmere Capital.",
         evidence: "“No US deals. That is firm policy.” · their words, 14 Mar",
         foot: "worked out from your records, nothing saved, nothing sent",
@@ -595,7 +601,7 @@ const rails = [
       },
       {
         kind: "Reporting",
-        receipt: "traceable",
+        receipt: "records attached",
         claim: "Built this month’s client report under your firm’s logo.",
         evidence: "€40M across 8 investors · rows travel as XLSX",
         foot: "every figure opens the rows it was counted from",
