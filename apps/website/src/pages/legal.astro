@@ -1,0 +1,156 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout
+  title="Legal & privacy | controlthrive"
+  description="Company and privacy information for controlthrive, operated by Control Thrive Ltd."
+>
+  <Header />
+
+  <main>
+    <section class="page-intro">
+      <div class="wrap">
+        <span class="mono-label">Company information</span>
+        <h1 class="page-title">Legal & privacy.</h1>
+        <p class="page-lede">
+          controlthrive is operated by Control Thrive Ltd, a company registered
+          in England and Wales.
+        </p>
+      </div>
+    </section>
+
+    <section class="legal-section">
+      <div class="wrap legal-grid">
+        <article class="legal-block">
+          <span class="mono-label">Registered company</span>
+          <h2>Control Thrive Ltd</h2>
+          <dl>
+            <div>
+              <dt>Company number</dt>
+              <dd>15706238</dd>
+            </div>
+            <div>
+              <dt>Registered office</dt>
+              <dd>
+                <address>
+                  71–75 Shelton Street<br />
+                  Covent Garden<br />
+                  London WC2H 9JQ<br />
+                  United Kingdom
+                </address>
+              </dd>
+            </div>
+          </dl>
+        </article>
+
+        <article class="legal-block">
+          <span class="mono-label">Privacy</span>
+          <h2>Simple, business-only use.</h2>
+          <p>
+            If you email us or book a call, we use the information you provide
+            to respond and manage that conversation. Booking links are handled
+            by Cal.com.
+          </p>
+          <p>
+            This website uses basic analytics to understand visits and improve
+            the site. For questions about your information, email
+            <a href="mailto:servando@controlthrive.com"
+              >servando@controlthrive.com</a
+            >.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .legal-section {
+    border-top: 1px solid var(--hairline);
+    padding-block: 0 clamp(4rem, 9vw, 7rem);
+  }
+
+  .legal-grid {
+    display: grid;
+  }
+
+  .legal-block {
+    padding-block: clamp(2.5rem, 6vw, 4rem);
+    border-top: 1px solid var(--hairline);
+  }
+
+  .legal-block:first-child {
+    border-top: 0;
+  }
+
+  .legal-block h2 {
+    margin-top: 1rem;
+    font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .legal-block p,
+  .legal-block dd {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--ink-2);
+  }
+
+  .legal-block p {
+    max-width: 34rem;
+    margin-top: 1rem;
+  }
+
+  .legal-block a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--hairline-2);
+    text-underline-offset: 0.2em;
+  }
+
+  .legal-block dl {
+    margin-top: 1.6rem;
+  }
+
+  .legal-block dl > div {
+    display: grid;
+    gap: 0.4rem;
+    padding-block: 1rem;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .legal-block dt {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+
+  .legal-block address {
+    font-style: normal;
+  }
+
+  @media (min-width: 760px) {
+    .legal-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(3rem, 8vw, 7rem);
+    }
+
+    .legal-block {
+      border-top: 0;
+    }
+
+    .legal-block dl > div {
+      grid-template-columns: 8rem minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+  }
+</style>

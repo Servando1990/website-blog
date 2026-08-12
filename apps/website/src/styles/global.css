@@ -1635,11 +1635,20 @@
   padding-top: 1.3rem;
   border-top: 1px solid var(--hairline);
 }
-.footer-meta span {
+.footer-meta span,
+.footer-meta a {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   letter-spacing: 0.03em;
   color: var(--ink-3);
+}
+
+.footer-meta a {
+  transition: color 120ms var(--ease-out);
+}
+
+.footer-meta a:hover {
+  color: var(--ink);
 }
 
 /* ---------------------------------------------------------------
