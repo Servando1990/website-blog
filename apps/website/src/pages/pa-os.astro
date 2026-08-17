@@ -4,9 +4,7 @@ import Glyph from "../components/Glyph.astro";
 import { bookingUrl } from "../lib/siteContent";
 
 // The cold-outreach pager. One job: a placement agent reads this in two
-// minutes and agrees to a screen share. Everything shown here is something
-// the product actually does today (see business-translation.md); the one
-// pillar still in build says so on its own card.
+// minutes and agrees to a screen share.
 
 const svg = (paths: string) =>
   `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
@@ -149,12 +147,12 @@ const pillars = [
   },
   {
     label: "Campaigns",
-    flag: "In build",
+    flag: "",
     icon: svg('<path d="M14 2 7 9"/><path d="M14 2 9.5 14 7 9 2 6.5 14 2z"/>'),
     head: "Outreach drafts · Project Meridian",
     meta: "drafts in your mailbox · never sent automatically",
     link: "Open drafts",
-    note: "In build. When it ships, every draft will wait in your mailbox for you to review and send.",
+    note: "Every draft is grounded in the mandate and your relationship history, then waits in your mailbox for review.",
     rows: [
       {
         n: "1",
@@ -243,7 +241,7 @@ const initial = pillars[start];
 const guarantees = [
   {
     title: "The send button stays yours.",
-    copy: "Campaign drafting is in build. When it ships, drafts will wait in your own mailbox. Paos will never send investor outreach without you.",
+    copy: "Every draft waits in your own mailbox for you to review, edit, and send. Paos never sends investor outreach without you.",
   },
   {
     title: "Every change waits for your review.",
@@ -265,16 +263,16 @@ const guarantees = [
 ---
 
 <Layout
-  title="Paos — the operating system for placement agents"
-  description="Paos brings investor discovery, a clean investor book, matching, and client reporting into one workflow, with campaign drafting in build. Closed beta."
+  title="Paos — the operating system for placement agents | Controlthrive Studios"
+  description="Controlthrive Studios is building Paos. The operating system for placement agents — from mandate to matched investors, personalized outreach, and client reporting. Closed beta."
   ogImage="/api/og/pa-os.png"
-  ogImageAlt="Paos — the operating system for placement agents: find investors, organize the book, match, and report, with campaign drafting in build."
+  ogImageAlt="Paos by Controlthrive Studios — the operating system for placement agents."
 >
   <div class="pa">
     <!-- Slim bar: brand home, and the ask always one click away. -->
     <header class="pa-bar">
       <div class="pa-bar__inner">
-        <a class="mark" href="/" aria-label="controlthrive home">
+        <a class="mark" href="/" aria-label="Controlthrive Studios home">
           <span class="mark__glyph"><Glyph size={15} /></span>
           <span class="mark__word">controlthrive</span>
         </a>
@@ -306,10 +304,8 @@ const guarantees = [
           </p>
           <h1 class="pa-h1">The operating system for placement agents.</h1>
           <p class="pa-lede">
-            Your broker-dealer keeps you compliant. Your CRM keeps names. Paos
-            brings search, a clean investor book, matching, and reporting into
-            one workflow. Every recommendation shows its source, and campaign
-            drafting is still in build.
+            Your CRM stores names. Paos runs the raise—from mandate to matched
+            investors, personalized outreach, and client reporting.
           </p>
           <div class="pa-actions">
             <a
@@ -833,7 +829,7 @@ const guarantees = [
 
     <footer class="pa-foot">
       <div class="pa-wrap pa-foot__row">
-        <a class="mark" href="/" aria-label="controlthrive home">
+        <a class="mark" href="/" aria-label="Controlthrive Studios home">
           <span class="mark__glyph"><Glyph size={14} /></span>
           <span class="mark__word">controlthrive</span>
         </a>

@@ -2,84 +2,41 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import CtaBand from "../components/CtaBand.astro";
 import Glyph from "../components/Glyph.astro";
 import {
   bookingUrl,
-  designPartnerIncludes,
   founderProfile,
   productPillars,
-  serviceFocus,
-  testimonials,
   trustedCompanies,
 } from "../lib/siteContent";
-
-// The home page has one job: a placement agent lands here and knows, in one
-// screen, what Paos is and what controlthrive builds.
-
-const featuredQuote = testimonials[0];
-const supportingQuotes = [testimonials[1], testimonials[3]];
 
 const founderParagraphs = [
   founderProfile.paragraphs[0],
   founderProfile.paragraphs[2],
 ];
 
-// The contrast that makes the category obvious. Left is the job today; right
-// is the same job with Paos. Every right-hand line is something the product
-// does now (business-translation.md).
-const contrast = [
-  {
-    today:
-      "Investor records are fragmented across CRM exports, spreadsheets, notes, and people.",
-    withOs:
-      "One clean investor book your team can review, with every source and correction preserved.",
-  },
-  {
-    today: "Deck terms are rekeyed before the mandate can be compared.",
-    withOs:
-      "Upload the deck and review a mandate ready for matching, with every field linked to its source.",
-  },
-  {
-    today: "Who to approach—and why—often remains undocumented.",
-    withOs:
-      "Review a ranked shortlist with an argument and evidence for every name.",
-  },
-  {
-    today: "Client reporting is rebuilt from scattered records.",
-    withOs:
-      "Generate a firm-branded report from captured activity, with any missing data clearly called out.",
-  },
-  {
-    today: "Passes, restrictions, and outcomes disappear into notes.",
-    withOs:
-      "Keep approved relationship history attached to the firm and reuse it on the next mandate.",
-  },
+// The home page has one job: a placement agent lands here and knows, in one
+// screen, what Paos is and what controlthrive builds.
+
+const raiseStages = [
+  { label: "Mandate", value: "Ready" },
+  { label: "Search", value: "12 sourced" },
+  { label: "Matching", value: "Ranked" },
+  { label: "Outreach", value: "Drafted" },
+  { label: "Reporting", value: "Current" },
 ];
 
-const rails = [
-  {
-    title: "The send button stays yours.",
-    copy: "Campaign drafting is in build. It is designed without an autonomous send path: drafts will wait in your own mailbox for you to send.",
-  },
-  {
-    title: "Every claim carries its source.",
-    copy: "If a claim cannot be verified, Paos leaves it out and tells you why.",
-  },
-  {
-    title: "Your judgment is the gate.",
-    copy: "Every proposed change waits for your review, with what will change and why shown side by side.",
-  },
-  {
-    title: "Your reports travel with their evidence.",
-    copy: "Every report keeps the records behind its numbers, and those rows export to Excel or CSV.",
-  },
+const partnerSnapshot = [
+  { title: "Your data", copy: "Investor book and mandates brought across." },
+  { title: "One live raise", copy: "From shortlist to client report." },
+  { title: "Founder support", copy: "Direct setup and iteration." },
 ];
+
 ---
 
 <Layout
   title="Paos — the operating system for placement agents | controlthrive"
-  description="controlthrive builds Paos: one workflow for investor discovery, a clean investor book, matching, and client reporting. Campaign drafting is in build. Closed beta."
+  description="Paos runs the raise from mandate to matched investors, outreach, and client reporting. Closed beta."
   ogImage="/api/og/home.png"
   ogImageAlt="Paos by controlthrive — the operating system for placement agents."
 >
@@ -97,13 +54,11 @@ const rails = [
             >
           </p>
           <h1 class="hero__title reveal" style="--reveal-delay: 60ms">
-            The operating system for placement agents.
+            Your CRM stores names. Paos runs the raise.
           </h1>
           <p class="hero__lede reveal" style="--reveal-delay: 120ms">
-            Your broker-dealer keeps you compliant. Your CRM keeps names. Paos
-            brings search, a clean investor book, matching, and reporting into
-            one workflow, with a source behind every recommendation. Campaign
-            drafting is in build, and nothing sends itself.
+            The operating system for placement agents—from investor search and
+            matching to outreach and client reporting.
           </p>
           <div class="hero__actions reveal" style="--reveal-delay: 180ms">
             <a
@@ -115,17 +70,16 @@ const rails = [
               data-growth-location="home-hero"
               data-growth-wedge="relationship-book"
             >
-              Join the design-partner program
+              Run a live mandate
             </a>
             <a class="link-quiet" href="/pa-os">See the product</a>
           </div>
         </div>
 
         <p class="sr-only">
-          Preview of Paos: it finds investors, cleans the book, ranks matches,
-          prepares shortlists for outreach, and creates client reports. Every
-          recommendation includes a source, and a person approves changes
-          before they reach the book.
+          Paos turns a mandate into a reviewed investor shortlist, outreach,
+          and client reporting. A person approves changes before anything is
+          sent or saved.
         </p>
 
         <!-- The product, collaged: the book behind, the ask floating over it,
@@ -204,8 +158,7 @@ const rails = [
                   <span class="rq__conf" data-rq-conf>cited</span>
                 </div>
                 <p class="rq__claim" data-rq-claim>
-                  Ranked 312 investors — who to approach, in what order, and
-                  why.
+                  Ranked 312 investors for Project Solís.
                 </p>
                 <p class="rq__evidence" data-rq-evidence>
                   Rockmont leads · committed €18M on Aurora, 2024
@@ -248,71 +201,37 @@ const rails = [
       </div>
     </section>
 
-    <!-- 01 The contrast -->
-    <section class="section section--ruled" id="why">
-      <div class="wrap">
-        <header class="sec-head">
-          <span class="sec-head__index">01</span>
-          <span class="sec-head__label">Why it exists</span>
-        </header>
-
-        <h2 class="sec-title reveal">
-          Your CRM records the work. Paos helps run the raise.
-        </h2>
-        <p class="sec-lede reveal" style="--reveal-delay: 60ms">
-          Teams still rebuild the same context across CRMs, spreadsheets,
-          inboxes, and individual memory. Paos carries the work from mandate
-          to shortlist to client report without starting over at each step.
-          Campaign drafting is still in build.
-        </p>
-
-        <div class="contrast">
-          <div class="contrast__col contrast__col--today">
-            <span class="mono-label">The raise today</span>
-            <ul>
-              {
-                contrast.map((row, index) => (
-                  <li class="reveal" style={`--reveal-delay: ${index * 50}ms`}>
-                    {row.today}
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-
-          <div class="contrast__col contrast__col--os">
-            <span class="mono-label"
-              ><i class="dot-live"></i>With
-              <span class="brand-name">Paos</span></span
-            >
-            <ul>
-              {
-                contrast.map((row, index) => (
-                  <li class="reveal" style={`--reveal-delay: ${index * 50}ms`}>
-                    {row.withOs}
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 02 The product -->
+    <!-- 01 The product -->
     <section class="section section--ruled" id="product">
       <div class="wrap">
         <header class="sec-head">
-          <span class="sec-head__index">02</span>
+          <span class="sec-head__index">01</span>
           <span class="sec-head__label">The product</span>
         </header>
 
-        <h2 class="sec-title reveal">One system. The five jobs of a raise.</h2>
-        <p class="sec-lede reveal" style="--reveal-delay: 60ms">
-          Not five tools bolted together — one shared investor book the whole
-          firm can work from, in plain language, alongside the systems you
-          already run.
-        </p>
+        <div class="product-statement reveal">
+          <h2>Turn your investor book into a system that runs the raise.</h2>
+        </div>
+
+        <div class="raise-run reveal" style="--reveal-delay: 100ms">
+          <div class="raise-run__head">
+            <span>Project Solís · investor book 312</span>
+            <span><i class="dot-live"></i>Live mandate</span>
+          </div>
+          <ol>
+            {
+              raiseStages.map((stage, index) => (
+                <li>
+                  <span class="raise-run__num">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <strong>{stage.label}</strong>
+                  <span>{stage.value}</span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
 
         <ul class="svc-list" style="margin-top: clamp(2rem, 5vw, 3rem)">
           {
@@ -329,7 +248,6 @@ const rails = [
                 </div>
                 <div class="svc-row__copy">
                   <p>{pillar.summary}</p>
-                  <p>{pillar.detail}</p>
                 </div>
               </li>
             ))
@@ -337,114 +255,54 @@ const rails = [
         </ul>
 
         <div class="product-cta reveal">
-          <a
-            class="btn-ink"
-            href={bookingUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-growth-cta="join-design-partners"
-            data-growth-location="home-product"
-            data-growth-wedge="relationship-book"
-            >Join the design-partner program</a
-          >
-          <a class="link-quiet" href="/pa-os">Walk through the product</a>
+          <a class="link-quiet" href="/pa-os">See Paos at work</a>
         </div>
       </div>
     </section>
 
-    <!-- 03 Built-in safeguards -->
-    <section class="section section--ruled" id="how">
+    <!-- 02 Selective services — visible, but secondary to Paos. -->
+    <section class="section section--ruled" id="services">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">02</span>
+          <span class="sec-head__label">Beyond Paos</span>
+        </header>
+
+        <div class="lane__copy">
+          <h2 class="sec-title reveal">Selective services.</h2>
+          <p class="sec-lede reveal" style="--reveal-delay: 60ms">
+            Controlthrive Studios builds Paos. A small number of founder-led
+            engagements sit beside it.
+          </p>
+          <div class="lane__actions reveal" style="--reveal-delay: 120ms">
+            <a class="btn-line" href="/services">See services</a>
+            <a class="link-quiet" href="/case-studies">Selected work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 Design partners — the commercial motion in one compact panel. -->
+    <section class="section section--ruled" id="design-partners">
       <div class="wrap">
         <header class="sec-head">
           <span class="sec-head__index">03</span>
-          <span class="sec-head__label">Built-in safeguards</span>
-        </header>
-
-        <h2 class="sec-title reveal">
-          AI does the work. Your rules stay in control.
-        </h2>
-        <p class="sec-lede reveal" style="--reveal-delay: 60ms">
-          Paos can research, organize, and recommend without taking decisions
-          away from your team. Four safeguards govern every action.
-        </p>
-
-        <ul class="rails">
-          {
-            rails.map((rail, index) => (
-              <li class="reveal" style={`--reveal-delay: ${index * 60}ms`}>
-                <strong>{rail.title}</strong>
-                <span>{rail.copy}</span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </section>
-
-    <!-- 04 Client perspective -->
-    <section class="section section--ruled">
-      <div class="wrap">
-        <header class="sec-head">
-          <span class="sec-head__index">04</span>
-          <span class="sec-head__label">Client perspective</span>
-        </header>
-
-        <blockquote class="quote-feature reveal">
-          <p>“{featuredQuote.quote}”</p>
-          <cite class="quote-cite">
-            <strong>{featuredQuote.name}</strong>
-            <span>{featuredQuote.role} · {featuredQuote.company}</span>
-          </cite>
-        </blockquote>
-
-        <div class="quote-grid">
-          {
-            supportingQuotes.map((quote, index) => (
-              <blockquote
-                class="reveal"
-                style={`--reveal-delay: ${index * 70}ms`}
-              >
-                <p>“{quote.quote}”</p>
-                <cite class="quote-cite">
-                  <strong>{quote.name}</strong>
-                  <span>
-                    {quote.role} · {quote.company}
-                  </span>
-                </cite>
-              </blockquote>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <!-- 05 Design partners — product plus founder-led outcomes. -->
-    <section class="section section--ruled" id="deployment">
-      <div class="wrap">
-        <header class="sec-head">
-          <span class="sec-head__index">05</span>
           <span class="sec-head__label">Design partners</span>
         </header>
 
-        <div class="lane">
-          <div class="lane__copy">
-            <h2 class="sec-title reveal">
-              The product, with the founder beside you.
-            </h2>
-            <p class="sec-lede reveal" style="--reveal-delay: 60ms">
-              Early design partners get Paos set up on a real investor book and
-              live mandate, with direct founder support through the first
-              reviewed shortlist and client-ready report.
-            </p>
-            <div class="lane__actions reveal" style="--reveal-delay: 120ms">
+        <div class="partner-close reveal">
+          <div class="partner-close__copy">
+            <h2>The product, with the founder beside you.</h2>
+            <p>Run Paos on a real investor book and live mandate.</p>
+            <div class="partner-close__actions">
               <a
                 class="btn-ink"
                 href={bookingUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-growth-cta="join-design-partners"
-                data-growth-location="home-partner-lane"
-                data-growth-wedge="live-mandate">Join the program</a
+                data-growth-location="home-design-partners"
+                data-growth-wedge="live-mandate">Run a live mandate</a
               >
               <a class="link-quiet" href="/design-partners"
                 >See what is included</a
@@ -452,12 +310,12 @@ const rails = [
             </div>
           </div>
 
-          <ul class="lane__facts reveal" style="--reveal-delay: 100ms">
+          <ul class="partner-close__facts">
             {
-              designPartnerIncludes.map((item) => (
+              partnerSnapshot.map((item) => (
                 <li>
                   <strong>{item.title}</strong>
-                  <span>{item.summary}</span>
+                  <span>{item.copy}</span>
                 </li>
               ))
             }
@@ -466,49 +324,11 @@ const rails = [
       </div>
     </section>
 
-    <!-- 06 Selective services — visible, but secondary to Paos. -->
-    <section class="section section--ruled" id="services">
+    <!-- Who builds it — the person behind a founder-led product. -->
+    <section class="section section--ruled" id="founder">
       <div class="wrap">
         <header class="sec-head">
-          <span class="sec-head__index">06</span>
-          <span class="sec-head__label">Selective services</span>
-        </header>
-
-        <div class="lane">
-          <div class="lane__copy">
-            <h2 class="sec-title reveal">
-              A small number of systems, built founder-to-founder.
-            </h2>
-            <p class="sec-lede reveal" style="--reveal-delay: 60ms">
-              Outside the Paos market, controlthrive takes on selected AI,
-              data, and decision-system engagements. The work is direct,
-              production-focused, and accountable to a business outcome.
-            </p>
-            <div class="lane__actions reveal" style="--reveal-delay: 120ms">
-              <a class="btn-line" href="/services">Explore services</a>
-              <a class="link-quiet" href="/case-studies">See selected work</a>
-            </div>
-          </div>
-
-          <ul class="lane__facts reveal" style="--reveal-delay: 100ms">
-            {
-              serviceFocus.map((item) => (
-                <li>
-                  <strong>{item.title}</strong>
-                  <span>{item.summary}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- 07 Founder -->
-    <section class="section section--ruled">
-      <div class="wrap">
-        <header class="sec-head">
-          <span class="sec-head__index">07</span>
+          <span class="sec-head__index">04</span>
           <span class="sec-head__label">Who builds it</span>
         </header>
 
@@ -527,12 +347,6 @@ const rails = [
         </div>
       </div>
     </section>
-
-    <CtaBand
-      index="08"
-      title="Run one live mandate with Paos."
-      copy="Design partners get Paos plus direct founder support through the first reviewed shortlist and client-ready report."
-    />
   </main>
 
   <Footer />
@@ -568,7 +382,7 @@ const rails = [
       {
         kind: "Search",
         receipt: "sources attached",
-        claim: "Found 12 investors beyond your book for the Meridian mandate.",
+        claim: "Found 12 investors for Project Solís.",
         evidence: "each one opens its source · 4 withheld, no evidence",
         foot: "a name without a source never reaches this list",
         logged: "✓ Added to mandate — decision logged",
@@ -576,8 +390,7 @@ const rails = [
       {
         kind: "Organize",
         receipt: "deck checked",
-        claim:
-          "Turned the pitch deck into a mandate ready for matching, with every field linked to its source.",
+        claim: "Turned the deck into a review-ready mandate.",
         evidence: "deck p.4 — “seeking €40 million in commitments”",
         foot: "every field opens the page it was read from",
         logged: "✓ Mandate created — decision logged",
@@ -585,8 +398,7 @@ const rails = [
       {
         kind: "Matching",
         receipt: "records attached",
-        claim:
-          "Ranked 312 investors — who to approach, in what order, and why.",
+        claim: "Ranked 312 investors for Project Solís.",
         evidence: "Rockmont leads · committed €18M on Aurora, 2024",
         foot: "every claim opens the record behind it",
         logged: "✓ Shortlist saved — decision logged",
@@ -602,7 +414,7 @@ const rails = [
       {
         kind: "Reporting",
         receipt: "records attached",
-        claim: "Built this month’s client report under your firm’s logo.",
+        claim: "Built this month’s client report.",
         evidence: "€40M across 8 investors · rows travel as XLSX",
         foot: "every figure opens the rows it was counted from",
         logged: "✓ Version 3 saved — v2 kept as it went out",

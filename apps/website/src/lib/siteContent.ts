@@ -3,11 +3,11 @@ export const bookingUrl = 'https://cal.com/servando-torres-garcia-qco7rh/30min';
 export const navigation = [
   { href: '/', label: 'Home' },
   { href: '/pa-os', label: 'Paos' },
-  { href: '/design-partners', label: 'Design Partners' },
-  { href: '/services', label: 'Services' },
+  { href: '/design-partners', label: 'Design partners' },
   { href: '/case-studies', label: 'Work' },
+  { href: '/blog', label: 'Writing' },
+  { href: '/services', label: 'Services' },
   { href: '/tools', label: 'Tools' },
-  { href: '/blog', label: 'Blog' },
 ];
 
 export const designPartnerIncludes = [
@@ -40,14 +40,14 @@ export const serviceFocus = [
       'Turn a complex business decision into software your team can inspect, trust, and use under pressure.',
   },
   {
-    title: 'Data and AI workflows',
+    title: 'Data and operating workflows',
     summary:
-      'Connect fragmented data, AI-assisted decisions, reliable controls, and human review in one working system.',
+      'Connect fragmented records, assisted judgment, reliable controls, and human review in one working system.',
   },
   {
     title: 'Operated outcomes',
     summary:
-      'When the work needs more than a handoff, we can run and improve the workflow beside the team after launch.',
+      'When the work needs more than a handoff, we stay with the workflow after launch and improve it beside the team.',
   },
 ];
 
@@ -55,39 +55,29 @@ export const trustedCompanies = ['BBVA', 'KPMG', 'PwC', 'Fintonic', 'Minsait'];
 
 export const productPillars = [
   {
-    title: 'Find investors beyond your book',
+    title: 'Organize the mandate and investor book',
     summary:
-      'Paos searches for investors against a specific mandate and links every claim to a source you can open.',
-    detail:
-      'Search continues as the mandate changes, so coverage stays current without buying another static list.',
+      'Bring CRM exports, decks, and relationship history into one reviewed book.',
   },
   {
-    title: 'Turn scattered records into one clean book',
+    title: 'Search beyond your investor book',
     summary:
-      'CRM exports, transcripts, and meeting notes become one organized investor book that your team reviews before anything changes.',
-    detail:
-      'Paos works alongside your existing CRM and remembers how your firm organizes the book.',
+      'Find investors that fit the mandate, with a source behind every result.',
   },
   {
-    title: 'Match each mandate to the right investors',
+    title: 'Match the right investors',
     summary:
-      'Mandates and deals crossed against your investor book produce qualified shortlists: who to approach, in what order, and why.',
-    detail:
-      'Hard exclusions and do-not-contact rules cannot be overridden, and the reason behind every recommendation remains visible.',
+      'Rank who to approach, in what order, and why.',
   },
   {
-    title: 'Prepare personalized outreach (in build)',
+    title: 'Prepare personalized outreach',
     summary:
-      'Shortlists can move into your outreach process today. Drafting inside your own mailbox is the next layer being built.',
-    detail:
-      'When it ships, drafts will wait in your own mailbox. Paos will never send investor outreach without you.',
+      'Draft from the mandate and relationship history. Nothing sends without you.',
   },
   {
     title: 'Produce client-ready reporting',
     summary:
-      'Firm-branded activity and progress reports where every number traces to the record behind it.',
-    detail:
-      'What justifies and defends the retainer — generated from the same living book the other pillars keep current.',
+      'Generate firm-branded reporting from the same live records.',
   },
 ];
 
