@@ -12,24 +12,24 @@ export const navigation = [
 
 export const designPartnerIncludes = [
   {
-    title: 'Bring the book across',
+    title: 'Start from the raise',
     summary:
-      'We bring CRM exports, decks, pipeline history, and relationship context into one working investor book.',
+      'Bring a deck, a teaser, or a sentence. Paos makes that mandate the working object — the book can wait.',
   },
   {
-    title: 'Run a live mandate together',
+    title: 'Find names on that raise',
     summary:
-      'We organize the mandate, review the investor shortlist, and produce the first client-ready output on real work.',
+      'We search for investors that fit the mandate, even if there is nobody in the book yet. Every name carries a source.',
   },
   {
-    title: 'Set your firm’s rules',
+    title: 'Bring the book only when it changes the next action',
     summary:
-      'Your exclusions, preferences, relationship history, and review decisions become part of how Paos works for the firm.',
+      'CRM exports and relationship history are fuel for ranking, suppression, and the call — not how the workspace is born.',
   },
   {
     title: 'Stay close to the outcome',
     summary:
-      'Direct founder support covers setup, the first operating run, and the path to a client-ready report.',
+      'Direct founder support covers the first operating run: names on the raise, the pipeline as the scoreboard, and a client-ready report when there is something to report.',
   },
 ];
 
@@ -55,29 +55,29 @@ export const trustedCompanies = ['BBVA', 'KPMG', 'PwC', 'Fintonic', 'Minsait'];
 
 export const productPillars = [
   {
-    title: 'Organize the mandate and investor book',
+    title: 'Start from the mandate',
     summary:
-      'Bring CRM exports, decks, and relationship history into one reviewed book.',
+      'Drop a deck or describe the raise. That mandate is the job — not a row in a CRM.',
   },
   {
-    title: 'Search beyond your investor book',
+    title: 'Find names for this raise',
     summary:
-      'Find investors that fit the mandate, with a source behind every result.',
+      'Search the world against the mandate. An empty book still runs. Candidates arrive with sources, not a fake ranking.',
   },
   {
-    title: 'Match the right investors',
+    title: 'The pipeline is the scoreboard',
     summary:
-      'Rank who to approach, in what order, and why.',
+      'Each investor × raise is a pursuit. Who is identified, out, talking, or in diligence — that is the work.',
   },
   {
-    title: 'Prepare personalized outreach',
+    title: 'Rank the book when you have one',
     summary:
-      'Draft from the mandate and relationship history. Nothing sends without you.',
+      'Matching orders names you already know. It is an upgrade, not how the raise is born.',
   },
   {
-    title: 'Produce client-ready reporting',
+    title: 'Report only what happened',
     summary:
-      'Generate firm-branded reporting from the same live records.',
+      'Firm-branded reporting from the live raise. Every figure opens the rows behind it.',
   },
 ];
 
@@ -144,9 +144,9 @@ export const trustPrinciples = [
       'Record updates and relationship-sensitive actions stop for human approval.',
   },
   {
-    title: 'Your book stays yours',
+    title: 'The book stays the firm’s',
     summary:
-      'Paos works with the systems you already run, and your relationship history remains exportable.',
+      'CRM is optional fuel. When you bring a book, it remains yours and exportable. Nothing investor-facing sends without you.',
   },
 ];
 

@@ -19,16 +19,16 @@ const founderParagraphs = [
 // screen, what Paos is and what controlthrive builds.
 
 const raiseStages = [
-  { label: "Mandate", value: "Ready" },
+  { label: "Mandate", value: "Live" },
   { label: "Search", value: "12 sourced" },
-  { label: "Matching", value: "Ranked" },
-  { label: "Outreach", value: "Drafted" },
-  { label: "Reporting", value: "Current" },
+  { label: "Pipeline", value: "8 identified" },
+  { label: "Matching", value: "When a book exists" },
+  { label: "Reporting", value: "From the raise" },
 ];
 
 const partnerSnapshot = [
-  { title: "Your data", copy: "Investor book and mandates brought across." },
-  { title: "One live raise", copy: "From shortlist to client report." },
+  { title: "A live raise", copy: "Start from a deck or a sentence." },
+  { title: "Names on that raise", copy: "Search even if the book is empty." },
   { title: "Founder support", copy: "Direct setup and iteration." },
 ];
 
@@ -36,7 +36,7 @@ const partnerSnapshot = [
 
 <Layout
   title="Paos — the operating system for placement agents | controlthrive"
-  description="Paos runs the raise from mandate to matched investors, outreach, and client reporting. Closed beta."
+  description="Paos runs the raise. Drop a mandate, find names even with an empty book, and keep the pipeline as the scoreboard. Closed beta."
   ogImage="/api/og/home.png"
   ogImageAlt="Paos by controlthrive — the operating system for placement agents."
 >
@@ -57,8 +57,9 @@ const partnerSnapshot = [
             Your CRM stores names. Paos runs the raise.
           </h1>
           <p class="hero__lede reveal" style="--reveal-delay: 120ms">
-            The operating system for placement agents—from investor search and
-            matching to outreach and client reporting.
+            Drop a mandate — a deck or a sentence. Paos finds names for that
+            raise even if the book is empty. Pipeline is the scoreboard.
+            Matching the book is an upgrade, not the start.
           </p>
           <div class="hero__actions reveal" style="--reveal-delay: 180ms">
             <a
@@ -68,7 +69,7 @@ const partnerSnapshot = [
               rel="noopener noreferrer"
               data-growth-cta="join-design-partners"
               data-growth-location="home-hero"
-              data-growth-wedge="relationship-book"
+              data-growth-wedge="live-mandate"
             >
               Run a live mandate
             </a>
@@ -77,14 +78,13 @@ const partnerSnapshot = [
         </div>
 
         <p class="sr-only">
-          Paos turns a mandate into a reviewed investor shortlist, outreach,
-          and client reporting. A person approves changes before anything is
-          sent or saved.
+          Paos starts from a mandate. It finds names for that raise even
+          with nobody in the book. A person approves every change; nothing
+          investor-facing sends itself.
         </p>
 
-        <!-- The product, collaged: the book behind, the ask floating over it,
-             the review card in front — one vanishing point. The wires connect
-             each recommendation to the record behind it. -->
+        <!-- The product, collaged: the raise behind, the find-names ask over
+             it, the review card in front. The book is not the object. -->
         <div
           class="deck reveal"
           style="--reveal-delay: 240ms"
@@ -94,23 +94,22 @@ const partnerSnapshot = [
             <div class="deck__card deck__card--book">
               <div class="dcard__bar">
                 <Glyph size={12} />
-                <span>Investor book</span>
-                <span class="dcard__meta">312 firms</span>
+                <span>Project Solís</span>
+                <span class="dcard__meta">live raise</span>
               </div>
               <ul class="dcard__rows">
-                <li class="is-cited"><b>Rockmont Family Office</b><i>94</i></li>
-                <li><b>Meridian Trust Office</b><i>89</i></li>
-                <li><b>Aldwych Capital Office</b><i>85</i></li>
-                <li><b>Talstein Multi-Family</b><i>81</i></li>
-                <li><b>Larkmere Capital</b><i>78</i></li>
-                <li><b>Gatewood Capital</b><i>74</i></li>
-                <li><b>Halcyon Partners</b><i>71</i></li>
+                <li class="is-cited"><b>Rockmont Family Office</b><i>Identified</i></li>
+                <li><b>Aldwych Capital Office</b><i>New</i></li>
+                <li><b>Talstein Multi-Family</b><i>New</i></li>
+                <li><b>Meridian Trust Office</b><i>Out</i></li>
+                <li><b>Larkmere Capital</b><i>Talking</i></li>
+                <li><b>Gatewood Capital</b><i>Passed</i></li>
+                <li><b>Halcyon Partners</b><i>Deep</i></li>
               </ul>
             </div>
 
             <div class="deck__card deck__card--ask">
-              Who should see <span class="deck__at">@Project Solís</span>, and
-              why?
+              Find investors for <span class="deck__at">@Project Solís</span>
             </div>
 
             <svg
@@ -154,36 +153,35 @@ const partnerSnapshot = [
 
               <article class="rq__item rq__item--active" data-rq-active>
                 <div class="rq__kind-row">
-                  <span class="rq__kind" data-rq-kind>Matching</span>
-                  <span class="rq__conf" data-rq-conf>cited</span>
+                  <span class="rq__kind" data-rq-kind>Search</span>
+                  <span class="rq__conf" data-rq-conf>sources attached</span>
                 </div>
                 <p class="rq__claim" data-rq-claim>
-                  Ranked 312 investors for Project Solís.
+                  Found 12 investors for Project Solís.
                 </p>
                 <p class="rq__evidence" data-rq-evidence>
-                  Rockmont leads · committed €18M on Aurora, 2024
+                  no book to dedup against · 4 withheld, no evidence
                 </p>
                 <div class="rq__actions">
                   <span class="rq__approve">Approve</span>
                   <span class="rq__edit">Edit</span>
                 </div>
                 <span class="rq__logged" data-rq-logged
-                  >✓ Shortlist saved — decision logged</span
+                  >✓ Added to mandate — decision logged</span
                 >
               </article>
 
               <article class="rq__item rq__item--queued" data-rq-queued>
                 <div class="rq__kind-row">
-                  <span class="rq__kind" data-rq-next-kind>Before you meet</span
-                  >
+                  <span class="rq__kind" data-rq-next-kind>Organize</span>
                 </div>
                 <p class="rq__claim" data-rq-next-claim>
-                  Assemble the pre-meeting brief for Larkmere Capital.
+                  Turned the deck into a review-ready mandate.
                 </p>
               </article>
 
               <div class="rq__foot" data-rq-foot>
-                every claim opens the record behind it
+                a name without a source never reaches this list
               </div>
             </div>
           </div>
@@ -210,12 +208,12 @@ const partnerSnapshot = [
         </header>
 
         <div class="product-statement reveal">
-          <h2>Turn your investor book into a system that runs the raise.</h2>
+          <h2>The raise is the job. The book can wait.</h2>
         </div>
 
         <div class="raise-run reveal" style="--reveal-delay: 100ms">
           <div class="raise-run__head">
-            <span>Project Solís · investor book 312</span>
+            <span>Project Solís · no book required</span>
             <span><i class="dot-live"></i>Live mandate</span>
           </div>
           <ol>
@@ -293,7 +291,7 @@ const partnerSnapshot = [
         <div class="partner-close reveal">
           <div class="partner-close__copy">
             <h2>The product, with the founder beside you.</h2>
-            <p>Run Paos on a real investor book and live mandate.</p>
+            <p>Run Paos on a live raise. Bring a deck, a sentence, or a book.</p>
             <div class="partner-close__actions">
               <a
                 class="btn-ink"
@@ -383,7 +381,7 @@ const partnerSnapshot = [
         kind: "Search",
         receipt: "sources attached",
         claim: "Found 12 investors for Project Solís.",
-        evidence: "each one opens its source · 4 withheld, no evidence",
+        evidence: "no book to dedup against · 4 withheld, no evidence",
         foot: "a name without a source never reaches this list",
         logged: "✓ Added to mandate — decision logged",
       },
@@ -396,26 +394,26 @@ const partnerSnapshot = [
         logged: "✓ Mandate created — decision logged",
       },
       {
+        kind: "Pipeline",
+        receipt: "this raise",
+        claim: "Eight firms are on Project Solís.",
+        evidence: "3 identified · 2 talking · 1 in diligence",
+        foot: "the pipeline is the scoreboard, not the book",
+        logged: "✓ Pursuit moved — decision logged",
+      },
+      {
         kind: "Matching",
-        receipt: "records attached",
-        claim: "Ranked 312 investors for Project Solís.",
+        receipt: "when a book exists",
+        claim: "Ranked the book for Project Solís.",
         evidence: "Rockmont leads · committed €18M on Aurora, 2024",
-        foot: "every claim opens the record behind it",
+        foot: "matching orders names you already know",
         logged: "✓ Shortlist saved — decision logged",
       },
       {
-        kind: "Before you meet",
-        receipt: "from your records",
-        claim: "Assembled the pre-meeting brief for Larkmere Capital.",
-        evidence: "“No US deals. That is firm policy.” · their words, 14 Mar",
-        foot: "worked out from your records, nothing saved, nothing sent",
-        logged: "✓ Read before the call — no record changed",
-      },
-      {
         kind: "Reporting",
-        receipt: "records attached",
+        receipt: "from the raise",
         claim: "Built this month’s client report.",
-        evidence: "€40M across 8 investors · rows travel as XLSX",
+        evidence: "€40M across 8 pursuits · rows travel as XLSX",
         foot: "every figure opens the rows it was counted from",
         logged: "✓ Version 3 saved — v2 kept as it went out",
       },
@@ -437,7 +435,7 @@ const partnerSnapshot = [
         nextClaim: rq.querySelector("[data-rq-next-claim]"),
       };
 
-      let index = 2; // Matching is what renders on the server
+      let index = 0; // Search is what renders on the server
 
       const render = (i: number) => {
         const current = pillars[i % pillars.length];

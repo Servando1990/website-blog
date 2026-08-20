@@ -19,55 +19,14 @@ const extIcon =
 // state — an outline action button, or a status (In pipeline / Passed) + link.
 const pillars = [
   {
-    label: "Search",
-    flag: "",
-    icon: svg('<circle cx="7" cy="7" r="4"/><path d="M10.2 10.2 14 14"/>'),
-    head: "Investor discovery · Project Meridian",
-    meta: "8 ready to review · 4 need more evidence · 19 Jul 2026",
-    link: "Open mandate",
-    note: "4 candidates left out because their claims could not be verified.",
-    rows: [
-      {
-        n: "1",
-        name: "Rockmont Family Office",
-        detail: "€20M avg check · EU real estate · Helsinki",
-        badge: "New",
-        ext: true,
-        state: "in",
-        status: "In pipeline",
-        link: "Open",
-      },
-      {
-        n: "2",
-        name: "Aldwych Capital Office",
-        detail: "€10–30M · value-add RE · London",
-        badge: "New",
-        ext: true,
-        state: "action",
-        action: "Add to Meridian",
-        link: "Pass",
-      },
-      {
-        n: "5",
-        name: "Talstein Multi-Family Office",
-        detail: "€15M avg · diversified · Zurich",
-        badge: "New",
-        ext: true,
-        state: "passed",
-        status: "Passed",
-        link: "Reconsider",
-      },
-    ],
-  },
-  {
-    label: "Organize",
+    label: "Mandate",
     flag: "",
     icon: svg(
       '<path d="M2.5 3.5h11"/><path d="M4.6 6v6.5M8 6v6.5M11.4 6v6.5"/>',
     ),
-    head: "Mandate extraction · Project Meridian",
-    meta: "9 details captured · 2 need review · 19 Jul 2026",
-    link: "Open mandate",
+    head: "Mandate · Project Meridian",
+    meta: "from the deck · 9 details captured · 2 need review",
+    link: "Open raise",
     note: "2 details need review — Paos shows the source page for each one.",
     rows: [
       {
@@ -103,15 +62,99 @@ const pillars = [
     ],
   },
   {
+    label: "Search",
+    flag: "",
+    icon: svg('<circle cx="7" cy="7" r="4"/><path d="M10.2 10.2 14 14"/>'),
+    head: "Names for Project Meridian",
+    meta: "8 ready to review · no book to dedup against",
+    link: "Open raise",
+    note: "4 candidates left out because their claims could not be verified. Empty book — not a Match list.",
+    rows: [
+      {
+        n: "1",
+        name: "Rockmont Family Office",
+        detail: "€20M avg check · EU real estate · Helsinki",
+        badge: "New",
+        ext: true,
+        state: "in",
+        status: "In pipeline",
+        link: "Open",
+      },
+      {
+        n: "2",
+        name: "Aldwych Capital Office",
+        detail: "€10–30M · value-add RE · London",
+        badge: "New",
+        ext: true,
+        state: "action",
+        action: "Add to Meridian",
+        link: "Pass",
+      },
+      {
+        n: "5",
+        name: "Talstein Multi-Family Office",
+        detail: "€15M avg · diversified · Zurich",
+        badge: "New",
+        ext: true,
+        state: "passed",
+        status: "Passed",
+        link: "Reconsider",
+      },
+    ],
+  },
+  {
+    label: "Pipeline",
+    flag: "",
+    icon: svg(
+      '<path d="M3 3.5h10M3 8h10M3 12.5h10"/><circle cx="3" cy="3.5" r="0.8" fill="currentColor" stroke="none"/><circle cx="3" cy="8" r="0.8" fill="currentColor" stroke="none"/><circle cx="3" cy="12.5" r="0.8" fill="currentColor" stroke="none"/>',
+    ),
+    head: "Pipeline · Project Meridian",
+    meta: "8 firms on this raise · the scoreboard",
+    link: "Open raise",
+    note: "A pursuit is one investor × this raise. The book is not the work.",
+    rows: [
+      {
+        n: "1",
+        name: "Rockmont Family Office",
+        detail: "Identified · added from search today",
+        badge: "New",
+        ext: true,
+        state: "in",
+        status: "Identified",
+        link: "Open",
+      },
+      {
+        n: "2",
+        name: "Larkmere Capital",
+        detail: "Talking · last call 14 Mar",
+        badge: "",
+        ext: true,
+        state: "in",
+        status: "Talking",
+        link: "Open",
+      },
+      {
+        n: "3",
+        name: "Halcyon Partners",
+        detail: "Deep · diligence since 2 Jul",
+        badge: "",
+        ext: true,
+        state: "in",
+        status: "Deep",
+        link: "Open",
+      },
+    ],
+  },
+  {
     label: "Match",
     flag: "",
     icon: svg(
       '<path d="M2 4l3 4-3 4M14 4l-3 4 3 4"/><circle cx="8" cy="8" r="0.7" fill="currentColor" stroke="none"/>',
     ),
-    head: "Investor matching · Project Meridian",
-    meta: "top 3 of 60 ranked · 19 Jul 2026",
-    link: "Open mandate",
-    note: "Hartree excluded — your standing policy always takes priority.",
+    head: "Rank the book · Project Meridian",
+    meta: "when a book exists · top 3 of 60",
+    link: "Open raise",
+    note: "Matching orders names you already know. Hartree excluded — standing policy.",
     rows: [
       {
         n: "1",
@@ -142,47 +185,6 @@ const pillars = [
         state: "action",
         action: "Add to shortlist",
         link: "Why",
-      },
-    ],
-  },
-  {
-    label: "Campaigns",
-    flag: "",
-    icon: svg('<path d="M14 2 7 9"/><path d="M14 2 9.5 14 7 9 2 6.5 14 2z"/>'),
-    head: "Outreach drafts · Project Meridian",
-    meta: "drafts in your mailbox · never sent automatically",
-    link: "Open drafts",
-    note: "Every draft is grounded in the mandate and your relationship history, then waits in your mailbox for review.",
-    rows: [
-      {
-        n: "1",
-        name: "To: Rockmont Family Office",
-        detail: "“Meridian — EU real estate, €20M ticket…”",
-        badge: "Draft",
-        ext: false,
-        state: "action",
-        action: "Review draft",
-        link: "Discard",
-      },
-      {
-        n: "2",
-        name: "To: Aldwych Capital Office",
-        detail: "“Following up on value-add real estate…”",
-        badge: "Draft",
-        ext: false,
-        state: "action",
-        action: "Review draft",
-        link: "Discard",
-      },
-      {
-        n: "3",
-        name: "To: Meridian Trust Office",
-        detail: "“Introducing the Meridian mandate…”",
-        badge: "Draft",
-        ext: false,
-        state: "action",
-        action: "Review draft",
-        link: "Discard",
       },
     ],
   },
@@ -219,8 +221,8 @@ const pillars = [
       },
       {
         n: "3",
-        name: "Coverage — 60 of 72 mapped",
-        detail: "12 pending review",
+        name: "Coverage — 8 firms on this raise",
+        detail: "3 identified · 2 talking · 1 in diligence",
         badge: "",
         ext: false,
         state: "action",
@@ -233,7 +235,7 @@ const pillars = [
 
 // Server-render Search first so the page is complete before JS and for
 // reduced-motion / screenshot / share.
-const start = 0;
+const start = 1;
 const initial = pillars[start];
 
 // Stated as guarantees, not prohibitions. Same five rules, but a placement
@@ -257,14 +259,14 @@ const guarantees = [
   },
   {
     title: "The book stays the firm’s.",
-    copy: "Your broker-dealer keeps you compliant, your CRM keeps names, and everything Paos produces exports in full, any time you ask.",
+    copy: "CRM is optional fuel. When you bring a book, it stays the firm’s and exports in full. Nothing investor-facing sends without you.",
   },
 ];
 ---
 
 <Layout
   title="Paos — the operating system for placement agents | Controlthrive Studios"
-  description="Controlthrive Studios is building Paos. The operating system for placement agents — from mandate to matched investors, personalized outreach, and client reporting. Closed beta."
+  description="Paos runs the raise. Drop a mandate, find names even with an empty book, and keep the pipeline as the scoreboard. Closed beta."
   ogImage="/api/og/pa-os.png"
   ogImageAlt="Paos by Controlthrive Studios — the operating system for placement agents."
 >
@@ -287,7 +289,7 @@ const guarantees = [
           rel="noopener noreferrer"
           data-growth-cta="join-design-partners"
           data-growth-location="product-bar"
-          data-growth-wedge="relationship-book"
+          data-growth-wedge="live-mandate"
         >
           Join the design-partner program
         </a>
@@ -304,8 +306,8 @@ const guarantees = [
           </p>
           <h1 class="pa-h1">The operating system for placement agents.</h1>
           <p class="pa-lede">
-            Your CRM stores names. Paos runs the raise—from mandate to matched
-            investors, personalized outreach, and client reporting.
+            Drop a mandate — a deck or a sentence. Paos finds names for that
+            raise even if the book is empty. The pipeline is the scoreboard.
           </p>
           <div class="pa-actions">
             <a
@@ -315,7 +317,7 @@ const guarantees = [
               rel="noopener noreferrer"
               data-growth-cta="join-design-partners"
               data-growth-location="product-hero"
-              data-growth-wedge="relationship-book"
+              data-growth-wedge="live-mandate"
               >Join the design-partner program</a
             >
             <a class="link-quiet" href="#loop">See how it works</a>
@@ -328,7 +330,7 @@ const guarantees = [
           <section
             class="os"
             data-os
-            aria-label="Paos — the five jobs of a raise"
+            aria-label="Paos — run the raise"
           >
             <div class="os__diagram" style={`--i:${start}`}>
               <div class="os__track" aria-hidden="true">
@@ -429,16 +431,14 @@ const guarantees = [
         <article class="beat" data-beat>
           <div class="beat__copy">
             <p class="beat__eyebrow"><span>01</span>One cockpit</p>
-            <h2 class="beat__title">Ask for it in your own words.</h2>
+            <h2 class="beat__title">Describe the raise. Go find names.</h2>
             <p class="beat__body">
-              Type <strong>@</strong> and you get the real record, not a name that
-              nearly matches — so “Project Solis” never loses “Project Solís”. Paos
-              answers from your own book, and every claim links back to the row it
-              came from.
+              A sentence or a deck is enough. Paos treats that as the mandate
+              and searches for investors that fit — even if there is nobody in
+              the book. Matching the book is a later verb, not the start.
             </p>
             <p class="beat__receipt">
-              answers from your book link to your records · web research links
-              to dated sources
+              empty book still searches · names without evidence are withheld
             </p>
           </div>
 
@@ -459,26 +459,26 @@ const guarantees = [
                   </p>
                 </div>
                 <div class="chat__work step" style="--d:1400ms">
-                  <span class="chat__spin"></span>reading the book · 312 firms ·
-                  74 pursuits
+                  <span class="chat__spin"></span>no investor book · searching
+                  for this raise
                 </div>
                 <div class="chat__answer step" style="--d:2000ms">
                   <p class="chat__line">
-                    12 firms rank above 80. Rockmont leads — it has taken EU
-                    real estate twice at this ticket.
+                    8 names to review for Project Meridian. Nothing to dedup
+                    against — these are outside names, not a ranked Match list.
                   </p>
                   <ul class="chat__cites">
                     <li>
-                      <span class="cite__k">pursuit</span>Aurora · committed
-                      €18M · 2024
+                      <span class="cite__k">search</span>EU real estate · €5–15M
+                      ticket
                     </li>
                     <li>
-                      <span class="cite__k">call</span>14 Mar · “EU real estate
-                      is the mandate”
+                      <span class="cite__k">withheld</span>4 names had no source
+                      — not shown to you
                     </li>
                     <li>
-                      <span class="cite__k">withheld</span>2 firms had no source
-                      on record — not shown to you
+                      <span class="cite__k">raise</span>the mandate is the job,
+                      not the book
                     </li>
                   </ul>
                 </div>
@@ -495,8 +495,7 @@ const guarantees = [
             <p class="beat__body">
               A new firm, a corrected field, a logged pass — every change the
               agent wants to make stops here with the old value, the new value
-              and the words behind it. Until you approve, the book has not
-              changed.
+              and the words behind it. Until you approve, nothing is written.
             </p>
             <p class="beat__receipt">
               no silent changes · every approval is recorded
@@ -555,11 +554,11 @@ const guarantees = [
         <article class="beat" data-beat>
           <div class="beat__copy">
             <p class="beat__eyebrow"><span>03</span>Search</p>
-            <h2 class="beat__title">Find the ones you don’t have yet.</h2>
+            <h2 class="beat__title">Find names for this raise.</h2>
             <p class="beat__body">
-              Ask for investors beyond your book and every candidate comes back
-              with its sources and a clear next step. Check whether the firm is
-              new or a possible duplicate, then add it to the mandate or pass.
+              Ask for investors that fit the mandate. The book is optional.
+              Every candidate comes back with sources and a clear next step:
+              add it to the raise, or pass.
             </p>
             <p class="beat__receipt">
               names without evidence are withheld — the run says how many, and
@@ -797,10 +796,10 @@ const guarantees = [
 
       <section class="pa-close">
         <div class="pa-wrap">
-          <h2 class="pa-h2">See it run on your own book.</h2>
+          <h2 class="pa-h2">See it run on a live raise.</h2>
           <p class="pa-lede">
-            Thirty minutes, screen share, founder-led. Bring a CRM export and a
-            live mandate — or watch it on ours first.
+            Thirty minutes, screen share, founder-led. Bring a deck, a
+            sentence, or a book — or watch it on ours first.
           </p>
           <div class="pa-actions">
             <a
@@ -974,9 +973,9 @@ const guarantees = [
     /* ---- beats: each demo plays once, when it scrolls into view ---- */
     const beats = Array.from(document.querySelectorAll("[data-beat]"));
     // Every name on this page is invented. No client project is ever named here.
-    const ASK = "Who should see @Project Solís, and why?";
+    const ASK = "Find investors for @Project Solís";
     const askMarkup =
-      'Who should see <span class="chat__at">@Project Solís</span>, and why?';
+      'Find investors for <span class="chat__at">@Project Solís</span>';
 
     const typeInto = (node, caret, text, done) => {
       let n = 0;
