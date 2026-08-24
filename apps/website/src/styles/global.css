@@ -4,7 +4,7 @@
 
 /* ------------------------------------------------------------------
    controlthrive — quiet OS design system
-   Borrowed from the PA-OS surface language: quiet monochrome, hairline
+   Borrowed from the Paos surface language: quiet monochrome, hairline
    borders, soft radii. State is weight and dots, never color floods.
    One accent (the blue dot), used only where the product is live.
    ------------------------------------------------------------------ */
@@ -21,7 +21,7 @@
     --field: #f4f4f4;
     --ink: #1a1a1a;
     --ink-2: #6b7280;
-    --ink-3: #9ca3af;
+    --ink-3: #6d7480;
     --hairline: #e8e8e8;
     --hairline-2: #dcdcdc;
     --live: #3b82f6;     /* the one blue dot */
@@ -49,7 +49,7 @@
     --field: #1d1d20;
     --ink: #ededee;
     --ink-2: #9a9aa0;
-    --ink-3: #6c6c72;
+    --ink-3: #7d7d84;
     --hairline: #262629;
     --hairline-2: #323236;
     --live: #4f9dff;
@@ -128,6 +128,10 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-3);
+}
+
+.brand-name {
+  text-transform: none;
 }
 
 .btn-ink,
@@ -272,7 +276,7 @@
   align-items: center;
   gap: 1.4rem;
 }
-@media (min-width: 768px) {
+@media (min-width: 980px) {
   .nav-links {
     display: flex;
   }
@@ -293,7 +297,7 @@
 .nav-cta {
   display: none;
 }
-@media (min-width: 768px) {
+@media (min-width: 980px) {
   .nav-cta {
     display: inline-flex;
     height: 2rem;
@@ -316,7 +320,7 @@
 .theme-toggle:hover {
   background: var(--hover);
 }
-@media (min-width: 768px) {
+@media (min-width: 980px) {
   .menu-btn {
     display: none;
   }
@@ -536,7 +540,7 @@
 }
 
 /* ---------------------------------------------------------------
-   The collage — three real PA-OS surfaces on one vanishing point,
+   The collage — three real Paos surfaces on one vanishing point,
    with the provenance wired through them. The depth is the form;
    the wires are the argument.
    --------------------------------------------------------------- */
@@ -769,7 +773,7 @@
 
 /* ---------------------------------------------------------------
    Review-queue vignette — the product, shown not told.
-   A pixel-crafted recreation of the PA-OS review surface.
+   A pixel-crafted recreation of the Paos review surface.
    --------------------------------------------------------------- */
 
 .rq {
@@ -925,7 +929,7 @@
 }
 
 /* ---------------------------------------------------------------
-   Contrast — the raise today, beside the raise on PA-OS
+   Contrast — the raise today, beside the raise on Paos
    --------------------------------------------------------------- */
 
 .contrast {
@@ -1029,7 +1033,7 @@
 }
 
 /* ---------------------------------------------------------------
-   Deployment — the forward-deployed work, shown as what's included
+   Product onboarding — how Paos starts on a firm's real book
    --------------------------------------------------------------- */
 
 .lane {
@@ -1107,7 +1111,7 @@
 }
 
 /* ---------------------------------------------------------------
-   Services — numbered editorial rows, no cards
+   Product pillars — numbered editorial rows, no cards
    --------------------------------------------------------------- */
 
 .svc-list {
@@ -1157,6 +1161,188 @@
 .svc-row__copy p + p {
   margin-top: 0.7rem;
   color: var(--ink-3);
+}
+
+/* Editorial product statement — a quiet pause before the workflow proof. */
+.product-statement {
+  display: grid;
+  justify-items: center;
+  max-width: 54rem;
+  margin-inline: auto;
+  padding-block: clamp(1rem, 3vw, 2rem) clamp(1.5rem, 4vw, 2.75rem);
+  text-align: center;
+}
+
+.product-statement h2 {
+  max-width: 22ch;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.8rem, 4.4vw, 3.25rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  text-wrap: balance;
+  color: var(--ink);
+}
+
+/* One raise in motion — status without another explanatory paragraph. */
+.raise-run {
+  margin-top: clamp(1rem, 3vw, 2rem);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-pane);
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: var(--shadow-lift);
+}
+
+.raise-run__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+}
+
+.raise-run__head span:last-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.raise-run ol {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.raise-run li {
+  display: grid;
+  align-content: start;
+  gap: 0.22rem;
+  min-width: 0;
+  padding: 1rem;
+}
+
+.raise-run li + li {
+  border-left: 1px solid var(--hairline);
+}
+
+.raise-run__num,
+.raise-run li > span:last-child {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.03em;
+  color: var(--ink-3);
+}
+
+.raise-run li strong {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+@media (max-width: 760px) {
+  .raise-run ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .raise-run li + li {
+    border-left: 0;
+  }
+
+  .raise-run li:nth-child(even) {
+    border-left: 1px solid var(--hairline);
+  }
+
+  .raise-run li:nth-child(n + 3) {
+    border-top: 1px solid var(--hairline);
+  }
+}
+
+/* Design partners — one high-contrast commercial close. */
+.partner-close {
+  --partner-bg: #18181a;
+  --partner-ink: #f5f5f6;
+  --partner-muted: #a1a1aa;
+  --partner-line: #303035;
+
+  display: grid;
+  gap: clamp(2rem, 6vw, 5rem);
+  padding: clamp(1.5rem, 5vw, 3rem);
+  border-radius: var(--radius-pane);
+  background: var(--partner-bg);
+  color: var(--partner-ink);
+  box-shadow: var(--shadow-pane);
+}
+
+:root.dark .partner-close {
+  --partner-bg: #ededee;
+  --partner-ink: #18181a;
+  --partner-muted: #66666d;
+  --partner-line: #d4d4d8;
+}
+
+@media (min-width: 820px) {
+  .partner-close {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: center;
+  }
+}
+
+.partner-close h2 {
+  max-width: 15ch;
+  font-size: clamp(1.8rem, 4vw, 2.65rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  color: var(--partner-ink);
+}
+
+.partner-close__copy > p {
+  max-width: 29rem;
+  margin-top: 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--partner-muted);
+}
+
+.partner-close__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.1rem;
+  margin-top: 1.75rem;
+}
+
+.partner-close .btn-ink {
+  background: var(--partner-ink);
+  color: var(--partner-bg);
+}
+
+.partner-close .link-quiet {
+  color: var(--partner-ink);
+}
+
+.partner-close__facts li {
+  display: grid;
+  gap: 0.2rem;
+  padding-block: 0.9rem;
+  border-top: 1px solid var(--partner-line);
+}
+
+.partner-close__facts strong {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--partner-ink);
+}
+
+.partner-close__facts span {
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--partner-muted);
 }
 
 /* ---------------------------------------------------------------
@@ -1351,7 +1537,7 @@
   max-width: 17rem;
 }
 
-.work-row__body h3 {
+.work-row__body :is(h2, h3) {
   font-size: clamp(1.25rem, 2.6vw, 1.6rem);
   font-weight: 500;
   letter-spacing: -0.02em;
@@ -1360,10 +1546,10 @@
   max-width: 30rem;
   text-wrap: balance;
 }
-.work-row__body h3 a {
+.work-row__body :is(h2, h3) a {
   transition: color 140ms var(--ease-out);
 }
-.work-row__body h3 a:hover {
+.work-row__body :is(h2, h3) a:hover {
   color: var(--ink-2);
 }
 .work-row__body > p {
@@ -1631,11 +1817,20 @@
   padding-top: 1.3rem;
   border-top: 1px solid var(--hairline);
 }
-.footer-meta span {
+.footer-meta span,
+.footer-meta a {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   letter-spacing: 0.03em;
   color: var(--ink-3);
+}
+
+.footer-meta a {
+  transition: color 120ms var(--ease-out);
+}
+
+.footer-meta a:hover {
+  color: var(--ink);
 }
 
 /* ---------------------------------------------------------------

@@ -1,0 +1,493 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Glyph from "../components/Glyph.astro";
+import {
+  bookingUrl,
+  designPartnerIncludes,
+  testimonials,
+  trustedCompanies,
+} from "../lib/siteContent";
+
+const proofQuote = testimonials[0];
+
+const firstRun = [
+  {
+    label: "01",
+    title: "Mandate live",
+    detail: "A deck, a teaser, or a sentence — that raise is the working object.",
+  },
+  {
+    label: "02",
+    title: "Names found",
+    detail: "Your book ranked first, the market searched after. Every name carries a source.",
+  },
+  {
+    label: "03",
+    title: "Pipeline moving",
+    detail: "Pursuits on this raise are the scoreboard, not a ranked CRM dump.",
+  },
+  {
+    label: "04",
+    title: "Report when there is work to show",
+    detail: "The first client-facing output generated from the live raise.",
+  },
+];
+
+const fitSignals = [
+  "You are a principal at a boutique placement or capital-advisory firm.",
+  "You are paid when capital closes — on funds, single deals, or SPVs.",
+  "You have a live or upcoming raise — a deck, a teaser, or even a sentence.",
+  "You have a book — Paos ranks it against the raise before anything else. No CRM migration required.",
+];
+
+const boundaries = [
+  "Paos remains the product; this is not a separate custom software project.",
+  "Nothing investor-facing sends without a person making the final decision.",
+  "The relationship history remains with the firm and stays exportable.",
+];
+---
+
+<Layout
+  title="Paos Design Partners | Controlthrive Studios"
+  description="Run Paos on a live raise with the founder beside you. Start from a mandate, rank your book against it, and search the market for the names you're missing."
+  ogImage="/api/og/home.png"
+  ogImageAlt="Paos design partners — software plus founder-led support on live placement mandates."
+>
+  <Header />
+
+  <main>
+    <section class="partner-hero">
+      <div class="wrap partner-hero__grid">
+        <div>
+          <p class="partner-hero__eyebrow reveal">
+            <span class="hero__chip"
+              ><i class="dot-live"></i><span class="brand-name">Paos</span> ·
+              design-partner program</span
+            >
+          </p>
+          <h1 class="partner-title reveal" style="--reveal-delay: 60ms">
+            The product, with the founder beside you.
+          </h1>
+          <p class="partner-lede reveal" style="--reveal-delay: 120ms">
+            Controlthrive Studios stands up Paos on one live raise — a deck,
+            a sentence, or a book if you have one — then works with your team
+            through names on that mandate, the pipeline, and a client-ready
+            report.
+          </p>
+          <div class="partner-actions reveal" style="--reveal-delay: 180ms">
+            <a
+              class="btn-ink"
+              href={bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-growth-cta="join-design-partners"
+              data-growth-location="design-partners-hero"
+              data-growth-wedge="live-mandate"
+            >
+              Join the program
+            </a>
+            <a class="link-quiet" href="/pa-os">See Paos</a>
+          </div>
+          <p class="partner-note reveal" style="--reveal-delay: 220ms">
+            Paid design partnership · limited cohort · founder support included
+          </p>
+        </div>
+
+        <div
+          class="partner-panel reveal"
+          style="--reveal-delay: 240ms"
+          aria-hidden="true"
+        >
+          <div class="partner-panel__bar">
+            <Glyph size={14} />
+            <span>Design-partner workspace</span>
+            <span><i class="dot-live"></i> live mandate</span>
+          </div>
+          <div class="partner-panel__body">
+            <div class="partner-panel__run">
+              <span class="mono-label">First operating run</span>
+              <strong>From a live raise to names on the board</strong>
+              <p>
+                One real workflow, completed inside Paos with the founder
+                beside you.
+              </p>
+            </div>
+            <ol class="partner-panel__steps">
+              {
+                firstRun.map((step) => (
+                  <li>
+                    <span>{step.label}</span>
+                    <div>
+                      <strong>{step.title}</strong>
+                      <p>{step.detail}</p>
+                    </div>
+                  </li>
+                ))
+              }
+            </ol>
+            <div class="partner-panel__result">
+              <span>Working result</span>
+              <strong
+                >One live raise · names on the pipeline · one report</strong
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof" aria-label="Selected founder experience">
+      <div class="wrap proof__row">
+        <span class="mono-label">Founder’s systems in production at</span>
+        <div class="proof__names">
+          {trustedCompanies.map((company) => <span>{company}</span>)}
+          <span>MVV Capital Partners</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">01</span>
+          <span class="sec-head__label">What is included</span>
+        </header>
+
+        <h2 class="sec-title reveal">See Paos on a live raise.</h2>
+        <p class="sec-lede reveal" style="--reveal-delay: 60ms">
+          We set up a live workspace from your mandate. Find names, move the
+          pipeline, and evaluate reporting on real work — not a demo dataset.
+          Bring a book only if it changes the next action.
+        </p>
+
+        <ul class="svc-list" style="margin-top: clamp(2rem, 5vw, 3rem)">
+          {
+            designPartnerIncludes.map((item, index) => (
+              <li
+                class="svc-row reveal"
+                style={`--reveal-delay: ${index * 70}ms`}
+              >
+                <div class="svc-row__lead">
+                  <span class="svc-row__num">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3>{item.title}</h3>
+                </div>
+                <div class="svc-row__copy">
+                  <p>{item.summary}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">02</span>
+          <span class="sec-head__label">How it fits</span>
+        </header>
+
+        <h2 class="sec-title reveal">
+          One system, brought into the workflow you already run.
+        </h2>
+        <p class="sec-lede reveal" style="--reveal-delay: 60ms">
+          Paos sits beside the CRM and broker-dealer you already run. Direct
+          founder support covers the first operating run on a live raise,
+          while your team keeps final judgment over every investor-facing
+          decision. Your book does the early work; the search extends it.
+        </p>
+
+        <div class="relationship-grid">
+          <div class="reveal">
+            <span class="mono-label">A strong fit</span>
+            <ul>
+              {fitSignals.map((signal) => <li>{signal}</li>)}
+            </ul>
+          </div>
+          <div class="reveal" style="--reveal-delay: 80ms">
+            <span class="mono-label">Clear boundaries</span>
+            <ul>
+              {boundaries.map((boundary) => <li>{boundary}</li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--ruled">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">03</span>
+          <span class="sec-head__label">Founder continuity</span>
+        </header>
+
+        <blockquote class="quote-feature reveal">
+          <p>“{proofQuote.quote}”</p>
+          <cite class="quote-cite">
+            <strong>{proofQuote.name}</strong>
+            <span>{proofQuote.role} · {proofQuote.company}</span>
+          </cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <CtaBand
+      index="04"
+      title="Bring one live mandate."
+      copy="Start with a CRM export, a deck, and the judgment your team already uses. We will run the first operating workflow together in Paos."
+      showPrinciples={true}
+    />
+  </main>
+
+  <Footer />
+
+  <script>
+    const revealElements = document.querySelectorAll<HTMLElement>(".reveal");
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      revealElements.forEach((el) => el.classList.add("is-visible"));
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: "0px 0px -8%", threshold: 0.1 },
+      );
+      revealElements.forEach((el) => observer.observe(el));
+    }
+  </script>
+</Layout>
+
+<style>
+  .partner-hero {
+    padding-block: clamp(4rem, 9vw, 7rem) clamp(3.5rem, 8vw, 6rem);
+  }
+
+  .partner-hero__grid {
+    display: grid;
+    gap: clamp(3rem, 7vw, 5rem);
+    align-items: center;
+  }
+
+  @media (min-width: 960px) {
+    .partner-hero__grid {
+      grid-template-columns: minmax(0, 6.5fr) minmax(23rem, 5.5fr);
+    }
+  }
+
+  .partner-hero__eyebrow {
+    margin-bottom: 1.5rem;
+  }
+
+  .partner-title {
+    max-width: 11ch;
+    color: var(--ink);
+    font-size: clamp(2.7rem, 6vw, 5rem);
+    font-weight: 500;
+    letter-spacing: -0.055em;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  .partner-lede {
+    max-width: 39rem;
+    margin-top: 1.6rem;
+    color: var(--ink-2);
+    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+    line-height: 1.65;
+  }
+
+  .partner-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .partner-note {
+    margin-top: 1.15rem;
+    color: var(--ink-3);
+    font-family: var(--font-mono);
+    font-size: 0.67rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .partner-panel {
+    width: 100%;
+    max-width: 31rem;
+    justify-self: center;
+    overflow: hidden;
+    border: 1px solid var(--hairline-2);
+    border-radius: var(--radius-pane);
+    background: var(--surface);
+    box-shadow: var(--shadow-pane);
+  }
+
+  @media (min-width: 960px) {
+    .partner-panel {
+      justify-self: end;
+    }
+  }
+
+  .partner-panel__bar {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    min-height: 2.85rem;
+    padding-inline: 1rem;
+    border-bottom: 1px solid var(--hairline);
+    color: var(--ink);
+    font-size: 0.78rem;
+  }
+
+  .partner-panel__bar > :last-child {
+    display: inline-flex;
+    gap: 0.45rem;
+    align-items: center;
+    margin-left: auto;
+    color: var(--ink-3);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+  }
+
+  .partner-panel__body {
+    padding: 1rem;
+  }
+
+  .partner-panel__run {
+    padding: 1.2rem;
+    border: 1px solid var(--hairline);
+    border-radius: calc(var(--radius-pane) - 0.35rem);
+    background: var(--field);
+  }
+
+  .partner-panel__run strong {
+    display: block;
+    margin-top: 0.75rem;
+    color: var(--ink);
+    font-size: 1.05rem;
+    font-weight: 500;
+  }
+
+  .partner-panel__run p,
+  .partner-panel__steps p {
+    margin-top: 0.35rem;
+    color: var(--ink-2);
+    font-size: 0.78rem;
+    line-height: 1.55;
+  }
+
+  .partner-panel__steps {
+    list-style: none;
+    margin: 0.75rem 0 0;
+    padding: 0;
+  }
+
+  .partner-panel__steps li {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.75rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .partner-panel__steps li > span {
+    color: var(--ink-3);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+  }
+
+  .partner-panel__steps strong {
+    color: var(--ink);
+    font-size: 0.84rem;
+    font-weight: 500;
+  }
+
+  .partner-panel__result {
+    margin-top: 0.9rem;
+    padding: 1rem;
+    border-radius: calc(var(--radius-pane) - 0.35rem);
+    background: var(--ink);
+    color: var(--canvas);
+  }
+
+  .partner-panel__result span {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    opacity: 0.68;
+  }
+
+  .partner-panel__result strong {
+    display: block;
+    margin-top: 0.45rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+
+  .relationship-grid {
+    display: grid;
+    gap: 2.5rem;
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  @media (min-width: 760px) {
+    .relationship-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0;
+    }
+
+    .relationship-grid > div {
+      padding-right: 3rem;
+    }
+
+    .relationship-grid > div + div {
+      padding-left: 3rem;
+      border-left: 1px solid var(--hairline-2);
+    }
+  }
+
+  .relationship-grid ul {
+    list-style: none;
+    margin: 1.4rem 0 0;
+    padding: 0;
+  }
+
+  .relationship-grid li {
+    position: relative;
+    padding: 0.9rem 0 0.9rem 1.2rem;
+    border-bottom: 1px solid var(--hairline);
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+
+  .relationship-grid li::before {
+    position: absolute;
+    top: 1.55rem;
+    left: 0;
+    width: 0.3rem;
+    height: 0.3rem;
+    border-radius: 999px;
+    background: var(--live);
+    content: "";
+  }
+</style>

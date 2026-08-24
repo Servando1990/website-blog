@@ -1,18 +1,28 @@
 ---
-import { bookingUrl, trustPrinciples } from '../lib/siteContent';
+import { bookingUrl, trustPrinciples } from "../lib/siteContent";
 
 interface Props {
   index?: string;
   title?: string;
   copy?: string;
   showPrinciples?: boolean;
+  primaryHref?: string;
+  primaryLabel?: string;
+  primaryExternal?: boolean;
+  secondaryHref?: string;
+  secondaryLabel?: string;
 }
 
 const {
-  index = '07',
-  title = 'If the workflow matters, the software path should feel clear.',
-  copy = 'Bring the process, bottleneck, or review workflow you want to improve. We can pressure-test the idea together and define the right next build.',
+  index = "07",
+  title = "Run one live mandate with Paos.",
+  copy = "Design partners get the product plus founder support on a live raise: start from a mandate, rank the book against it, and search for the names you're missing. The pipeline keeps score.",
   showPrinciples = true,
+  primaryHref = bookingUrl,
+  primaryLabel = "Join the design-partner program",
+  primaryExternal = true,
+  secondaryHref = "/pa-os",
+  secondaryLabel = "See Paos",
 } = Astro.props;
 ---
 
@@ -29,26 +39,28 @@ const {
     <div class="cta-final__actions">
       <a
         class="btn-ink"
-        href={bookingUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        data-growth-cta="book-founder-call"
-        data-growth-location="final-cta"
-        data-growth-wedge="pa-os"
+        href={primaryHref}
+        target={primaryExternal ? "_blank" : undefined}
+        rel={primaryExternal ? "noopener noreferrer" : undefined}
+        data-growth-cta={primaryExternal ? "founding-partner" : undefined}
+        data-growth-location={primaryExternal ? "final-cta" : undefined}
+        data-growth-wedge={primaryExternal ? "founding-partner" : undefined}
       >
-        Book a founder call
+        {primaryLabel}
       </a>
-      <a class="btn-line" href="mailto:servando@controlthrive.com">
-        Email controlthrive
+      <a class="btn-line" href={secondaryHref}>
+        {secondaryLabel}
       </a>
     </div>
 
-    {showPrinciples && (
-      <div class="principles" aria-label="Operating principles">
-        {trustPrinciples.map((principle) => (
-          <span>{principle.title}</span>
-        ))}
-      </div>
-    )}
+    {
+      showPrinciples && (
+        <div class="principles" aria-label="Operating principles">
+          {trustPrinciples.map((principle) => (
+            <span>{principle.title}</span>
+          ))}
+        </div>
+      )
+    }
   </div>
 </section>

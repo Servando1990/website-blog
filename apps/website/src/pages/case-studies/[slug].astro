@@ -133,7 +133,7 @@ const inlineLinks = caseStudyInlineLinks[caseStudy.slug] ?? [];
 
           <section>
             <span class="mono-label">Takeaway</span>
-            <h2>What this work says about how controlthrive builds.</h2>
+            <h2>What this work says about how the studio builds.</h2>
             <p set:html={renderInlineLinks(caseStudy.takeaway, inlineLinks)} />
           </section>
         </article>
@@ -156,9 +156,12 @@ const inlineLinks = caseStudyInlineLinks[caseStudy.slug] ?? [];
 
     <CtaBand
       index="02"
-      title="Have a similar workflow in mind?"
-      copy="Bring the process, bottleneck, or review workflow you want to improve. We can sort out whether it needs a workshop, a lighter decision layer, or a full build."
+      title="Need a system like this?"
+      copy="Bring the outcome, bottleneck, and operating reality. The studio can determine whether there is a focused path from the problem to production software."
       showPrinciples={false}
+      primaryLabel="Discuss an engagement"
+      secondaryHref="/services"
+      secondaryLabel="Explore services"
     />
 
     <section class="section section--ruled">

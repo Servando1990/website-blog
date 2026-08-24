@@ -21,8 +21,8 @@ function node(type: string, style: Style, children?: unknown) {
 const div = (style: Style, children?: unknown) => node('div', style, children);
 const span = (style: Style, children?: unknown) => node('span', style, children);
 
-const pillars = ['Source', 'Standardize', 'Match', 'Campaigns', 'Report'];
-const activePillar = 2;
+const pillars = ['Mandate', 'Search', 'Pipeline', 'Match', 'Report'];
+const activePillar = 1;
 
 // One pillar in the rail: a dot over a label; the active one is olive.
 const pillarNode = (label: string, active: boolean) =>
@@ -156,7 +156,7 @@ export const GET: APIRoute = async () => {
                   borderRadius: '999px',
                   background: colors.olive,
                 }),
-                div({}, 'PA-OS · CLOSED BETA'),
+                div({}, 'Paos · CLOSED BETA'),
               ]
             ),
             div(
@@ -181,7 +181,7 @@ export const GET: APIRoute = async () => {
                 lineHeight: 1.34,
                 fontWeight: 400,
               },
-              'One agent runs the whole raise — every claim cited, nothing sent without your review.'
+              'Drop a mandate. Rank the book. Search beyond it. Pipeline is the scoreboard.'
             ),
           ]
         ),

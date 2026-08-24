@@ -15,7 +15,7 @@ export interface Props {
 
 const {
   title,
-  description = 'controlthrive builds PA-OS — the operating system for placement agents. One agent runs the raise: search, standardization, matching, campaigns and reporting, every claim cited back to its source.',
+  description = 'Controlthrive Studios builds Paos — the operating system for placement agents. One agent runs the raise — a fund, a single deal, or an SPV: the book ranked against the mandate, the market searched beyond it, every claim cited back to its source.',
   ogImage = '/api/og/home.png',
   ogImageAlt,
   ogImageWidth = 1200,
@@ -123,26 +123,35 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID?.trim() || '';
     <script type="application/ld+json" is:inline>
       {JSON.stringify({
         '@context': 'https://schema.org',
-        '@type': 'ProfessionalService',
-        name: 'controlthrive',
-        founder: {
-          '@type': 'Person',
-          name: 'Servando Torres',
-        },
-        email: 'servando@controlthrive.com',
-        url: baseUrl,
-        description,
-        sameAs: [
-          'https://x.com/vandotorres',
-          'https://www.linkedin.com/in/servando-torres-239a26b0/',
-          'https://x.com/servandotorres',
-          'https://linkedin.com/in/servandotorres',
-          'https://github.com/Servando1990',
-        ],
-        serviceType: [
-          'Private capital workflow software',
-          'Portfolio monitoring systems',
-          'Decision support tooling',
+        '@graph': [
+          {
+            '@type': 'Organization',
+            '@id': `${baseUrl}#organization`,
+            name: 'controlthrive',
+            founder: {
+              '@type': 'Person',
+              name: 'Servando Torres',
+            },
+            email: 'servando@controlthrive.com',
+            url: baseUrl,
+            description,
+            sameAs: [
+              'https://x.com/vandotorres',
+              'https://www.linkedin.com/in/servando-torres-239a26b0/',
+              'https://github.com/Servando1990',
+            ],
+          },
+          {
+            '@type': 'SoftwareApplication',
+            '@id': `${baseUrl}#pa-os`,
+            name: 'Paos',
+            applicationCategory: 'BusinessApplication',
+            operatingSystem: 'Web',
+            url: new URL('/pa-os', baseUrl).href,
+            description:
+              'The operating system for boutique placement agents: matching, search, standardization, and reporting under human control, with campaign drafting in build.',
+            creator: { '@id': `${baseUrl}#organization` },
+          },
         ],
       })}
     </script>

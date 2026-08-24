@@ -1,81 +1,47 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import CtaBand from '../components/CtaBand.astro';
-import Glyph from '../components/Glyph.astro';
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Glyph from "../components/Glyph.astro";
 import {
   bookingUrl,
   founderProfile,
-  serviceAreas,
-  testimonials,
+  productPillars,
   trustedCompanies,
-} from '../lib/siteContent';
-
-// The home page has one job: a placement agent lands here and knows, in one
-// screen, what PA-OS is and what controlthrive is. Product first; the services
-// lane is named honestly and kept narrow so nobody has to guess whether this
-// is an agency.
-
-const featuredQuote = testimonials[0];
-const supportingQuotes = [testimonials[1], testimonials[3]];
+} from "../lib/siteContent";
 
 const founderParagraphs = [
   founderProfile.paragraphs[0],
   founderProfile.paragraphs[2],
 ];
 
-// The contrast that makes the category obvious. Left is the job today; right
-// is the same job with PA-OS. Every right-hand line is something the product
-// does now (business-translation.md).
-const contrast = [
-  {
-    today: 'Your book lives in a CRM export, a partner’s memory, and four spreadsheets.',
-    withOs: 'One typed book, built from your own exports, with every mapping decision remembered.',
-  },
-  {
-    today: 'A deck becomes a mandate by hand, and the numbers get retyped.',
-    withOs: 'Drop the deck — the mandate comes back typed, each field quoted to its source page.',
-  },
-  {
-    today: 'Who to call next is a judgment nobody can reconstruct a month later.',
-    withOs: 'A ranked shortlist with the argument and the evidence behind every name.',
-  },
-  {
-    today: 'The monthly client report is assembled by hand the week it is due.',
-    withOs: 'The report generates from the same living book — versioned, under your firm’s logo.',
-  },
-  {
-    today: 'The relationship memory walks out with whoever leaves.',
-    withOs: 'The memory is the firm’s, on any broker-dealer, exportable in full, any time.',
-  },
+// The home page has one job: a placement agent lands here and knows, in one
+// screen, what Paos is and what controlthrive builds.
+
+const raiseStages = [
+  { label: "Mandate", value: "Live" },
+  { label: "Matching", value: "Book ranked first" },
+  { label: "Search", value: "12 found beyond it" },
+  { label: "Pipeline", value: "8 identified" },
+  { label: "Reporting", value: "From the raise" },
 ];
 
-const rails = [
+const partnerSnapshot = [
+  { title: "A live raise", copy: "Start from a deck or a sentence." },
   {
-    title: 'The send button stays yours.',
-    copy: 'Outreach is drafted into your own mailbox and waits there for you to send. PA-OS has no send path of its own.',
+    title: "Names on that raise",
+    copy: "Your book ranked first, the market searched after.",
   },
-  {
-    title: 'Every claim carries its source.',
-    copy: 'A claim you cannot open the evidence for is withheld, and the run tells you how many were withheld and why.',
-  },
-  {
-    title: 'Your judgment is the gate.',
-    copy: 'Every change the agent wants stops in For review with the old value beside the new one.',
-  },
-  {
-    title: 'Your book, your exit.',
-    copy: 'PA-OS sits on top of the CRM and broker-dealer you already have. Everything exports in full.',
-  },
+  { title: "Founder support", copy: "Direct setup and iteration." },
 ];
+
 ---
 
 <Layout
-  title="PA-OS — the operating system for placement agents | controlthrive"
-  description="controlthrive builds PA-OS: the operating system for placement agents. Search, standardization, matching, campaigns and reporting on one agent — every claim cited, nothing sent without you. Closed beta."
+  title="Paos — the operating system for placement agents | Controlthrive Studios"
+  description="Paos runs the raise. Drop a mandate, rank your book against it, and search the market for the names you're missing. Closed beta."
   ogImage="/api/og/home.png"
-  ogImageAlt="PA-OS by controlthrive — the operating system for placement agents."
+  ogImageAlt="Paos by Controlthrive Studios — the operating system for placement agents."
 >
   <Header />
 
@@ -85,16 +51,19 @@ const rails = [
       <div class="wrap hero__grid">
         <div>
           <p class="hero__eyebrow reveal">
-            <span class="hero__chip"><i class="dot-live"></i>PA-OS · Closed beta</span>
+            <span class="hero__chip"
+              ><i class="dot-live"></i><span class="brand-name">Paos</span> ·
+              Closed beta</span
+            >
           </p>
           <h1 class="hero__title reveal" style="--reveal-delay: 60ms">
-            The operating system for placement agents.
+            Start with who you know. Finish with who you don't.
           </h1>
           <p class="hero__lede reveal" style="--reveal-delay: 120ms">
-            Your broker-dealer keeps you compliant. Your CRM keeps names. PA-OS
-            runs the raise — search, standardization, matching, campaigns and
-            reporting — as one agent you talk to, with a receipt behind every
-            claim and nothing that sends itself.
+            Paos reads the mandate and ranks your book against it — who fits
+            this raise, who's warm, who said never. When the book runs out,
+            it searches the market for the names you're missing. Nothing
+            sends without you.
           </p>
           <div class="hero__actions reveal" style="--reveal-delay: 180ms">
             <a
@@ -102,47 +71,50 @@ const rails = [
               href={bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              data-growth-cta="request-access"
+              data-growth-cta="join-design-partners"
               data-growth-location="home-hero"
-              data-growth-wedge="pa-os"
+              data-growth-wedge="live-mandate"
             >
-              Request access
+              Run a live mandate
             </a>
             <a class="link-quiet" href="/pa-os">See the product</a>
           </div>
         </div>
 
         <p class="sr-only">
-          Preview of PA-OS: agents handle sourcing, standardization, matching,
-          outreach, and reporting — each one proposes a change with cited
-          evidence that a person approves before anything is written.
+          Paos starts from a mandate. It ranks the firm's own investor book
+          against that raise, then searches the market for names beyond it.
+          A person approves every change; nothing investor-facing sends
+          itself.
         </p>
 
-        <!-- The product, collaged: the book behind, the ask floating over it,
-             the review card in front — one vanishing point. The wires are
-             ours: they run the provenance through the collage, from the ask
-             into the claim, and from the claim back to the row it came from. -->
-        <div class="deck reveal" style="--reveal-delay: 240ms" aria-hidden="true">
+        <!-- The product, collaged: the raise behind, the find-names ask over
+             it, the review card in front. The book is not the object. -->
+        <div
+          class="deck reveal"
+          style="--reveal-delay: 240ms"
+          aria-hidden="true"
+        >
           <div class="deck__plane">
             <div class="deck__card deck__card--book">
               <div class="dcard__bar">
                 <Glyph size={12} />
-                <span>Investor book</span>
-                <span class="dcard__meta">312 firms</span>
+                <span>Project Solís</span>
+                <span class="dcard__meta">live raise</span>
               </div>
               <ul class="dcard__rows">
-                <li class="is-cited"><b>Rockmont Family Office</b><i>94</i></li>
-                <li><b>Meridian Trust Office</b><i>89</i></li>
-                <li><b>Aldwych Capital Office</b><i>85</i></li>
-                <li><b>Talstein Multi-Family</b><i>81</i></li>
-                <li><b>Larkmere Capital</b><i>78</i></li>
-                <li><b>Gatewood Capital</b><i>74</i></li>
-                <li><b>Halcyon Partners</b><i>71</i></li>
+                <li class="is-cited"><b>Rockmont Family Office</b><i>Identified</i></li>
+                <li><b>Aldwych Capital Office</b><i>New</i></li>
+                <li><b>Talstein Multi-Family</b><i>New</i></li>
+                <li><b>Verlaine Trust Office</b><i>Out</i></li>
+                <li><b>Larkmere Capital</b><i>Talking</i></li>
+                <li><b>Gatewood Capital</b><i>Passed</i></li>
+                <li><b>Halcyon Partners</b><i>Deep</i></li>
               </ul>
             </div>
 
             <div class="deck__card deck__card--ask">
-              Who should see <span class="deck__at">@Project Solís</span>, and why?
+              Find investors for <span class="deck__at">@Project Solís</span>
             </div>
 
             <svg
@@ -152,18 +124,25 @@ const rails = [
               fill="none"
               aria-hidden="true"
             >
-              <path id="wireA" class="deck__wire" vector-effect="non-scaling-stroke"
-                d="M31 14 C 31 23, 23 24, 23 31" />
-              <path id="wireB" class="deck__wire" style="--wd:0.5s" vector-effect="non-scaling-stroke"
-                d="M85 40 C 95 39, 78 27, 68 24" />
+              <path
+                id="wireA"
+                class="deck__wire"
+                vector-effect="non-scaling-stroke"
+                d="M31 14 C 31 23, 23 24, 23 31"></path>
+              <path
+                id="wireB"
+                class="deck__wire"
+                style="--wd:0.5s"
+                vector-effect="non-scaling-stroke"
+                d="M85 40 C 95 39, 78 27, 68 24"></path>
               <circle class="deck__spark" r="1.1">
                 <animateMotion dur="2.8s" repeatCount="indefinite" begin="0.9s">
-                  <mpath href="#wireA" xlink:href="#wireA" />
+                  <mpath href="#wireA" xlink:href="#wireA"></mpath>
                 </animateMotion>
               </circle>
               <circle class="deck__spark" r="1.1">
                 <animateMotion dur="2.8s" repeatCount="indefinite" begin="2.1s">
-                  <mpath href="#wireB" xlink:href="#wireB" />
+                  <mpath href="#wireB" xlink:href="#wireB"></mpath>
                 </animateMotion>
               </circle>
             </svg>
@@ -171,38 +150,44 @@ const rails = [
             <div class="rq deck__card deck__card--front" data-rq>
               <div class="rq__bar">
                 <Glyph size={14} />
-                <span class="rq__title">PA-OS · agents at work</span>
-                <span class="rq__count"><i class="dot-live"></i><span data-rq-step>3 / 5</span></span>
+                <span class="rq__title">Paos · agents at work</span>
+                <span class="rq__count"
+                  ><i class="dot-live"></i><span data-rq-step>3 / 5</span></span
+                >
               </div>
 
               <article class="rq__item rq__item--active" data-rq-active>
                 <div class="rq__kind-row">
-                  <span class="rq__kind" data-rq-kind>Matching</span>
-                  <span class="rq__conf" data-rq-conf>cited</span>
+                  <span class="rq__kind" data-rq-kind>Search</span>
+                  <span class="rq__conf" data-rq-conf>sources attached</span>
                 </div>
                 <p class="rq__claim" data-rq-claim>
-                  Ranked 312 investors — who to approach, in what order, and why.
+                  Found 12 investors for Project Solís.
                 </p>
                 <p class="rq__evidence" data-rq-evidence>
-                  Rockmont leads · committed €18M on Aurora, 2024
+                  all 12 outside your book · 4 withheld, no evidence
                 </p>
                 <div class="rq__actions">
                   <span class="rq__approve">Approve</span>
                   <span class="rq__edit">Edit</span>
                 </div>
-                <span class="rq__logged" data-rq-logged>✓ Shortlist saved — decision logged</span>
+                <span class="rq__logged" data-rq-logged
+                  >✓ Added to mandate — decision logged</span
+                >
               </article>
 
               <article class="rq__item rq__item--queued" data-rq-queued>
                 <div class="rq__kind-row">
-                  <span class="rq__kind" data-rq-next-kind>Before you meet</span>
+                  <span class="rq__kind" data-rq-next-kind>Organize</span>
                 </div>
                 <p class="rq__claim" data-rq-next-claim>
-                  Assemble the pre-meeting brief for Larkmere Capital.
+                  Turned the deck into a review-ready mandate.
                 </p>
               </article>
 
-              <div class="rq__foot" data-rq-foot>every claim opens the record behind it</div>
+              <div class="rq__foot" data-rq-foot>
+                a name without a source never reaches this list
+              </div>
             </div>
           </div>
         </div>
@@ -214,204 +199,139 @@ const rails = [
       <div class="wrap proof__row">
         <span class="mono-label">Founder’s systems in production at</span>
         <div class="proof__names">
-          {trustedCompanies.map((company) => (
-            <span>{company}</span>
-          ))}
+          {trustedCompanies.map((company) => <span>{company}</span>)}
         </div>
       </div>
     </section>
 
-    <!-- 01 The contrast -->
-    <section class="section section--ruled" id="why">
-      <div class="wrap">
-        <header class="sec-head">
-          <span class="sec-head__index">01</span>
-          <span class="sec-head__label">Why it exists</span>
-        </header>
-
-        <h2 class="sec-title reveal">
-          Your CRM was built to store names. It was never built to run a raise.
-        </h2>
-        <p class="sec-lede reveal" style="--reveal-delay: 60ms">
-          A raise turns on five jobs, and every one of them is done today in a
-          spreadsheet, an inbox, or someone’s head. PA-OS is the layer that
-          runs them — and can show its work.
-        </p>
-
-        <div class="contrast">
-          <div class="contrast__col contrast__col--today">
-            <span class="mono-label">The raise today</span>
-            <ul>
-              {contrast.map((row, index) => (
-                <li class="reveal" style={`--reveal-delay: ${index * 50}ms`}>{row.today}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div class="contrast__col contrast__col--os">
-            <span class="mono-label"><i class="dot-live"></i>With PA-OS</span>
-            <ul>
-              {contrast.map((row, index) => (
-                <li class="reveal" style={`--reveal-delay: ${index * 50}ms`}>{row.withOs}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 02 The product -->
+    <!-- 01 The product -->
     <section class="section section--ruled" id="product">
       <div class="wrap">
         <header class="sec-head">
-          <span class="sec-head__index">02</span>
+          <span class="sec-head__index">01</span>
           <span class="sec-head__label">The product</span>
         </header>
 
-        <h2 class="sec-title reveal">One agent. The five jobs of a raise.</h2>
-        <p class="sec-lede reveal" style="--reveal-delay: 60ms">
-          Not five tools bolted together — one operating memory the whole firm
-          works from, in plain language, on top of the systems you already run.
-        </p>
+        <div class="product-statement reveal">
+          <h2>The raise is the job. The book is your head start.</h2>
+        </div>
+
+        <div class="raise-run reveal" style="--reveal-delay: 100ms">
+          <div class="raise-run__head">
+            <span>Project Solís · book ranked, market searched</span>
+            <span><i class="dot-live"></i>Live mandate</span>
+          </div>
+          <ol>
+            {
+              raiseStages.map((stage, index) => (
+                <li>
+                  <span class="raise-run__num">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <strong>{stage.label}</strong>
+                  <span>{stage.value}</span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
 
         <ul class="svc-list" style="margin-top: clamp(2rem, 5vw, 3rem)">
-          {serviceAreas.map((service, index) => (
-            <li class="svc-row reveal" style={`--reveal-delay: ${index * 70}ms`}>
-              <div class="svc-row__lead">
-                <span class="svc-row__num">{String(index + 1).padStart(2, '0')}</span>
-                <h3>{service.title}</h3>
-              </div>
-              <div class="svc-row__copy">
-                <p>{service.summary}</p>
-                <p>{service.detail}</p>
-              </div>
-            </li>
-          ))}
+          {
+            productPillars.map((pillar, index) => (
+              <li
+                class="svc-row reveal"
+                style={`--reveal-delay: ${index * 70}ms`}
+              >
+                <div class="svc-row__lead">
+                  <span class="svc-row__num">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3>{pillar.title}</h3>
+                </div>
+                <div class="svc-row__copy">
+                  <p>{pillar.summary}</p>
+                </div>
+              </li>
+            ))
+          }
         </ul>
 
         <div class="product-cta reveal">
-          <a
-            class="btn-ink"
-            href={bookingUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-growth-cta="request-access"
-            data-growth-location="home-product"
-            data-growth-wedge="pa-os">Request access</a
-          >
-          <a class="link-quiet" href="/pa-os">Walk through the product</a>
+          <a class="link-quiet" href="/pa-os">See Paos at work</a>
         </div>
       </div>
     </section>
 
-    <!-- 03 The rails -->
-    <section class="section section--ruled" id="how">
+    <!-- 02 Selective services — visible, but secondary to Paos. -->
+    <section class="section section--ruled" id="services">
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-head__index">02</span>
+          <span class="sec-head__label">Beyond Paos</span>
+        </header>
+
+        <div class="lane__copy">
+          <h2 class="sec-title reveal">Selective services.</h2>
+          <p class="sec-lede reveal" style="--reveal-delay: 60ms">
+            Controlthrive Studios builds Paos. A small number of founder-led
+            engagements sit beside it.
+          </p>
+          <div class="lane__actions reveal" style="--reveal-delay: 120ms">
+            <a class="btn-line" href="/services">See services</a>
+            <a class="link-quiet" href="/case-studies">Selected work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 Design partners — the commercial motion in one compact panel. -->
+    <section class="section section--ruled" id="design-partners">
       <div class="wrap">
         <header class="sec-head">
           <span class="sec-head__index">03</span>
-          <span class="sec-head__label">The rails</span>
+          <span class="sec-head__label">Design partners</span>
         </header>
 
-        <h2 class="sec-title reveal">Agentic where it helps. Deterministic where it counts.</h2>
-        <p class="sec-lede reveal" style="--reveal-delay: 60ms">
-          An agent inside a regulated workflow is only useful if it cannot
-          surprise you. Four rules are enforced in code, not in a prompt.
-        </p>
-
-        <ul class="rails">
-          {rails.map((rail, index) => (
-            <li class="reveal" style={`--reveal-delay: ${index * 60}ms`}>
-              <strong>{rail.title}</strong>
-              <span>{rail.copy}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-
-    <!-- 04 Client perspective -->
-    <section class="section section--ruled">
-      <div class="wrap">
-        <header class="sec-head">
-          <span class="sec-head__index">04</span>
-          <span class="sec-head__label">Client perspective</span>
-        </header>
-
-        <blockquote class="quote-feature reveal">
-          <p>“{featuredQuote.quote}”</p>
-          <cite class="quote-cite">
-            <strong>{featuredQuote.name}</strong>
-            <span>{featuredQuote.role} · {featuredQuote.company}</span>
-          </cite>
-        </blockquote>
-
-        <div class="quote-grid">
-          {supportingQuotes.map((quote, index) => (
-            <blockquote class="reveal" style={`--reveal-delay: ${index * 70}ms`}>
-              <p>“{quote.quote}”</p>
-              <cite class="quote-cite">
-                <strong>{quote.name}</strong>
-                <span>{quote.role} · {quote.company}</span>
-              </cite>
-            </blockquote>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- 05 Deployment. The human work, framed as what's included — not as a
-         second business. A real book is messy; landing it is the product. -->
-    <section class="section section--ruled" id="deployment">
-      <div class="wrap">
-        <header class="sec-head">
-          <span class="sec-head__index">05</span>
-          <span class="sec-head__label">Deployment</span>
-        </header>
-
-        <div class="lane">
-          <div class="lane__copy">
-            <h2 class="sec-title reveal">You don’t roll this out alone.</h2>
-            <p class="sec-lede reveal" style="--reveal-delay: 60ms">
-              PA-OS lands on a real book — a messy export, half-typed mandates,
-              ten years of relationship memory in one partner’s head. We deploy
-              it with you, on your data, with the founder on the call.
-            </p>
-            <div class="lane__actions reveal" style="--reveal-delay: 120ms">
+        <div class="partner-close reveal">
+          <div class="partner-close__copy">
+            <h2>The product, with the founder beside you.</h2>
+            <p>Run Paos on a live raise. Bring a deck, a sentence, or a book.</p>
+            <div class="partner-close__actions">
               <a
                 class="btn-ink"
                 href={bookingUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                data-growth-cta="request-access"
-                data-growth-location="home-deployment"
-                data-growth-wedge="pa-os">Request access</a
+                data-growth-cta="join-design-partners"
+                data-growth-location="home-design-partners"
+                data-growth-wedge="live-mandate">Run a live mandate</a
+              >
+              <a class="link-quiet" href="/design-partners"
+                >See what is included</a
               >
             </div>
           </div>
 
-          <ul class="lane__facts reveal" style="--reveal-delay: 100ms">
-            <li>
-              <strong>We load the book with you</strong>
-              <span>Your CRM export, your decks, your pipeline history. The first import is a working session, not a support ticket.</span>
-            </li>
-            <li>
-              <strong>The first mandate, together</strong>
-              <span>First standardization, first ranked shortlist, first client report — run beside you on live deals.</span>
-            </li>
-            <li>
-              <strong>Weekly until it holds</strong>
-              <span>Short sessions while the book beds in, then whenever the next raise needs it.</span>
-            </li>
+          <ul class="partner-close__facts">
+            {
+              partnerSnapshot.map((item) => (
+                <li>
+                  <strong>{item.title}</strong>
+                  <span>{item.copy}</span>
+                </li>
+              ))
+            }
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- 06 Founder -->
-    <section class="section section--ruled">
+    <!-- Who builds it — the person behind a founder-led product. -->
+    <section class="section section--ruled" id="founder">
       <div class="wrap">
         <header class="sec-head">
-          <span class="sec-head__index">06</span>
+          <span class="sec-head__index">04</span>
           <span class="sec-head__label">Who builds it</span>
         </header>
 
@@ -425,41 +345,35 @@ const rails = [
           </figure>
 
           <div class="founder__copy reveal" style="--reveal-delay: 100ms">
-            {founderParagraphs.map((paragraph) => (
-              <p>{paragraph}</p>
-            ))}
+            {founderParagraphs.map((paragraph) => <p>{paragraph}</p>)}
           </div>
         </div>
       </div>
     </section>
-
-    <CtaBand
-      index="07"
-      title="See it run on your own book."
-      copy="Thirty minutes, screen share, founder-led. Bring a CRM export and a live mandate — or watch it on ours first."
-    />
   </main>
 
   <Footer />
 
   <script>
     // Staggered reveal on scroll — one orchestrated entrance per section.
-    const revealElements = document.querySelectorAll<HTMLElement>('.reveal');
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealElements = document.querySelectorAll<HTMLElement>(".reveal");
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
-    if (reduceMotion || !('IntersectionObserver' in window)) {
-      revealElements.forEach((el) => el.classList.add('is-visible'));
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      revealElements.forEach((el) => el.classList.add("is-visible"));
     } else {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
+              entry.target.classList.add("is-visible");
               observer.unobserve(entry.target);
             }
           });
         },
-        { rootMargin: '0px 0px -8%', threshold: 0.1 },
+        { rootMargin: "0px 0px -8%", threshold: 0.1 },
       );
       revealElements.forEach((el) => observer.observe(el));
     }
@@ -469,70 +383,70 @@ const rails = [
     // what the claim is grounded in. Every name here is invented.
     const pillars = [
       {
-        kind: 'Search',
-        receipt: 'cited',
-        claim: 'Found 12 investors beyond your book for the Meridian mandate.',
-        evidence: 'each one opens its source · 4 withheld, no evidence',
-        foot: 'a name without a source never reaches this list',
-        logged: '✓ Added to mandate — decision logged',
+        kind: "Search",
+        receipt: "sources attached",
+        claim: "Found 12 investors for Project Solís.",
+        evidence: "all 12 outside your book · 4 withheld, no evidence",
+        foot: "a name without a source never reaches this list",
+        logged: "✓ Added to mandate — decision logged",
       },
       {
-        kind: 'Standardization',
-        receipt: 'sourced',
-        claim: 'Turned the pitch deck into a typed, provenance-quoted mandate.',
-        evidence: 'deck p.4 — “seeking €40 million in commitments”',
-        foot: 'every field opens the page it was read from',
-        logged: '✓ Mandate created — decision logged',
+        kind: "Organize",
+        receipt: "deck checked",
+        claim: "Turned the deck into a review-ready mandate.",
+        evidence: "deck p.4 — “seeking €40 million in commitments”",
+        foot: "every field opens the page it was read from",
+        logged: "✓ Mandate created — decision logged",
       },
       {
-        kind: 'Matching',
-        receipt: 'cited',
-        claim: 'Ranked 312 investors — who to approach, in what order, and why.',
-        evidence: 'Rockmont leads · committed €18M on Aurora, 2024',
-        foot: 'every claim opens the record behind it',
-        logged: '✓ Shortlist saved — decision logged',
+        kind: "Pipeline",
+        receipt: "this raise",
+        claim: "Eight firms are on Project Solís.",
+        evidence: "3 identified · 2 talking · 1 in diligence",
+        foot: "the pipeline is the scoreboard, not the book",
+        logged: "✓ Pursuit moved — decision logged",
       },
       {
-        kind: 'Before you meet',
-        receipt: 'derived',
-        claim: 'Assembled the pre-meeting brief for Larkmere Capital.',
-        evidence: '“No US deals. That is firm policy.” · their words, 14 Mar',
-        foot: 'worked out from your records, nothing saved, nothing sent',
-        logged: '✓ Read before the call — no record changed',
+        kind: "Matching",
+        receipt: "your book, first move",
+        claim: "Ranked the book for Project Solís.",
+        evidence: "Rockmont leads · committed €18M on Aurora, 2024",
+        foot: "matching orders names you already know",
+        logged: "✓ Shortlist saved — decision logged",
       },
       {
-        kind: 'Reporting',
-        receipt: 'traceable',
-        claim: 'Built this month’s client report under your firm’s logo.',
-        evidence: '€40M across 8 investors · rows travel as XLSX',
-        foot: 'every figure opens the rows it was counted from',
-        logged: '✓ Version 3 saved — v2 kept as it went out',
+        kind: "Reporting",
+        receipt: "from the raise",
+        claim: "Built this month’s client report.",
+        evidence: "€28M across 8 pursuits · rows travel as XLSX",
+        foot: "every figure opens the rows it was counted from",
+        logged: "✓ Version 3 saved — v2 kept as it went out",
       },
     ];
 
-    const rq = document.querySelector<HTMLElement>('[data-rq]');
-    const active = rq?.querySelector<HTMLElement>('[data-rq-active]');
+    const rq = document.querySelector<HTMLElement>("[data-rq]");
+    const active = rq?.querySelector<HTMLElement>("[data-rq-active]");
 
     if (rq && active && !reduceMotion) {
       const fields = {
-        kind: rq.querySelector('[data-rq-kind]'),
-        conf: rq.querySelector('[data-rq-conf]'),
-        claim: rq.querySelector('[data-rq-claim]'),
-        evidence: rq.querySelector('[data-rq-evidence]'),
-        logged: rq.querySelector('[data-rq-logged]'),
-        step: rq.querySelector('[data-rq-step]'),
-        foot: rq.querySelector('[data-rq-foot]'),
-        nextKind: rq.querySelector('[data-rq-next-kind]'),
-        nextClaim: rq.querySelector('[data-rq-next-claim]'),
+        kind: rq.querySelector("[data-rq-kind]"),
+        conf: rq.querySelector("[data-rq-conf]"),
+        claim: rq.querySelector("[data-rq-claim]"),
+        evidence: rq.querySelector("[data-rq-evidence]"),
+        logged: rq.querySelector("[data-rq-logged]"),
+        step: rq.querySelector("[data-rq-step]"),
+        foot: rq.querySelector("[data-rq-foot]"),
+        nextKind: rq.querySelector("[data-rq-next-kind]"),
+        nextClaim: rq.querySelector("[data-rq-next-claim]"),
       };
 
-      let index = 2; // Matching is what renders on the server
+      let index = 0; // Search is what renders on the server
 
       const render = (i: number) => {
         const current = pillars[i % pillars.length];
         const next = pillars[(i + 1) % pillars.length];
 
-        active.classList.remove('rq__item--approved', 'rq__item--active');
+        active.classList.remove("rq__item--approved", "rq__item--active");
         void active.offsetWidth;
 
         if (fields.kind) fields.kind.textContent = current.kind;
@@ -541,15 +455,16 @@ const rails = [
         if (fields.evidence) fields.evidence.textContent = current.evidence;
         if (fields.logged) fields.logged.textContent = current.logged;
         if (fields.foot) fields.foot.textContent = current.foot;
-        if (fields.step) fields.step.textContent = `${(i % pillars.length) + 1} / ${pillars.length}`;
+        if (fields.step)
+          fields.step.textContent = `${(i % pillars.length) + 1} / ${pillars.length}`;
         if (fields.nextKind) fields.nextKind.textContent = next.kind;
         if (fields.nextClaim) fields.nextClaim.textContent = next.claim;
 
-        active.classList.add('rq__item--active');
+        active.classList.add("rq__item--active");
       };
 
       window.setInterval(() => {
-        active.classList.add('rq__item--approved');
+        active.classList.add("rq__item--approved");
         window.setTimeout(() => {
           index = (index + 1) % pillars.length;
           render(index);

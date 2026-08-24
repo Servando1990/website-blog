@@ -2,100 +2,82 @@ export const bookingUrl = 'https://cal.com/servando-torres-garcia-qco7rh/30min';
 
 export const navigation = [
   { href: '/', label: 'Home' },
-  { href: '/pa-os', label: 'PA-OS' },
-  { href: '/offerings', label: 'Services' },
-  { href: '/case-studies', label: 'Case Studies' },
+  { href: '/pa-os', label: 'Paos' },
+  { href: '/design-partners', label: 'Design partners' },
+  { href: '/case-studies', label: 'Work' },
+  { href: '/blog', label: 'Writing' },
+  { href: '/services', label: 'Services' },
   { href: '/tools', label: 'Tools' },
-  { href: '/blog', label: 'Blog' },
+];
+
+export const designPartnerIncludes = [
+  {
+    title: 'Start from the raise',
+    summary:
+      'Bring a deck, a teaser, or a sentence. Paos makes that mandate the working object.',
+  },
+  {
+    title: 'Rank the book against it',
+    summary:
+      'Your existing network goes first: who fits this raise, who is warm, who said never. Relationship history becomes the call order.',
+  },
+  {
+    title: 'Search beyond the book',
+    summary:
+      'When the known names run out, Paos searches the market for investors that fit. Every name carries a source — and it works even with no book at all.',
+  },
+  {
+    title: 'Stay close to the outcome',
+    summary:
+      'Direct founder support covers the first operating run: names on the raise, the pipeline as the scoreboard, and a client-ready report when there is something to report.',
+  },
+];
+
+export const serviceFocus = [
+  {
+    title: 'Decision systems',
+    summary:
+      'Turn a complex business decision into software your team can inspect, trust, and use under pressure.',
+  },
+  {
+    title: 'Data and operating workflows',
+    summary:
+      'Connect fragmented records, assisted judgment, reliable controls, and human review in one working system.',
+  },
+  {
+    title: 'Operated outcomes',
+    summary:
+      'When the work needs more than a handoff, we stay with the workflow after launch and improve it beside the team.',
+  },
 ];
 
 export const trustedCompanies = ['BBVA', 'KPMG', 'PwC', 'Fintonic', 'Minsait'];
 
-export const serviceAreas = [
+export const productPillars = [
   {
-    title: 'Search — investor sourcing and enrichment',
+    title: 'Start from the mandate',
     summary:
-      'Live search agents find and enrich investors for a specific mandate, with every claim traced to a source you can open.',
-    detail:
-      'The system works the mandate continuously — coverage stays current instead of decaying the way a bought list does.',
+      'Drop a deck or describe the raise — a fund, a single deal, or an SPV. That mandate is the job — not a row in a CRM.',
   },
   {
-    title: 'Standardization — from messy book to typed records',
+    title: 'Rank the book first',
     summary:
-      'CSV exports, transcripts, and meeting notes become a typed, relational investor book through suggest-then-approve proposals.',
-    detail:
-      'The book feeds the CRM you already run instead of replacing it, and every mapping decision you make is remembered.',
+      'Matching orders the investors you already know against the mandate — who fits, who is warm, who said never. The network is the first move.',
   },
   {
-    title: 'Matching — mandate to ranked shortlist',
+    title: 'Search beyond the book',
     summary:
-      'Mandates and deals crossed against your investor book produce qualified shortlists: who to approach, in what order, and why.',
-    detail:
-      'Hard exclusions and do-not-contact rules are deterministic; the ranking reasoning stays visible and reviewable.',
+      'When the known names run out, search the market against the mandate. Candidates arrive with sources — even with an empty book.',
   },
   {
-    title: 'Campaigns — personalized outreach, drafts only',
+    title: 'The pipeline is the scoreboard',
     summary:
-      'Mailbox-native outreach drafted from the record, personalized per relationship, staged for your review.',
-    detail:
-      'Nothing sends without your approval — compliance-by-construction inside your broker-dealer rails, never around them.',
+      'Each investor × raise is a pursuit. Who is identified, out, talking, or in diligence — that is the work.',
   },
   {
-    title: 'Reporting — the work, made visible',
+    title: 'Report only what happened',
     summary:
-      'White-label activity and progress reports where every number traces to the record behind it.',
-    detail:
-      'What justifies and defends the retainer — generated from the same living book the other pillars keep current.',
-  },
-];
-
-export const engagementSteps = [
-  {
-    step: '01',
-    title: 'Clarify the commercial problem',
-    summary:
-      'We start with the decision, bottleneck, or workflow that matters to the business, not with model selection.',
-  },
-  {
-    step: '02',
-    title: 'Design the operating workflow',
-    summary:
-      'We map the human steps, the data reality, and the right level of automation so the system fits how your team already works.',
-  },
-  {
-    step: '03',
-    title: 'Build the production path',
-    summary:
-      'We ship the software, orchestration, and interfaces needed to make the idea durable instead of experimental.',
-  },
-  {
-    step: '04',
-    title: 'Support adoption and next decisions',
-    summary:
-      'We stay close enough to the rollout to refine the system, improve trust, and shape what comes next.',
-  },
-];
-
-export const industryFocus = [
-  {
-    title: 'Capital Markets & Advisory',
-    summary:
-      'High-context workflows, relationship-heavy decisions, and teams that need judgment preserved rather than buried.',
-  },
-  {
-    title: 'Portfolio & Research Teams',
-    summary:
-      'Dashboards, monitoring, and intelligence layers that help analysts act faster without sacrificing auditability.',
-  },
-  {
-    title: 'Revenue & Commerce',
-    summary:
-      'Commercial systems where pricing, enrichment, and workflow speed have a direct impact on growth.',
-  },
-  {
-    title: 'Data-Heavy Operations',
-    summary:
-      'Messy record sets, fragmented processes, and operational environments where better software compounds quickly.',
+      'Firm-branded reporting from the live raise. Every figure opens the rows behind it.',
   },
 ];
 
@@ -136,14 +118,14 @@ export const testimonials = [
   },
   {
     quote:
-      'Servando developed from scratch a  AI-matching solution that formed the core of our data processing capabilities, demonstrating strong technical skills and a structured approach that directly contributed to project success. The solutions lead to 70%+ reduction in duplicates and +1 FTE worth of manual effort eliminated.',
+      'Servando developed from scratch an AI-matching solution that formed the core of our data processing capabilities, demonstrating strong technical skills and a structured approach that directly contributed to project success. The solutions lead to 70%+ reduction in duplicates and +1 FTE worth of manual effort eliminated.',
     name: 'Kamil Kapturkiewicz',
     role: 'Founder',
     company: 'Databris',
   },
   {
     quote:
-      'Servando helped improved our lending algorithms and helped us find high impact issues in our fraud system. His contributions delivered high-impact results that made a real difference to our business outcomes.',
+      'Servando helped improve our lending algorithms and helped us find high impact issues in our fraud system. His contributions delivered high-impact results that made a real difference to our business outcomes.',
     name: 'Francisco Llaneza',
     role: 'Principal Data Scientist',
     company: 'Fintonic',
@@ -152,19 +134,19 @@ export const testimonials = [
 
 export const trustPrinciples = [
   {
-    title: 'Source-linked outputs',
+    title: 'Evidence on every claim',
     summary:
-      'The systems are designed so teams can still see the reasoning, supporting material, and tradeoffs behind an output before they act on it.',
+      'Paos keeps the source and reasoning beside the output so the team can review it before acting.',
   },
   {
-    title: 'Founder continuity',
+    title: 'Review before changes',
     summary:
-      'The same person who scopes the workflow stays close through delivery, which keeps decisions clearer and reduces handoff noise.',
+      'Record updates and relationship-sensitive actions stop for human approval.',
   },
   {
-    title: 'Built for day-to-day use',
+    title: 'The book stays the firm’s',
     summary:
-      'The goal is not a polished demo. The goal is software that holds up when a real team uses it under pressure and over time.',
+      'CRM is optional fuel. When you bring a book, it remains yours and exportable. Nothing investor-facing sends without you.',
   },
 ];
 
@@ -172,7 +154,7 @@ export const founderProfile = {
   paragraphs: [
     'My approach is built on high agency, deep ownership, and a bias toward tangible outcomes. Responsibility means staying with the work until there is a real result: something shipped, improved, clarified, automated, or made useful. I do not believe in vague promises or work that sounds impressive but never becomes value someone can actually feel.',
     'The business comes first. Tools are secondary. What matters is understanding the business context deeply enough to operate almost like an extension of the team: absorbing the domain knowledge, translating it into systems, and sharing progress repeatedly.',
-    'The best companies are becoming living knowledge bases. Every conversation, transcript, Slack message, decision, and customer interaction becomes part of the shared context that can help the product improve. My job is to capture that context and turn it into useful artifacts, workflows, and products that compound over time.',
+    'The best companies are becoming living knowledge bases. Every conversation, transcript, Slack message, decision, and customer interaction becomes part of the shared context that can help the product improve. My job is to capture that context and turn it into useful decisions, workflows, and products that get better over time.',
     'The goal matters more than the plan. Building has become faster, more fluid, and more dynamic, so alignment is everything. Once the destination is clear, the path can adapt quickly.',
     'The strongest partnerships are long-term ones where both sides are genuinely on the same side: thinking clearly, moving fast, and building something that keeps getting better.',
   ],

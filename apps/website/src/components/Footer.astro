@@ -1,5 +1,5 @@
 ---
-import { bookingUrl, navigation } from '../lib/siteContent';
+import { bookingUrl, navigation } from "../lib/siteContent";
 ---
 
 <footer class="site-footer">
@@ -10,38 +10,51 @@ import { bookingUrl, navigation } from '../lib/siteContent';
           <span class="brand__word">controlthrive</span>
         </a>
         <p>
-          Maker of PA-OS — the operating system for placement agents. One
-          agent runs the raise, every claim carries a receipt, and nothing
-          leaves the firm without you.
+          Controlthrive Studios is building Paos — the operating system for
+          placement agents. Every claim carries a receipt. Nothing leaves the
+          firm without you.
         </p>
       </div>
 
       <div class="footer-col">
         <span class="mono-label">Navigate</span>
-        {navigation.map((item) => (
-          <a href={item.href}>{item.label}</a>
-        ))}
+        {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
         <a
           href={bookingUrl}
           target="_blank"
           rel="noopener noreferrer"
-          data-growth-cta="book-founder-call"
+          data-growth-cta="join-design-partners"
           data-growth-location="footer"
-          data-growth-wedge="pa-os">Book a call</a
+          data-growth-wedge="live-mandate">Run a live mandate</a
         >
       </div>
 
       <div class="footer-col">
         <span class="mono-label">Elsewhere</span>
-        <a href="https://x.com/vandotorres" target="_blank" rel="noopener noreferrer">X</a>
-        <a href="https://www.linkedin.com/in/servando-torres-239a26b0/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://github.com/Servando1990" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="mailto:servando@controlthrive.com">servando@controlthrive.com</a>
+        <a
+          href="https://x.com/vandotorres"
+          target="_blank"
+          rel="noopener noreferrer">X</a
+        >
+        <a
+          href="https://www.linkedin.com/in/servando-torres-239a26b0/"
+          target="_blank"
+          rel="noopener noreferrer">LinkedIn</a
+        >
+        <a
+          href="https://github.com/Servando1990"
+          target="_blank"
+          rel="noopener noreferrer">GitHub</a
+        >
+        <a href="mailto:servando@controlthrive.com"
+          >servando@controlthrive.com</a
+        >
       </div>
     </div>
 
     <div class="footer-meta">
-      <span>&copy; 2026 controlthrive</span>
+      <span>&copy; 2026 Controlthrive Studios</span>
+      <a href="/legal">Legal &amp; privacy</a>
       <span>Founder-led · Remote-first</span>
     </div>
   </div>

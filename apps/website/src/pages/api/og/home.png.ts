@@ -1,159 +1,160 @@
 import type { APIRoute } from 'astro';
 import { ImageResponse } from '@vercel/og';
 
+type Style = Record<string, string | number>;
+
+const colors = {
+  paper: '#F6F4EE',
+  ink: '#141612',
+  muted: '#687064',
+  line: '#D8D3C6',
+  olive: '#6F8052',
+};
+
+function node(type: string, style: Style, children?: unknown) {
+  return {
+    type,
+    props: { style, children },
+  };
+}
+
+const div = (style: Style, children?: unknown) => node('div', style, children);
+const span = (style: Style, children?: unknown) => node('span', style, children);
+
 export const GET: APIRoute = async () => {
   return new ImageResponse(
-    {
-      type: 'div',
-      props: {
-        style: {
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          background: '#ffffff',
-          color: '#111111',
-          padding: '54px 64px',
-          fontFamily: '"Geist", "Segoe UI", sans-serif',
-        },
-        children: [
+    div(
+      {
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        background: colors.paper,
+        color: colors.ink,
+        overflow: 'hidden',
+        fontFamily: '"Geist", "Segoe UI", sans-serif',
+      },
+      [
+        div({
+          position: 'absolute',
+          left: '72px',
+          right: '72px',
+          top: '72px',
+          height: '1px',
+          background: colors.line,
+        }),
+        div({
+          position: 'absolute',
+          left: '72px',
+          right: '72px',
+          bottom: '72px',
+          height: '1px',
+          background: colors.line,
+        }),
+        div(
           {
-            type: 'div',
-            props: {
-              style: {
+            position: 'absolute',
+            left: '72px',
+            top: '42px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '14px',
+          },
+          [
+            div(
+              {
+                width: '38px',
+                height: '38px',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '18px',
+                justifyContent: 'center',
+                border: `1px solid ${colors.ink}`,
+                color: colors.ink,
+                fontSize: '14px',
+                fontWeight: 600,
+                lineHeight: 1,
               },
-              children: [
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      width: '62px',
-                      height: '62px',
-                      borderRadius: '16px',
-                      border: '1px solid #E5E7EB',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '26px',
-                      fontWeight: '500',
-                      color: '#84B067',
-                      letterSpacing: '-0.03em',
-                    },
-                    children: 'CT',
-                  },
-                },
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '4px',
-                    },
-                    children: [
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            fontSize: '32px',
-                            fontWeight: '500',
-                            letterSpacing: '-0.03em',
-                          },
-                          children: 'controlthrive',
-                        },
-                      },
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            fontSize: '18px',
-                            color: '#6B7280',
-                          },
-                          children: 'Founder-led software partner for private capital',
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
+              'CT'
+            ),
+            div(
+              {
+                fontSize: '26px',
+                fontWeight: 500,
+                lineHeight: 1,
+              },
+              'controlthrive'
+            ),
+          ]
+        ),
+        div(
           {
-            type: 'div',
-            props: {
-              style: {
+            position: 'absolute',
+            left: '132px',
+            top: '196px',
+            width: '780px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '30px',
+          },
+          [
+            div(
+              {
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '22px',
-                maxWidth: '970px',
+                fontSize: '86px',
+                lineHeight: 0.96,
+                fontWeight: 500,
+                letterSpacing: '0',
               },
-              children: [
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontSize: '76px',
-                      lineHeight: '1.02',
-                      letterSpacing: '-0.04em',
-                      fontWeight: '500',
-                    },
-                    children: 'We build software for private capital teams that work on judgment.',
-                  },
-                },
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontSize: '28px',
-                      lineHeight: '1.55',
-                      color: '#6B7280',
-                      maxWidth: '900px',
-                    },
-                    children:
-                      'Investor coverage, portfolio monitoring, and internal systems designed for teams that need software people can actually use.',
-                  },
-                },
-              ],
-            },
-          },
+              [
+                span({}, 'Product company'),
+                span({}, 'for private capital.'),
+              ]
+            ),
+            div(
+              {
+                width: '600px',
+                color: colors.muted,
+                fontSize: '28px',
+                lineHeight: 1.36,
+                fontWeight: 400,
+              },
+              'Production AI and internal systems.'
+            ),
+          ]
+        ),
+        div({
+          position: 'absolute',
+          right: '72px',
+          top: '72px',
+          width: '1px',
+          height: '486px',
+          background: colors.line,
+        }),
+        div(
           {
-            type: 'div',
-            props: {
-              style: {
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                fontSize: '22px',
-                color: '#6B7280',
-              },
-              children: [
-                {
-                  type: 'div',
-                  props: {
-                    children: 'controlthrive.com',
-                  },
-                },
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontWeight: '500',
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                    },
-                    children: 'Homepage',
-                  },
-                },
-              ],
-            },
+            position: 'absolute',
+            right: '104px',
+            bottom: '96px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            color: colors.olive,
+            fontSize: '18px',
+            fontWeight: 500,
+            lineHeight: 1,
           },
-        ],
-      },
-    } as any,
+          [
+            div({
+              width: '28px',
+              height: '2px',
+              background: colors.olive,
+            }),
+            div({}, 'controlthrive.com'),
+          ]
+        ),
+      ]
+    ) as any,
     {
       width: 1200,
       height: 630,
