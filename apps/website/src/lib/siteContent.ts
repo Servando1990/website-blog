@@ -57,7 +57,7 @@ export const productPillars = [
   {
     title: 'Start from the mandate',
     summary:
-      'Drop a deck or describe the raise. That mandate is the job — not a row in a CRM.',
+      'Drop a deck or describe the raise — a fund, a single deal, or an SPV. That mandate is the job — not a row in a CRM.',
   },
   {
     title: 'Find names for this raise',
@@ -118,14 +118,14 @@ export const testimonials = [
   },
   {
     quote:
-      'Servando developed from scratch a  AI-matching solution that formed the core of our data processing capabilities, demonstrating strong technical skills and a structured approach that directly contributed to project success. The solutions lead to 70%+ reduction in duplicates and +1 FTE worth of manual effort eliminated.',
+      'Servando developed from scratch an AI-matching solution that formed the core of our data processing capabilities, demonstrating strong technical skills and a structured approach that directly contributed to project success. The solutions lead to 70%+ reduction in duplicates and +1 FTE worth of manual effort eliminated.',
     name: 'Kamil Kapturkiewicz',
     role: 'Founder',
     company: 'Databris',
   },
   {
     quote:
-      'Servando helped improved our lending algorithms and helped us find high impact issues in our fraud system. His contributions delivered high-impact results that made a real difference to our business outcomes.',
+      'Servando helped improve our lending algorithms and helped us find high impact issues in our fraud system. His contributions delivered high-impact results that made a real difference to our business outcomes.',
     name: 'Francisco Llaneza',
     role: 'Principal Data Scientist',
     company: 'Fintonic',
