@@ -14,17 +14,17 @@ export const designPartnerIncludes = [
   {
     title: 'Start from the raise',
     summary:
-      'Bring a deck, a teaser, or a sentence. Paos makes that mandate the working object — the book can wait.',
+      'Bring a deck, a teaser, or a sentence. Paos makes that mandate the working object.',
   },
   {
-    title: 'Find names on that raise',
+    title: 'Rank the book against it',
     summary:
-      'We search for investors that fit the mandate, even if there is nobody in the book yet. Every name carries a source.',
+      'Your existing network goes first: who fits this raise, who is warm, who said never. Relationship history becomes the call order.',
   },
   {
-    title: 'Bring the book only when it changes the next action',
+    title: 'Search beyond the book',
     summary:
-      'CRM exports and relationship history are fuel for ranking, suppression, and the call — not how the workspace is born.',
+      'When the known names run out, Paos searches the market for investors that fit. Every name carries a source — and it works even with no book at all.',
   },
   {
     title: 'Stay close to the outcome',
@@ -60,19 +60,19 @@ export const productPillars = [
       'Drop a deck or describe the raise — a fund, a single deal, or an SPV. That mandate is the job — not a row in a CRM.',
   },
   {
-    title: 'Find names for this raise',
+    title: 'Rank the book first',
     summary:
-      'Search the world against the mandate. An empty book still runs. Candidates arrive with sources, not a fake ranking.',
+      'Matching orders the investors you already know against the mandate — who fits, who is warm, who said never. The network is the first move.',
+  },
+  {
+    title: 'Search beyond the book',
+    summary:
+      'When the known names run out, search the market against the mandate. Candidates arrive with sources — even with an empty book.',
   },
   {
     title: 'The pipeline is the scoreboard',
     summary:
       'Each investor × raise is a pursuit. Who is identified, out, talking, or in diligence — that is the work.',
-  },
-  {
-    title: 'Rank the book when you have one',
-    summary:
-      'Matching orders names you already know. It is an upgrade, not how the raise is born.',
   },
   {
     title: 'Report only what happened',

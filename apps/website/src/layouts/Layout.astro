@@ -15,7 +15,7 @@ export interface Props {
 
 const {
   title,
-  description = 'Controlthrive Studios builds Paos — the operating system for placement agents. One agent runs the raise — a fund, a single deal, or an SPV: search, standardization, matching and reporting, every claim cited back to its source.',
+  description = 'Controlthrive Studios builds Paos — the operating system for placement agents. One agent runs the raise — a fund, a single deal, or an SPV: the book ranked against the mandate, the market searched beyond it, every claim cited back to its source.',
   ogImage = '/api/og/home.png',
   ogImageAlt,
   ogImageWidth = 1200,
@@ -149,7 +149,7 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID?.trim() || '';
             operatingSystem: 'Web',
             url: new URL('/pa-os', baseUrl).href,
             description:
-              'The operating system for boutique placement agents: search, standardization, matching, and reporting under human control, with campaign drafting in build.',
+              'The operating system for boutique placement agents: matching, search, standardization, and reporting under human control, with campaign drafting in build.',
             creator: { '@id': `${baseUrl}#organization` },
           },
         ],

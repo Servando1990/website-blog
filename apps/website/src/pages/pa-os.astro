@@ -62,13 +62,56 @@ const pillars = [
     ],
   },
   {
+    label: "Match",
+    flag: "",
+    icon: svg(
+      '<path d="M2 4l3 4-3 4M14 4l-3 4 3 4"/><circle cx="8" cy="8" r="0.7" fill="currentColor" stroke="none"/>',
+    ),
+    head: "Rank the book · Project Meridian",
+    meta: "your book, first move · top 3 of 60",
+    link: "Open raise",
+    note: "Matching orders names you already know. Hartree excluded — standing policy.",
+    rows: [
+      {
+        n: "1",
+        name: "Rockmont Family Office",
+        detail: "94 fit · invests EU RE, €20M ticket",
+        badge: "94",
+        ext: true,
+        state: "in",
+        status: "Shortlisted",
+        link: "Why",
+      },
+      {
+        n: "2",
+        name: "Verlaine Trust Office",
+        detail: "89 fit · value-add mandate match",
+        badge: "89",
+        ext: true,
+        state: "action",
+        action: "Add to shortlist",
+        link: "Why",
+      },
+      {
+        n: "3",
+        name: "Aldwych Capital Office",
+        detail: "85 fit · profile only — no behaviour yet",
+        badge: "85",
+        ext: true,
+        state: "action",
+        action: "Add to shortlist",
+        link: "Why",
+      },
+    ],
+  },
+  {
     label: "Search",
     flag: "",
     icon: svg('<circle cx="7" cy="7" r="4"/><path d="M10.2 10.2 14 14"/>'),
     head: "Names for Project Meridian",
-    meta: "8 ready to review · no book to dedup against",
+    meta: "8 ready to review · all outside your book",
     link: "Open raise",
-    note: "4 candidates left out because their claims could not be verified. Empty book — not a Match list.",
+    note: "4 candidates left out because their claims could not be verified. These are new names — the ranked book is the other panel.",
     rows: [
       {
         n: "1",
@@ -146,49 +189,6 @@ const pillars = [
     ],
   },
   {
-    label: "Match",
-    flag: "",
-    icon: svg(
-      '<path d="M2 4l3 4-3 4M14 4l-3 4 3 4"/><circle cx="8" cy="8" r="0.7" fill="currentColor" stroke="none"/>',
-    ),
-    head: "Rank the book · Project Meridian",
-    meta: "when a book exists · top 3 of 60",
-    link: "Open raise",
-    note: "Matching orders names you already know. Hartree excluded — standing policy.",
-    rows: [
-      {
-        n: "1",
-        name: "Rockmont Family Office",
-        detail: "94 fit · invests EU RE, €20M ticket",
-        badge: "94",
-        ext: true,
-        state: "in",
-        status: "Shortlisted",
-        link: "Why",
-      },
-      {
-        n: "2",
-        name: "Verlaine Trust Office",
-        detail: "89 fit · value-add mandate match",
-        badge: "89",
-        ext: true,
-        state: "action",
-        action: "Add to shortlist",
-        link: "Why",
-      },
-      {
-        n: "3",
-        name: "Aldwych Capital Office",
-        detail: "85 fit · profile only — no behaviour yet",
-        badge: "85",
-        ext: true,
-        state: "action",
-        action: "Add to shortlist",
-        link: "Why",
-      },
-    ],
-  },
-  {
     label: "Report",
     flag: "",
     icon: svg(
@@ -233,8 +233,8 @@ const pillars = [
   },
 ];
 
-// Server-render Search first so the page is complete before JS and for
-// reduced-motion / screenshot / share.
+// Server-render Match first — the book is the first move — so the page is
+// complete before JS and for reduced-motion / screenshot / share.
 const start = 1;
 const initial = pillars[start];
 
@@ -266,7 +266,7 @@ const guarantees = [
 
 <Layout
   title="Paos — the operating system for placement agents | Controlthrive Studios"
-  description="Paos runs the raise. Drop a mandate, find names even with an empty book, and keep the pipeline as the scoreboard. Closed beta."
+  description="Paos runs the raise. Drop a mandate, rank your book against it, and search the market for the names you're missing. Closed beta."
   ogImage="/api/og/pa-os.png"
   ogImageAlt="Paos by Controlthrive Studios — the operating system for placement agents."
 >
@@ -306,9 +306,9 @@ const guarantees = [
           </p>
           <h1 class="pa-h1">The operating system for placement agents.</h1>
           <p class="pa-lede">
-            Drop a mandate — a deck or a sentence. A fund, a single deal, or
-            an SPV. Paos finds names for that raise even if the book is
-            empty. The pipeline is the scoreboard.
+            Drop a mandate — a fund, a single deal, or an SPV. Paos ranks
+            your book against it, then searches the market for the names
+            you're missing. The pipeline is the scoreboard.
           </p>
           <div class="pa-actions">
             <a
@@ -359,7 +359,7 @@ const guarantees = [
               <div class="os__chrome">
                 <span class="os__chromemark"><Glyph size={13} /></span>
                 <span class="os__chromeword">Paos</span>
-                <span class="os__chromepath" data-os-crumb>Search</span>
+                <span class="os__chromepath" data-os-crumb>{initial.label}</span>
                 <span class="os__chromelive"><i class="dot-live"></i>live</span>
               </div>
 
@@ -432,14 +432,15 @@ const guarantees = [
         <article class="beat" data-beat>
           <div class="beat__copy">
             <p class="beat__eyebrow"><span>01</span>One cockpit</p>
-            <h2 class="beat__title">Describe the raise. Go find names.</h2>
+            <h2 class="beat__title">Describe the raise. Work the names.</h2>
             <p class="beat__body">
-              A sentence or a deck is enough. Paos treats that as the mandate
-              and searches for investors that fit — even if there is nobody in
-              the book. Matching the book is a later verb, not the start.
+              A sentence or a deck is enough. Paos treats that as the mandate,
+              ranks your book against it, and searches the market for the
+              names the book is missing. Both engines, one raise.
             </p>
             <p class="beat__receipt">
-              empty book still searches · names without evidence are withheld
+              book ranked first · empty book still searches · unsourced names
+              withheld
             </p>
           </div>
 
@@ -460,13 +461,13 @@ const guarantees = [
                   </p>
                 </div>
                 <div class="chat__work step" style="--d:1400ms">
-                  <span class="chat__spin"></span>no investor book · searching
-                  for this raise
+                  <span class="chat__spin"></span>book ranked · searching
+                  beyond it
                 </div>
                 <div class="chat__answer step" style="--d:2000ms">
                   <p class="chat__line">
-                    8 names to review for Project Meridian. Nothing to dedup
-                    against — these are outside names, not a ranked Match list.
+                    8 new names to review for Project Meridian — none already
+                    in your book, on top of the 60 it ranked.
                   </p>
                   <ul class="chat__cites">
                     <li>
@@ -478,8 +479,8 @@ const guarantees = [
                       — not shown to you
                     </li>
                     <li>
-                      <span class="cite__k">raise</span>the mandate is the job,
-                      not the book
+                      <span class="cite__k">book</span>60 known names ranked
+                      first
                     </li>
                   </ul>
                 </div>
@@ -555,11 +556,11 @@ const guarantees = [
         <article class="beat" data-beat>
           <div class="beat__copy">
             <p class="beat__eyebrow"><span>03</span>Search</p>
-            <h2 class="beat__title">Find names for this raise.</h2>
+            <h2 class="beat__title">Find names beyond the book.</h2>
             <p class="beat__body">
-              Ask for investors that fit the mandate. The book is optional.
-              Every candidate comes back with sources and a clear next step:
-              add it to the raise, or pass.
+              When the known names run out, ask for investors that fit the
+              mandate. Every candidate comes back with sources and a clear
+              next step: add it to the raise, or pass.
             </p>
             <p class="beat__receipt">
               names without evidence are withheld — the run says how many, and

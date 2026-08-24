@@ -20,15 +20,18 @@ const founderParagraphs = [
 
 const raiseStages = [
   { label: "Mandate", value: "Live" },
-  { label: "Search", value: "12 sourced" },
+  { label: "Matching", value: "Book ranked first" },
+  { label: "Search", value: "12 found beyond it" },
   { label: "Pipeline", value: "8 identified" },
-  { label: "Matching", value: "When a book exists" },
   { label: "Reporting", value: "From the raise" },
 ];
 
 const partnerSnapshot = [
   { title: "A live raise", copy: "Start from a deck or a sentence." },
-  { title: "Names on that raise", copy: "Search even if the book is empty." },
+  {
+    title: "Names on that raise",
+    copy: "Your book ranked first, the market searched after.",
+  },
   { title: "Founder support", copy: "Direct setup and iteration." },
 ];
 
@@ -36,7 +39,7 @@ const partnerSnapshot = [
 
 <Layout
   title="Paos — the operating system for placement agents | Controlthrive Studios"
-  description="Paos runs the raise. Drop a mandate, find names even with an empty book, and keep the pipeline as the scoreboard. Closed beta."
+  description="Paos runs the raise. Drop a mandate, rank your book against it, and search the market for the names you're missing. Closed beta."
   ogImage="/api/og/home.png"
   ogImageAlt="Paos by Controlthrive Studios — the operating system for placement agents."
 >
@@ -54,13 +57,13 @@ const partnerSnapshot = [
             >
           </p>
           <h1 class="hero__title reveal" style="--reveal-delay: 60ms">
-            Your CRM stores names. Paos runs the raise.
+            Start with who you know. Finish with who you don't.
           </h1>
           <p class="hero__lede reveal" style="--reveal-delay: 120ms">
-            Drop a mandate — a deck or a sentence. A fund, a single deal, or
-            an SPV. Paos finds names for that raise even if the book is empty.
-            Pipeline is the scoreboard. Matching the book is an upgrade, not
-            the start.
+            Paos reads the mandate and ranks your book against it — who fits
+            this raise, who's warm, who said never. When the book runs out,
+            it searches the market for the names you're missing. Nothing
+            sends without you.
           </p>
           <div class="hero__actions reveal" style="--reveal-delay: 180ms">
             <a
@@ -79,9 +82,10 @@ const partnerSnapshot = [
         </div>
 
         <p class="sr-only">
-          Paos starts from a mandate. It finds names for that raise even
-          with nobody in the book. A person approves every change; nothing
-          investor-facing sends itself.
+          Paos starts from a mandate. It ranks the firm's own investor book
+          against that raise, then searches the market for names beyond it.
+          A person approves every change; nothing investor-facing sends
+          itself.
         </p>
 
         <!-- The product, collaged: the raise behind, the find-names ask over
@@ -161,7 +165,7 @@ const partnerSnapshot = [
                   Found 12 investors for Project Solís.
                 </p>
                 <p class="rq__evidence" data-rq-evidence>
-                  no book to dedup against · 4 withheld, no evidence
+                  all 12 outside your book · 4 withheld, no evidence
                 </p>
                 <div class="rq__actions">
                   <span class="rq__approve">Approve</span>
@@ -209,12 +213,12 @@ const partnerSnapshot = [
         </header>
 
         <div class="product-statement reveal">
-          <h2>The raise is the job. The book can wait.</h2>
+          <h2>The raise is the job. The book is your head start.</h2>
         </div>
 
         <div class="raise-run reveal" style="--reveal-delay: 100ms">
           <div class="raise-run__head">
-            <span>Project Solís · no book required</span>
+            <span>Project Solís · book ranked, market searched</span>
             <span><i class="dot-live"></i>Live mandate</span>
           </div>
           <ol>
@@ -382,7 +386,7 @@ const partnerSnapshot = [
         kind: "Search",
         receipt: "sources attached",
         claim: "Found 12 investors for Project Solís.",
-        evidence: "no book to dedup against · 4 withheld, no evidence",
+        evidence: "all 12 outside your book · 4 withheld, no evidence",
         foot: "a name without a source never reaches this list",
         logged: "✓ Added to mandate — decision logged",
       },
@@ -404,7 +408,7 @@ const partnerSnapshot = [
       },
       {
         kind: "Matching",
-        receipt: "when a book exists",
+        receipt: "your book, first move",
         claim: "Ranked the book for Project Solís.",
         evidence: "Rockmont leads · committed €18M on Aurora, 2024",
         foot: "matching orders names you already know",

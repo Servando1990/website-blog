@@ -181,7 +181,7 @@ export const GET: APIRoute = async () => {
                 lineHeight: 1.34,
                 fontWeight: 400,
               },
-              'Drop a mandate. Find names even if the book is empty. Pipeline is the scoreboard.'
+              'Drop a mandate. Rank the book. Search beyond it. Pipeline is the scoreboard.'
             ),
           ]
         ),
