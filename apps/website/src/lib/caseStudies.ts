@@ -52,11 +52,11 @@ export const caseStudies: CaseStudy[] = [
     title: 'How a private capital advisory firm operationalized investor targeting',
     industry: 'Private Capital Advisory',
     summary:
-      'What started as an investor-matching engine became a workflow for turning deal materials, CRM history, and private-markets judgment into ranked shortlists and outreach-ready handoff.',
+      'Investor-matching engine for turning deal materials, CRM history into ranked shortlists',
     cardSummary:
       'A founder-led build that helped a private capital advisory team move from fragmented CRM context and tacit deal knowledge to a production AI workflow for investor search, review, and handoff.',
     featuredOutcome:
-      'A proprietary workflow that moved from scoring experiments to campaign-ready investor shortlists',
+      'A workflow that moved from scoring experiments to campaign-ready investor shortlists',
     tags: ['Private markets', 'LLM systems', 'Agentic workflows'],
     metrics: [
       { value: '10 alpha releases', label: 'shipped in 46 days as campaign pressure increased' },
