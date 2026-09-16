@@ -294,10 +294,6 @@ export const caseStudies: CaseStudy[] = [
     ],
     takeaway:
       'The best AI-enabled operations workflows know exactly where automation should stop and human review should begin.',
-    proofLink: {
-      label: 'Read the Databris case study',
-      href: 'https://www.databris.com/case-study-details.html#case-details2',
-    },
     diagram: {
       title: 'Entity Matching Flow',
       subtitle: 'How raw records become cleaner operational data with the right review checkpoints.',
